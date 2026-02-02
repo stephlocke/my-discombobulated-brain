@@ -1,0 +1,144 @@
+{{ define "main" }}
+
+<article class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto">
+        <!-- Article Header -->
+        <header class="mb-8">
+            <!-- Breadcrumb Navigation -->
+            <nav aria-label="Breadcrumb" class="mb-4">
+                <ol class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">Home</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li><a href="{{ .Section | relURL }}" class="hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">{{ .Section | title }}</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li aria-current="page">{{ .Title }}</li>
+                </ol>
+            </nav>
+            
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                {{ .Title }}
+            </h1>
+            
+            <!-- Meta Information -->
+            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 pb-4">
+                {{ if .Date }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">
+                        {{ .Date.Format "January 2, 2006" }}
+                    </time>
+                </div>
+                {{ end }}
+                
+                {{ if .ReadingTime }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>{{ .ReadingTime }} min read</span>
+                </div>
+                {{ end }}
+                
+                {{ with .Params.categories }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                    </svg>
+                    <span class="flex gap-2">
+                        {{ range . }}
+                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                            {{ . }}
+                        </span>
+                        {{ end }}
+                    </span>
+                </div>
+                {{ end }}
+            </div>
+            
+            <!-- Summary/Description -->
+            {{ with .Description }}
+            <p class="text-xl text-gray-600 dark:text-gray-400 mt-6 italic">
+                {{ . }}
+            </p>
+            {{ end }}
+        </header>
+        
+        <!-- Article Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
+                    prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+                    prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-gray-900 dark:prose-strong:text-white
+                    prose-ul:text-gray-700 dark:prose-ul:text-gray-300
+                    prose-ol:text-gray-700 dark:prose-ol:text-gray-300
+                    prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:py-2 prose-blockquote:px-4
+                    prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:rounded
+                    prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950
+                    prose-img:rounded-lg prose-img:shadow-lg">
+            {{ .Content }}
+        </div>
+        
+        <!-- Tags -->
+        {{ with .Params.tags }}
+        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <h2 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">Tags:</h2>
+            <div class="flex flex-wrap gap-2">
+                {{ range . }}
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
+                   class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    #{{ . }}
+                </a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+        
+        <!-- Navigation to Previous/Next Posts -->
+        <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700" aria-label="Post navigation">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {{ with .PrevInSection }}
+                <a href="{{ .RelPermalink }}" 
+                   class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">Previous</div>
+                        <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">{{ .Title }}</div>
+                    </div>
+                </a>
+                {{ end }}
+                
+                {{ with .NextInSection }}
+                <a href="{{ .RelPermalink }}" 
+                   class="flex items-center justify-end gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition group {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500 dark:text-gray-400">Next</div>
+                        <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">{{ .Title }}</div>
+                    </div>
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                {{ end }}
+            </div>
+        </nav>
+        
+        <!-- Support Notice -->
+        <aside class="mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded" role="complementary">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Need Support?</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                If this article raised difficult feelings or you need someone to talk to, please reach out for support. You're not alone.
+            </p>
+            <a href="/contact/" 
+               class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                Get Help
+            </a>
+        </aside>
+    </div>
+</article>
+
+{{ end }}

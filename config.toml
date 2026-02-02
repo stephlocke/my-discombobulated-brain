@@ -1,0 +1,112 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Mental Health Charity'
+
+# Pagination
+[pagination]
+  pagerSize = 10
+
+# Enable emoji support
+enableEmoji = true
+
+# Enable Git info
+enableGitInfo = false
+
+# Enable RSS
+enableRSS = true
+
+# Copyright notice
+copyright = '© 2026 Mental Health Charity. All rights reserved.'
+
+# Build configuration for Tailwind CSS
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = '(postcss|tailwind)\.config\.js'
+    target = 'css'
+
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'
+
+[params]
+  description = 'A mental health charity dedicated to providing support and resources for those in need.'
+  author = 'Mental Health Charity'
+  keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
+  
+  # Social media
+  twitter = ''
+  facebook = ''
+  instagram = ''
+  linkedin = ''
+  
+  # Contact
+  email = 'contact@example.org'
+  phone = ''
+  
+  # Features
+  showReadingTime = true
+  showShareButtons = true
+  showDateUpdated = false
+  
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[menu]
+  [[menu.main]]
+    identifier = 'home'
+    name = 'Home'
+    url = '/'
+    weight = 1
+  
+  [[menu.main]]
+    identifier = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 2
+  
+  [[menu.main]]
+    identifier = 'blog'
+    name = 'Blog'
+    url = '/blog/'
+    weight = 3
+  
+  [[menu.main]]
+    identifier = 'contact'
+    name = 'Contact'
+    url = '/contact/'
+    weight = 4
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = true
+    style = 'monokai'
+    tabWidth = 4
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+  page = ['HTML']
+  section = ['HTML', 'RSS']
+
+[sitemap]
+  changefreq = 'weekly'
+  filename = 'sitemap.xml'
+  priority = 0.5

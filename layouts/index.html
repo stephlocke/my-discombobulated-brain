@@ -1,0 +1,138 @@
+{{ define "main" }}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 py-16 md:py-24" aria-labelledby="hero-heading">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Your Mental Health Matters
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                We're here to support you on your journey to better mental health. You're not alone.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/about/" 
+                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                    Learn About Us
+                </a>
+                <a href="/blog/" 
+                   class="inline-block bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-8 py-3 rounded-lg font-semibold border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                    Read Our Blog
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-16 bg-white dark:bg-gray-900" aria-labelledby="mission-heading">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 id="mission-heading" class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                Our Mission
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Support Card -->
+                <article class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Providing compassionate support and resources for those facing mental health challenges.
+                    </p>
+                </article>
+                
+                <!-- Education Card -->
+                <article class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+                        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Education</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Raising awareness and breaking down stigma through education and open conversation.
+                    </p>
+                </article>
+                
+                <!-- Community Card -->
+                <article class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+                        <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Community</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Building a supportive community where everyone feels heard, valued, and understood.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Blog Posts -->
+{{ $recentPosts := where .Site.RegularPages "Type" "blog" | first 3 }}
+{{ if $recentPosts }}
+<section class="py-16 bg-gray-50 dark:bg-gray-800" aria-labelledby="blog-heading">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 id="blog-heading" class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                Latest From Our Blog
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                {{ range $recentPosts }}
+                <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition">
+                    <a href="{{ .RelPermalink }}" class="block p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                        {{ if .Date }}
+                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500 dark:text-gray-400">
+                            {{ .Date.Format "January 2, 2006" }}
+                        </time>
+                        {{ end }}
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-2 mb-3 hover:text-blue-600 dark:hover:text-blue-400">
+                            {{ .Title }}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            {{ .Summary | truncate 150 }}
+                        </p>
+                        <span class="inline-block mt-4 text-blue-600 dark:text-blue-400 font-semibold">
+                            Read more →
+                        </span>
+                    </a>
+                </article>
+                {{ end }}
+            </div>
+            <div class="text-center mt-12">
+                <a href="/blog/" 
+                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                    View All Posts
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<!-- CTA Section -->
+<section class="py-16 bg-blue-600 dark:bg-blue-800" aria-labelledby="cta-heading">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Need Support?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8">
+                Remember, seeking help is a sign of strength, not weakness. We're here for you.
+            </p>
+            <a href="/contact/" 
+               class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 transition">
+                Get in Touch
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ end }}

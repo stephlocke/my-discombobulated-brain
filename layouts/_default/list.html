@@ -1,0 +1,113 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+        <!-- Page Header -->
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                {{ .Title }}
+            </h1>
+            {{ with .Description }}
+            <p class="text-xl text-gray-600 dark:text-gray-400">
+                {{ . }}
+            </p>
+            {{ end }}
+        </header>
+        
+        <!-- Posts List -->
+        {{ $paginator := .Paginate .Pages }}
+        {{ if $paginator.Pages }}
+        <div class="space-y-8" role="list">
+            {{ range $paginator.Pages }}
+            <article class="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition p-6 border border-gray-200 dark:border-gray-700">
+                <a href="{{ .RelPermalink }}" class="block group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                    <!-- Post Meta -->
+                    <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        {{ if .Date }}
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">
+                            {{ .Date.Format "January 2, 2006" }}
+                        </time>
+                        {{ end }}
+                        {{ if .Params.readingTime }}
+                        <span aria-label="Reading time">{{ .ReadingTime }} min read</span>
+                        {{ end }}
+                        {{ with .Params.categories }}
+                        <span class="flex gap-2">
+                            {{ range . }}
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                        </span>
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Post Title -->
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        {{ .Title }}
+                    </h2>
+                    
+                    <!-- Post Summary -->
+                    {{ with .Summary }}
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        {{ . | truncate 200 }}
+                    </p>
+                    {{ end }}
+                    
+                    <!-- Read More Link -->
+                    <span class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:underline">
+                        Read more
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </span>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+        
+        <!-- Pagination -->
+        {{ if gt $paginator.TotalPages 1 }}
+        <nav class="mt-12" aria-label="Pagination">
+            <ul class="flex justify-center gap-2">
+                {{ if $paginator.HasPrev }}
+                <li>
+                    <a href="{{ $paginator.Prev.URL }}" 
+                       class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       aria-label="Go to previous page">
+                        ← Previous
+                    </a>
+                </li>
+                {{ end }}
+                
+                <li>
+                    <span class="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}
+                    </span>
+                </li>
+                
+                {{ if $paginator.HasNext }}
+                <li>
+                    <a href="{{ $paginator.Next.URL }}" 
+                       class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       aria-label="Go to next page">
+                        Next →
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{ end }}
+        
+        {{ else }}
+        <!-- No Posts Message -->
+        <div class="text-center py-12">
+            <p class="text-xl text-gray-600 dark:text-gray-400">
+                No posts found. Check back soon!
+            </p>
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+{{ end }}
