@@ -3,6 +3,8 @@
 ## Initial prompt
 > @workspace /new  hugo static site project with tailwind and the tailwindcli. implement a typical multisection home pagean about,  and a blog directory. add layouts for home, head (seo etc), list, and singles. Use minimal tailwind classes to begin with. support light mode and darkmode. this site is going to be for a mental health charity so accessability is critical - scaffold and design with tha tin mind.
 
+
+
 ## Steps to replicate for a new Hugo site
 ### Step 1: Install Hugo
 
@@ -253,7 +255,7 @@ Run your Hugo site locally:
 hugo server
 ```
 
-Visit `http://localhost:1313` to see your site in action.
+Visit `http://localhost:1313/my-discombobulated-brain` to see your site in action.
 
 ### Step 8: Accessibility Considerations
 
@@ -261,3 +263,48 @@ Visit `http://localhost:1313` to see your site in action.
 - Use semantic HTML elements (like `<header>`, `<nav>`, `<main>`, and `<footer>`).
 - Include `alt` attributes for images (if any).
 - Use ARIA roles where necessary to enhance accessibility.
+
+## Content Management
+
+This site uses [Sveltia CMS](https://github.com/sveltia/sveltia-cms), a modern Git-based CMS for managing content.
+
+### Accessing the CMS
+
+- **Local Development**: Visit `http://localhost:1313/my-discombobulated-brain/admin/`
+- **Production**: Visit `https://stephlocke.com/my-discombobulated-brain/admin/`
+
+### Authentication Setup
+
+This site uses the [Sveltia CMS Auth](https://github.com/sveltia/sveltia-cms-auth) Cloudflare Worker for GitHub OAuth authentication.
+
+**Current Configuration**: The Cloudflare Worker and GitHub OAuth App are currently being hosted and supported by **Nightingale HQ** to save setup effort on MDB's side. This provides a ready-to-use authentication solution without needing to manage infrastructure.
+
+#### How it Works
+
+1. The CMS redirects users to GitHub for authentication
+2. The Cloudflare Worker handles the OAuth callback
+3. Users can then edit content directly through the CMS interface
+4. Changes are committed to the GitHub repository
+
+#### Setting up Your Own (Optional)
+
+If you want to host your own authentication:
+
+1. Deploy the [Sveltia CMS Auth Worker](https://github.com/sveltia/sveltia-cms-auth) to Cloudflare
+2. Create a GitHub OAuth App:
+   - Go to GitHub Settings → Developer settings → OAuth Apps → New OAuth App
+   - **Application name**: `My Discombobulated Brain CMS`
+   - **Homepage URL**: `https://stephlocke.com/my-discombobulated-brain/`
+   - **Authorization callback URL**: Your Cloudflare Worker URL + `/callback`
+3. Configure the Worker with your GitHub OAuth credentials
+4. Update `static/admin/config.yml` with your auth endpoint
+
+### Local Development
+
+For local CMS development, uncomment `local_backend: true` in `static/admin/config.yml` and run:
+
+```bash
+npx @sveltia/cms-auth localhost
+```
+
+Then access the CMS at `http://localhost:1313/admin/`
