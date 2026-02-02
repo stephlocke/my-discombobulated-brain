@@ -1,7 +1,7 @@
 # Discombulated Brain site
 
 ## Initial prompt
-> implement a typical multisection home pagean about,  and a blog directory. add layouts for home, head (seo etc), list, and singles. Use minimal tailwind classes to begin with. support light mode and darkmode. this site is going to be for a mental health charity so accessability is critical - scaffold and design with tha tin mind.
+> @workspace /new  hugo static site project with tailwind and the tailwindcli. implement a typical multisection home pagean about,  and a blog directory. add layouts for home, head (seo etc), list, and singles. Use minimal tailwind classes to begin with. support light mode and darkmode. this site is going to be for a mental health charity so accessability is critical - scaffold and design with tha tin mind.
 
 ## Steps to replicate for a new Hugo site
 ### Step 1: Install Hugo
