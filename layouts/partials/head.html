@@ -34,11 +34,15 @@
 
 <!-- Dark Mode Script (runs before page load to prevent flash) -->
 <script>
-    // Check for saved theme preference or default to system preference
-    const theme = localStorage.getItem('theme') || 
-                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    if (theme === 'dark') {
+    // Apply saved mode when valid, otherwise default to auto (system preference).
+    const savedTheme = localStorage.getItem('theme');
+    const mode = savedTheme === 'dark' || savedTheme === 'light' || savedTheme === 'auto'
+        ? savedTheme
+        : 'auto';
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldUseDark = mode === 'dark' || (mode === 'auto' && prefersDark);
+
+    if (shouldUseDark) {
         document.documentElement.classList.add('dark');
     }
 </script>

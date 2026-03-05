@@ -11,7 +11,15 @@
     "license": "ISC",
     "type": "commonjs",
     "devDependencies": {
-        "@tailwindcss/cli": "^4.1.18",
-        "tailwindcss": "^4.1.18"
-    }
+        "@tailwindcss/cli": "^4.2.1",
+        "tailwindcss": "^4.2.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stephlocke/my-discombobulated-brain.git"
+    },
+    "bugs": {
+        "url": "https://github.com/stephlocke/my-discombobulated-brain/issues"
+    },
+    "homepage": "https://github.com/stephlocke/my-discombobulated-brain#readme"
 }
