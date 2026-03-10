@@ -1,3 +1,23 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 @source "hugo_stats.json";
+@import "custom.css";
+
+@theme {
+    --color-body: var(--color-white);
+    --color-dark-body: var(--color-gray-900);
+
+    --color-primary: var(--color-teal-500);
+    --color-primary-darken: var(--color-teal-600);
+
+    --color-secondary: var(--color-yellow-500);
+
+    --color-dark-primary: var(--color-teal-700);
+    --color-dark-primary-darken: var(--color-teal-800);
+
+    --color-dark-secondary: var(--color-yellow-700);
+
+    --color-off-black: var(--color-gray-700);
+    --color-off-black-darken: var(--color-gray-800);
+    --color-white-darken: var(--color-gray-200);
+}
