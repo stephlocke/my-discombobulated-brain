@@ -10,7 +10,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
-                   class="text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}">
+                   class="text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:bg-white-darken dark:focus:bg-off-black focus:rounded focus:no-underline px-2 py-1 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
@@ -52,7 +52,7 @@
         <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
             {{ range .Site.Menus.main }}
             <a href="{{ .URL | relLangURL }}" 
-               class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg {{ if $.IsMenuCurrent "main" . }}font-semibold text-blue-600 dark:text-blue-400 bg-gray-50 dark:bg-gray-700{{ end }}"
+               class="block px-4 py-2 text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:bg-white-darken dark:focus:bg-off-black focus:rounded focus:no-underline font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                 {{ .Name }}
             </a>
