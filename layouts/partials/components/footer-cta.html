@@ -1,0 +1,17 @@
+<section class="py-16 bg-gradient-to-b from-primary to-primary-darken dark:from-dark-primary dark:to-dark-primary-darken" aria-labelledby="cta-heading">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold text-off-black dark:text-white mb-6">
+                {{ .Params.headline }}
+            </h2>
+            <p class="text-xl text-off-black dark:text-white mb-8">
+                {{ .Params.body }}
+            </p>
+            {{ with .Params.buttons }}
+                {{ range . }}
+                    {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
