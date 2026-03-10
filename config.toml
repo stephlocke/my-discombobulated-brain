@@ -67,18 +67,21 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     identifier = 'home'
     name = 'Home'
     url = '/'
+    pageRef = '/'
     weight = 1
   
   [[menu.main]]
     identifier = 'about'
     name = 'About'
     url = '/about/'
+    pageRef = '/about'
     weight = 2
   
   [[menu.main]]
     identifier = 'blog'
     name = 'Blog'
     url = '/blog/'
+    pageRef = '/blog'
     weight = 3
   
   [[menu.main]]
