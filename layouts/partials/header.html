@@ -1,22 +1,30 @@
 <header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
     <nav class="container mx-auto px-4 py-4" aria-label="Main navigation">
-        <div class="flex items-center justify-between">
+        <div class="flex justify-around">
+            <div class="">
             <!-- Logo/Site Title -->
-            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-off-black dark:text-white hover:text-off-black-darken dark:hover:text-white-darken">
+            {{ with .Site.Params.logo }}
+            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
+                <img src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto">
+            </a>
+            {{ else }}
+            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
                 {{ .Site.Title }}
             </a>
+            {{ end }}
+            </div>
             
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
-                   class="text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:bg-white-darken dark:focus:bg-off-black focus:rounded focus:no-underline px-2 py-1 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}">
+                   class="text-white hover:underline hover:underline-offset-8 hover:text-secondary focus:outline-none focus:bg-white-darken focus:text-secondary focus:rounded focus:no-underline px-2 py-1 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
                 
                 <!-- Dark Mode Toggle -->
-                <button 
+                {{/*  <button 
                     id="theme-toggle" 
                     type="button"
                     class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -31,7 +39,21 @@
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                         <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
-                </button>
+                </button>  */}}
+
+            </div>
+
+            <!-- Social Links -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="Bluesky">
+                    <i class="fab fa-bluesky fa-xl"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin fa-xl"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="YouTube">
+                    <i class="fab fa-youtube fa-xl"></i>
+                </a>
             </div>
             
             <!-- Mobile Menu Button -->

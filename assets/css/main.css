@@ -7,17 +7,21 @@
     --color-body: var(--color-white);
     --color-dark-body: var(--color-gray-900);
 
-    --color-primary: var(--color-teal-500);
-    --color-primary-darken: var(--color-teal-600);
+    --color-primary: oklch(63.5% 0.15 158);
+    --color-primary-darken: oklch(54% 0.13 158);
 
     --color-secondary: var(--color-yellow-500);
+    --color-secondary-darken: var(--color-yellow-700);
 
-    --color-dark-primary: var(--color-teal-700);
-    --color-dark-primary-darken: var(--color-teal-800);
+    --color-dark-primary: oklch(40% 0.1 164);
+    --color-dark-primary-darken: oklch(37% 0.09 162);
 
     --color-dark-secondary: var(--color-yellow-700);
+    --color-dark-secondary-darken: var(--color-yellow-900);
 
     --color-off-black: var(--color-gray-700);
     --color-off-black-darken: var(--color-gray-800);
     --color-white-darken: var(--color-gray-200);
+
+    --font-exo: 'Exo', sans-serif;
 }

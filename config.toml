@@ -42,6 +42,8 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   description = 'A mental health charity dedicated to providing support and resources for those in need.'
   author = 'Mental Health Charity'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
+  logo = 'images/my-discombob-logo.svg'
+  favicon = 'images/favicon.ico'
   
   # Social media
   twitter = ''
