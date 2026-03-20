@@ -8,5 +8,5 @@
     <p class="text-gray-600 dark:text-gray-400 mb-8">
         {{ .text }}
     </p>
-    {{ partial "components/button" (dict "type" "solid" "href" (printf "#%s" (lower .header)) "label" "Read more") }}
+    {{ partial "components/button" (dict "type" "outline" "href" (printf "#%s" (lower .header)) "label" "Read more") }}
 </article>

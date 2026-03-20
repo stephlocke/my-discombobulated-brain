@@ -19,10 +19,10 @@
     {{ $hoverClass = "hover:bg-primary-darken/10 dark:hover:bg-dark-primary-darken/10 hover:text-primary-darken dark:hover:text-white hover:border-primary-darken dark:hover:border-dark-primary-darken" }}
     {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body dark:focus:ring-offset-dark-body" }}
 {{ else if eq $type "solid-alt" }}
-    {{ $bgClass = "bg-off-black dark:bg-white" }}
+    {{ $bgClass = "bg-white" }}
     {{ $textClass = "text-primary dark:text-dark-primary" }}
-    {{ $borderClass = "border-2 border-off-black dark:border-white" }}
-    {{ $hoverClass = "hover:bg-off-black-darken hover:border-off-black-darken dark:hover:bg-white-darken dark:hover:border-white-darken" }}
+    {{ $borderClass = "border-2 border-white" }}
+    {{ $hoverClass = "hover:bg-white-darken hover:border-white-darken " }}
     {{ $focusRingClass = "focus:ring-white focus:ring-offset-primary dark:focus:ring-offset-dark-primary" }}
 {{ else if eq $type "outline-alt" }}
     {{ $bgClass = "bg-transparent" }}
