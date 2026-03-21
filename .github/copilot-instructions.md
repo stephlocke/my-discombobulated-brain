@@ -54,7 +54,7 @@ This repository uses five specialised agents for code review. When Copilot revie
 ### Content
 - Never use stigmatising mental health language (see brand-voice-icp agent)
 - Crisis/contact information must appear on every page — do not remove it
-- Use Oxford commas; use em dashes (—) not hyphens for parenthetical clauses
+- Use Oxford commas; use commas for parenthetical clauses — do not use em dashes (—) as connectors or parenthetical markers; em dashes are a well-known AI writing signal and read as generated text
 - Every blog post must end with the crisis support notice
 
 ### Commits and PRs

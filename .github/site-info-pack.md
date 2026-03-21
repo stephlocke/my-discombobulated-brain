@@ -37,7 +37,7 @@
 - Use **second person** ("you") to speak directly to the reader
 - Use **first person plural** ("we") for the organisation
 - Sentence lengths: mix short punchy sentences with medium ones; avoid walls of text
-- Use Oxford commas; use em dashes (—) for parenthetical clauses
+- Use Oxford commas; use commas for parenthetical clauses — do not use em dashes (—) as connectors or for parenthetical asides; em dashes are a recognised AI writing signal and undermine the human, trustworthy tone this site requires
 - Avoid: stigmatising terms (`crazy`, `lunatic`, `commit` suicide), negative imperatives, passive voice
 - Prefer: `died by suicide`, `living with depression`, `experiencing a mental health challenge`
 - Headlines should be empathetic and solution-focused, not alarming or sensationalist
