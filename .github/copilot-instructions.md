@@ -23,6 +23,7 @@ This repository uses five specialised agents for code review. When Copilot revie
 | **Design & Style** | `.github/agents/design-style.md` | `assets/css/`, `layouts/`, Tailwind class usage, components |
 | **Hugo Practices** | `.github/agents/hugo-practices.md` | `layouts/`, `config.toml`, `archetypes/`, `hugo_stats.json` |
 | **Maintainer** | `.github/agents/maintainer.md` | `package.json`, `.github/workflows/`, `static/admin/config.yml` |
+| **Performance** | `.github/agents/performance.md` | `layouts/partials/head.html`, `assets/css/`, images, third-party scripts |
 
 > When reviewing a pull request that touches multiple areas, apply **all relevant agents** and group your comments by agent using the emoji prefix defined in each agent file (🔍 SEO/AEO, 💬 Brand Voice, 🎨 Design/Style, 🦔 Hugo, 🔧 Maintainer).
 

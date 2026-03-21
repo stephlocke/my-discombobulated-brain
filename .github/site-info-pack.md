@@ -329,10 +329,38 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 - Write content that directly answers the questions the primary audience is searching
 
 ### Performance Targets
-- Lighthouse Performance score: ≥ 90
-- Lighthouse Accessibility score: ≥ 95
-- Core Web Vitals: all green
-- CSS is minified and fingerprinted in production
+
+#### Lighthouse Score Thresholds
+
+| Category | 🟢 Good | 🟡 Needs Improvement | 🔴 Poor |
+|---|---|---|---|
+| Performance | ≥ 90 | 50–89 | < 50 |
+| Accessibility | 100 | 90–99 | < 90 |
+| Best Practices | ≥ 95 | 80–94 | < 80 |
+| SEO | ≥ 95 | 80–94 | < 80 |
+
+#### Core Web Vitals Targets
+
+| Metric | Good | Needs Improvement | Poor |
+|---|---|---|---|
+| LCP (Largest Contentful Paint) | ≤ 2.5 s | 2.5–4.0 s | > 4.0 s |
+| INP (Interaction to Next Paint) | ≤ 200 ms | 200–500 ms | > 500 ms |
+| CLS (Cumulative Layout Shift) | ≤ 0.1 | 0.1–0.25 | > 0.25 |
+| FCP (First Contentful Paint) | ≤ 1.8 s | 1.8–3.0 s | > 3.0 s |
+| TTFB (Time to First Byte) | ≤ 800 ms | 800–1800 ms | > 1800 ms |
+
+#### Performance Budget
+
+| Resource | Budget |
+|---|---|
+| Total page weight | < 1.5 MB |
+| JavaScript (compressed) | < 300 KB |
+| CSS (compressed) | < 100 KB |
+| Images (above fold) | < 500 KB |
+| Fonts | < 100 KB |
+| Third-party resources | < 200 KB |
+
+Performance matters beyond SEO — the primary audience may be visiting on mobile data or low-spec devices in moments of distress. A slow or broken page is a safeguarding concern, not just a UX inconvenience. Full Lighthouse review guidance lives in `.github/agents/performance.md`.
 
 ---
 
