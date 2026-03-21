@@ -37,14 +37,17 @@ jobs:
         id: audit
         run: |
           set +e
-          AUDIT_OUTPUT=$(npm audit --parseable 2>&1)
+          npm audit --json > /tmp/audit.json 2>&1
           AUDIT_EXIT=$?
           set -e
           if [ $AUDIT_EXIT -eq 0 ]; then
             SUMMARY="✅ No vulnerabilities found."
           else
-            SUMMARY=$(echo "$AUDIT_OUTPUT" | head -20 || echo "Run \`npm audit\` locally for full details.")
-            SUMMARY="⚠️ Vulnerabilities detected:\n\`\`\`\n${SUMMARY}\n\`\`\`"
+            CRITICAL=$(jq '.metadata.vulnerabilities.critical // 0' /tmp/audit.json 2>/dev/null || echo "0")
+            HIGH=$(jq '.metadata.vulnerabilities.high // 0' /tmp/audit.json 2>/dev/null || echo "0")
+            MODERATE=$(jq '.metadata.vulnerabilities.moderate // 0' /tmp/audit.json 2>/dev/null || echo "0")
+            LOW=$(jq '.metadata.vulnerabilities.low // 0' /tmp/audit.json 2>/dev/null || echo "0")
+            SUMMARY="⚠️ Vulnerabilities detected — critical: ${CRITICAL}, high: ${HIGH}, moderate: ${MODERATE}, low: ${LOW}. Run \`npm audit\` locally or see the [workflow run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) for package details."
           fi
           {
             echo "summary<<EOF"

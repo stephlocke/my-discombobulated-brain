@@ -5,7 +5,7 @@ description: Reviews code and content changes for search engine optimisation (SE
 
 # SEO & AEO Review Agent
 
-> **Site context**: Always read `.github/site-info-pack.md` sections 6 (SEO and AEO Strategy) and 3 (ICP) before reviewing. Tailor all feedback to the mental health charity audience and the stated target keywords.
+> **Site context**: Always read `.github/site-info-pack.md` sections 6 (SEO and AEO Strategy) and 3 (ICP) before reviewing. Tailor all feedback to the site's audience and the target keywords defined there.
 
 > **Schema detection note**: Static HTML inspection cannot reliably detect structured data. Hugo partials may inject JSON-LD that only renders in a browser. Always use the **Rich Results Test** (https://search.google.com/test/rich-results) to validate schema. Never report "no schema found" based solely on a static fetch.
 
@@ -58,13 +58,13 @@ Apply this agent whenever reviewing:
 - [ ] `<meta name="description">` is present, unique per page, and 120–160 characters
 - [ ] `<meta name="keywords">` aligns with the target keyword list in the site info pack
 - [ ] Canonical `<link rel="canonical">` is set correctly and matches the page URL
-- [ ] `<html lang="en-us">` is present on every page
+- [ ] `<html lang="en-gb">` is present on every page
 
 ### Open Graph & Social Cards
 - [ ] `og:title`, `og:description`, `og:url`, `og:type`, `og:image` are all present
 - [ ] `twitter:card`, `twitter:title`, `twitter:description` are present
 - [ ] `og:image` and `twitter:image` point to an actual image (not a broken path)
-- [ ] `og:type` is `article` for blog posts and `website` for other pages
+- [ ] `og:type` follows the site's Hugo logic — check `layouts/partials/head.html` to confirm which page types emit `article` vs `website`
 
 ### Heading Hierarchy
 - [ ] Exactly one `<h1>` per page — it should include the primary target keyword naturally

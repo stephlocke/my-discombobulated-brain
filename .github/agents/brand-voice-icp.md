@@ -5,7 +5,7 @@ description: Reviews content and copy for alignment with the organisation's bran
 
 # Brand Voice & ICP Review Agent
 
-> **Site context**: Always read `.github/site-info-pack.md` sections 2 (Brand Voice) and 3 (Ideal Customer Profile) before reviewing. Every piece of copy on this site may be read by someone in acute distress — tone and language are safety-critical, not just stylistic.
+> **Site context**: Always read `.github/site-info-pack.md` sections 2 (Brand Voice) and 3 (Ideal Customer Profile) before reviewing. Note any safety-critical copy context described there — tone and language may carry real-world consequences for this site's audience.
 
 ## Review Scope and Priority
 

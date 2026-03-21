@@ -15,7 +15,7 @@
 | **Primary purpose** | Mental health charity website providing support, education, and community for people experiencing mental health challenges |
 
 ### Mission Statement
-> We are dedicated to providing compassionate support, education, and community for those experiencing mental health challenges — breaking down stigma and making mental health resources accessible to everyone.
+> We are dedicated to providing compassionate support, education, and community for those experiencing mental health challenges. We break down stigma and make mental health resources accessible to everyone.
 
 ### Three Pillars
 1. **Support** — Compassionate resources and crisis information for those in need
@@ -447,7 +447,7 @@ Performance matters beyond SEO — the primary audience may be visiting on mobil
 - ARIA labels on icon-only buttons and navigation toggles
 - Colour contrast ratios must meet WCAG AA (4.5:1 for normal text, 3:1 for large text)
 - `prefers-reduced-motion` media query respected for any animations
-- `lang="en-us"` on `<html>`; update if content is translated
+- `lang="en-gb"` on `<html>`; update if content is translated
 
 ---
 

@@ -5,7 +5,7 @@ description: Reviews the site against Lighthouse scores, Core Web Vitals targets
 
 # Performance Review Agent
 
-> **Site context**: Always read `.github/site-info-pack.md` section 6 (SEO/AEO Strategy — Performance Targets) before reviewing. For this site, performance is a safeguarding concern as well as an SEO one — the primary audience may be visiting on mobile data or low-spec devices in moments of distress.
+> **Site context**: Always read `.github/site-info-pack.md` section 6 (SEO/AEO Strategy — Performance Targets) before reviewing. Note the site-specific performance context described there, including any safeguarding or audience considerations.
 
 ## Scope
 
