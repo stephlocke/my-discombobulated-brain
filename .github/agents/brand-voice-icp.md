@@ -35,60 +35,66 @@ description: Reviews content and copy for alignment with the mental health chari
 
 ## Brand Voice Checklist
 
+> The canonical rules for tone, language, formatting, and CTA copy live in **`site-info-pack.md §2`**. Always read that section before reviewing. The checklist below is a quick prompt for what to verify — refer to §2 for the specific terms, examples, and red/green flags.
+
 ### Tone
-- [ ] Copy is **compassionate and empathetic** — it acknowledges the reader's feelings before offering solutions
-- [ ] Copy is **hopeful but honest** — it does not over-promise or minimise real challenges
-- [ ] Copy is **accessible and plain** — no clinical jargon, medical acronyms, or academic language without explanation
-- [ ] Copy is **inclusive and affirming** — person-first language is used consistently
+- [ ] Copy is **compassionate and empathetic** — acknowledges the reader's feelings before offering solutions (see Tone of Voice in §2)
+- [ ] Copy is **hopeful but honest** — does not over-promise or minimise real challenges
+- [ ] Copy is **accessible and plain** — no clinical jargon or academic language without explanation
+- [ ] Copy is **inclusive and affirming** — person-first language throughout
 - [ ] Copy is **action-oriented** — every section guides the reader towards a clear next step
 
-### Language Rules
-- [ ] Uses **second person** ("you", "your") to address the reader directly
-- [ ] Uses **first person plural** ("we", "our") for the organisation — never "the charity" in body copy
-- [ ] Avoids stigmatising terms: `crazy`, `lunatic`, `psycho`, `commit suicide` (use `died by suicide` or `took their own life`)
-- [ ] Avoids negative imperatives: "Don't suffer alone" → "You don't have to face this alone"
-- [ ] Avoids passive voice where active voice is clearer
-- [ ] Uses Oxford commas
-- [ ] Headlines are empathetic and solution-focused — not alarming or sensationalist
-- [ ] **British English spelling** throughout — `normalise` not `normalize`, `recognise` not `recognize`, `behaviour` not `behavior`, `colour` not `color`
-- [ ] No sentence exceeds ~25 words without a full stop — split long sentences into two
+### Language and Formatting
+- [ ] Follows all Writing Principles in `site-info-pack.md §2` — second person, first person plural for the organisation, Oxford commas, no em dashes, no negative imperatives, no passive voice
+- [ ] No stigmatising terms — check against the specific terms listed in `site-info-pack.md §2` red flags
+- [ ] British English spelling throughout — check against the specific substitutions in `site-info-pack.md §2` red flags
+- [ ] No sentence exceeds 25 words; paragraphs are 3–5 sentences maximum
+- [ ] Complex vocabulary replaced with plain equivalents — see `site-info-pack.md §2` red flags for substitutions
+- [ ] Heading hierarchy is unbroken — H2 starts body copy; no H3 before H2; no `#` H1 in Markdown body
+- [ ] No standalone `---` horizontal rules in Markdown body
 
-### Formatting and Readability
-- [ ] Paragraphs are short (3–5 sentences maximum for body copy)
-- [ ] Headings are descriptive and carry meaning independently
-- [ ] Bullet points are used for lists of 3+ items rather than comma-separated lists
-- [ ] No walls of text — white space and visual hierarchy are used generously
-- [ ] Complex vocabulary replaced with plain equivalents — `utilise` → `use`, `commence` → `start`, `ascertain` → `find out`, `facilitate` → `help`
-- [ ] **Heading hierarchy is unbroken** — body copy starts at H2 (Hugo renders frontmatter `title` as H1); no levels are skipped; H3 never appears before an H2
-- [ ] **No standalone `---` horizontal rules in Markdown body** — use an H2 heading as a section break instead
+### Human Voice — No AI Signals
+- [ ] No em dashes (—) used as connectors or parenthetical markers — rewrite with a comma or split into two sentences
+- [ ] No hollow affirmations: "Absolutely!", "Certainly!", "Great question!", "Of course!"
+- [ ] No AI-typical vocabulary: `delve`, `foster`, `empower`, `transformative`, `journey`, `navigate`, `leverage`, `unlock`, `revolutionise`, `cutting-edge`
+- [ ] No filler openers: "In today's world…", "In the realm of…", "It is important to note that…", "It goes without saying…"
+- [ ] No performative empathy: "We understand that mental health can be challenging…", "We know how hard it can be…"
+- [ ] No excessive intensifiers: "very unique", "incredibly important", "truly inspiring", "deeply meaningful"
 
 ---
 
 ## ICP Alignment Checklist
 
+> The canonical audience definitions, persona details, and content requirements live in **`site-info-pack.md §3`**. Always read that section before reviewing.
+
+- [ ] Content meets the requirements for its target audience segment — apply the **Content Requirements by Audience** table from `site-info-pack.md §3`
+- [ ] Crisis or contact information is visible or clearly linked — never buried (see §3 Audience Implications and §10 Crisis Information Protocol)
+- [ ] CTAs follow the standards in `site-info-pack.md §2 CTA Copy Standards`
+
 ### Primary Audience — People Seeking Support
-- [ ] Content acknowledges the difficulty of reaching out and validates that choice
-- [ ] Crisis or contact information is visible or linked — never buried
-- [ ] Language does not assume prior knowledge of mental health terminology
+- [ ] Acknowledges the difficulty of reaching out and validates that choice
+- [ ] Language assumes no prior knowledge of mental health terminology
 - [ ] Content is scannable for someone with limited concentration or in distress
-- [ ] CTAs are gentle and non-pressuring ("Reach out when you're ready", not "Act now!")
 
 ### Secondary Audience — Supporters and Carers
 - [ ] Resources aimed at supporters are clearly framed as "for carers" or "how to help"
 - [ ] Guidance is practical and empathetic — acknowledges carer burnout and their own needs
 
 ### Tertiary Audience — Professionals and Advocates
-- [ ] Professional resources signal credibility (references, evidence-based claims)
+- [ ] Content signals credibility (evidence-based framing, referenced claims)
 - [ ] Shareable content is clearly structured and citable
 
 ---
 
 ## CTA Copy Checklist
 
-- [ ] CTA labels are specific and action-oriented: "Get In Touch", "Find Support", "Read Our Story" — not "Submit" or "Click Here"
-- [ ] CTA copy on the footer CTA block aligns with the page's emotional context
+> The canonical CTA copy standards live in **`site-info-pack.md §2 CTA Copy Standards`**. Always apply those. The items below are a quick verification prompt.
+
+- [ ] CTA labels are specific and action-oriented — not "Submit" or "Click Here" (see §2 CTA table for examples)
+- [ ] CTA copy is gentle and reader-led — no urgent or pressuring language (see §2 red flags)
+- [ ] Footer CTA copy aligns with the emotional context of the page
 - [ ] The primary CTA on any page is easy to find and visually prominent
-- [ ] Crisis/emergency CTAs use `solid` or `solid-alt` button variants for maximum visibility
+- [ ] Crisis and emergency CTAs use `solid` or `solid-alt` button variants for maximum visibility
 
 ---
 

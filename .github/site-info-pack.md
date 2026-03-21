@@ -35,12 +35,30 @@
 
 ### Writing Principles
 - Use **second person** ("you") to speak directly to the reader
-- Use **first person plural** ("we") for the organisation
-- Sentence lengths: mix short punchy sentences with medium ones; avoid walls of text
+- Use **first person plural** ("we") for the organisation — never "the charity" in body copy
+- Sentence lengths: mix short punchy sentences with medium ones; avoid walls of text; no sentence should exceed 25 words without a full stop
+- Body copy paragraphs should be short — 3 to 5 sentences maximum; generous white space aids readers with limited concentration or in distress
 - Use Oxford commas; use commas for parenthetical clauses — do not use em dashes (—) as connectors or for parenthetical asides; em dashes are a recognised AI writing signal and undermine the human, trustworthy tone this site requires
-- Avoid: stigmatising terms (`crazy`, `lunatic`, `commit` suicide), negative imperatives, passive voice
+- Avoid: stigmatising terms (`crazy`, `lunatic`, `commit` suicide), negative imperatives ("Don't suffer alone" → "You don't have to face this alone"), passive voice
 - Prefer: `died by suicide`, `living with depression`, `experiencing a mental health challenge`
 - Headlines should be empathetic and solution-focused, not alarming or sensationalist
+
+### CTA Copy Standards
+
+CTA copy is read by people in varying states of distress. Every CTA must be:
+
+- **Specific and action-oriented** — "Find Support", "Get In Touch", "Read Our Story" rather than "Submit" or "Click Here"
+- **Gentle and reader-led** — use "whenever you're ready", not "now" or "act immediately"
+- **Contextually matched** — the footer CTA block copy should align with the emotional context of the page it sits on
+- **Clearly primary** — the main CTA on any page must be easy to find and visually prominent
+- **High-visibility for crisis** — crisis and emergency CTAs must use the `solid` or `solid-alt` button variant (see Design System §4) to ensure maximum visibility in all colour modes
+
+| ❌ Avoid | ✅ Prefer |
+|---|---|
+| "Get Help Now!" | "Find support whenever you're ready" |
+| "Don't wait — reach out today" | "We're here when you need us" |
+| "Submit" | "Send your message" |
+| "Click here" | "Read about our support services" |
 
 ### Voice Examples
 | ❌ Avoid | ✅ Prefer |
@@ -114,6 +132,16 @@ When reviewing copy, layouts, or features against the ICP, score each persona on
 - Ensure WCAG 2.1 AA compliance at minimum; target AAA where practical
 - Mobile-first design is non-negotiable for the primary audience
 - Performance matters: the primary audience may be on mobile data or low-spec devices
+
+### Content Requirements by Audience
+
+What good content must do for each segment. Use this when writing copy, reviewing a PR, or assessing whether a page serves the right people.
+
+| Audience | What content must do |
+|---|---|
+| **Primary — People seeking support** | Acknowledge the difficulty of reaching out and validate that choice; keep crisis/contact information visible and never buried; use language that assumes no prior knowledge of mental health terminology; ensure scannability for someone with limited concentration; use gentle, non-pressuring CTAs ("Reach out when you're ready", not "Act now!") |
+| **Secondary — Supporters and carers** | Clearly frame resources aimed at supporters as "for carers" or "how to help someone"; provide practical, empathetic guidance that also acknowledges carer burnout and the carer's own wellbeing needs |
+| **Tertiary — Professionals and advocates** | Signal credibility through evidence-based framing, referenced claims, and clear, shareable structure; content must hold up when a professional recommends it to patients, colleagues, or employees |
 
 ### Personas
 

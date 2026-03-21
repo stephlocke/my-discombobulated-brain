@@ -94,23 +94,19 @@ Apply this agent whenever reviewing:
 
 ### E-E-A-T Signals
 
-For a mental health charity, E-E-A-T is especially important — people and AI engines must trust the content before acting on it.
+> The canonical E-E-A-T requirements for this site — including specific authority sources, credibility signals, and trustworthiness requirements — live in **`site-info-pack.md §6 E-E-A-T Signals`**. Always read that section before reviewing. Apply the generic checks below.
 
 - [ ] **Experience** — content reflects first-hand or lived experience where relevant; real scenarios and personal accounts are included
-- [ ] **Expertise** — factual claims are accurate and evidence-based; recognised sources (NHS, NICE, Mind, Samaritans) are referenced or linked where relevant
-- [ ] **Authoritativeness** — contributors and authors are named where possible; external recognition (press, NHS referrals, partnerships) is cited where it exists
+- [ ] **Expertise** — factual claims are accurate and evidence-based; claims are linked to recognised sources (see site-info-pack.md §6 for the site-specific authority list)
+- [ ] **Authoritativeness** — contributors and authors are named where possible; external recognition is cited where it exists
 - [ ] **Trustworthiness** — crisis helpline, privacy policy, and contact information are clearly present; no pseudoscience or unsupported claims
 
 ### Content Volume
 
-Pages below the thresholds in `site-info-pack.md §8` are considered thin content. Never flag a page for word count alone without suggesting substantive additions that genuinely serve the reader.
+> The canonical content volume minimums for this site live in **`site-info-pack.md §8 Content Volume Minimums`**. Apply those thresholds. Never flag a page for word count alone without suggesting substantive additions that genuinely serve the reader.
 
-- [ ] Blog posts: 800 words minimum (target 1,200+)
-- [ ] Hub or pillar pages: 1,500 words minimum (target 2,500+)
-- [ ] Standard pages (About, Contact): 400 words minimum
-- [ ] Section index pages (`_index.md`): 150 words minimum
-
-Thin pages must be expanded with substantive content (FAQs, step-by-step guidance, definition blocks, personal accounts, comparison tables) or consolidated into a parent page.
+- [ ] Blog posts, standard pages, and section index pages meet the minimums in `site-info-pack.md §8`
+- [ ] Thin pages are flagged with specific, substantive expansion suggestions (FAQs, step-by-step guidance, definition blocks, personal accounts, comparison tables)
 
 ### Text-to-HTML Ratio
 - [ ] Visible body text is at least 10% of total HTML — pages below this threshold are flagged as thin content
@@ -122,15 +118,11 @@ Thin pages must be expanded with substantive content (FAQs, step-by-step guidanc
 
 ### AI Crawler Accessibility
 
-AI engines are an increasingly primary discovery channel for people seeking mental health information. Ensure the following crawlers are **not** blocked in `static/robots.txt`:
+> The canonical list of AI crawlers that must not be blocked lives in **`site-info-pack.md §6 AI Crawler Accessibility`**. Verify none are blocked in `static/robots.txt`.
 
-- [ ] `GPTBot` (OpenAI / ChatGPT)
-- [ ] `OAI-SearchBot` (OpenAI search)
-- [ ] `ClaudeBot` (Anthropic / Claude)
-- [ ] `anthropic-ai` (Anthropic)
-- [ ] `PerplexityBot` (Perplexity AI)
-- [ ] `Googlebot` (Google Search and AI Overviews)
-- [ ] `Bingbot` (Bing / Copilot)
+- [ ] All crawlers listed in `site-info-pack.md §6` are permitted in `static/robots.txt`
+- [ ] No blanket `Disallow: /` or broad wildcard rule affects AI crawlers
+- [ ] `static/robots.txt` includes a `Sitemap:` reference pointing to `/sitemap.xml`
 
 ### Brand Entity Signals
 - [ ] The organisation name is used consistently across all pages — flag any variation in title tags, H1s, and meta descriptions
