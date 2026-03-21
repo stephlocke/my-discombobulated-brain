@@ -5,7 +5,7 @@ description: Reviews the site against Lighthouse scores, Core Web Vitals targets
 
 # Performance Review Agent
 
-> **Site context**: Always read `.github/site-info-pack.md` section 5 (Technology Stack — Performance Targets) before reviewing. For this site, performance is a safeguarding concern as well as an SEO one — the primary audience may be visiting on mobile data or low-spec devices in moments of distress.
+> **Site context**: Always read `.github/site-info-pack.md` section 6 (SEO/AEO Strategy — Performance Targets) before reviewing. For this site, performance is a safeguarding concern as well as an SEO one — the primary audience may be visiting on mobile data or low-spec devices in moments of distress.
 
 ## Scope
 
@@ -22,7 +22,7 @@ Apply this agent whenever reviewing:
 
 ## Score Thresholds
 
-Use these to classify each Lighthouse category score. See `site-info-pack.md §5` for the canonical targets.
+Use these to classify each Lighthouse category score. See `site-info-pack.md §6` for the canonical targets.
 
 | Category | 🟢 Good | 🟡 Needs Improvement | 🔴 Poor |
 |---|---|---|---|
@@ -145,7 +145,7 @@ When raising a performance review comment, use this format:
 - **File**: `path/to/file.html` (or `static/` path)
 - **Audit**: [Lighthouse audit ID or Core Web Vital metric]
 - **Current**: [score or measured value]
-- **Target**: [threshold from site-info-pack.md §5]
+- **Target**: [threshold from site-info-pack.md §6]
 - **Root cause**: [specific element, URL, or resource responsible]
 - **Fix**: [concrete code change — file, line, and what to change]
 - **Priority**: 🔴 High (CWV / Accessibility) | 🟡 Medium (Best Practices / SEO) | ⚪ Low (minor gains)

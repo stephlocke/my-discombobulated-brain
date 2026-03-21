@@ -14,7 +14,7 @@ Read **`.github/site-info-pack.md`** for full site context (organisation, missio
 
 ## Specialised Review Agents
 
-This repository uses five specialised agents for code review. When Copilot reviews a pull request or is asked to review code, apply the relevant agent's checklist from `.github/agents/`:
+This repository uses six specialised agents for code review. When Copilot reviews a pull request or is asked to review code, apply the relevant agent's checklist from `.github/agents/`:
 
 | Agent | File | Apply when reviewing… |
 |---|---|---|
@@ -25,7 +25,7 @@ This repository uses five specialised agents for code review. When Copilot revie
 | **Maintainer** | `.github/agents/maintainer.md` | `package.json`, `.github/workflows/`, `static/admin/config.yml` |
 | **Performance** | `.github/agents/performance.md` | `layouts/partials/head.html`, `assets/css/`, images, third-party scripts |
 
-> When reviewing a pull request that touches multiple areas, apply **all relevant agents** and group your comments by agent using the emoji prefix defined in each agent file (🔍 SEO/AEO, 💬 Brand Voice, 🎨 Design/Style, 🦔 Hugo, 🔧 Maintainer).
+> When reviewing a pull request that touches multiple areas, apply **all relevant agents** and group your comments by agent using the emoji prefix defined in each agent file (🔍 SEO/AEO, 💬 Brand Voice, 🎨 Design/Style, 🦔 Hugo, 🔧 Maintainer, ⚡ Performance).
 
 ---
 

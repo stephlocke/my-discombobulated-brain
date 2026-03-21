@@ -21,7 +21,6 @@ jobs:
     outputs:
       audit-summary: ${{ steps.audit.outputs.summary }}
       outdated-summary: ${{ steps.outdated.outputs.summary }}
-      audit-exit-code: ${{ steps.audit.outputs.exit_code }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,7 +50,6 @@ jobs:
             echo "summary<<EOF"
             echo -e "$SUMMARY"
             echo "EOF"
-            echo "exit_code=$AUDIT_EXIT"
           } >> "$GITHUB_OUTPUT"
 
       - name: Check for outdated packages
@@ -132,7 +130,7 @@ jobs:
         run: |
           set +e
           TODOS=$(grep -rn "TODO\|FIXME\|HACK\|XXX" --include="*.html" --include="*.md" --include="*.toml" --include="*.css" . \
-            --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=public 2>&1 | head -20)
+            --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=public --exclude-dir=.github 2>&1 | head -20)
           set -e
           if [ -z "$TODOS" ]; then
             SUMMARY="✅ No TODO/FIXME items found."
@@ -192,6 +190,14 @@ jobs:
 
       - name: Create or update weekly review issue
         uses: actions/github-script@v7
+        env:
+          AUDIT_SUMMARY: ${{ needs.dependency-audit.outputs.audit-summary }}
+          OUTDATED_SUMMARY: ${{ needs.dependency-audit.outputs.outdated-summary }}
+          BUILD_STATUS: ${{ needs.build-check.outputs.build-status }}
+          BUILD_DETAIL: ${{ needs.build-check.outputs.build-detail }}
+          TODOS_SUMMARY: ${{ needs.content-checks.outputs.todos-summary }}
+          PLACEHOLDERS_SUMMARY: ${{ needs.content-checks.outputs.placeholders-summary }}
+          MISSING_ALT_SUMMARY: ${{ needs.content-checks.outputs.missing-alt-summary }}
         with:
           script: |
             const date = new Date().toISOString().split('T')[0];
@@ -209,34 +215,34 @@ jobs:
               `### 🔒 Security`,
               ``,
               `**npm audit**`,
-              `${{ needs.dependency-audit.outputs.audit-summary }}`,
+              process.env.AUDIT_SUMMARY,
               ``,
               `---`,
               ``,
               `### 📦 Dependencies`,
               ``,
               `**Outdated packages**`,
-              `${{ needs.dependency-audit.outputs.outdated-summary }}`,
+              process.env.OUTDATED_SUMMARY,
               ``,
               `---`,
               ``,
               `### 🏗️ Build Health`,
               ``,
-              `**Hugo build**: ${{ needs.build-check.outputs.build-status }}`,
-              `${{ needs.build-check.outputs.build-detail }}`,
+              `**Hugo build**: ${process.env.BUILD_STATUS}`,
+              process.env.BUILD_DETAIL,
               ``,
               `---`,
               ``,
               `### 📝 Content & Template Checks`,
               ``,
               `**TODO / FIXME items**`,
-              `${{ needs.content-checks.outputs.todos-summary }}`,
+              process.env.TODOS_SUMMARY,
               ``,
               `**Placeholder content**`,
-              `${{ needs.content-checks.outputs.placeholders-summary }}`,
+              process.env.PLACEHOLDERS_SUMMARY,
               ``,
               `**Image alt attributes**`,
-              `${{ needs.content-checks.outputs.missing-alt-summary }}`,
+              process.env.MISSING_ALT_SUMMARY,
               ``,
               `---`,
               ``,
@@ -284,7 +290,7 @@ jobs:
               repo: context.repo.repo,
               labels: weekLabel,
               state: 'open',
-              per_page: 5,
+              per_page: 100,
             });
 
             const thisWeekIssue = existing.data.find(i => i.title === title);

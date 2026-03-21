@@ -27,11 +27,11 @@
 ## 2. Brand Voice
 
 ### Tone of Voice
-- **Compassionate and empathetic** — Always centre the feelings and experiences of the reader
-- **Hopeful but honest** — Acknowledge difficulty while reinforcing that support exists
-- **Accessible and plain** — Avoid clinical jargon, complex acronyms, and academic language
-- **Inclusive and affirming** — Use affirming, person-first language; never blame or shame
-- **Action-oriented** — Guide the reader clearly towards next steps (contact, resources, community)
+- **Compassionate and empathetic**: Always centre the feelings and experiences of the reader
+- **Hopeful but honest**: Acknowledge difficulty while reinforcing that support exists
+- **Accessible and plain**: Avoid clinical jargon, complex acronyms, and academic language
+- **Inclusive and affirming**: Use affirming, person-first language; never blame or shame
+- **Action-oriented**: Guide the reader clearly towards next steps (contact, resources, community)
 
 ### Writing Principles
 - Use **second person** ("you") to speak directly to the reader
@@ -83,7 +83,7 @@ Quick-reference red and green flags for anyone writing or reviewing copy. Full o
 - **Complex vocabulary** — `utilise` → `use`, `commence` → `start`, `ascertain` → `find out`, `facilitate` → `help`; plain English always
 - **Walls of text** — three or more list-able items buried inside a paragraph; use a bulleted list instead
 - **Broken heading hierarchy** — H3 appearing before any H2; levels skipped (e.g. H2 → H4); a `#` H1 added inside Markdown body (Hugo renders the frontmatter `title` as H1 — the body should start at H2)
-- **Horizontal rules in body content** — standalone `---` lines in the body of a Markdown file; use an H2 heading as a section break instead
+- **Horizontal rules in site content** — in `content/**/*.md` (public site pages), standalone `---` lines should not be used as section breaks; use an H2 heading instead. Internal docs (e.g. `.github/**/*.md`) may use `---` for readability.
 
 #### ✅ Green Flags — Approve
 

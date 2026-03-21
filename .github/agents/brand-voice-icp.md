@@ -51,7 +51,7 @@ description: Reviews content and copy for alignment with the mental health chari
 - [ ] No sentence exceeds 25 words; paragraphs are 3–5 sentences maximum
 - [ ] Complex vocabulary replaced with plain equivalents — see `site-info-pack.md §2` red flags for substitutions
 - [ ] Heading hierarchy is unbroken — H2 starts body copy; no H3 before H2; no `#` H1 in Markdown body
-- [ ] No standalone `---` horizontal rules in Markdown body
+- [ ] No standalone `---` horizontal rules in `content/**/*.md` (site content) — use an H2 heading as a section break instead
 
 ### Human Voice — No AI Signals
 - [ ] No em dashes (—) used as connectors or parenthetical markers — rewrite with a comma or split into two sentences
