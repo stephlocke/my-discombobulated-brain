@@ -1,10 +1,8 @@
-# GitHub Copilot Instructions — My Discombobulated Brain
-
-This is a **mental health charity website** built with Hugo (extended) and Tailwind CSS v4, deployed to GitHub Pages. Every code and content change may be seen by people experiencing mental health challenges — quality, accessibility, and tone of voice are not optional.
+# GitHub Copilot Instructions
 
 ## Site Context
 
-Read **`.github/site-info-pack.md`** for full site context before generating or reviewing code. Key sections:
+Read **`.github/site-info-pack.md`** for full site context (organisation, mission, audience, design system, and tech stack) before generating or reviewing code. Key sections:
 - §2 Brand Voice — tone, language rules, stigma-free writing
 - §3 ICP — who visits this site and what they need
 - §4 Design System — colour tokens, components, dark mode

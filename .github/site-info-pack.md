@@ -77,6 +77,122 @@
 - Mobile-first design is non-negotiable for the primary audience
 - Performance matters: the primary audience may be on mobile data or low-spec devices
 
+### Personas
+
+The personas below give each audience segment a human face. Reference them when writing copy, designing components, or assessing whether a feature serves the people who matter most.
+
+---
+
+#### Persona 1 — Jamie, 24 · *The Burnt-Out Graduate*
+**Audience segment**: Primary (seeking support)
+
+| | |
+|---|---|
+| **Demographics** | 24, non-binary, mixed-race British, living in a shared house in a mid-size city |
+| **Occupation** | Junior data analyst, nine months into their first full-time job |
+| **Tech comfort** | High — lives on their phone; rarely uses a desktop outside work |
+| **Access pattern** | Late-night mobile browsing, often after 11 pm, sometimes mid-panic-attack |
+
+**Personality & context**: Jamie appears capable and put-together at work, but privately experiences waves of anxiety and low mood they can't quite name. They grew up with social media and are comfortable searching for mental health content, but have been burned by sites that felt clinical or preachy. They want to feel understood quickly — if the first sentence doesn't resonate, they're gone. They're looking for validation that what they're feeling is real, and a gentle nudge towards next steps they can take tonight.
+
+**Design implications**: Ultra-fast mobile load; warm, conversational hero copy; crisis line visible without scrolling; no sign-up gates on core content.
+
+---
+
+#### Persona 2 — Priya, 38 · *The Quietly Struggling Parent*
+**Audience segment**: Primary (seeking support)
+
+| | |
+|---|---|
+| **Demographics** | 38, South Asian British woman, married with two primary-school-age children |
+| **Occupation** | Part-time pharmacist, recently returned from maternity leave |
+| **Tech comfort** | Medium — confident on a smartphone but doesn't explore unfamiliar apps or sites |
+| **Access pattern** | Quick mobile visits during lunch break or school run; rarely has more than 5 minutes |
+
+**Personality & context**: Priya has been experiencing persistent low mood and exhaustion since her second pregnancy but has not sought help — there is significant stigma around mental health in her close-knit family and community, and she worries about what seeking help might mean for how others see her. She searches in private browsing mode. She wants information that respects her cultural context, doesn't assume she can "just take time off", and doesn't make her feel broken. A tone that is practical and non-judgmental is essential.
+
+**Design implications**: Fast, no-fuss navigation; stigma-free language everywhere above the fold; content that acknowledges caregiving pressures; no pop-ups or notifications that could be seen by others.
+
+---
+
+#### Persona 3 — Marcus, 57 · *The First-Timer*
+**Audience segment**: Primary (seeking support)
+
+| | |
+|---|---|
+| **Demographics** | 57, Black British man, widowed two years ago, lives alone in a suburban town |
+| **Occupation** | Recently retired HGV driver |
+| **Tech comfort** | Low-medium — uses a tablet at home; confident with email and YouTube but wary of "complex" sites |
+| **Access pattern** | Daytime desktop/tablet; unhurried but easily put off by confusing layouts |
+
+**Personality & context**: Marcus is experiencing low mood and isolation for the first time in his life following retirement and bereavement. He doesn't think of himself as someone with "mental health issues" — he would describe it as "just not feeling right". He is sceptical of therapy jargon and anything that feels like it's aimed at younger people. Trust signals matter enormously: clear language, no buzzwords, a phone number he can call if he needs to. He was encouraged to look online by his GP but is cautious.
+
+**Design implications**: Large, readable font; plain language; phone/helpline number prominent; no youth-coded imagery or slang; generous tap targets for tablet use.
+
+---
+
+#### Persona 4 — Helen, 53 · *The Worried Parent*
+**Audience segment**: Secondary (supporter/carer)
+
+| | |
+|---|---|
+| **Demographics** | 53, white British woman, married, two adult children — one currently in treatment for an eating disorder |
+| **Occupation** | Secondary school administrator |
+| **Tech comfort** | Medium — comfortable on a laptop; uses Google extensively for research |
+| **Access pattern** | Evening desktop research sessions; thorough reader who bookmarks and returns to pages |
+
+**Personality & context**: Helen is exhausted, frightened, and oscillates between wanting to fix everything and feeling completely helpless. She has read a lot online and is now cautious about sources — she trusts sites that feel professional and evidence-informed. She needs practical guidance on how to support her child without making things worse, and she also needs someone to acknowledge that carers need support too. She will share good resources with her husband and her daughter's care team.
+
+**Design implications**: Clear, structured content with headings; sources or evidence signals where possible; carer-specific content clearly labelled; share-friendly page layout.
+
+---
+
+#### Persona 5 — Theo, 31 · *The Researching Partner*
+**Audience segment**: Secondary (supporter/carer)
+
+| | |
+|---|---|
+| **Demographics** | 31, white British man, in a long-term relationship with a partner who has bipolar disorder |
+| **Occupation** | UX designer at a tech company |
+| **Tech comfort** | Very high — critiques website UX as he browses; notices every friction point |
+| **Access pattern** | Late-night laptop sessions; task-focused — comes with a specific question and wants a direct answer |
+
+**Personality & context**: Theo is practical and analytically minded. He loves his partner deeply and wants to understand what they're going through so he can be genuinely helpful. He is put off by vague platitudes and is looking for evidence-based, specific guidance. He will notice broken layouts, poor accessibility, and inconsistent copy immediately. He's also quietly carrying a lot of emotional weight and would benefit from content that acknowledges his experience as a carer — though he'd never search for that directly.
+
+**Design implications**: Efficient navigation; no fluff in headings; structured, scannable content; solid technical execution (broken things erode trust immediately for this persona).
+
+---
+
+#### Persona 6 — Dr. Amara, 46 · *The Trusted Referrer*
+**Audience segment**: Tertiary (professional/advocate)
+
+| | |
+|---|---|
+| **Demographics** | 46, British-Nigerian woman, based in a busy urban NHS GP practice |
+| **Occupation** | GP partner |
+| **Tech comfort** | High — uses clinical systems daily; expects reliable, fast, accessible tools |
+| **Access pattern** | Brief desktop visits mid-consultation or during admin time; needs information fast |
+
+**Personality & context**: Dr. Amara sees mental health presentations in almost every clinic session and wants a trustworthy resource she can recommend to patients who are not yet ready for a referral or who face long waiting lists. She is looking for credibility: clear information, no pseudoscience, and a tone that won't alienate her patients. She will recommend the site only if she trusts it — one piece of questionable content would lose her permanently. She also uses the site herself occasionally, though she would not describe it that way.
+
+**Design implications**: Credibility signals (evidence-based framing, no pseudoscience); clean print/share layout for resource pages; fast load; professional but warm tone.
+
+---
+
+#### Persona 7 — Kezia, 34 · *The Wellbeing Champion*
+**Audience segment**: Tertiary (professional/advocate)
+
+| | |
+|---|---|
+| **Demographics** | 34, mixed-race British woman, works in central London |
+| **Occupation** | HR Business Partner at a 200-person tech company |
+| **Tech comfort** | High — uses a wide range of SaaS tools; comfortable navigating complex sites |
+| **Access pattern** | Daytime desktop; purposeful visits to find resources for her company's wellbeing programme |
+
+**Personality & context**: Kezia is building her company's mental health and wellbeing programme from scratch and is actively curating a list of recommended external resources for employees. She needs content that is inclusive, non-stigmatising, and suitable for a diverse workforce. She will share links directly in Slack channels and internal newsletters, so she needs to trust that whatever she links to won't let her down. She is also quietly passionate about this topic — a family member has lived with OCD for years — though she keeps her professional and personal motivations separate.
+
+**Design implications**: Shareable, standalone pages that make sense without site context; content suitable for a workplace audience; no crisis-only framing (she needs general wellbeing content too); clear, professional visual design.
+
 ---
 
 ## 4. Design System
