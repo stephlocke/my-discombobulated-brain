@@ -9,14 +9,18 @@ title = 'Mental Health Charity'
 # Enable emoji support
 enableEmoji = true
 
-# Enable Git info
-enableGitInfo = false
+# Enable Git info for accurate lastmod dates in sitemap and feeds
+enableGitInfo = true
 
 # Enable RSS
 enableRSS = true
 
 # Copyright notice
 copyright = '© 2026 Mental Health Charity. All rights reserved.'
+
+# Frontmatter date resolution: Git commit time → explicit lastmod → file mod time → default
+[frontmatter]
+  lastmod = [':git', 'lastmod', ':fileModTime', ':default']
 
 # Build configuration for Tailwind CSS
 [build]
@@ -105,13 +109,84 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     noClasses = true
     style = 'monokai'
     tabWidth = 4
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+# Human-friendly, stable permalinks
+# Note: `:slug` falls back to the content filename if no `slug` is set in frontmatter.
+[permalinks]
+  [permalinks.page]
+    blog = '/blog/:slug/'
+
+# Register the text/markdown media type for Markdown output format
+[mediaTypes]
+  [mediaTypes.'text/markdown']
+    suffixes = ['md']
+
+# Custom output formats
+[outputFormats]
+  [outputFormats.SearchIndex]
+    mediaType = 'application/json'
+    baseName = 'searchindex'
+    isHTML = false
+    notAlternative = true
+  [outputFormats.llms]
+    mediaType = 'text/plain'
+    baseName = 'llms'
+    isPlainText = true
+    isHTML = false
+    rel = 'alternate'
+  [outputFormats.llmsfull]
+    mediaType = 'text/plain'
+    baseName = 'llms-full'
+    isPlainText = true
+    isHTML = false
+    rel = 'alternate'
+  [outputFormats.Markdown]
+    mediaType = 'text/markdown'
+    baseName = 'index'
+    isPlainText = true
+    isHTML = false
+    rel = 'alternate'
 
 [outputs]
-  home = ['HTML', 'RSS', 'JSON']
-  page = ['HTML']
+  home    = ['HTML', 'RSS', 'SearchIndex', 'llms', 'llmsfull']
+  page    = ['HTML', 'Markdown']
   section = ['HTML', 'RSS']
 
 [sitemap]
-  changefreq = 'weekly'
   filename = 'sitemap.xml'
-  priority = 0.5
+
+# Image processing: quality, resizing, and format conversion
+[imaging]
+  quality        = 82
+  resampleFilter = 'Lanczos'
+  [imaging.exif]
+    disableDate     = false
+    disableLatLong  = true
+    includeFields   = ''
+    excludeFields   = ''
+
+# Resource caches: speed up repeated builds
+[caches]
+  [caches.images]
+    dir    = ':resourceDir/_gen'
+    maxAge = '720h'
+  [caches.assets]
+    dir    = ':resourceDir/_gen'
+    maxAge = '720h'
+
+# Minify HTML, CSS, JS, JSON, SVG, and XML in production builds
+[minify]
+  disableCSS  = false
+  disableHTML = false
+  disableJS   = false
+  disableJSON = false
+  disableSVG  = false
+  disableXML  = false
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepDefaultAttrVals = true
+      keepWhitespace      = false

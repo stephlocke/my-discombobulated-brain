@@ -1,0 +1,28 @@
+{{- /*
+  Shortcode: faq
+  Renders a FAQ block with schema.org FAQPage + Question/Answer markup.
+  Each question/answer pair is passed as inner content using nested
+  {{< faq-item >}} shortcodes, OR as TOML/YAML data via the `items` param.
+
+  Simple usage (self-contained, question and answer as params):
+    {{< faq question="What is mental health?" >}}
+    Mental health includes our emotional, psychological, and social wellbeing.
+    {{< /faq >}}
+
+  For a multi-item FAQ page block, call this shortcode once per Q&A pair
+  and wrap them all in a <div itemscope itemtype="https://schema.org/FAQPage">.
+*/ -}}
+{{- $question := .Get "question" -}}
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"
+     class="faq-item border-b border-gray-200 dark:border-gray-700 py-6">
+  <h3 itemprop="name"
+      class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+    {{ $question }}
+  </h3>
+  <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+    <div itemprop="text"
+         class="text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
+      {{ .Inner | markdownify }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+{{- /*
+  Partial: basic-seo.html
+  Emits all primary, Open Graph, Twitter Card, and JSON-LD structured-data
+  tags for a page. Call from layouts/partials/head.html with:
+    {{ partial "basic-seo.html" . }}
+*/ -}}
+
+{{- $title := cond .IsHome (printf "%s – %s" .Site.Title .Site.Params.description) (printf "%s | %s" .Title .Site.Title) -}}
+{{- $description := .Description | default (.Summary | truncate 160) | default .Site.Params.description -}}
+{{- $ogImage := "" -}}
+{{- with .Params.image -}}
+  {{- $ogImage = . | absURL -}}
+{{- else -}}
+  {{- with .Site.Params.logo -}}
+    {{- $ogImage = . | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Primary meta tags -->
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+{{- if .Keywords }}
+<meta name="keywords" content="{{ delimit .Keywords ", " }}">
+{{- else }}
+<meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}">
+{{- end }}
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+{{- with $ogImage }}
+<meta property="og:image" content="{{ . }}">
+<meta property="og:image:alt" content="{{ $title }}">
+{{- end }}
+{{- if .IsPage }}
+{{- with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- range .Params.categories }}<meta property="article:section" content="{{ . }}">{{ end }}
+{{- range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
+{{- end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with $ogImage }}
+<meta name="twitter:image" content="{{ . }}">
+{{- end }}
+{{- with .Site.Params.twitter }}
+<meta name="twitter:site" content="@{{ . }}">
+{{- end }}
+
+<!-- Alternate feeds and AI-readable formats -->
+{{- with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }} – Feed" href="{{ .Permalink }}">
+{{- end }}
+{{- with .OutputFormats.Get "llms" }}
+<link rel="alternate" type="text/plain" title="{{ $.Site.Title }} – LLMs.txt" href="{{ .Permalink }}">
+{{- end }}
+{{- with .OutputFormats.Get "Markdown" }}
+<link rel="alternate" type="text/markdown" title="{{ $.Title }} – Markdown" href="{{ .Permalink }}">
+{{- end }}
+
+<!-- JSON-LD structured data -->
+{{- if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ .Site.Title | jsonify }},
+  "url": {{ .Site.BaseURL | jsonify }},
+  "description": {{ .Site.Params.description | jsonify }}
+  {{- with .Site.Params.logo }},
+  "logo": {{ . | absURL | jsonify }}
+  {{- end }}
+  {{- with .Site.Params.email }},
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": {{ . | jsonify }},
+    "contactType": "customer support"
+  }
+  {{- end }}
+}
+</script>
+{{- else if .IsPage }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "url": {{ .Permalink | jsonify }}
+  {{- if not .Date.IsZero }},
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"
+  {{- end }}
+  {{- if not .Lastmod.IsZero }},
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}"
+  {{- end }},
+  "author": {
+    "@type": "Organization",
+    "name": {{ .Site.Params.author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }}
+    {{- with .Site.Params.logo }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ . | absURL | jsonify }}
+    }
+    {{- end }}
+  }
+  {{- with $ogImage }},
+  "image": {{ . | jsonify }}
+  {{- end }}
+}
+</script>
+{{- else if eq .Kind "section" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "url": {{ .Permalink | jsonify }},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }}
+  }
+}
+</script>
+{{- end }}

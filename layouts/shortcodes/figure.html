@@ -1,0 +1,38 @@
+{{- /*
+  Shortcode: figure
+  Renders a semantic <figure> with optional caption, alt text, link, and
+  schema.org ImageObject markup. Replaces Hugo's built-in figure shortcode
+  with better accessibility and structured-data support.
+
+  Usage:
+    {{< figure src="/images/example.jpg" alt="Descriptive alt text"
+               caption="Optional caption" link="https://example.com"
+               class="my-class" width="800" height="600" >}}
+*/ -}}
+{{- $src     := .Get "src" -}}
+{{- $alt     := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- $link    := .Get "link" -}}
+{{- $class   := .Get "class" | default "" -}}
+{{- $width   := .Get "width" -}}
+{{- $height  := .Get "height" -}}
+{{- $id      := .Get "id" -}}
+
+<figure{{ with $class }} class="{{ . }}"{{ end }}{{ with $id }} id="{{ . }}"{{ end }}
+  itemscope itemtype="https://schema.org/ImageObject">
+  {{- with $link }}
+  <a href="{{ . }}"
+     {{ if strings.HasPrefix . "http" }}target="_blank" rel="noopener noreferrer"
+     aria-label="{{ $alt }}{{ if $alt }} — {{ end }}opens in new tab"{{ end }}>
+  {{- end }}
+  <img src="{{ $src }}" alt="{{ $alt }}"
+    {{- with $width }} width="{{ . }}"{{ end }}
+    {{- with $height }} height="{{ . }}"{{ end }}
+    itemprop="contentUrl"
+    loading="lazy"
+    decoding="async">
+  {{- with $link }}</a>{{ end }}
+  {{- with $caption }}
+  <figcaption itemprop="caption description">{{ . }}</figcaption>
+  {{- end }}
+</figure>

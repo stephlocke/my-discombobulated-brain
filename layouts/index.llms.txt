@@ -1,0 +1,28 @@
+{{- /* llms.txt — concise, machine-readable site overview for AI assistants.
+     Format follows the llms.txt convention (https://llmstxt.org/).
+     Rendered at /llms.txt from the home page SearchIndex output format.
+*/ -}}
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+{{ .Site.Title }} is a mental health charity providing compassionate support,
+education, and community for people living with mental health challenges.
+
+## Pages
+{{- range .Site.RegularPages.ByTitle }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+{{- end }}
+
+## Sections
+{{- range .Site.Sections }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+{{- end }}
+
+## Contact
+{{- with .Site.Params.email }}
+- Email: {{ . }}
+{{- end }}
+{{- with .Site.Params.phone }}
+- Phone: {{ . }}
+{{- end }}
