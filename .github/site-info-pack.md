@@ -94,6 +94,20 @@ Quick-reference red and green flags for anyone writing or reviewing copy. Full o
 - British English spelling throughout
 - Short, scannable structure — short paragraphs, clear headings, bullet points for lists of 3+
 
+  
+### Primary Audience — People Seeking Support
+- [ ] Acknowledges the difficulty of reaching out and validates that choice
+- [ ] Language assumes no prior knowledge of mental health terminology
+- [ ] Content is scannable for someone with limited concentration or in distress
+
+### Secondary Audience — Supporters and Carers
+- [ ] Resources aimed at supporters are clearly framed as "for carers" or "how to help"
+- [ ] Guidance is practical and empathetic — acknowledges carer burnout and their own needs
+
+### Tertiary Audience — Professionals and Advocates
+- [ ] Content signals credibility (evidence-based framing, referenced claims)
+- [ ] Shareable content is clearly structured and citable
+
 ---
 
 ## 3. Ideal Customer Profile (ICP)
