@@ -1,0 +1,311 @@
+name: Weekly Site Review
+
+on:
+  schedule:
+    # Every Monday at 09:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  dependency-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    outputs:
+      audit-summary: ${{ steps.audit.outputs.summary }}
+      outdated-summary: ${{ steps.outdated.outputs.summary }}
+      audit-exit-code: ${{ steps.audit.outputs.exit_code }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        id: audit
+        run: |
+          set +e
+          AUDIT_OUTPUT=$(npm audit --parseable 2>&1)
+          AUDIT_EXIT=$?
+          set -e
+          if [ $AUDIT_EXIT -eq 0 ]; then
+            SUMMARY="✅ No vulnerabilities found."
+          else
+            SUMMARY=$(echo "$AUDIT_OUTPUT" | head -20 || echo "Run \`npm audit\` locally for full details.")
+            SUMMARY="⚠️ Vulnerabilities detected:\n\`\`\`\n${SUMMARY}\n\`\`\`"
+          fi
+          {
+            echo "summary<<EOF"
+            echo -e "$SUMMARY"
+            echo "EOF"
+            echo "exit_code=$AUDIT_EXIT"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check for outdated packages
+        id: outdated
+        run: |
+          set +e
+          OUTDATED=$(npm outdated 2>&1)
+          set -e
+          if [ -z "$OUTDATED" ]; then
+            SUMMARY="✅ All npm packages are up to date."
+          else
+            SUMMARY="📦 Outdated packages:\n\`\`\`\n${OUTDATED}\n\`\`\`"
+          fi
+          {
+            echo "summary<<EOF"
+            echo -e "$SUMMARY"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+  build-check:
+    name: Hugo Build Check
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.146.6
+    outputs:
+      build-status: ${{ steps.build.outputs.status }}
+      build-detail: ${{ steps.build.outputs.detail }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        id: build
+        run: |
+          set +e
+          BUILD_OUTPUT=$(hugo --gc --minify 2>&1)
+          BUILD_EXIT=$?
+          set -e
+          if [ $BUILD_EXIT -eq 0 ]; then
+            echo "status=✅ Build succeeded" >> "$GITHUB_OUTPUT"
+            echo "detail=" >> "$GITHUB_OUTPUT"
+          else
+            {
+              echo "status=❌ Build failed"
+              echo "detail<<EOF"
+              echo "$BUILD_OUTPUT" | tail -30
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+  content-checks:
+    name: Content & Template Checks
+    runs-on: ubuntu-latest
+    outputs:
+      todos-summary: ${{ steps.todos.outputs.summary }}
+      placeholders-summary: ${{ steps.placeholders.outputs.summary }}
+      missing-alt-summary: ${{ steps.missing-alt.outputs.summary }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for TODO / FIXME items
+        id: todos
+        run: |
+          set +e
+          TODOS=$(grep -rn "TODO\|FIXME\|HACK\|XXX" --include="*.html" --include="*.md" --include="*.toml" --include="*.css" . \
+            --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=public 2>&1 | head -20)
+          set -e
+          if [ -z "$TODOS" ]; then
+            SUMMARY="✅ No TODO/FIXME items found."
+          else
+            SUMMARY="📝 TODO/FIXME items found:\n\`\`\`\n${TODOS}\n\`\`\`"
+          fi
+          {
+            echo "summary<<EOF"
+            echo -e "$SUMMARY"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check for placeholder content
+        id: placeholders
+        run: |
+          set +e
+          PLACEHOLDERS=$(grep -rn "example\.org\|lorem ipsum\|placeholder\|TODO\|your-email" \
+            --include="*.toml" --include="*.yml" --include="*.md" \
+            --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=public \
+            --exclude-dir=.github . 2>&1 | head -20)
+          set -e
+          if [ -z "$PLACEHOLDERS" ]; then
+            SUMMARY="✅ No placeholder content detected."
+          else
+            SUMMARY="⚠️ Placeholder content found (review before launch):\n\`\`\`\n${PLACEHOLDERS}\n\`\`\`"
+          fi
+          {
+            echo "summary<<EOF"
+            echo -e "$SUMMARY"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check for missing alt attributes on img tags
+        id: missing-alt
+        run: |
+          set +e
+          MISSING=$(grep -rn "<img " layouts/ --include="*.html" | grep -v 'alt=' | head -10)
+          set -e
+          if [ -z "$MISSING" ]; then
+            SUMMARY="✅ All \`<img>\` tags in layouts have \`alt\` attributes."
+          else
+            SUMMARY="♿ \`<img>\` tags missing \`alt\` attribute:\n\`\`\`\n${MISSING}\n\`\`\`"
+          fi
+          {
+            echo "summary<<EOF"
+            echo -e "$SUMMARY"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+  create-review-issue:
+    name: Create Weekly Review Issue
+    needs: [dependency-audit, build-check, content-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create or update weekly review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = new Date().toISOString().split('T')[0];
+            const weekLabel = 'weekly-review';
+            const title = `Weekly Site Review — ${date}`;
+
+            const body = [
+              `## Weekly Site Review — ${date}`,
+              ``,
+              `> Automated review generated by the [weekly-review workflow](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/workflows/weekly-review.yml).`,
+              `> Use GitHub Copilot on this issue (referencing \`.github/agents/maintainer.md\`) to triage and prioritise actions.`,
+              ``,
+              `---`,
+              ``,
+              `### 🔒 Security`,
+              ``,
+              `**npm audit**`,
+              `${{ needs.dependency-audit.outputs.audit-summary }}`,
+              ``,
+              `---`,
+              ``,
+              `### 📦 Dependencies`,
+              ``,
+              `**Outdated packages**`,
+              `${{ needs.dependency-audit.outputs.outdated-summary }}`,
+              ``,
+              `---`,
+              ``,
+              `### 🏗️ Build Health`,
+              ``,
+              `**Hugo build**: ${{ needs.build-check.outputs.build-status }}`,
+              `${{ needs.build-check.outputs.build-detail }}`,
+              ``,
+              `---`,
+              ``,
+              `### 📝 Content & Template Checks`,
+              ``,
+              `**TODO / FIXME items**`,
+              `${{ needs.content-checks.outputs.todos-summary }}`,
+              ``,
+              `**Placeholder content**`,
+              `${{ needs.content-checks.outputs.placeholders-summary }}`,
+              ``,
+              `**Image alt attributes**`,
+              `${{ needs.content-checks.outputs.missing-alt-summary }}`,
+              ``,
+              `---`,
+              ``,
+              `### 🔧 Known Technical Debt`,
+              ``,
+              `Review the technical debt register in \`.github/agents/maintainer.md\` and action any high-priority items.`,
+              ``,
+              `---`,
+              ``,
+              `### 📋 Recommended Actions`,
+              ``,
+              `- [ ] Review any security vulnerabilities above and update dependencies as needed`,
+              `- [ ] Check the [Hugo releases page](https://github.com/gohugoio/hugo/releases) for new versions`,
+              `- [ ] Review and action any placeholder content before the next public milestone`,
+              `- [ ] Review the full agent checklists with GitHub Copilot:`,
+              `  - SEO/AEO: \`.github/agents/seo-aeo.md\``,
+              `  - Brand Voice: \`.github/agents/brand-voice-icp.md\``,
+              `  - Design & Style: \`.github/agents/design-style.md\``,
+              `  - Hugo Practices: \`.github/agents/hugo-practices.md\``,
+              `  - Maintainer: \`.github/agents/maintainer.md\``,
+            ].join('\n');
+
+            // Ensure the label exists
+            try {
+              await github.rest.issues.getLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: weekLabel,
+              });
+            } catch (e) {
+              if (e.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: weekLabel,
+                  color: '0075ca',
+                  description: 'Automated weekly site review',
+                });
+              }
+            }
+
+            // Check if there's already an open weekly review issue from this week
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: weekLabel,
+              state: 'open',
+              per_page: 5,
+            });
+
+            const thisWeekIssue = existing.data.find(i => i.title === title);
+
+            if (thisWeekIssue) {
+              // Update the existing issue rather than creating a duplicate
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: thisWeekIssue.number,
+                title,
+                body,
+              });
+              console.log(`Updated existing issue #${thisWeekIssue.number}`);
+            } else {
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: [weekLabel],
+              });
+              console.log(`Created issue #${created.data.number}: ${created.data.html_url}`);
+            }
