@@ -72,6 +72,122 @@ Apply this agent whenever reviewing:
 
 ---
 
+---
+
+## ICP Review Framework
+
+Use this framework when asked to do a **full ICP review** of the site, a page, or a pull request. It applies the five evaluation dimensions defined in `site-info-pack.md §3` and produces a structured report.
+
+### Evaluation Dimensions (quick reference)
+
+| Dimension | What to assess |
+|---|---|
+| **Clarity** | Does this person understand what's on offer in under 10 seconds? |
+| **Relevance** | Does the copy speak to their specific situation, or does it feel generic? |
+| **Trust** | Are there signals that make them feel safe and believe the content? |
+| **Friction** | How easy is it for them to take the next step given their energy and context? |
+| **Contradiction** | Does the site say one thing and signal another? |
+
+Score each dimension 1–5 (5 = excellent). See `site-info-pack.md §3` for full definitions.
+
+---
+
+### Contradiction Detection
+
+Actively look for contradictions between pages and between claims and signals. For a mental health charity site, common contradictions include:
+
+- Copy says "no pressure" or "at your own pace" — but CTAs use urgent or imperative language ("Act Now", "Don't wait")
+- Homepage claims the site is "always here for you" or "24/7 support" — but the contact page shows office hours or an auto-reply notice
+- Positioning as non-judgmental and stigma-free — but a blog post heading or meta description uses a stigmatising term
+- Claims the site is easy to navigate or "everything in one place" — but core content (crisis line, support resources) is buried below the fold or requires multiple clicks
+- Promises "plain language" — but a page contains clinical jargon, acronyms, or unexplained terminology
+- Hero copy targets people in distress — but the imagery, colour, or tone elsewhere on the page feels clinical, institutional, or youth-coded in a way that excludes other personas
+- Claims inclusivity or diversity — but examples, photos, and named resources reflect only one demographic group
+
+---
+
+### Full ICP Review Output Format
+
+When producing a complete ICP review, always use this exact structure.
+
+---
+
+#### 📊 Overall Grade
+
+**Grade: [A / B / C / D / F]**
+
+One sentence summarising why.
+
+**Estimated bounce rate for a cold visitor: [X%]**
+
+One sentence explaining the key driver.
+
+---
+
+#### 👥 ICP Verdict Table
+
+| # | Persona | Clarity | Relevance | Trust | Friction | Verdict |
+|---|---------|---------|-----------|-------|----------|---------|
+| 1 | Jamie (Burnt-Out Graduate) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 2 | Priya (Quietly Struggling Parent) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 3 | Marcus (The First-Timer) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 4 | Helen (Worried Parent) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 5 | Theo (Researching Partner) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 6 | Dr. Amara (Trusted Referrer) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+| 7 | Kezia (Wellbeing Champion) | ?/5 | ?/5 | ?/5 | ?/5 | ✅ Stays / ⚠️ Hesitates / 🚪 Bounces |
+
+---
+
+#### 🗣️ ICP First-Impression Quotes
+
+For each persona, write one short, blunt, in-character reaction to landing on the page — no more than two sentences. Make it quotable. Make it real.
+
+**Jamie:** "..."
+**Priya:** "..."
+**Marcus:** "..."
+**Helen:** "..."
+**Theo:** "..."
+**Dr. Amara:** "..."
+**Kezia:** "..."
+
+---
+
+#### 🔍 5 Specific Insights
+
+Numbered list. Each insight must:
+
+1. Quote the **actual copy** from the site (verbatim, in quotation marks)
+2. Name the **persona(s)** most affected
+3. Explain **why it works or fails** in 1–2 sentences
+4. Suggest a **specific fix** — not "improve your CTA" but "change 'Get Started' to 'Find Support' on the homepage hero"
+
+Format:
+
+```
+**Insight [N]: [Short title]**
+
+> "[Exact quote from the site]"
+
+**Affects:** [persona names]
+**Why it fails / works:** [1–2 sentences]
+**Fix:** [Specific, actionable recommendation]
+```
+
+---
+
+#### ⚡ Contradiction Report
+
+Flag any contradictions found between pages or between claims and signals. If none found, say so explicitly.
+
+```
+⚠️ Contradiction: [Title]
+- Page A says: "[quote]"
+- Page B signals: "[quote or observation]"
+- Persona impact: [who notices this and why it erodes trust]
+```
+
+---
+
 ## Review Comments Format
 
 When raising a review comment, use this format:

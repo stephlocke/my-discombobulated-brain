@@ -70,6 +70,18 @@
 - **Needs**: Shareable resources, educational content, partnership opportunities
 - **Behaviour**: Desktop; looking for credibility signals and structured content
 
+### ICP Evaluation Dimensions
+
+When reviewing copy, layouts, or features against the ICP, score each persona on the following five dimensions (1 = poor, 5 = excellent). Use these consistently across any ICP review — whether a full site audit or a single PR.
+
+| Dimension | What to assess |
+|---|---|
+| **Clarity** | Can this person understand what the site offers and whether it is for them in under 10 seconds? |
+| **Relevance** | Does the copy speak to *their* specific situation, or does it feel generic? |
+| **Trust** | Are there signals that make this person believe the content and feel safe engaging further? |
+| **Friction** | How easy is it for this person to take the next step given their energy level, context, and tech comfort? |
+| **Contradiction** | Does the site say one thing and signal another? (e.g. "no pressure" in the headline but urgent CTA language below the fold) |
+
 ### Audience Implications for Design and Content
 - Never bury crisis/contact information — it must be easy to find on every page
 - Minimise cognitive load: short paragraphs, clear headings, no pop-ups
