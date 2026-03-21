@@ -323,10 +323,42 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 - Canonical URLs are set automatically
 
 ### AEO (Answer Engine Optimisation)
-- Structure FAQ and resource content using clear question-based headings
-- Add FAQ schema (`schema.org/FAQPage`) to relevant blog posts and resource pages
+
+AI engines (Google AI Overviews, Perplexity, ChatGPT, Claude, Bing Copilot) are an increasingly primary discovery channel for people seeking mental health information. Optimising for them requires signals that go beyond traditional SEO.
+
+- Structure FAQ and resource content using clear question-based headings; the answer must immediately follow the heading
+- Add FAQ schema (`schema.org/FAQPage`) to relevant blog posts and resource pages — validate with the Rich Results Test, not static HTML inspection
 - Use structured data for Organisation, WebSite, and BreadcrumbList
-- Write content that directly answers the questions the primary audience is searching
+- Write content that directly answers the questions the primary audience is searching — open key pages with a clear 40–60 word answer before expanding into detail
+- Keep sentences short and declarative; AI engines extract short sentences more reliably than long subordinate-clause-heavy prose
+- Use structured lists and tables for features, comparisons, and step-by-step guidance — AI engines cite structured content more frequently than unformatted paragraphs
+
+### AI Crawler Accessibility
+
+The following AI crawlers must **not** be blocked in `static/robots.txt`. Blocking them prevents the site from appearing in AI-generated answers when people search for mental health support.
+
+| Crawler | Engine |
+|---|---|
+| `GPTBot` | OpenAI / ChatGPT |
+| `OAI-SearchBot` | OpenAI search |
+| `ClaudeBot` | Anthropic / Claude |
+| `anthropic-ai` | Anthropic |
+| `PerplexityBot` | Perplexity AI |
+| `Googlebot` | Google Search and AI Overviews |
+| `Bingbot` | Bing / Copilot |
+
+### E-E-A-T Signals
+
+Google and AI engines assess content against Experience, Expertise, Authoritativeness, and Trustworthiness (E-E-A-T). For a mental health charity this means:
+
+- **Experience** — include first-hand perspectives and lived-experience narratives where appropriate; real scenarios increase trust and citation probability
+- **Expertise** — ground factual claims in evidence; reference recognised sources (NHS, NICE, Mind, Samaritans, peer-reviewed research) where relevant
+- **Authoritativeness** — name authors and contributors; link to external recognition (press, NHS partnerships, charity registrations) where it exists
+- **Trustworthiness** — crisis helpline, privacy policy, HTTPS, and contact information must be clearly present on every page; no pseudoscience or unsupported claims
+
+### `llms.txt`
+
+Consider adding a `/llms.txt` file at the site root following the [llms.txt specification](https://llmstxt.org). This lists key pages for large language models to index and can improve citation in AI-generated answers. Priority pages to include: homepage, all resource and hub pages, key blog posts.
 
 ### Performance Targets
 
@@ -403,6 +435,32 @@ Draft → Review → Publish (editorial workflow enabled in CMS config)
 - [ ] Crisis information visible or linked where relevant
 - [ ] Person-first language used consistently
 - [ ] Clear call-to-action at end of post
+
+### Content Volume Minimums
+
+Pages below these thresholds are considered thin content by search and AI engines. Never flag a page for word count alone without suggesting substantive additions that genuinely serve the reader.
+
+| Content type | Minimum | Target |
+|---|---|---|
+| Blog posts | 800 words | 1,200+ words |
+| Hub / pillar pages | 1,500 words | 2,500+ words |
+| Standard pages (About, Contact, etc.) | 400 words | 600+ words |
+| Section index pages (`_index.md`) | 150 words | 300+ words |
+
+Thin pages must be expanded with substantive content (FAQs, personal accounts, step-by-step guidance, definition blocks, comparison tables) or consolidated into a parent page. Full review guidance lives in `.github/agents/seo-aeo.md`.
+
+### Text-to-HTML Ratio
+
+Aim for at least 10% visible body text relative to total HTML markup. Pages below this threshold appear thin to search engines and AI engines. Hub and pillar pages should target 15–25%. Check any page with:
+
+```bash
+html=$(curl -s https://[your-site-url]/path/)
+total=$(echo "$html" | wc -c)
+text=$(echo "$html" | sed 's/<[^>]*>//g' | tr -s ' \n' | wc -c)
+echo "scale=1; $text * 100 / $total" | bc
+```
+
+Typical fixes: add explanatory prose between bullet points, expand FAQ answers, add step-by-step guidance sections, include definition blocks, add comparison tables with surrounding context.
 
 ---
 
