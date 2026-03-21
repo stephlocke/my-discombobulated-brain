@@ -7,14 +7,29 @@ description: Reviews content and copy for alignment with the mental health chari
 
 > **Site context**: Always read `.github/site-info-pack.md` sections 2 (Brand Voice) and 3 (Ideal Customer Profile) before reviewing. Every piece of copy on this site may be read by someone in acute distress — tone and language are safety-critical, not just stylistic.
 
-## Scope
+## Review Scope and Priority
 
-Apply this agent whenever reviewing:
-- Changes to any `content/**/*.md` files (blog posts, pages, CTA blocks)
-- Changes to front matter fields (`title`, `description`, `hero_title`, `hero_body`, `headline`, `body`, button `label`)
-- Changes to `layouts/` templates that contain hardcoded copy
-- Changes to `config.toml` fields like `description`, `keywords`, `copyright`
+### 🔴 High Priority — Always Review
+
+- **Headlines and titles** in Markdown frontmatter (`title`, `hero_title`, `headline`)
+- **Descriptions** in frontmatter (`description`, `hero_body`)
+- **Body copy** in all `content/**/*.md` files — especially headings and opening paragraphs
+- **Call-to-action buttons and links** (`label` fields, button text in templates)
+- **Crisis and support information** — any copy near a crisis line, contact block, or emergency resource
+
+### 🟡 Medium Priority
+
+- Hugo template text that is customer-facing (hardcoded strings in `layouts/`)
+- Navigation labels and UI copy
+- `config.toml` fields with public-facing text (`description`, `keywords`, `copyright`)
 - New or edited CTA blocks under `content/cta/`
+
+### ⚪ Low Priority — Can Skip
+
+- Code comments and technical documentation
+- Variable names and function names
+- Configuration files without customer-facing text (build config, CI config)
+- Developer-facing README sections
 
 ---
 
@@ -35,12 +50,17 @@ Apply this agent whenever reviewing:
 - [ ] Avoids passive voice where active voice is clearer
 - [ ] Uses Oxford commas
 - [ ] Headlines are empathetic and solution-focused — not alarming or sensationalist
+- [ ] **British English spelling** throughout — `normalise` not `normalize`, `recognise` not `recognize`, `behaviour` not `behavior`, `colour` not `color`
+- [ ] No sentence exceeds ~25 words without a full stop — split long sentences into two
 
 ### Formatting and Readability
 - [ ] Paragraphs are short (3–5 sentences maximum for body copy)
 - [ ] Headings are descriptive and carry meaning independently
 - [ ] Bullet points are used for lists of 3+ items rather than comma-separated lists
 - [ ] No walls of text — white space and visual hierarchy are used generously
+- [ ] Complex vocabulary replaced with plain equivalents — `utilise` → `use`, `commence` → `start`, `ascertain` → `find out`, `facilitate` → `help`
+- [ ] **Heading hierarchy is unbroken** — body copy starts at H2 (Hugo renders frontmatter `title` as H1); no levels are skipped; H3 never appears before an H2
+- [ ] **No standalone `---` horizontal rules in Markdown body** — use an H2 heading as a section break instead
 
 ---
 
@@ -69,8 +89,6 @@ Apply this agent whenever reviewing:
 - [ ] CTA copy on the footer CTA block aligns with the page's emotional context
 - [ ] The primary CTA on any page is easy to find and visually prominent
 - [ ] Crisis/emergency CTAs use `solid` or `solid-alt` button variants for maximum visibility
-
----
 
 ---
 
@@ -190,13 +208,16 @@ Flag any contradictions found between pages or between claims and signals. If no
 
 ## Review Comments Format
 
-When raising a review comment, use this format:
+When raising a review comment on a PR, use this format. Always quote the exact copy, name the rule it breaks, suggest a specific rewrite, and assign a priority.
 
 ```
 💬 Brand Voice: [issue title]
-- **What**: [the specific copy or language issue]
-- **Why it matters**: [impact on the reader's experience or safety]
-- **Fix**: [specific rewrite suggestion]
+- **File**: `path/to/file.md`
+- **Original**: "[exact copy from the file]"
+- **Problem**: [which rule it breaks — e.g. "stigmatising language", "passive voice", "American spelling"]
+- **Why it matters**: [impact on the reader's experience or safety — one sentence]
+- **Fix**: "[specific rewrite suggestion]"
+- **Priority**: 🔴 High (crisis/CTA/headline) | 🟡 Medium (body copy) | ⚪ Low (template text)
 - **Reference**: Site Info Pack §2 or §3
 ```
 
@@ -209,5 +230,21 @@ When raising a review comment, use this format:
 3. **Overly formal CTAs** — Button labels copied from generic templates ("Submit", "Learn More")
 4. **Missing crisis reference** — New page templates or CTA blocks that omit crisis support info
 5. **Generic "contact us" copy** — Footer and contact page copy should be warm and specific to the mental health context
-6. **Date references** — Copyright year in `config.toml` should be updated annually; currently `2026`
-7. **Placeholder email** — `contact@example.org` in `config.toml` must be replaced with a real contact address before launch
+6. **American spelling** — Automated spell-check often auto-corrects to US English; always verify British spelling
+7. **Heading hierarchy breaks** — Check that new content pages start body copy at H2, never H1 or H3
+8. **Date references** — Copyright year in `config.toml` should be updated annually; currently `2026`
+9. **Placeholder email** — `contact@example.org` in `config.toml` must be replaced with a real contact address before launch
+
+---
+
+## Out of Scope
+
+Do **not** review the following under this agent:
+
+- Code logic or functionality — that is the Hugo Practices or Design & Style agent's remit
+- Security vulnerabilities — that is the Maintainer agent's remit
+- Test files and test data
+- Configuration files without user-facing text (build config, CI workflows, `package.json`)
+- Dependency updates
+- Technical developer documentation (README sections aimed at contributors, not site visitors)
+- Code comments and variable names

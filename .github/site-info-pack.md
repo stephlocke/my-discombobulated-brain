@@ -50,6 +50,32 @@
 | "Crazy deals on resources" | "Free resources, crafted with care" |
 | "All users must register" | "Join our community — it only takes a minute." |
 
+### Content Quality Signals
+
+Quick-reference red and green flags for anyone writing or reviewing copy. Full operational checklists live in `.github/agents/brand-voice-icp.md`.
+
+#### ❌ Red Flags — Must Fix
+
+- **Stigmatising language** — `crazy`, `lunatic`, `psycho`, `commit suicide`, `suffered a breakdown`; use the preferred terms in Writing Principles above
+- **Clinical jargon without explanation** — `comorbidity`, `affect dysregulation`, `somatisation`, `DSM criteria`; explain or replace with plain language
+- **American spelling** — `normalize` → `normalise`, `recognize` → `recognise`, `behavior` → `behaviour`, `color` → `colour`; British English throughout
+- **Passive voice** — "support can be accessed" → "find support here"; "help is available" → "we're here to help"
+- **Urgent or pressuring CTAs** — "Get Help Now!", "Don't wait", "Act immediately"; replace with gentle, reader-led language
+- **Long sentences** — any sentence over 25 words that can be split into two shorter ones
+- **Complex vocabulary** — `utilise` → `use`, `commence` → `start`, `ascertain` → `find out`, `facilitate` → `help`; plain English always
+- **Walls of text** — three or more list-able items buried inside a paragraph; use a bulleted list instead
+- **Broken heading hierarchy** — H3 appearing before any H2; levels skipped (e.g. H2 → H4); a `#` H1 added inside Markdown body (Hugo renders the frontmatter `title` as H1 — the body should start at H2)
+- **Horizontal rules in body content** — standalone `---` lines in the body of a Markdown file; use an H2 heading as a section break instead
+
+#### ✅ Green Flags — Approve
+
+- Warm, validating opening — acknowledges the reader's feelings before moving to information or action
+- Plain, conversational language — sounds like a knowledgeable, caring friend, not a clinician or institution
+- Specific over vague — names a feeling, situation, or challenge rather than speaking in abstractions ("when you're lying awake at 3 am" not "during difficult times")
+- Gentle, reader-led CTAs — invites rather than instructs ("whenever you're ready" not "now")
+- British English spelling throughout
+- Short, scannable structure — short paragraphs, clear headings, bullet points for lists of 3+
+
 ---
 
 ## 3. Ideal Customer Profile (ICP)
