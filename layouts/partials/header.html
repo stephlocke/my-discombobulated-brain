@@ -1,4 +1,4 @@
-<header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
+<header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40 relative" role="banner">
     <nav class="container mx-auto px-4 py-4" aria-label="Main navigation">
         <div class="flex justify-around">
             <div class="">
@@ -22,27 +22,23 @@
                     {{ .Name }}
                 </a>
                 {{ end }}
-                
-                <!-- Dark Mode Toggle -->
-                {{/*  <button 
-                    id="theme-toggle" 
-                    type="button"
-                    class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    aria-label="Toggle dark mode"
-                    aria-pressed="false">
-                    <svg id="theme-toggle-auto-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20.25h6L14.25 17m-7.5 0h10.5A2.25 2.25 0 0019.5 14.75V6.75A2.25 2.25 0 0017.25 4.5H6.75A2.25 2.25 0 004.5 6.75v8A2.25 2.25 0 006.75 17z"></path>
-                    </svg>
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                    </svg>
-                </button>  */}}
-
             </div>
 
+            <!-- Desktop Search Toggle -->
+            <div class="hidden md:flex items-center">
+                <button
+                    id="search-toggle"
+                    type="button"
+                    class="p-2 text-white hover:text-secondary focus:outline-none focus:ring-2 focus:ring-white rounded"
+                    aria-label="Open search"
+                    aria-expanded="false"
+                    aria-controls="search-panel">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"></path>
+                    </svg>
+                </button>
+            </div>
+                
             <!-- Social Links -->
             <div class="hidden md:flex items-center space-x-4">
                 <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="Bluesky">
@@ -69,9 +65,60 @@
                 </svg>
             </button>
         </div>
+
+        <!-- Desktop Search Panel -->
+        <div
+            id="search-panel"
+            class="hidden absolute inset-x-0 top-full z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md"
+            aria-label="Site search">
+            <div class="container mx-auto px-4 py-4 max-w-4xl">
+                <div data-search-widget>
+                    <form
+                        data-search-form
+                        data-index="{{ "searchindex.json" | relURL }}"
+                        autocomplete="off"
+                        role="search">
+                        <input
+                            data-search-input
+                            type="search"
+                            placeholder="Search…"
+                            aria-label="Search site content"
+                            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 text-off-black dark:text-white bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </form>
+                    <div
+                        data-search-results
+                        class="mt-4 max-h-96 overflow-y-auto"
+                        aria-live="polite"
+                        aria-atomic="true"></div>
+                </div>
+            </div>
+        </div>
         
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+            <!-- Mobile Search -->
+            <div class="pb-3 border-b border-gray-200 dark:border-gray-700">
+                <div data-search-widget>
+                    <form
+                        data-search-form
+                        data-index="{{ "searchindex.json" | relURL }}"
+                        autocomplete="off"
+                        role="search">
+                        <input
+                            data-search-input
+                            type="search"
+                            placeholder="Search…"
+                            aria-label="Search site content"
+                            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 text-off-black dark:text-white bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </form>
+                    <div
+                        data-search-results
+                        class="mt-4 max-h-96 overflow-y-auto"
+                        aria-live="polite"
+                        aria-atomic="true"></div>
+                </div>
+            </div>
+
             {{ range .Site.Menus.main }}
             <a href="{{ .URL | relLangURL }}" 
                class="block px-4 py-2 text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:bg-white-darken dark:focus:bg-off-black focus:rounded focus:no-underline font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}"
@@ -91,6 +138,17 @@
         </div>
     </nav>
 </header>
+
+{{- $searchJS := resources.Get "js/search.js" -}}
+{{- if $searchJS }}
+  {{- if hugo.IsDevelopment }}
+  <script src="{{ $searchJS.RelPermalink }}" defer></script>
+  {{- else }}
+  {{- with $searchJS | minify | fingerprint }}
+  <script src="{{ .RelPermalink }}" defer integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- end }}
+  {{- end }}
+{{- end }}
 
 <script>
     // Theme toggle functionality
@@ -193,6 +251,51 @@
             const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
             mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
             mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Desktop search panel toggle
+    const searchToggle = document.getElementById('search-toggle');
+    const searchPanel = document.getElementById('search-panel');
+
+    function openSearchPanel() {
+        searchPanel.classList.remove('hidden');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        searchToggle.setAttribute('aria-label', 'Close search');
+        const input = searchPanel.querySelector('[data-search-input]');
+        if (input) { input.focus(); }
+    }
+
+    function closeSearchPanel() {
+        searchPanel.classList.add('hidden');
+        searchToggle.setAttribute('aria-expanded', 'false');
+        searchToggle.setAttribute('aria-label', 'Open search');
+    }
+
+    if (searchToggle && searchPanel) {
+        searchToggle.addEventListener('click', () => {
+            if (searchPanel.classList.contains('hidden')) {
+                openSearchPanel();
+            } else {
+                closeSearchPanel();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !searchPanel.classList.contains('hidden')) {
+                closeSearchPanel();
+                searchToggle.focus();
+            }
+        });
+
+        // Close when clicking outside the panel and toggle button
+        document.addEventListener('click', (e) => {
+            if (!searchPanel.classList.contains('hidden') &&
+                !searchPanel.contains(e.target) &&
+                !searchToggle.contains(e.target)) {
+                closeSearchPanel();
+            }
         });
     }
 </script>
