@@ -23,7 +23,7 @@
   {{- with $link }}
   <a href="{{ . }}"
      {{ if strings.HasPrefix . "http" }}target="_blank" rel="noopener noreferrer"
-     aria-label="{{ $alt }}{{ if $alt }} — {{ end }}opens in new tab"{{ end }}>
+     aria-label="{{ if $alt }}{{ $alt }}, opens in a new tab{{ else }}Opens in a new tab{{ end }}"{{ end }}>
   {{- end }}
   <img src="{{ $src }}" alt="{{ $alt }}"
     {{- with $width }} width="{{ . }}"{{ end }}

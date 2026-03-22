@@ -25,7 +25,6 @@ Output:
 The script is safe to re-run: it regenerates the file from scratch each time.
 """
 
-import os
 import re
 import sys
 from pathlib import Path
@@ -134,6 +133,5 @@ def write_redirects(redirects: list[tuple[str, str]]) -> None:
 if __name__ == "__main__":
     redirects = collect_redirects()
     if not redirects:
-        print("No redirect_from entries found in content/. Nothing to write.")
-        sys.exit(0)
+        print("No redirect_from entries found in content/. Writing header-only _redirects file.")
     write_redirects(redirects)

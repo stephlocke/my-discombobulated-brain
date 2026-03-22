@@ -12,9 +12,10 @@ changes.
 
 Run this script any time you:
 
-- rename a content file or directory (changing its canonical URL)
-- change `slug` in a page's frontmatter
+- update or add a `redirect_from` value in a page's frontmatter
 - retire a page and want to forward traffic to a replacement
+
+Note: the script derives canonical URLs from the content file path, not from `slug` or `url` frontmatter fields. Changing `slug` alone does not affect the redirect target that this script generates.
 
 Commit the updated `static/_redirects` alongside the content change.
 

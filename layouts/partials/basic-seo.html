@@ -6,7 +6,7 @@
 */ -}}
 
 {{- $title := cond .IsHome (printf "%s – %s" .Site.Title .Site.Params.description) (printf "%s | %s" .Title .Site.Title) -}}
-{{- $description := .Description | default (.Summary | truncate 160) | default .Site.Params.description -}}
+{{- $description := .Description | default (.Summary | plainify | htmlUnescape | truncate 160) | default .Site.Params.description -}}
 {{- $ogImage := "" -}}
 {{- with .Params.image -}}
   {{- $ogImage = . | absURL -}}

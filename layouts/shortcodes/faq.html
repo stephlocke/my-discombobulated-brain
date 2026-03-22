@@ -1,16 +1,19 @@
 {{- /*
   Shortcode: faq
-  Renders a FAQ block with schema.org FAQPage + Question/Answer markup.
-  Each question/answer pair is passed as inner content using nested
-  {{< faq-item >}} shortcodes, OR as TOML/YAML data via the `items` param.
+  Renders a single FAQ Question/Answer pair with schema.org microdata.
 
-  Simple usage (self-contained, question and answer as params):
+  Usage (self-contained, question as a param; answer as inner content):
     {{< faq question="What is mental health?" >}}
     Mental health includes our emotional, psychological, and social wellbeing.
     {{< /faq >}}
 
-  For a multi-item FAQ page block, call this shortcode once per Q&A pair
-  and wrap them all in a <div itemscope itemtype="https://schema.org/FAQPage">.
+  This shortcode does not itself emit an outer FAQPage wrapper or support
+  nested `faq-item` shortcodes or an `items` parameter.
+  To build a full FAQPage block, wrap multiple `faq` shortcodes in:
+    <div itemscope itemtype="https://schema.org/FAQPage">
+      {{< faq question="..." >}}...{{< /faq >}}
+      {{< faq question="..." >}}...{{< /faq >}}
+    </div>
 */ -}}
 {{- $question := .Get "question" -}}
 <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"
@@ -21,7 +24,7 @@
   </h3>
   <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
     <div itemprop="text"
-         class="text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
+         class="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none">
       {{ .Inner | markdownify }}
     </div>
   </div>
