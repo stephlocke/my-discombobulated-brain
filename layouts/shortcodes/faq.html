@@ -1,31 +1,39 @@
 {{- /*
-  Shortcode: faq
-  Renders a single FAQ Question/Answer pair with schema.org microdata.
+  FAQ Shortcode with Schema.org FAQPage support.
 
-  Usage (self-contained, question as a param; answer as inner content):
-    {{< faq question="What is mental health?" >}}
-    Mental health includes our emotional, psychological, and social wellbeing.
+  Usage:
+    {{< faq question="Your question here?" >}}
+    Answer content here. Can include **markdown**.
     {{< /faq >}}
 
-  This shortcode does not itself emit an outer FAQPage wrapper or support
-  nested `faq-item` shortcodes or an `items` parameter.
-  To build a full FAQPage block, wrap multiple `faq` shortcodes in:
-    <div itemscope itemtype="https://schema.org/FAQPage">
-      {{< faq question="..." >}}...{{< /faq >}}
-      {{< faq question="..." >}}...{{< /faq >}}
-    </div>
+  Parameters:
+    - question (required): The FAQ question text
+
+  The FAQ schema JSON-LD is automatically generated at the end of the page
+  by the baseof template when FAQs are present.
 */ -}}
+
 {{- $question := .Get "question" -}}
-<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"
-     class="faq-item border-b border-gray-200 dark:border-gray-700 py-6">
-  <h3 itemprop="name"
-      class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-    {{ $question }}
+{{- $answer := .Inner | .Page.RenderString -}}
+
+{{- if not $question -}}
+  {{- errorf "FAQ shortcode requires a 'question' parameter. File: %s" .Page.File.Path -}}
+{{- end -}}
+
+{{- /* Generate a unique ID for this FAQ item */ -}}
+{{- $faqId := printf "faq-%s" ($question | anchorize) -}}
+
+{{- /* Add this FAQ to page scratch for schema generation */ -}}
+{{- $faqData := dict "question" $question "answer" ($answer | plainify) -}}
+{{- .Page.Scratch.Add "faqs" (slice $faqData) -}}
+
+<div class="faq-item mb-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+  <h3 class="faq-question text-xl font-semibold mb-3" itemprop="name" id="{{ $faqId }}">
+    {{ $question | safeHTML }}
   </h3>
-  <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-    <div itemprop="text"
-         class="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none">
-      {{ .Inner | markdownify }}
+  <div class="faq-answer prose dark:prose-invert" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+    <div itemprop="text">
+      {{ $answer | safeHTML }}
     </div>
   </div>
 </div>
