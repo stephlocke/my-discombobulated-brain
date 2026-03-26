@@ -16,4 +16,17 @@ overview_cards:
       text: Building a supportive community where everyone feels heard, valued, and understood.
       icon: users
       icon_color: purple
+client_logos:
+  - name: "Cardiff Medical School"
+    logo: "Cardiff-Medical-School-Logo.png"
+  - name: "Gov UK"
+    logo: "gov-uk-logo.png"
+  - name: "MMA"
+    logo: "MMA-Logo.png"
+  - name: "Newport County AFC"
+    logo: "NCAFC-Logo.png"
+  - name: "NCMH"
+    logo: "ncmh-logo.png"
+  - name: "PHA Group"
+    logo: "PHA-Group-Logo.png"
 ---

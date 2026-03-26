@@ -1,0 +1,42 @@
+{{ $ctxt := .ctxt }}
+{{ if eq .format "cta" }}
+    <section class="bg-gradient-to-b from-teal-200 to-white dark:from-gray-800 dark:to-gray-900 py-16 md:py-24" aria-labelledby="hero-heading">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold text-off-black dark:text-white mb-6">
+                    Your Mental Health Matters
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                    We're here to support you on your journey to better mental health. You're not alone.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    {{ partial "components/button" (dict "type" "solid" "href" "./about/" "label" "Learn About Us") }}
+                    {{ partial "components/button" (dict "type" "outline" "href" "./blog" "label" "Read Our Blog")}}
+                </div>
+            </div>
+        </div>
+    </section>
+{{ end }}
+{{ if eq .format "overview" }}
+    <section class="bg-gradient-to-b from-teal-200 to-white dark:from-gray-800 dark:to-gray-900 py-16 md:py-24" aria-labelledby="hero-heading">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold text-off-black dark:text-white mb-6">
+                    Your Mental Health Matters
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                    We're here to support you on your journey to better mental health. You're not alone.
+                </p>
+                {{ with $ctxt.Params.overview_cards }}
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        {{ range . }}
+                            {{ partial "components/overview-card.html" . }}
+                        {{ end }}
+                    </div>
+                </div>  
+                {{ end }}
+            </div>
+        </div>
+    </section>
+{{ end }}
