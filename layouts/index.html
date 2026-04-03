@@ -4,51 +4,18 @@
 {{ partial "hero.html" (dict "format" "overview" "ctxt" .) }}
 
 <!-- Upcoming Events section -->
+{{ partial "upcoming-events.html" . }}
 
 <!-- Working With section -->
 {{ partial "client-logos.html" . }}
+
 <!-- Awards and Recognition section -->
+{{ partial "awards.html" . }}
 
 <!-- Services Detail Panels section -->
 
 <!-- Latest Blog Posts -->
-{{ $recentPosts := where .Site.RegularPages "Type" "blog" | first 3 }}
-{{ if $recentPosts }}
-<section class="py-16 bg-gray-50 dark:bg-gray-800" aria-labelledby="blog-heading">
-    <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 id="blog-heading" class="text-3xl md:text-4xl font-bold text-center text-off-black dark:text-white mb-12">
-                Latest From Our Blog
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                {{ range $recentPosts }}
-                <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition">
-                    <a href="{{ .RelPermalink }}" class="block p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                        {{ if .Date }}
-                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500 dark:text-gray-400">
-                            {{ .Date.Format "January 2, 2006" }}
-                        </time>
-                        {{ end }}
-                        <h3 class="text-xl font-semibold text-off-black dark:text-white mt-2 mb-3 hover:text-blue-600 dark:hover:text-blue-400">
-                            {{ .Title }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            {{ .Summary | truncate 150 }}
-                        </p>
-                        <span class="inline-block mt-4 text-blue-600 dark:text-blue-400 font-semibold">
-                            Read more →
-                        </span>
-                    </a>
-                </article>
-                {{ end }}
-            </div>
-            <div class="text-center mt-12">
-                {{ partial "components/button" (dict "type" "solid" "href" "./blog/" "label" "View All Posts") }}
-            </div>
-        </div>
-    </div>
-</section>
-{{ end }}
+{{ partial "recent-posts.html" . }}
 
 <!-- CTA Section -->
 {{ with .Params.footer_cta }}

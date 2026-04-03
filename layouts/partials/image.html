@@ -1,0 +1,34 @@
+{{- $src := .Src -}}
+{{- $alt := .Alt | default "" -}}
+{{- $class := .Class | default "" -}}
+{{- $loading := .Loading | default "lazy" -}}
+{{- $fetchpriority := .Fetchpriority | default "" -}}
+{{- $width := .Width | default "" -}}
+{{- $height := .Height | default "" -}}
+{{- $size := .Size | default "" -}}
+{{- $displayXL := .DisplayXL | default "" -}}
+{{- $displayLG := .DisplayLG | default "" -}}
+{{- $displayMD := .DisplayMD | default "" -}}
+{{- $context := .Context -}}
+
+{{- /* If no explicit width/height provided but size is provided, extract from size */ -}}
+{{- if and (not $width) $size -}}
+  {{- $sizeParts := split $size "x" -}}
+  {{- if eq (len $sizeParts) 2 -}}
+    {{- $width = index $sizeParts 0 -}}
+    {{- $height = index $sizeParts 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Render the image with proper width and height attributes */ -}}
+<picture>
+  <img
+    loading="{{ $loading }}"
+    decoding="async"
+    src="{{ $src }}"
+    alt="{{ $alt }}"
+    class="{{ $class }}"
+    {{- if $fetchpriority }} fetchpriority="{{ $fetchpriority }}"{{ end }}
+    {{- if $width }} width="{{ $width }}"{{ end }}
+    {{- if $height }} height="{{ $height }}"{{ end }} />
+</picture>
