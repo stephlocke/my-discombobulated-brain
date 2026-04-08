@@ -1,0 +1,24 @@
+{{ $gridCollection := .gridCollection }}
+{{ with .ctxt }}
+{{ with .Site.GetPage $gridCollection }}
+<section class="">
+    <div class="container-sm mx-auto">
+        <div class="py-12">
+            <h2 class="text-center text-3xl font-bold mb-6 text-primary">{{ .Title }}</h2>
+            <div class="row flex justify-center items-center gap-12 flex-wrap w-2/3 mx-auto">
+            {{ range .Pages.ByWeight }}
+                {{ if .Params.link }}
+                <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" alt="{{ .Title }}">
+                    {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                </a>
+                {{ else }}
+                <a href="{{ .RelPermalink }}" class="" title="{{ .Title }}" alt="{{ .Title }}">
+                    {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                </a>
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+{{ end }}

@@ -194,6 +194,11 @@
           </div>
         {{ end }}
       {{ end }}
+      {{ if and (eq $placement "Grid") (not $is_svg) }}
+        <div class="">
+            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-10 md:h-30 transition-transform duration-300 hover:scale-105") }}
+        </div>
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

@@ -7,10 +7,10 @@
 {{ partial "upcoming-events.html" . }}
 
 <!-- Working With section -->
-{{ partial "client-logos.html" . }}
+{{ partial "logo-grid.html" (dict "ctxt" . "gridCollection" "/working-with") }}
 
 <!-- Awards and Recognition section -->
-{{ partial "awards.html" . }}
+{{ partial "logo-grid.html" (dict "ctxt" . "gridCollection" "/awards-and-recognition") }}
 
 <!-- Services Detail Panels section -->
 
