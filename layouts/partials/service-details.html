@@ -1,0 +1,25 @@
+{{- $collection := .collection | default "/services" -}}
+{{- with .ctxt -}}
+  {{- with .Site.GetPage $collection -}}
+    {{- $pages := .Pages.ByWeight -}}
+    {{- if $pages -}}
+      {{- range $i, $p := $pages -}}
+        <section class="py-16 {{ if modBool $i 2 }}bg-gray-50 dark:bg-gray-800{{ else }}bg-white dark:bg-gray-900{{ end }}" aria-labelledby="service-heading-{{ $i }}">
+          <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+              <div class="w-full md:w-1/2{{ if not (modBool $i 2) }} md:order-last{{ end }}">
+                {{- partial "components/general-img-load.html" (dict "ctxt" $p "placement" "Section" "index" 0) -}}
+              </div>
+              <div class="w-full md:w-1/2 flex flex-col gap-4">
+                <h2 id="service-heading-{{ $i }}" class="text-2xl font-bold text-off-black dark:text-white">{{ $p.Title }}</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300">{{ $p.Description }}</p>
+                <div class="prose dark:prose-invert max-w-none">{{ $p.Content }}</div>
+                {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" (printf "Learn more about %s" $p.Title)) -}}
+              </div>
+            </div>
+          </div>
+        </section>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
