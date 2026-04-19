@@ -194,9 +194,28 @@
           </div>
         {{ end }}
       {{ end }}
+      {{ if eq $placement "SectionSmall" }}
+        <div class="mb-6 content-center {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">
+          {{ if $is_video }}
+            <video
+              class="mx-auto max-h-96 w-auto {{ $mediaFrame }}"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              {{ if $poster }}poster="{{ $poster }}"{{ end }}>
+              <source src="{{ .RelPermalink }}" type="video/{{ $image_ext }}" />
+              {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
+            </video>
+          {{ else }}
+            {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+          {{ end }}
+        </div>
+      {{ end }}
       {{ if and (eq $placement "Grid") (not $is_svg) }}
         <div class="">
-            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-10 md:h-30 transition-transform duration-300 hover:scale-105") }}
+            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 transition-transform duration-300 hover:scale-105") }}
         </div>
       {{ end }}
     {{ end }}
