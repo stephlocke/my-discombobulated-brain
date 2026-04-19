@@ -18,6 +18,15 @@
     </main>
     
     {{ partial "footer.html" . }}
+
+    {{- with .Scratch.Get "faqs" }}
+    {{- $entities := slice }}
+    {{- range . }}
+      {{- $entities = $entities | append (dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" .answer)) }}
+    {{- end }}
+    {{- $schema := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $entities }}
+    <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+    {{- end }}
     {{ partial "components/back-to-top.html" . }}
 </body>
 </html>

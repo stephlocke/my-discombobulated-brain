@@ -1,0 +1,20 @@
+{{- /* searchindex.json — structured search index for client-side search.
+     Rendered at /searchindex.json from the home page SearchIndex output format.
+     Consumed by assets/js/search.js to power in-page search.
+*/ -}}
+[
+  {{- $pages := .Site.RegularPages -}}
+  {{- range $i, $page := $pages -}}
+  {{- if gt $i 0 }},{{ end }}
+  {
+    "title":       {{ $page.Title | jsonify }},
+    "url":         {{ $page.RelPermalink | jsonify }},
+    "section":     {{ $page.Section | jsonify }},
+    "description": {{ $page.Description | default ($page.Summary | plainify | truncate 200) | jsonify }},
+    "tags":        {{ $page.Params.tags | default slice | jsonify }},
+    "categories":  {{ $page.Params.categories | default slice | jsonify }},
+    "date":        {{ $page.Date.Format "2006-01-02" | jsonify }},
+    "content":     {{ $page.Plain | truncate 1000 | jsonify }}
+  }
+  {{- end }}
+]

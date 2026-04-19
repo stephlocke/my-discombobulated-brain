@@ -1,0 +1,39 @@
+{{- /*
+  FAQ Shortcode with Schema.org FAQPage support.
+
+  Usage:
+    {{< faq question="Your question here?" >}}
+    Answer content here. Can include **markdown**.
+    {{< /faq >}}
+
+  Parameters:
+    - question (required): The FAQ question text
+
+  The FAQ schema JSON-LD is automatically generated at the end of the page
+  by the baseof template when FAQs are present.
+*/ -}}
+
+{{- $question := .Get "question" -}}
+{{- $answer := .Inner | .Page.RenderString -}}
+
+{{- if not $question -}}
+  {{- errorf "FAQ shortcode requires a 'question' parameter. File: %s" .Page.File.Path -}}
+{{- end -}}
+
+{{- /* Generate a unique ID for this FAQ item */ -}}
+{{- $faqId := printf "faq-%s" ($question | anchorize) -}}
+
+{{- /* Add this FAQ to page scratch for schema generation */ -}}
+{{- $faqData := dict "question" $question "answer" ($answer | plainify) -}}
+{{- .Page.Scratch.Add "faqs" (slice $faqData) -}}
+
+<div class="faq-item mb-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+  <h3 class="faq-question text-xl font-semibold mb-3" itemprop="name" id="{{ $faqId }}">
+    {{ $question | safeHTML }}
+  </h3>
+  <div class="faq-answer prose dark:prose-invert" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+    <div itemprop="text">
+      {{ $answer | safeHTML }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{{- /* llms-full.txt — full content dump for AI assistants and feed aggregators.
+     Rendered at /llms-full.txt from the home page llmsfull output format.
+     Each page is separated by a Markdown horizontal rule so LLMs can chunk it.
+*/ -}}
+# {{ .Site.Title }}: Full Content
+
+> {{ .Site.Params.description }}
+
+Site: {{ .Site.BaseURL }}
+Generated: {{ now.Format "2006-01-02" }}
+
+---
+{{- range .Site.RegularPages.ByTitle }}
+
+## {{ .Title }}
+
+URL: {{ .Permalink }}
+{{- if not .Date.IsZero }}
+Published: {{ .Date.Format "2006-01-02" }}
+{{- end }}
+{{- if not .Lastmod.IsZero }}
+Updated: {{ .Lastmod.Format "2006-01-02" }}
+{{- end }}
+{{- with .Description }}
+Description: {{ . }}
+{{- end }}
+
+{{ .Plain }}
+
+---
+{{- end }}

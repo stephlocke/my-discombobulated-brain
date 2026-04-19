@@ -1,0 +1,54 @@
+[build]
+  publish = "public"
+  command = "npm install && hugo --gc --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.158.0"
+  HUGO_ENVIRONMENT = "production"
+  NODE_VERSION = "20"
+
+# Netlify edge function: serve raw markdown when client requests it
+[[edge_functions]]
+  function = "serve-markdown"
+  path = "/*"
+
+# Security and caching headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Long-lived cache for fingerprinted assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Correct Content-Type for feeds and sitemaps
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/index.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=utf-8"
+
+[[headers]]
+  for = "/*/index.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=utf-8"
