@@ -1,5 +1,5 @@
-<header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40 relative" role="banner">
-    <nav class="container mx-auto px-4 py-4" aria-label="Main navigation">
+<header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
+    <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Main navigation">
         <div class="flex justify-around">
             <div class="">
             <!-- Logo/Site Title -->
@@ -128,13 +128,13 @@
             {{ end }}
             
             <!-- Mobile Dark Mode Toggle -->
-            <button 
+            {{/*  <button 
                 id="mobile-theme-toggle" 
                 type="button"
                 class="w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Toggle dark mode">
                 <span id="mobile-theme-text">Toggle Dark Mode</span>
-            </button>
+            </button>  */}}
         </div>
     </nav>
 </header>
@@ -164,7 +164,9 @@
 
     function getThemeMode() {
         const savedTheme = localStorage.getItem('theme');
-        return THEME_MODES.includes(savedTheme) ? savedTheme : 'auto';
+        /*  return THEME_MODES.includes(savedTheme) ? savedTheme : 'auto';  */
+        /* theme locked to light mode for now, as dark mode is not fully implemented yet */
+        return THEME_MODES.includes('light');
     }
 
     function isDarkForMode(mode) {

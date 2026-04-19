@@ -1,0 +1,34 @@
+{{- $collection := .collection | default "/services" -}}
+{{- with .ctxt -}}
+  {{- with .Site.GetPage $collection -}}
+    {{- $pages := .Pages.ByWeight -}}
+    {{- if $pages -}}
+      <section class="pt-16 bg-white dark:bg-gray-900" aria-labelledby="services-overview-heading">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="services-overview-heading" class="text-center text-3xl font-bold text-primary dark:text-primary-dark">
+            <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">
+              What We Do
+            </a>
+          </h2>
+        </div>
+      </section>
+      {{- range $i, $p := $pages -}}
+        <section id="service-heading-{{ $i }}" class="py-16 scroll-mt-24 {{ if modBool $i 2 }}bg-gray-50 dark:bg-gray-800{{ else }}bg-white dark:bg-gray-900{{ end }}" aria-labelledby="service-heading-{{ $i }}">
+          <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+              <div class="w-full md:w-1/2{{ if not (modBool $i 2) }} md:order-last{{ end }}">
+                {{- partial "components/general-img-load.html" (dict "ctxt" $p "placement" "Section" "index" 0) -}}
+              </div>
+              <div class="w-full md:w-1/2 flex flex-col gap-4">
+                <h3 class="text-2xl font-bold text-off-black dark:text-white">{{ $p.Title }}</h3>
+                <p class="text-lg text-gray-600 dark:text-gray-300">{{ $p.Description }}</p>
+                <div class="prose dark:prose-invert max-w-none">{{ $p.Content }}</div>
+                {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" (printf "Learn more about %s" $p.Title)) -}}
+              </div>
+            </div>
+          </div>
+        </section>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

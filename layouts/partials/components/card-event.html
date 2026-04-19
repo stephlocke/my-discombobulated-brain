@@ -1,0 +1,22 @@
+<article class="event-card bg-white dark:bg-surface-dark shadow hover:shadow-lg transition-shadow overflow-hidden rounded-lg focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark">
+    {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "TeamCard" "isPhoto" false) }}
+    <div class="p-6">
+        <h3 class="text-xl font-semibold mb-2 text-primary dark:text-primary-dark">
+            <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none">
+                {{ .Title }}
+            </a>
+        </h3>
+        <p class="text-text mb-4 text-sm line-clamp-3">
+            {{ .Description }}
+        </p>
+        {{ $eventDate := time.AsTime .Params.event_date }}
+        {{ $startTime := time.AsTime .Params.start_time }}
+        {{ $endTime := time.AsTime .Params.end_time }}
+        <div class="space-y-1 text-xs text-tertiary dark:text-tertiary-dark">
+                <p><strong>Date:</strong> {{ $eventDate.Format "January 2, 2006" }}</p>
+                <p><strong>Time:</strong> {{ $startTime.Format "3:04 PM" }} – {{ $endTime.Format "3:04 PM" }}</p>
+        </div>
+        
+        <a href="{{ .RelPermalink }}" class="mt-4 inline-block bg-primary dark:bg-primary-dark text-white dark:text-white px-4 py-2 rounded font-semibold text-sm hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark">Learn More</a>
+    </div>
+</article>

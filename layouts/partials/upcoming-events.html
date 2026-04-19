@@ -1,0 +1,30 @@
+{{- $upcomingEvents := slice -}}
+{{ with .Site.GetPage "/events" }}
+    {{ range .Pages }}
+    {{ $eventDate := time.AsTime .Params.event_date }}
+        {{- if ge $eventDate (now) -}}
+            {{- $upcomingEvents = $upcomingEvents | append . -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+<section class="upcoming-events py-12">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8 text-primary dark:text-primary-dark text-center">
+            <a href="{{ with .Site.GetPage "/events" }}{{ .RelPermalink }}{{ end }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                Upcoming Events
+            </a>
+        </h2>
+        
+        {{- if $upcomingEvents -}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                {{- range (first 3 (sort $upcomingEvents "Params.event_date" "asc")) -}}
+                {{ partial "components/card-event" . }}
+                {{- end -}}
+            </div>
+        {{- else -}}
+            <p class="text-secondary dark:text-secondary-dark text-center py-8">
+                No upcoming events at this time.
+            </p>
+        {{- end -}}
+    </div>
+</section>

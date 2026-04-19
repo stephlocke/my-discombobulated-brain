@@ -3,6 +3,7 @@
 @source "hugo_stats.json";
 @source "../js/search.js";
 @import "custom.css";
+@import "modules/layout.css";
 
 @theme {
     --color-body: var(--color-white);
