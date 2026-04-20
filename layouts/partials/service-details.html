@@ -24,7 +24,7 @@
                   <a href="{{ $p.RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ $p.Title }}</a>
                 </h3>
                 <p class="text-center md:text-left text-lg text-gray-600 dark:text-gray-300">{{ $p.Description }}</p>
-                <div class="text-center md:text-left prose dark:prose-invert max-w-none">{{ $p.Content }}</div>
+                <div class="text-center md:text-left prose max-w-none prose-a:text-primary dark:prose-invert dark:prose-a:text-primary-dark">{{ $p.Content }}</div>
                 {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" (printf "Learn more about %s" $p.Title)) -}}
               </div>
             </div>

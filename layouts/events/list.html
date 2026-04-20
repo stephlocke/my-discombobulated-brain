@@ -1,0 +1,58 @@
+{{ define "main" }}
+
+<section class="container py-12">
+    <div class="max-w-5xl mx-auto">
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
+            {{ with .Content }}
+            <div class="prose dark:prose-invert max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
+                {{ . }}
+            </div>
+            {{ end }}
+            {{ if and (not .Content) .Description }}
+            <p class="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300">
+                {{ .Description }}
+            </p>
+            {{ end }}
+        </header>
+
+        <div class="space-y-6" role="list">
+            {{ range .RegularPages.ByWeight }}
+            {{ $eventDate := index .Params "event_date" }}
+            {{ $startTime := index .Params "start_time" }}
+            {{ $endTime := index .Params "end_time" }}
+            <article class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6" role="listitem">
+                <a href="{{ with .Params.link }}{{ . }}{{ else }}{{ .RelPermalink }}{{ end }}"
+                   {{ with .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
+                   class="grid grid-cols-1 md:grid-cols-[220px_1fr] items-center gap-6 group focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                    <div>
+                        {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-semibold text-primary dark:text-primary-dark group-hover:underline">{{ .Title }}</h2>
+                        {{ with .Description }}
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">{{ . }}</p>
+                        {{ end }}
+
+                        {{ if or $eventDate (or $startTime $endTime) }}
+                        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 dark:text-gray-300">
+                            {{ with $eventDate }}
+                            <p><span class="font-semibold">Date:</span> {{ (time.AsTime .).Format "January 2, 2006" }}</p>
+                            {{ end }}
+                            {{ with $startTime }}
+                            <p><span class="font-semibold">Start:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                            {{ end }}
+                            {{ with $endTime }}
+                            <p><span class="font-semibold">End:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+{{ end }}

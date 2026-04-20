@@ -1,11 +1,11 @@
-<header class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
-    <nav class="container py-4" aria-label="Main navigation">
+<header id="site-header" class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
+    <nav id="site-nav" class="container py-4 transition-all duration-200" aria-label="Main navigation">
         <div class="flex justify-around">
             <div class="">
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
-                <img src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto">
+                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto transition-all duration-200">
             </a>
             {{ else }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
@@ -197,4 +197,25 @@
             mobileMenu.classList.toggle('hidden');
         });
     }
+
+    // Make the sticky navbar slightly thinner after scrolling.
+    const siteNav = document.getElementById('site-nav');
+    const siteLogo = document.getElementById('site-logo');
+
+    function updateHeaderOnScroll() {
+        const isScrolled = window.scrollY > 16;
+
+        if (siteNav) {
+            siteNav.classList.toggle('py-4', !isScrolled);
+            siteNav.classList.toggle('py-2', isScrolled);
+        }
+
+        if (siteLogo) {
+            siteLogo.classList.toggle('h-12', !isScrolled);
+            siteLogo.classList.toggle('h-10', isScrolled);
+        }
+    }
+
+    updateHeaderOnScroll();
+    window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
 </script>

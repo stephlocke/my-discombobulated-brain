@@ -6,22 +6,22 @@
         <header class="mb-8">
             <!-- Breadcrumb Navigation -->
             <nav aria-label="Breadcrumb" class="mb-4">
-                <ol class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">Home</a></li>
+                <ol class="flex items-center gap-2 text-sm text-off-black dark:text-white-darken">
+                    <li><a href="/" class="hover:text-primary dark:hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded">Home</a></li>
                     <li aria-hidden="true">/</li>
-                    <li><a href="{{ .Section | relURL }}" class="hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">{{ .Section | title }}</a></li>
+                    <li><a href="{{ .Section | relURL }}" class="hover:text-primary dark:hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Section | title }}</a></li>
                     <li aria-hidden="true">/</li>
                     <li aria-current="page">{{ .Title }}</li>
                 </ol>
             </nav>
             
             <!-- Title -->
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-off-black dark:text-white mb-4">
                 {{ .Title }}
             </h1>
             
             <!-- Meta Information -->
-            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 pb-4">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-off-black dark:text-white-darken border-b border-white-darken dark:border-off-black pb-4">
                 {{ if .Date }}
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,7 +49,7 @@
                     </svg>
                     <span class="flex gap-2">
                         {{ range . }}
-                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                        <span class="bg-primary/10 dark:bg-primary-dark/20 text-primary dark:text-primary-dark px-2 py-1 rounded">
                             {{ . }}
                         </span>
                         {{ end }}
@@ -60,7 +60,7 @@
             
             <!-- Summary/Description -->
             {{ with .Description }}
-            <p class="text-xl text-gray-600 dark:text-gray-400 mt-6 italic">
+            <p class="text-xl text-off-black dark:text-white-darken mt-6 italic">
                 {{ . }}
             </p>
             {{ end }}
@@ -68,27 +68,27 @@
         
         <!-- Article Content -->
         <div class="prose prose-lg dark:prose-invert max-w-none
-                    prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-                    prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
-                    prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
-                    prose-strong:text-gray-900 dark:prose-strong:text-white
-                    prose-ul:text-gray-700 dark:prose-ul:text-gray-300
-                    prose-ol:text-gray-700 dark:prose-ol:text-gray-300
-                    prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:py-2 prose-blockquote:px-4
-                    prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:rounded
-                    prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950
+                    prose-headings:font-bold prose-headings:text-off-black dark:prose-headings:text-white
+                    prose-p:text-off-black dark:prose-p:text-white-darken prose-p:leading-relaxed
+                    prose-a:text-primary dark:prose-a:text-primary-dark prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-off-black dark:prose-strong:text-white
+                    prose-ul:text-off-black dark:prose-ul:text-white-darken
+                    prose-ol:text-off-black dark:prose-ol:text-white-darken
+                    prose-blockquote:border-primary prose-blockquote:bg-primary/10 dark:prose-blockquote:bg-primary-dark/20 prose-blockquote:py-2 prose-blockquote:px-4
+                    prose-code:text-primary dark:prose-code:text-primary-dark prose-code:bg-white-darken dark:prose-code:bg-off-black prose-code:px-1 prose-code:rounded
+                    prose-pre:bg-off-black dark:prose-pre:bg-off-black-darken
                     prose-img:rounded-lg prose-img:shadow-lg">
             {{ .Content }}
         </div>
         
         <!-- Tags -->
         {{ with .Params.tags }}
-        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <h2 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">Tags:</h2>
+        <div class="mt-12 pt-8 border-t border-white-darken dark:border-off-black">
+            <h2 class="text-sm font-semibold text-off-black dark:text-white mb-3">Tags:</h2>
             <div class="flex flex-wrap gap-2">
                 {{ range . }}
                 <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
-                   class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                   class="bg-white-darken dark:bg-off-black text-off-black dark:text-white-darken px-3 py-1 rounded-full text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/20 focus:outline-none focus:ring-2 focus:ring-primary">
                     #{{ . }}
                 </a>
                 {{ end }}
@@ -97,29 +97,29 @@
         {{ end }}
         
         <!-- Navigation to Previous/Next Posts -->
-        <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700" aria-label="Post navigation">
+        <nav class="mt-12 pt-8 border-t border-white-darken dark:border-off-black" aria-label="Post navigation">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {{ with .PrevInSection }}
                 <a href="{{ .RelPermalink }}" 
-                   class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition group">
-                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                   class="flex items-center gap-3 p-4 bg-white-darken dark:bg-off-black rounded-lg hover:bg-primary/10 dark:hover:bg-primary-dark/20 focus:outline-none focus:ring-2 focus:ring-primary transition group">
+                    <svg class="w-6 h-6 text-off-black dark:text-white-darken group-hover:text-primary dark:group-hover:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                     <div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Previous</div>
-                        <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">{{ .Title }}</div>
+                        <div class="text-sm text-off-black dark:text-white-darken">Previous</div>
+                        <div class="font-semibold text-off-black dark:text-white group-hover:text-primary dark:group-hover:text-primary-dark">{{ .Title }}</div>
                     </div>
                 </a>
                 {{ end }}
                 
                 {{ with .NextInSection }}
                 <a href="{{ .RelPermalink }}" 
-                   class="flex items-center justify-end gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition group {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
+                   class="flex items-center justify-end gap-3 p-4 bg-white-darken dark:bg-off-black rounded-lg hover:bg-primary/10 dark:hover:bg-primary-dark/20 focus:outline-none focus:ring-2 focus:ring-primary transition group {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
                     <div class="text-right">
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Next</div>
-                        <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">{{ .Title }}</div>
+                        <div class="text-sm text-off-black dark:text-white-darken">Next</div>
+                        <div class="font-semibold text-off-black dark:text-white group-hover:text-primary dark:group-hover:text-primary-dark">{{ .Title }}</div>
                     </div>
-                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="w-6 h-6 text-off-black dark:text-white-darken group-hover:text-primary dark:group-hover:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </a>
@@ -128,13 +128,13 @@
         </nav>
         
         <!-- Support Notice -->
-        <aside class="mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded" role="complementary">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Need Support?</h2>
-            <p class="text-gray-700 dark:text-gray-300 mb-4">
+        <aside class="mt-12 p-6 bg-primary/10 dark:bg-primary-dark/20 border-l-4 border-primary rounded" role="complementary">
+            <h2 class="text-lg font-semibold text-off-black dark:text-white mb-2">Need Support?</h2>
+            <p class="text-off-black dark:text-white-darken mb-4">
                 If this article raised difficult feelings or you need someone to talk to, please reach out for support. You're not alone.
             </p>
             <a href="/contact/" 
-               class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+               class="inline-block bg-primary dark:bg-primary-dark text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary transition">
                 Get Help
             </a>
         </aside>

@@ -33,7 +33,7 @@
                         <div class="max-w-4xl mx-auto">
                             <div class="grid md:grid-cols-3 gap-8">
                                 {{- range $i, $p := $pages -}}
-                                    {{ partial "components/overview-card.html" (dict "header" $p.Title "text" $p.Description "icon" "check" "icon_color" "teal" "href" (printf "#service-heading-%d" $i)) }}
+                                    {{ partial "components/overview-card.html" (dict "header" $p.Title "text" $p.Description "icon" $p.Params.icon "icon_color" $p.Params.icon_color "href" (printf "#service-heading-%d" $i)) }}
                                 {{- end -}}
                             </div>
                         </div>
