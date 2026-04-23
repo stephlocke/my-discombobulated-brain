@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}" class="scroll-smooth">
+<html lang="{{ .Site.Language.Locale | default "en" }}" class="scroll-smooth">
 <head>
     {{ partial "head.html" . }}
     {{ with (templates.Defer (dict "key" "global")) }}

@@ -8,7 +8,7 @@
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
                 {{ range $recentPosts }}
-                <article class="bg-white dark:bg-surface-dark shadow hover:shadow-lg transition-shadow overflow-hidden rounded-lg focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark">
+                <article class="content-card">
                     <div class="p-6">
                         {{ if .Date }}
                         <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500 dark:text-gray-400">
@@ -23,7 +23,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
                             {{ .Summary | truncate 150 }}
                         </p>
-                        <a href="{{ .RelPermalink }}" class="mt-4 inline-block bg-primary dark:bg-primary-dark text-white px-4 py-2 rounded font-semibold text-sm hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark">
+                        <a href="{{ .RelPermalink }}" class="card-cta-link mt-4 text-sm">
                             Read more
                         </a>
                     </div>

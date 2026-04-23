@@ -1,1 +1,376 @@
+@layer base {
+	html {
+		@apply scroll-smooth bg-body;
+	}
+
+	body {
+		@apply bg-body text-off-black antialiased;
+		font-family: var(--font-exo);
+	}
+
+	main {
+		@apply overflow-x-clip;
+	}
+
+	section {
+		@apply relative;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply tracking-tight;
+	}
+
+	a {
+		@apply transition-colors duration-200;
+	}
+
+	a:focus-visible,
+	button:focus-visible {
+		@apply outline-none;
+	}
+
+	@media (width < theme(--breakpoint-md)) {
+		h1 {
+			@apply text-3xl leading-tight;
+		}
+
+		h2 {
+			@apply text-2xl leading-tight;
+		}
+
+		p,
+		li {
+			@apply text-base leading-7;
+		}
+	}
+}
+
+@layer components {
+	.btn-base {
+		@apply inline-block rounded-lg px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+	}
+
+	#site-header {
+		@apply border-b border-primary-darken/20 bg-primary shadow-sm backdrop-blur transition-[background-color,border-color] duration-300 ease-out;
+	}
+
+	#site-header.is-compact {
+		@apply bg-primary/95;
+	}
+
+	#site-nav > div {
+		@apply items-center justify-between gap-4;
+	}
+
+	#site-nav a {
+		@apply rounded-md;
+	}
+
+	.site-nav-link {
+		@apply rounded px-2 py-1 font-bold text-white hover:text-secondary hover:underline hover:underline-offset-8 focus:bg-white-darken focus:text-secondary focus:no-underline focus:outline-none;
+	}
+
+	.site-nav-link:focus-visible {
+		@apply ring-2 ring-white ring-offset-2 ring-offset-primary underline underline-offset-8;
+	}
+
+	.site-nav-link-current {
+		@apply rounded bg-primary-darken/90 text-white;
+	}
+
+	#mobile-menu-button {
+		@apply text-white hover:bg-primary-darken/30 focus:ring-secondary;
+	}
+
+	#mobile-menu-button:focus-visible {
+		@apply ring-2 ring-white ring-offset-2 ring-offset-primary;
+	}
+
+	#mobile-menu {
+		@apply rounded-xl bg-white/95 p-2 shadow-lg ring-1 ring-primary/10;
+	}
+
+	#mobile-menu-button,
+	#mobile-menu a,
+	.btn-base,
+	.card-cta-link,
+	.pagination-link {
+		@apply min-h-11;
+	}
+
+	#mobile-menu a {
+		@apply rounded-lg text-off-black hover:bg-primary/10 hover:text-primary;
+	}
+
+	.mobile-nav-link {
+		@apply block rounded px-4 py-2 font-bold text-off-black hover:text-off-black-darken hover:underline hover:underline-offset-8 focus:bg-white-darken focus:no-underline focus:outline-none;
+	}
+
+	.mobile-nav-link:focus-visible {
+		@apply bg-primary/10 ring-2 ring-primary ring-offset-2 underline underline-offset-4;
+	}
+
+	.mobile-nav-link-current {
+		@apply bg-primary text-white hover:text-white;
+	}
+
+	#mobile-menu a[aria-current="page"] {
+		@apply bg-primary text-white;
+	}
+
+	.upcoming-events,
+	section[aria-labelledby="blog-heading"],
+	section[aria-labelledby="services-overview-heading"],
+	section[id^="service-heading-"] {
+		@apply py-14 md:py-18;
+	}
+
+	@media (width < theme(--breakpoint-md)) {
+		.upcoming-events,
+		section[aria-labelledby="blog-heading"],
+		section[aria-labelledby="services-overview-heading"],
+		section[id^="service-heading-"] {
+			@apply py-10;
+		}
+
+		.upcoming-events .grid,
+		section[aria-labelledby="blog-heading"] .grid,
+		section.container [role="list"] {
+			@apply gap-4;
+		}
+
+		.upcoming-events h2,
+		#blog-heading,
+		#services-overview-heading,
+		.container > .py-12 > h2 {
+			@apply text-2xl;
+		}
+	}
+
+	.upcoming-events h2,
+	#blog-heading,
+	#services-overview-heading,
+	.container > .py-12 > h2 {
+		@apply text-balance text-3xl font-bold md:text-4xl;
+	}
+
+	.event-card,
+	.content-card,
+	.upcoming-events article,
+	section[aria-labelledby="blog-heading"] article,
+	section.container article[role="listitem"],
+	article.bg-white.shadow {
+		@apply rounded-2xl border border-primary/10 bg-white shadow-sm transition duration-300;
+	}
+
+	.event-card:focus-within,
+	.content-card:focus-within,
+	.upcoming-events article:focus-within,
+	section[aria-labelledby="blog-heading"] article:focus-within,
+	section.container article[role="listitem"]:focus-within,
+	article.bg-white.shadow:focus-within {
+		@apply border-primary/30 shadow-lg ring-2 ring-primary/20 ring-offset-2;
+	}
+
+	.event-card:hover,
+	.content-card:hover,
+	.upcoming-events article:hover,
+	section[aria-labelledby="blog-heading"] article:hover,
+	section.container article[role="listitem"]:hover,
+	article.bg-white.shadow:hover {
+		@apply -translate-y-0.5 border-primary/20 shadow-lg;
+	}
+
+	.event-card .p-6,
+	section[aria-labelledby="blog-heading"] article .p-6,
+	section.container article[role="listitem"] .p-6 {
+		@apply space-y-3;
+	}
+
+	@media (width < theme(--breakpoint-md)) {
+		.event-card .p-6,
+		section[aria-labelledby="blog-heading"] article .p-6,
+		section.container article[role="listitem"] .p-6 {
+			@apply p-5;
+		}
+
+		.event-card h3,
+		section[aria-labelledby="blog-heading"] h3,
+		section.container article[role="listitem"] h2 {
+			@apply text-xl;
+		}
+	}
+
+	a.inline-block.bg-primary,
+	.card-cta-link,
+	a[class*="bg-primary"][class*="font-semibold"],
+	.event-card a[href*="/"].inline-block {
+		@apply inline-block rounded-lg bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+	}
+
+	.card-cta-link:focus-visible,
+	a.inline-block.bg-primary:focus-visible,
+	a[class*="bg-primary"][class*="font-semibold"]:focus-visible,
+	.event-card a[href*="/"].inline-block:focus-visible {
+		@apply bg-primary-darken ring-2 ring-primary-darken ring-offset-2;
+	}
+
+	a.inline-block.bg-primary:hover,
+	.card-cta-link:hover,
+	a[class*="bg-primary"][class*="font-semibold"]:hover,
+	.event-card a[href*="/"].inline-block:hover {
+		@apply -translate-y-0.5 shadow-md;
+	}
+
+	.container .prose {
+		@apply prose-headings:text-off-black prose-a:font-semibold prose-a:text-primary;
+	}
+
+	.container .prose a:hover {
+		@apply text-primary-darken;
+	}
+
+	.container .prose :where(p, li) {
+		@apply leading-8;
+	}
+
+	.container .prose blockquote {
+		@apply rounded-r-xl border-primary/30;
+	}
+
+	.post-prose {
+		@apply prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-off-black prose-p:leading-relaxed prose-p:text-off-black prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-off-black prose-ul:text-off-black prose-ol:text-off-black prose-blockquote:border-primary prose-blockquote:bg-primary/10 prose-blockquote:px-4 prose-blockquote:py-2 prose-code:rounded prose-code:bg-white-darken prose-code:px-1 prose-code:text-primary prose-pre:bg-off-black prose-img:rounded-lg prose-img:shadow-lg;
+	}
+
+	@media (width < theme(--breakpoint-md)) {
+		.post-prose {
+			@apply prose-base;
+		}
+
+		.post-prose :where(p, li) {
+			@apply leading-7;
+		}
+	}
+
+	.tag-pill {
+		@apply rounded-full bg-white-darken px-3 py-1 text-sm text-off-black hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary;
+	}
+
+	.tag-pill:focus-visible {
+		@apply bg-primary/10 underline underline-offset-4;
+	}
+
+	.adjacent-post-link {
+		@apply flex items-center gap-3 rounded-lg bg-white-darken p-4 transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary;
+	}
+
+	.adjacent-post-link:focus-visible {
+		@apply bg-primary/10 ring-offset-2;
+	}
+
+	.adjacent-post-link-next {
+		@apply justify-end;
+	}
+
+	.content-card-link {
+		@apply rounded focus:outline-none focus:ring-2 focus:ring-primary;
+	}
+
+	.content-card-link:focus-visible h2,
+	.content-card-link:focus-visible h3 {
+		@apply underline underline-offset-4;
+	}
+
+	.pagination-link {
+		@apply rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary;
+	}
+
+	.pagination-link:focus-visible {
+		@apply border-primary bg-primary/5 ring-offset-2;
+	}
+
+	footer {
+		@apply border-t border-primary/10 bg-gray-50;
+	}
+
+	footer h3 {
+		@apply text-off-black;
+	}
+
+	footer a {
+		@apply rounded-sm hover:text-primary focus:ring-primary;
+	}
+
+	footer a:focus-visible {
+		@apply underline underline-offset-4 ring-2 ring-primary ring-offset-2;
+	}
+
+	footer p[class*="bg-blue-50"] {
+		@apply rounded-xl border-primary/20 bg-primary/5;
+	}
+
+	#back-to-top {
+		@apply h-11 w-11 rounded-full shadow-md transition duration-300 hover:w-36;
+	}
+
+	@media (width < theme(--breakpoint-md)) {
+		#back-to-top {
+			@apply bottom-4 right-4 h-10 w-10;
+		}
+
+		#back-to-top:hover {
+			@apply w-10;
+		}
+
+		#back-to-top span {
+			@apply hidden;
+		}
+	}
+
+	#back-to-top span {
+		@apply tracking-tight;
+	}
+
+	#back-to-top:focus-visible {
+		@apply ring-2 ring-secondary ring-offset-2 ring-offset-white;
+	}
+}
+
+@layer utilities {
+	@media (prefers-reduced-motion: no-preference) {
+		.upcoming-events article,
+		.content-card,
+		section[aria-labelledby="blog-heading"] article,
+		section.container article[role="listitem"],
+		#site-header,
+		footer {
+			animation: fade-in-up 420ms ease-out both;
+		}
+
+		.upcoming-events article:nth-child(2),
+		section[aria-labelledby="blog-heading"] article:nth-child(2) {
+			animation-delay: 80ms;
+		}
+
+		.upcoming-events article:nth-child(3),
+		section[aria-labelledby="blog-heading"] article:nth-child(3) {
+			animation-delay: 140ms;
+		}
+	}
+}
+
+@keyframes fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
