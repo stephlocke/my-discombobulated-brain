@@ -1,11 +1,11 @@
-<header id="site-header" class="bg-primary dark:bg-dark-primary shadow-sm sticky top-0 z-40" role="banner">
-    <nav id="site-nav" class="container py-4 transition-all duration-200" aria-label="Main navigation">
+<header id="site-header" class="shadow-sm sticky top-0 z-40" role="banner">
+    <nav id="site-nav" class="container py-4 transition-[padding] duration-300 ease-out" aria-label="Main navigation">
         <div class="flex justify-around">
             <div class="">
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
-                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto transition-all duration-200">
+                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto transition-[height,transform] duration-300 ease-out">
             </a>
             {{ else }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
@@ -18,7 +18,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
-                   class="text-white hover:underline hover:underline-offset-8 hover:text-secondary focus:outline-none focus:bg-white-darken focus:text-secondary focus:rounded focus:no-underline px-2 py-1 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}">
+                         class="site-nav-link {{ if $.IsMenuCurrent "main" . }}site-nav-link-current{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
@@ -74,7 +74,7 @@
         <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
             {{ range .Site.Menus.main }}
             <a href="{{ .URL | relLangURL }}" 
-               class="block px-4 py-2 text-off-black dark:text-white hover:underline hover:underline-offset-8 hover:text-off-black-darken dark:hover:text-white-darken focus:outline-none focus:bg-white-darken dark:focus:bg-off-black focus:rounded focus:no-underline font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary-darken rounded text-white{{ end }}"
+                    class="mobile-nav-link {{ if $.IsMenuCurrent "main" . }}mobile-nav-link-current{{ end }}"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                 {{ .Name }}
             </a>
@@ -199,23 +199,44 @@
     }
 
     // Make the sticky navbar slightly thinner after scrolling.
+    const siteHeader = document.getElementById('site-header');
     const siteNav = document.getElementById('site-nav');
     const siteLogo = document.getElementById('site-logo');
+    let isHeaderCompact = false;
 
-    function updateHeaderOnScroll() {
-        const isScrolled = window.scrollY > 16;
+    function setHeaderCompactState(nextIsCompact) {
+        if (isHeaderCompact === nextIsCompact) {
+            return;
+        }
+
+        isHeaderCompact = nextIsCompact;
+
+        if (siteHeader) {
+            siteHeader.classList.toggle('is-compact', isHeaderCompact);
+        }
 
         if (siteNav) {
-            siteNav.classList.toggle('py-4', !isScrolled);
-            siteNav.classList.toggle('py-2', isScrolled);
+            siteNav.classList.toggle('py-4', !isHeaderCompact);
+            siteNav.classList.toggle('py-2', isHeaderCompact);
         }
 
         if (siteLogo) {
-            siteLogo.classList.toggle('h-12', !isScrolled);
-            siteLogo.classList.toggle('h-10', isScrolled);
+            siteLogo.classList.toggle('h-12', !isHeaderCompact);
+            siteLogo.classList.toggle('h-10', isHeaderCompact);
         }
     }
 
+    function updateHeaderOnScroll() {
+        const scrollY = window.scrollY;
+
+        if (!isHeaderCompact && scrollY > 24) {
+            setHeaderCompactState(true);
+        } else if (isHeaderCompact && scrollY < 8) {
+            setHeaderCompactState(false);
+        }
+    }
+
+    setHeaderCompactState(window.scrollY > 24);
     updateHeaderOnScroll();
     window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
 </script>

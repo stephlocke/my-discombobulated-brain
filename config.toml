@@ -1,5 +1,5 @@
 baseURL = 'https://stephlocke.com/my-discombobulated-brain/'
-languageCode = 'en-us'
+locale = 'en-us'
 title = 'Mental Health Charity'
 
 # Pagination
