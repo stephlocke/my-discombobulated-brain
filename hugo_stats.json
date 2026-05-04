@@ -224,10 +224,8 @@
       "max-w-3xl",
       "max-w-4xl",
       "max-w-5xl",
-      "max-w-6xl",
       "max-w-none",
       "mb-10",
-      "mb-12",
       "mb-2",
       "mb-3",
       "mb-4",
@@ -351,7 +349,6 @@
     ],
     "ids": [
       "back-to-top",
-      "blog-heading",
       "common-signs-of-anxiety",
       "community",
       "conclusion",

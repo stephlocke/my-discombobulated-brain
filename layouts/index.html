@@ -4,16 +4,24 @@
 {{ partial "components/hero.html" (dict "format" "overview" "ctxt" .) }}
 
 <!-- Upcoming Events section -->
-{{ partial "components/upcoming-events.html" . }}
+{{ if .Site.Params.upcomingEventsSection }}
+  {{ partial "components/upcoming-events.html" . }}
+{{ end }}
 
 <!-- Working With section -->
-{{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
+{{ if .Site.Params.workingWithSection }}
+  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
+{{ end }}
 
 <!-- Services Detail Panels section -->
-{{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
+{{ if .Site.Params.servicesSection }}
+  {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
+{{ end }}
 
 <!-- Awards and Recognition section -->
-{{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
+{{ if .Site.Params.awardsSection }}
+  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
+{{ end }}
 
 <!-- Latest Blog Posts -->
 {{ if .Site.Params.blogSection }}

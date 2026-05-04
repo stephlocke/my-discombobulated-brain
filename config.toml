@@ -44,7 +44,15 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
   favicon = 'images/favicon.ico'
-  # Should the blog section be shown on the homepage?
+  # Should Upcoming Events be shown on the homepage?
+  upcomingEventsSection = true
+  # Should Working With be shown on the homepage?
+  workingWithSection = true
+  # Should Services be shown on the homepage?
+  servicesSection = true
+  # Should Awards and Recognition be shown on the homepage?
+  awardsSection = true
+    # Should the blog section be shown on the homepage?
   blogSection = false
   
   # Social media
