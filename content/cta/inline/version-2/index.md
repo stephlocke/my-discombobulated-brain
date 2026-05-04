@@ -5,10 +5,10 @@ body: Whether it's financial or just your time, all donations are appreciated!
 buttons: 
   - href: ./contact
     type: solid
-    label: Volunteer
+    label: Donate
   - href: ./contact
     type: solid
-    label: Donate
+    label: Volunteer
 build:
   render: never
 ---
