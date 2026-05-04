@@ -47,6 +47,10 @@
 
     --font-title: {{ site.Params.style_rules.title_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
     --font-body: {{ site.Params.style_rules.body_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
+
+    --radius-button: {{ if eq (site.Params.style_rules.edges | default "round") "sharp" }}0px{{ else if eq (site.Params.style_rules.edges | default "round") "curved" }}0.5rem{{ else }}9999px{{ end }};
+    --radius-card: {{ if eq (site.Params.style_rules.edges | default "round") "sharp" }}0px{{ else if eq (site.Params.style_rules.edges | default "round") "curved" }}0.5rem{{ else }}3rem{{ end }};
+    --radius-card-compact: {{ if eq (site.Params.style_rules.edges | default "round") "sharp" }}0px{{ else if eq (site.Params.style_rules.edges | default "round") "curved" }}0.5rem{{ else }}2rem{{ end }};
 }
 
 @utility container {

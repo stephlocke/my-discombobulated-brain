@@ -54,6 +54,7 @@
 @layer components {
 	.btn-base {
 		@apply inline-block px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+		border-radius: var(--radius-button);
 	}
 
 	#site-header {
@@ -166,7 +167,8 @@
 	section[aria-labelledby="blog-heading"] article,
 	section.container article[role="listitem"],
 	article.bg-white.shadow {
-		@apply rounded-2xl border border-primary/10 bg-white shadow-sm transition duration-300;
+		@apply border border-primary/10 bg-white shadow-sm transition duration-300;
+		border-radius: var(--radius-card);
 	}
 
 	.event-card:focus-within,
@@ -211,7 +213,8 @@
 	.card-cta-link,
 	a[class*="bg-primary"][class*="font-semibold"],
 	.event-card a[href*="/"].inline-block {
-		@apply inline-block rounded-lg bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+		@apply inline-block bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+		border-radius: var(--radius-button);
 	}
 
 	.card-cta-link:focus-visible,
@@ -288,7 +291,8 @@
 	}
 
 	.pagination-link {
-		@apply rounded-lg border border-border-default bg-surface px-4 py-2 text-off-black hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-primary;
+		@apply border border-border-default bg-surface px-4 py-2 text-off-black hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-primary;
+		border-radius: var(--radius-button);
 	}
 
 	.pagination-link:focus-visible {
@@ -312,7 +316,8 @@
 	}
 
 	footer p[class*="bg-primary/5"] {
-		@apply rounded-xl border-primary/20 bg-primary/5;
+		@apply border-primary/20 bg-primary/5;
+		border-radius: var(--radius-card-compact);
 	}
 
 	#back-to-top {

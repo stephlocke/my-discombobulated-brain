@@ -1,13 +1,4 @@
-{{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
-{{ $cardRounding := "rounded-none" }}
-{{ if eq $edgesStyle "sharp" }}
-  {{ $cardRounding = "rounded-none" }}
-{{ else if eq $edgesStyle "curved" }}
-  {{ $cardRounding = "rounded-lg" }}
-{{ else if eq $edgesStyle "round" }}
-  {{ $cardRounding = "rounded-[3rem]" }}
-{{ end }}
-<article class="event-card bg-surface shadow hover:shadow-lg transition-shadow overflow-hidden {{ $cardRounding }} focus-within:ring-2 focus-within:ring-primary">
+<article class="event-card bg-surface shadow hover:shadow-lg transition-shadow overflow-hidden {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }} focus-within:ring-2 focus-within:ring-primary">
     {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "TeamCard" "isPhoto" false) }}
     <div class="p-6">
         <h3 class="text-xl font-semibold mb-2 text-primary">

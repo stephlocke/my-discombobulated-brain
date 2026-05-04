@@ -42,6 +42,7 @@ This repository uses six specialised agents for code review. When Copilot review
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
 - If a needed colour token does not exist yet, add or update the custom theme tokens in `assets/css/main.css` first, then use those tokens in templates and styles
+- **Rounding (edges parameter):** All cards, buttons, and rounded components must respect the `style_rules.edges` parameter. Extract `$edgesStyle := .Site.Params.style_rules.edges | default "round"` and apply conditional rounding: `sharp` → `rounded-none`, `curved` → `rounded-lg`, `round` → `rounded-full` (buttons) or `rounded-[2rem]`/`rounded-[3rem]` (cards). This ensures consistency across the site when the edges setting changes.
 - Do not add `dark:` variants or other dark mode styles unless explicitly requested
 - Do not add a `tailwind.config.js` file — v4 is configured in CSS only
 - Do not add inline `<style>` blocks in layout files
