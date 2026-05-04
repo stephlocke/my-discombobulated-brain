@@ -6,15 +6,7 @@
 {{ $borderClass := "" }}
 {{ $hoverClass := "" }}
 {{ $focusRingClass := "" }}
-{{ $shapeClass := "" }}
-{{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
-{{ if eq $edgesStyle "sharp" }}
-  {{ $shapeClass = "rounded-none" }}
-{{ else if eq $edgesStyle "curved" }}
-  {{ $shapeClass = "rounded-lg" }}
-{{ else if eq $edgesStyle "round" }}
-  {{ $shapeClass = "rounded-full" }}
-{{ end }}
+{{ $shapeClass := partial "components/edge-rounding" (dict "context" . "shape" "button") }}
 {{ if eq $type "solid" }}
     {{ $bgClass = "bg-primary" }}
     {{ $textClass = "text-inverse" }}

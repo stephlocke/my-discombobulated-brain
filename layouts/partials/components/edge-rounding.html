@@ -1,0 +1,17 @@
+{{- $shape := .shape | default "card" -}}
+{{- $sharpClass := "rounded-none" -}}
+{{- $curvedClass := "rounded-lg" -}}
+{{- $roundClass := "rounded-[3rem]" -}}
+{{- if eq $shape "button" -}}
+{{- $roundClass = "rounded-full" -}}
+{{- else if eq $shape "card-compact" -}}
+{{- $roundClass = "rounded-[2rem]" -}}
+{{- end -}}
+{{- $edgesStyle := site.Params.style_rules.edges | default "round" -}}
+{{- if eq $edgesStyle "sharp" -}}
+{{- $sharpClass -}}
+{{- else if eq $edgesStyle "curved" -}}
+{{- $curvedClass -}}
+{{- else -}}
+{{- $roundClass -}}
+{{- end -}}
