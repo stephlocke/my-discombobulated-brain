@@ -1,12 +1,12 @@
 {{ $ctxt := .ctxt }}
 {{ if eq .format "cta" }}
-    <section class="bg-gradient-to-b from-teal-200 to-white py-16 md:py-24" aria-labelledby="hero-heading">
+    <section class="bg-gradient-to-b from-hero-tint to-surface py-16 md:py-24" aria-labelledby="hero-heading">
         <div class="container">
             <div class="max-w-3xl mx-auto text-center">
                 <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold text-off-black mb-6">
                     Your Mental Health Matters
                 </h1>
-                <p class="text-xl text-gray-600 mb-8">
+                <p class="text-xl text-muted mb-8">
                     We're here to support you on your journey to better mental health. You're not alone.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -18,13 +18,13 @@
     </section>
 {{ end }}
 {{ if eq .format "overview" }}
-    <section class="bg-gradient-to-b from-teal-200 to-white py-16 md:py-24" aria-labelledby="hero-heading">
+    <section class="bg-gradient-to-b from-hero-tint to-surface py-16 md:py-24" aria-labelledby="hero-heading">
         <div class="container">
             <div class="max-w-4xl mx-auto text-center">
                 <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold text-off-black mb-6">
                     Your Mental Health Matters
                 </h1>
-                <p class="text-xl text-gray-600 mb-8">
+                <p class="text-xl text-muted mb-8">
                     We're here to support you on your journey to better mental health. You're not alone.
                 </p>
                 {{- with $ctxt.Site.GetPage "/services" -}}

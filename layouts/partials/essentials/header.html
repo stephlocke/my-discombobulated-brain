@@ -4,11 +4,11 @@
             <div class="">
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
-            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
+            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-inverse hover:text-secondary">
                 <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto transition-[height,transform] duration-300 ease-out">
             </a>
             {{ else }}
-            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-white hover:text-secondary">
+            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-inverse hover:text-secondary">
                 {{ .Site.Title }}
             </a>
             {{ end }}
@@ -27,7 +27,7 @@
                 {{/*  <button 
                     id="theme-toggle" 
                     type="button"
-                    class="p-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="p-2 text-off-black hover:bg-surface-hover rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     aria-label="Toggle dark mode"
                     aria-pressed="false">
                     <svg id="theme-toggle-auto-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -45,13 +45,13 @@
 
             <!-- Social Links -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="Bluesky">
+                <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="Bluesky">
                     <i class="fab fa-bluesky fa-xl"></i>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="LinkedIn">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="LinkedIn">
                     <i class="fab fa-linkedin fa-xl"></i>
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary transition" aria-label="YouTube">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="YouTube">
                     <i class="fab fa-youtube fa-xl"></i>
                 </a>
             </div>
@@ -60,7 +60,7 @@
             <button 
                 id="mobile-menu-button" 
                 type="button"
-                class="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="md:hidden p-2 text-off-black hover:bg-surface-hover rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 aria-label="Toggle mobile menu"
                 aria-expanded="false"
                 aria-controls="mobile-menu">
@@ -84,7 +84,7 @@
             {{/*  <button 
                 id="mobile-theme-toggle" 
                 type="button"
-                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full text-left px-4 py-2 text-off-black hover:bg-surface-hover rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 aria-label="Toggle dark mode">
                 <span id="mobile-theme-text">Toggle Dark Mode</span>
             </button>  */}}

@@ -1,23 +1,23 @@
-<footer class="bg-gray-50 border-t border-gray-200" role="contentinfo">
+<footer class="bg-surface-muted border-t border-border-subtle" role="contentinfo">
     <div class="container py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- About Section -->
             <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900">{{ .Site.Title }}</h3>
-                <p class="text-gray-600 text-sm">
+                <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
+                <p class="text-muted text-sm">
                     {{ .Site.Params.description }}
                 </p>
             </div>
             
             <!-- Quick Links -->
             <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900">Quick Links</h3>
+                <h3 class="text-lg font-semibold mb-4 text-strong">Quick Links</h3>
                 <nav aria-label="Footer navigation">
                     <ul class="space-y-2">
                         {{ range .Site.Menus.main }}
                         <li>
                             <a href="{{ .URL | relLangURL }}" 
-                               class="text-gray-600 hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                               class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">
                                 {{ .Name }}
                             </a>
                         </li>
@@ -28,12 +28,12 @@
             
             <!-- Contact & Resources -->
             <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900">Get Help</h3>
-                <div class="space-y-2 text-sm text-gray-600">
+                <h3 class="text-lg font-semibold mb-4 text-strong">Get Help</h3>
+                <div class="space-y-2 text-sm text-muted">
                     {{ with .Site.Params.email }}
                     <p>
                         <span class="sr-only">Email:</span>
-                        <a href="mailto:{{ . }}" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
+                        <a href="mailto:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">
                             {{ . }}
                         </a>
                     </p>
@@ -41,13 +41,13 @@
                     {{ with .Site.Params.phone }}
                     <p>
                         <span class="sr-only">Phone:</span>
-                        <a href="tel:{{ . }}" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
+                        <a href="tel:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">
                             {{ . }}
                         </a>
                     </p>
                     {{ end }}
-                    <p class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
-                        <strong class="text-gray-900">Crisis Support:</strong><br>
+                    <p class="mt-4 p-3 bg-primary/5 border border-primary/20 rounded">
+                        <strong class="text-strong">Crisis Support:</strong><br>
                         If you're in crisis, please call your local emergency services or crisis hotline.
                     </p>
                 </div>
@@ -55,9 +55,9 @@
         </div>
         
         <!-- Copyright & Social -->
-        <div class="mt-8 pt-8 border-t border-gray-200">
+        <div class="mt-8 pt-8 border-t border-border-subtle">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-sm text-gray-600">
+                <p class="text-sm text-muted">
                     {{ .Site.Copyright }}
                 </p>
                 
@@ -66,7 +66,7 @@
                 <nav aria-label="Social media links" class="flex space-x-4 mt-4 md:mt-0">
                     {{ with .Site.Params.twitter }}
                     <a href="https://twitter.com/{{ . }}" 
-                       class="text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                       class="text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded"
                        aria-label="Follow us on Twitter"
                        target="_blank" rel="noopener noreferrer">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -76,7 +76,7 @@
                     {{ end }}
                     {{ with .Site.Params.facebook }}
                     <a href="https://facebook.com/{{ . }}" 
-                       class="text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                       class="text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded"
                        aria-label="Follow us on Facebook"
                        target="_blank" rel="noopener noreferrer">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

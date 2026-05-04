@@ -117,7 +117,7 @@
               {{ else }}
                 {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
               {{ end }}
-              <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-black/80 peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
+              <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-overlay peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
                 {{ if $is_video }}
                   <video
                     class="h-auto w-full {{ $mediaFrame }}"

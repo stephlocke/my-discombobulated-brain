@@ -17,7 +17,7 @@
 {{ end }}
 {{ if eq $type "solid" }}
     {{ $bgClass = "bg-primary" }}
-    {{ $textClass = "text-white" }}
+    {{ $textClass = "text-inverse" }}
     {{ $borderClass = "border-2 border-primary" }}
     {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
     {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
@@ -28,41 +28,41 @@
     {{ $hoverClass = "hover:bg-primary-darken/10 hover:text-primary-darken hover:border-primary-darken" }}
     {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
 {{ else if eq $type "solid-alt" }}
-    {{ $bgClass = "bg-white" }}
+    {{ $bgClass = "bg-surface" }}
     {{ $textClass = "text-primary" }}
-    {{ $borderClass = "border-2 border-white" }}
+    {{ $borderClass = "border-2 border-surface" }}
     {{ $hoverClass = "hover:bg-white-darken hover:border-white-darken " }}
-    {{ $focusRingClass = "focus:ring-white focus:ring-offset-primary" }}
+    {{ $focusRingClass = "focus:ring-inverse focus:ring-offset-primary" }}
 {{ else if eq $type "outline-alt" }}
     {{ $bgClass = "bg-transparent" }}
     {{ $textClass = "text-off-black" }}
     {{ $borderClass = "border-2 border-off-black" }}
-    {{ $hoverClass = "hover:bg-white/10" }}
+    {{ $hoverClass = "hover:bg-surface/10" }}
     {{ $focusRingClass = "focus:ring-off-black focus:ring-offset-primary" }}
 {{ else if eq $type "ghost" }}
     {{ $bgClass = "bg-transparent" }}
-    {{ $textClass = "text-button" }}
+    {{ $textClass = "text-primary" }}
     {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-gray-100 hover:text-button" }}
-    {{ $focusRingClass = "focus:ring-button" }}
+    {{ $hoverClass = "hover:bg-surface-hover hover:text-primary-darken" }}
+    {{ $focusRingClass = "focus:ring-primary" }}
 {{ else if eq $type "danger" }}
-    {{ $bgClass = "bg-red-600" }}
-    {{ $textClass = "text-white" }}
+    {{ $bgClass = "bg-danger" }}
+    {{ $textClass = "text-inverse" }}
     {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-red-700" }}
-    {{ $focusRingClass = "focus:ring-red-500" }}
+    {{ $hoverClass = "hover:bg-danger-darken" }}
+    {{ $focusRingClass = "focus:ring-danger-ring" }}
 {{ else if eq $type "success" }}
-    {{ $bgClass = "bg-green-600" }}
-    {{ $textClass = "text-white" }}
+    {{ $bgClass = "bg-success" }}
+    {{ $textClass = "text-inverse" }}
     {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-green-700" }}
-    {{ $focusRingClass = "focus:ring-green-500" }}
+    {{ $hoverClass = "hover:bg-success-darken" }}
+    {{ $focusRingClass = "focus:ring-success-ring" }}
 {{ else if eq $type "warning" }}
-    {{ $bgClass = "bg-yellow-600" }}
-    {{ $textClass = "text-white" }}
+    {{ $bgClass = "bg-warning" }}
+    {{ $textClass = "text-inverse" }}
     {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-yellow-700" }}
-    {{ $focusRingClass = "focus:ring-yellow-500" }}
+    {{ $hoverClass = "hover:bg-warning-darken" }}
+    {{ $focusRingClass = "focus:ring-warning-ring" }}
 {{ end }}
 
 <a href="{{ $href }}" 

@@ -11,7 +11,7 @@
                 <article class="content-card">
                     <div class="p-6">
                         {{ if .Date }}
-                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500">
+                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
                             {{ .Date.Format "January 2, 2006" }}
                         </time>
                         {{ end }}
@@ -20,7 +20,7 @@
                                 {{ .Title }}
                             </a>
                         </h3>
-                        <p class="text-gray-600 text-sm line-clamp-3">
+                        <p class="text-muted text-sm line-clamp-3">
                             {{ .Summary | truncate 150 }}
                         </p>
                         <a href="{{ .RelPermalink }}" class="card-cta-link mt-4 text-sm">

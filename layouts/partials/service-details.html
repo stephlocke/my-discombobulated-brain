@@ -3,7 +3,7 @@
   {{- with .Site.GetPage $collection -}}
     {{- $pages := .Pages.ByWeight -}}
     {{- if $pages -}}
-      <section class="pt-16 bg-white" aria-labelledby="services-overview-heading">
+      <section class="pt-16 bg-surface" aria-labelledby="services-overview-heading">
         <div class="container">
           <h2 id="services-overview-heading" class="text-center text-3xl font-bold text-primary">
             <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">
@@ -13,7 +13,7 @@
         </div>
       </section>
       {{- range $i, $p := $pages -}}
-        <section id="service-heading-{{ $i }}" class="py-16 scroll-mt-24 bg-white" aria-labelledby="service-heading-{{ $i }}">
+        <section id="service-heading-{{ $i }}" class="py-16 scroll-mt-24 bg-surface" aria-labelledby="service-heading-{{ $i }}">
           <div class="container">
             <div class="flex flex-col md:flex-row items-center gap-8">
               <div class="w-full md:w-1/2{{ if not (modBool $i 2) }} md:order-last{{ end }}">
@@ -23,7 +23,7 @@
                 <h3 class="text-center md:text-left text-2xl font-bold text-primary">
                   <a href="{{ $p.RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ $p.Title }}</a>
                 </h3>
-                <p class="text-center md:text-left text-lg text-gray-600">{{ $p.Description }}</p>
+                <p class="text-center md:text-left text-lg text-muted">{{ $p.Description }}</p>
                 <div class="text-center md:text-left prose max-w-none prose-a:text-primary">{{ $p.Content }}</div>
                 {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" (printf "Learn more about %s" $p.Title)) -}}
               </div>

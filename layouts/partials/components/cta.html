@@ -1,8 +1,8 @@
 {{- $cta := .cta | default . -}}
 {{- $location := .location | default "footer" -}}
 {{- $bgClass := "bg-gradient-to-b from-primary to-primary-darken" -}}
-{{- $headlineClass := "text-white" -}}
-{{- $bodyClass := "text-white" -}}
+{{- $headlineClass := "text-inverse" -}}
+{{- $bodyClass := "text-inverse" -}}
 {{- if eq $location "inline" -}}
     {{- $bgClass = "bg-primary/15" -}}
     {{- $headlineClass = "text-primary" -}}

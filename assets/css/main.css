@@ -7,6 +7,17 @@
 @theme {
     --color-body: var(--color-white);
     --color-dark-body: var(--color-gray-900);
+    --color-surface: var(--color-white);
+    --color-surface-muted: var(--color-gray-50);
+    --color-surface-hover: var(--color-gray-100);
+    --color-border-subtle: var(--color-gray-200);
+    --color-border-default: var(--color-gray-300);
+    --color-strong: var(--color-gray-900);
+    --color-muted: var(--color-gray-600);
+    --color-subtle: var(--color-gray-500);
+    --color-inverse: var(--color-white);
+    --color-overlay: rgb(0 0 0 / 80%);
+    --color-hero-tint: color-mix(in oklch, var(--color-primary) 20%, white);
 
     --color-primary: {{ site.Params.style_rules.primary_color | default "oklch(63.5% 0.15 158)" }};
     --color-primary-darken: color-mix(in oklch, var(--color-primary) 85%, black);
@@ -19,6 +30,16 @@
 
     --color-dark-secondary: color-mix(in oklch, var(--color-secondary) 70%, black);
     --color-dark-secondary-darken: color-mix(in oklch, var(--color-dark-secondary) 85%, black);
+
+    --color-danger: var(--color-red-600);
+    --color-danger-darken: color-mix(in oklch, var(--color-danger) 85%, black);
+    --color-danger-ring: color-mix(in oklch, var(--color-danger) 80%, white);
+    --color-success: var(--color-green-600);
+    --color-success-darken: color-mix(in oklch, var(--color-success) 85%, black);
+    --color-success-ring: color-mix(in oklch, var(--color-success) 80%, white);
+    --color-warning: var(--color-yellow-600);
+    --color-warning-darken: color-mix(in oklch, var(--color-warning) 85%, black);
+    --color-warning-ring: color-mix(in oklch, var(--color-warning) 80%, white);
 
     --color-off-black: var(--color-gray-700);
     --color-off-black-darken: var(--color-gray-800);
