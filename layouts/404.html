@@ -1,0 +1,81 @@
+{{ define "main" }}
+
+{{- $homeHref := .Site.Home.RelPermalink -}}
+{{- $servicesHref := "/services/" | relLangURL -}}
+{{- $aboutHref := "/about/" | relLangURL -}}
+{{- $blogHref := "/blog/" | relLangURL -}}
+{{- with .Site.GetPage "/services" -}}
+    {{- $servicesHref = .RelPermalink -}}
+{{- end -}}
+{{- with .Site.GetPage "/about" -}}
+    {{- $aboutHref = .RelPermalink -}}
+{{- end -}}
+{{- with .Site.GetPage "/blog" -}}
+    {{- $blogHref = .RelPermalink -}}
+{{- end -}}
+
+<section class="bg-gradient-to-b from-hero-tint to-surface py-16 md:py-24" aria-labelledby="error-heading">
+    <div class="container">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="mb-4 text-2xl font-semibold uppercase tracking-[0.2em] text-primary">404</p>
+            <h1 id="error-heading" class="mb-6 text-4xl font-bold text-off-black md:text-5xl">
+                We couldn't find that page
+            </h1>
+            <p class="mx-auto mb-8 max-w-2xl text-lg text-muted">
+                The page you were looking for may have moved, the link may be out of date, or the address may have been typed incorrectly. You can head back home, or try one of the sections below.
+            </p>
+            <div class="flex flex-col justify-center gap-4 sm:flex-row">
+                {{ partial "components/button" (dict "type" "solid" "href" $homeHref "label" "Go to the homepage") }}
+                {{ partial "components/button" (dict "type" "outline" "href" $servicesHref "label" "Explore our services") }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16" aria-labelledby="next-steps-heading">
+    <div class="container">
+        <div class="mx-auto max-w-5xl">
+            <h2 id="next-steps-heading" class="mb-10 text-center text-3xl font-bold text-primary">
+                Helpful next steps
+            </h2>
+            <div class="grid gap-6 md:grid-cols-3">
+                <article class="content-card p-6">
+                    <h3 class="mb-3 text-xl font-semibold text-primary">About us</h3>
+                    <p class="mb-4 text-sm text-muted">
+                        Learn who we are, what we stand for, and how we support people experiencing mental health challenges.
+                    </p>
+                    {{ partial "components/button" (dict "type" "outline" "href" $aboutHref "label" "Read about us") }}
+                </article>
+                <article class="content-card p-6">
+                    <h3 class="mb-3 text-xl font-semibold text-primary">Support and services</h3>
+                    <p class="mb-4 text-sm text-muted">
+                        Find the services, resources, and guidance we offer, whenever you're ready to explore them.
+                    </p>
+                    {{ partial "components/button" (dict "type" "outline" "href" $servicesHref "label" "View our services") }}
+                </article>
+                <article class="content-card p-6">
+                    <h3 class="mb-3 text-xl font-semibold text-primary">Latest articles</h3>
+                    <p class="mb-4 text-sm text-muted">
+                        Read practical, stigma-free articles that may help you make sense of what you're going through.
+                    </p>
+                    {{ partial "components/button" (dict "type" "outline" "href" $blogHref "label" "Visit the blog") }}
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-16" aria-labelledby="support-heading">
+    <div class="container">
+        <div class="mx-auto max-w-3xl rounded-[2rem] border border-primary/20 bg-primary/5 p-8 text-center">
+            <h2 id="support-heading" class="mb-4 text-2xl font-bold text-primary">
+                Need support right now?
+            </h2>
+            <p class="text-muted">
+                If you're in crisis, please call your local emergency services or crisis hotline. If you need a calmer starting point, you can return to the homepage and explore support whenever you're ready.
+            </p>
+        </div>
+    </div>
+</section>
+
+{{ end }}

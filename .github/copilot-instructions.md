@@ -40,8 +40,9 @@ This repository uses six specialised agents for code review. When Copilot review
 
 ### Tailwind CSS v4
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
-- Use named token classes (`bg-primary`, `text-primary`) not hardcoded colour values
-- Always add `dark:` variants for any element with a light-mode colour
+- Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
+- If a needed colour token does not exist yet, add or update the custom theme tokens in `assets/css/main.css` first, then use those tokens in templates and styles
+- Do not add `dark:` variants or other dark mode styles unless explicitly requested
 - Do not add a `tailwind.config.js` file — v4 is configured in CSS only
 - Do not add inline `<style>` blocks in layout files
 

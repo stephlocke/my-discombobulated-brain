@@ -18,11 +18,23 @@
 {{ end }}
 <!-- This with statement is needed to bring in the page context as we're using a variable dict in the partial call -->
 {{ with .ctxt }}
-  {{ $photoFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.6)] dark:shadow-[0_6px_24px_rgba(10,10,20,0.8)]" }}
-  {{ $standardFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.4)] dark:shadow-[0_6px_24px_rgba(10,10,20,0.65)]" }}
+  {{ $photoFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.6)]" }}
+  {{ $standardFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.4)]" }}
   {{ $mediaFrame := $standardFrame }}
   {{ if $isPhoto }}
     {{ $mediaFrame = $photoFrame }}
+  {{ end }}
+  {{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
+  {{ $imageRounding := "rounded-none" }}
+  {{ if eq $edgesStyle "sharp" }}
+    {{ $imageRounding = "rounded-none" }}
+  {{ else if eq $edgesStyle "curved" }}
+    {{ $imageRounding = "rounded-lg" }}
+  {{ else if eq $edgesStyle "round" }}
+    {{ $imageRounding = "rounded-[2rem]" }}
+  {{ end }}
+  {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") }}
+    {{ $imageRounding = "rounded-none" }}
   {{ end }}
   <!-- Support old multi-resource format for backwards compatibility -->
   {{ with index .Params.Resources 0 }}
@@ -79,7 +91,7 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s" $mediaFrame) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
           {{ end }}
         </div>
       {{ end }}
@@ -103,9 +115,9 @@
                   {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
                 </video>
               {{ else }}
-                {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+                {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
               {{ end }}
-              <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-black/80 peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
+              <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-overlay peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
                 {{ if $is_video }}
                   <video
                     class="h-auto w-full {{ $mediaFrame }}"
@@ -121,7 +133,7 @@
                     {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
                   </video>
                 {{ else }}
-                  {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+                  {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
                 {{ end }}
               </div>
             </label>
@@ -141,7 +153,7 @@
                 {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
               </video>
             {{ else }}
-              {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+              {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
             {{ end }}
           </div>
         {{ end }}
@@ -161,36 +173,36 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto w-full h-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
           {{ end }}
         </div>
       {{ end }}
       {{ if  and (eq $placement "TeamCard") (not $is_svg) }}
         <div>
           {{ if $is_gif }}
-            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $mediaFrame) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ partial "image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $mediaFrame) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
           {{ end }}
         </div>
       {{ end }}
       {{ if and (eq $placement "TeamCardMicro") (not $is_svg) }}
         <div class="">
           {{ if $is_gif }}
-            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
           {{ else }}
-            {{ partial "image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
           {{ end }}
         </div>
       {{ end }}
       {{ if eq $placement "ListCard" }}
         {{ if or $is_svg $is_gif }}
           <div>
-            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-contain %s" $mediaFrame) "Width" "1200" "Height" "640") }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-contain %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
           </div>
         {{ else }}
           <div>
-            {{ partial "image" (dict "Src" (.Fill " 1200x640 webp ").RelPermalink "Context" $.Page "Alt" $.Title "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-cover %s" $mediaFrame) "Width" "1200" "Height" "640") }}
+            {{ partial "components/image" (dict "Src" (.Fill " 1200x640 webp ").RelPermalink "Context" $.Page "Alt" $.Title "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
           </div>
         {{ end }}
       {{ end }}
@@ -209,13 +221,13 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
           {{ end }}
         </div>
       {{ end }}
       {{ if and (eq $placement "Grid") (not $is_svg) }}
         <div class="">
-            {{ partial "image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 transition-transform duration-300 hover:scale-105") }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 transition-transform duration-300 hover:scale-105") }}
         </div>
       {{ end }}
     {{ end }}

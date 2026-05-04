@@ -1,0 +1,25 @@
+{{- $ctxt := .ctxt -}}
+{{- $location := .location | default "footer" -}}
+{{- $cta := .cta -}}
+
+{{- if eq $location "footer" -}}
+  {{- with (or $cta $ctxt.Params.footer_cta) -}}
+    {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location .) -}}
+      {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if eq $location "inline" -}}
+  {{- if $cta -}}
+    {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location $cta) -}}
+      {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with $ctxt.Params.inline_ctas -}}
+      {{- range . -}}
+        {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location .) -}}
+          {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

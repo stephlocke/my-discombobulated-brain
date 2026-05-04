@@ -5,7 +5,7 @@
 
 	body {
 		@apply bg-body text-off-black antialiased;
-		font-family: var(--font-exo);
+		font-family: var(--font-body);
 	}
 
 	main {
@@ -19,8 +19,11 @@
 	h1,
 	h2,
 	h3,
-	h4 {
+	h4,
+	h5,
+	h6 {
 		@apply tracking-tight;
+		font-family: var(--font-title);
 	}
 
 	a {
@@ -50,7 +53,7 @@
 
 @layer components {
 	.btn-base {
-		@apply inline-block rounded-lg px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+		@apply inline-block px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
 	}
 
 	#site-header {
@@ -285,7 +288,7 @@
 	}
 
 	.pagination-link {
-		@apply rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary;
+		@apply rounded-lg border border-border-default bg-surface px-4 py-2 text-off-black hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-primary;
 	}
 
 	.pagination-link:focus-visible {
@@ -293,7 +296,7 @@
 	}
 
 	footer {
-		@apply border-t border-primary/10 bg-gray-50;
+		@apply border-t border-border-subtle bg-surface-muted;
 	}
 
 	footer h3 {
@@ -308,7 +311,7 @@
 		@apply underline underline-offset-4 ring-2 ring-primary ring-offset-2;
 	}
 
-	footer p[class*="bg-blue-50"] {
+	footer p[class*="bg-primary/5"] {
 		@apply rounded-xl border-primary/20 bg-primary/5;
 	}
 
