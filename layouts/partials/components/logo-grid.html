@@ -1,6 +1,4 @@
-{{ $gridCollection := .gridCollection }}
 {{ with .ctxt }}
-{{ with .Site.GetPage $gridCollection }}
 <section class="container">
         <div class="py-12">
             <h2 class="text-center text-3xl font-bold mb-6 text-primary">
@@ -22,5 +20,4 @@
             {{ end }}
         </div>
 </section>
-{{ end }}
 {{ end }}

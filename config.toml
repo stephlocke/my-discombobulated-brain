@@ -44,6 +44,8 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
   favicon = 'images/favicon.ico'
+  # Should the blog section be shown on the homepage?
+  blogSection = false
   
   # Social media
   twitter = ''

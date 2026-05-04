@@ -7,16 +7,18 @@
 {{ partial "components/upcoming-events.html" . }}
 
 <!-- Working With section -->
-{{ partial "components/logo-grid.html" (dict "ctxt" . "gridCollection" "/working-with") }}
+{{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
 
 <!-- Services Detail Panels section -->
 {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
 
 <!-- Awards and Recognition section -->
-{{ partial "components/logo-grid.html" (dict "ctxt" . "gridCollection" "/awards-and-recognition") }}
+{{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
 
 <!-- Latest Blog Posts -->
-{{ partial "recent-posts.html" . }}
+{{ if .Site.Params.blogSection }}
+  {{ partial "recent-posts.html" . }}
+{{ end }}
 
 <!-- CTA Section -->
 {{ with .Params.footer_cta }}
