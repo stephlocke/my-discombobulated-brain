@@ -24,7 +24,7 @@
   {{ if $isPhoto }}
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
-  {{ $edgesStyle := .Site.Params.edges | default "round" }}
+  {{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
   {{ $imageRounding := "rounded-none" }}
   {{ if eq $edgesStyle "sharp" }}
     {{ $imageRounding = "rounded-none" }}

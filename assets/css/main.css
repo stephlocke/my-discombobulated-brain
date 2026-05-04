@@ -8,23 +8,24 @@
     --color-body: var(--color-white);
     --color-dark-body: var(--color-gray-900);
 
-    --color-primary: oklch(63.5% 0.15 158);
-    --color-primary-darken: oklch(54% 0.13 158);
+    --color-primary: {{ site.Params.style_rules.primary_color | default "oklch(63.5% 0.15 158)" }};
+    --color-primary-darken: color-mix(in oklch, var(--color-primary) 85%, black);
 
-    --color-secondary: var(--color-yellow-500);
-    --color-secondary-darken: var(--color-yellow-700);
+    --color-secondary: {{ site.Params.style_rules.secondary_color | default "var(--color-yellow-500)" }};
+    --color-secondary-darken: color-mix(in oklch, var(--color-secondary) 85%, black);
 
-    --color-dark-primary: oklch(40% 0.1 164);
-    --color-dark-primary-darken: oklch(37% 0.09 162);
+    --color-dark-primary: color-mix(in oklch, var(--color-primary) 70%, black);
+    --color-dark-primary-darken: color-mix(in oklch, var(--color-dark-primary) 85%, black);
 
-    --color-dark-secondary: var(--color-yellow-700);
-    --color-dark-secondary-darken: var(--color-yellow-900);
+    --color-dark-secondary: color-mix(in oklch, var(--color-secondary) 70%, black);
+    --color-dark-secondary-darken: color-mix(in oklch, var(--color-dark-secondary) 85%, black);
 
     --color-off-black: var(--color-gray-700);
     --color-off-black-darken: var(--color-gray-800);
     --color-white-darken: var(--color-gray-200);
 
-    --font-exo: 'Exo', sans-serif;
+    --font-title: {{ site.Params.style_rules.title_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
+    --font-body: {{ site.Params.style_rules.body_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
 }
 
 @utility container {

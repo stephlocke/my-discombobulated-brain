@@ -1,4 +1,4 @@
-{{ $edgesStyle := .Site.Params.edges | default "round" }}
+{{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
 {{ $cardRounding := "rounded-none" }}
 {{ if eq $edgesStyle "sharp" }}
   {{ $cardRounding = "rounded-none" }}

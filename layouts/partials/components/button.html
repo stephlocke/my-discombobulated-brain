@@ -7,7 +7,7 @@
 {{ $hoverClass := "" }}
 {{ $focusRingClass := "" }}
 {{ $shapeClass := "" }}
-{{ $edgesStyle := .Site.Params.edges | default "round" }}
+{{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
 {{ if eq $edgesStyle "sharp" }}
   {{ $shapeClass = "rounded-none" }}
 {{ else if eq $edgesStyle "curved" }}

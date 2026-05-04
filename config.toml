@@ -54,8 +54,16 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   awardsSection = true
     # Should the blog section be shown on the homepage?
   blogSection = false
-  # Edge rounding style: sharp, curved, or round
-  edges = "round"
+
+  [params.style_rules]
+    # Edge rounding style: sharp, curved, or round
+    edges = "round"
+    # Primary and secondary theme colors
+    primary_color = "oklch(63.5% 0.15 158)"
+    secondary_color = "var(--color-yellow-500)"
+    # Font stacks (primary plus fallbacks)
+    title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
   
   # Social media
   twitter = ''
