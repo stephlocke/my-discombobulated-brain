@@ -3,14 +3,14 @@
 <section class="container py-12">
     <div class="max-w-5xl mx-auto">
         <header class="mb-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
             {{ with .Content }}
-            <div class="prose dark:prose-invert max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
+            <div class="prose max-w-3xl mx-auto text-gray-700">
                 {{ . }}
             </div>
             {{ end }}
             {{ if and (not .Content) .Description }}
-            <p class="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300">
+            <p class="max-w-3xl mx-auto text-lg text-gray-700">
                 {{ .Description }}
             </p>
             {{ end }}
@@ -24,22 +24,22 @@
             <article class="content-card" role="listitem">
                 <div class="p-6">
                     {{ if .Date }}
-                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500 dark:text-gray-400">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500">
                         {{ .Date.Format "January 2, 2006" }}
                     </time>
                     {{ end }}
-                    <h2 class="text-2xl font-semibold text-primary dark:text-primary-dark mt-2 mb-3">
+                    <h2 class="text-2xl font-semibold text-primary mt-2 mb-3">
                         <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none">
                             {{ .Title }}
                         </a>
                     </h2>
                     {{ with .Description }}
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    <p class="text-gray-600 mb-4">
                         {{ . }}
                     </p>
                     {{ else }}
                     {{ with .Summary }}
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    <p class="text-gray-600 mb-4">
                         {{ . | truncate 200 }}
                     </p>
                     {{ end }}
@@ -65,7 +65,7 @@
                 </li>
                 {{ end }}
                 <li>
-                    <span class="px-4 py-2 text-gray-700 dark:text-gray-300">
+                    <span class="px-4 py-2 text-gray-700">
                         Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}
                     </span>
                 </li>
@@ -94,9 +94,9 @@
                         {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
                     </div>
                     <div>
-                        <h2 class="text-2xl font-semibold text-primary dark:text-primary-dark group-hover:underline">{{ .Title }}</h2>
+                        <h2 class="text-2xl font-semibold text-primary group-hover:underline">{{ .Title }}</h2>
                         {{ with .Description }}
-                        <p class="text-gray-600 dark:text-gray-400 mt-2">{{ . }}</p>
+                        <p class="text-gray-600 mt-2">{{ . }}</p>
                         {{ end }}
                     </div>
                 </a>

@@ -6,22 +6,22 @@
         <header class="mb-8">
             <!-- Breadcrumb Navigation -->
             <nav aria-label="Breadcrumb" class="mb-4">
-                <ol class="flex items-center gap-2 text-sm text-off-black dark:text-white-darken">
-                    <li><a href="/" class="hover:text-primary dark:hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded">Home</a></li>
+                <ol class="flex items-center gap-2 text-sm text-off-black">
+                    <li><a href="/" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">Home</a></li>
                     <li aria-hidden="true">/</li>
-                    <li><a href="{{ .Section | relURL }}" class="hover:text-primary dark:hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Section | title }}</a></li>
+                    <li><a href="{{ .Section | relURL }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Section | title }}</a></li>
                     <li aria-hidden="true">/</li>
                     <li aria-current="page">{{ .Title }}</li>
                 </ol>
             </nav>
             
             <!-- Title -->
-            <h1 class="text-4xl md:text-5xl font-bold text-off-black dark:text-white mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-off-black mb-4">
                 {{ .Title }}
             </h1>
             
             <!-- Meta Information -->
-            <div class="flex flex-wrap items-center gap-4 text-sm text-off-black dark:text-white-darken border-b border-white-darken dark:border-off-black pb-4">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-off-black border-b border-white-darken pb-4">
                 {{ if .Date }}
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,7 +49,7 @@
                     </svg>
                     <span class="flex gap-2">
                         {{ range . }}
-                        <span class="bg-primary/10 dark:bg-primary-dark/20 text-primary dark:text-primary-dark px-2 py-1 rounded">
+                        <span class="bg-primary/10 text-primary px-2 py-1 rounded">
                             {{ . }}
                         </span>
                         {{ end }}
@@ -60,7 +60,7 @@
             
             <!-- Summary/Description -->
             {{ with .Description }}
-            <p class="text-xl text-off-black dark:text-white-darken mt-6 italic">
+            <p class="text-xl text-off-black mt-6 italic">
                 {{ . }}
             </p>
             {{ end }}
@@ -73,8 +73,8 @@
         
         <!-- Tags -->
         {{ with .Params.tags }}
-        <div class="mt-12 pt-8 border-t border-white-darken dark:border-off-black">
-            <h2 class="text-sm font-semibold text-off-black dark:text-white mb-3">Tags:</h2>
+        <div class="mt-12 pt-8 border-t border-white-darken">
+            <h2 class="text-sm font-semibold text-off-black mb-3">Tags:</h2>
             <div class="flex flex-wrap gap-2">
                 {{ range . }}
                 <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
@@ -87,17 +87,17 @@
         {{ end }}
         
         <!-- Navigation to Previous/Next Posts -->
-        <nav class="mt-12 pt-8 border-t border-white-darken dark:border-off-black" aria-label="Post navigation">
+        <nav class="mt-12 pt-8 border-t border-white-darken" aria-label="Post navigation">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {{ with .PrevInSection }}
                 <a href="{{ .RelPermalink }}" 
                    class="adjacent-post-link group">
-                    <svg class="w-6 h-6 text-off-black dark:text-white-darken group-hover:text-primary dark:group-hover:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="w-6 h-6 text-off-black group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                     <div>
-                        <div class="text-sm text-off-black dark:text-white-darken">Previous</div>
-                        <div class="font-semibold text-off-black dark:text-white group-hover:text-primary dark:group-hover:text-primary-dark">{{ .Title }}</div>
+                        <div class="text-sm text-off-black">Previous</div>
+                        <div class="font-semibold text-off-black group-hover:text-primary">{{ .Title }}</div>
                     </div>
                 </a>
                 {{ end }}
@@ -106,10 +106,10 @@
                 <a href="{{ .RelPermalink }}" 
                          class="adjacent-post-link adjacent-post-link-next group {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
                     <div class="text-right">
-                        <div class="text-sm text-off-black dark:text-white-darken">Next</div>
-                        <div class="font-semibold text-off-black dark:text-white group-hover:text-primary dark:group-hover:text-primary-dark">{{ .Title }}</div>
+                        <div class="text-sm text-off-black">Next</div>
+                        <div class="font-semibold text-off-black group-hover:text-primary">{{ .Title }}</div>
                     </div>
-                    <svg class="w-6 h-6 text-off-black dark:text-white-darken group-hover:text-primary dark:group-hover:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="w-6 h-6 text-off-black group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </a>
@@ -118,9 +118,9 @@
         </nav>
         
         <!-- Support Notice -->
-        <aside class="mt-12 p-6 bg-primary/10 dark:bg-primary-dark/20 border-l-4 border-primary rounded" role="complementary">
-            <h2 class="text-lg font-semibold text-off-black dark:text-white mb-2">Need Support?</h2>
-            <p class="text-off-black dark:text-white-darken mb-4">
+        <aside class="mt-12 p-6 bg-primary/10 border-l-4 border-primary rounded" role="complementary">
+            <h2 class="text-lg font-semibold text-off-black mb-2">Need Support?</h2>
+            <p class="text-off-black mb-4">
                 If this article raised difficult feelings or you need someone to talk to, please reach out for support. You're not alone.
             </p>
             <a href="/contact/" 

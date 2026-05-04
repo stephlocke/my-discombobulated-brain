@@ -8,41 +8,41 @@
 {{ $focusRingClass := "" }}
 {{ $shapeClass := "" }}
 {{ if eq $type "solid" }}
-    {{ $bgClass = "bg-primary dark:bg-dark-primary" }}
+    {{ $bgClass = "bg-primary" }}
     {{ $textClass = "text-white" }}
-    {{ $borderClass = "border-2 border-primary dark:border-dark-primary" }}
-    {{ $hoverClass = "hover:bg-primary-darken dark:hover:bg-dark-primary-darken hover:border-primary-darken dark:hover:border-dark-primary-darken" }}
-    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body dark:focus:ring-offset-dark-body" }}
+    {{ $borderClass = "border-2 border-primary" }}
+    {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
+    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
 {{ else if eq $type "capsule" }}
-    {{ $bgClass = "bg-primary dark:bg-dark-primary" }}
+    {{ $bgClass = "bg-primary" }}
     {{ $textClass = "text-white" }}
-    {{ $borderClass = "border-2 border-primary dark:border-dark-primary" }}
-    {{ $hoverClass = "hover:bg-primary-darken dark:hover:bg-dark-primary-darken hover:border-primary-darken dark:hover:border-dark-primary-darken" }}
-    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body dark:focus:ring-offset-dark-body" }}
+    {{ $borderClass = "border-2 border-primary" }}
+    {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
+    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
     {{ $shapeClass = "rounded-full" }}
 {{ else if eq $type "outline" }}
     {{ $bgClass = "bg-transparent" }}
-    {{ $textClass = "text-primary dark:text-white" }}
-    {{ $borderClass = "border-2 border-primary dark:border-dark-primary" }}
-    {{ $hoverClass = "hover:bg-primary-darken/10 dark:hover:bg-dark-primary-darken/10 hover:text-primary-darken dark:hover:text-white hover:border-primary-darken dark:hover:border-dark-primary-darken" }}
-    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body dark:focus:ring-offset-dark-body" }}
+    {{ $textClass = "text-primary" }}
+    {{ $borderClass = "border-2 border-primary" }}
+    {{ $hoverClass = "hover:bg-primary-darken/10 hover:text-primary-darken hover:border-primary-darken" }}
+    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
 {{ else if eq $type "solid-alt" }}
     {{ $bgClass = "bg-white" }}
-    {{ $textClass = "text-primary dark:text-dark-primary" }}
+    {{ $textClass = "text-primary" }}
     {{ $borderClass = "border-2 border-white" }}
     {{ $hoverClass = "hover:bg-white-darken hover:border-white-darken " }}
-    {{ $focusRingClass = "focus:ring-white focus:ring-offset-primary dark:focus:ring-offset-dark-primary" }}
+    {{ $focusRingClass = "focus:ring-white focus:ring-offset-primary" }}
 {{ else if eq $type "outline-alt" }}
     {{ $bgClass = "bg-transparent" }}
-    {{ $textClass = "text-off-black dark:text-white" }}
-    {{ $borderClass = "border-2 border-off-black dark:border-white" }}
-    {{ $hoverClass = "hover:bg-white/10 dark:hover:bg-off-black/10" }}
-    {{ $focusRingClass = "focus:ring-off-black focus:ring-offset-primary dark:focus:ring-white dark:focus:ring-offset-dark-primary" }}
+    {{ $textClass = "text-off-black" }}
+    {{ $borderClass = "border-2 border-off-black" }}
+    {{ $hoverClass = "hover:bg-white/10" }}
+    {{ $focusRingClass = "focus:ring-off-black focus:ring-offset-primary" }}
 {{ else if eq $type "ghost" }}
     {{ $bgClass = "bg-transparent" }}
-    {{ $textClass = "text-button dark:text-blue-400" }}
+    {{ $textClass = "text-button" }}
     {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-button dark:hover:text-blue-400" }}
+    {{ $hoverClass = "hover:bg-gray-100 hover:text-button" }}
     {{ $focusRingClass = "focus:ring-button" }}
 {{ else if eq $type "danger" }}
     {{ $bgClass = "bg-red-600" }}

@@ -18,8 +18,8 @@
 {{ end }}
 <!-- This with statement is needed to bring in the page context as we're using a variable dict in the partial call -->
 {{ with .ctxt }}
-  {{ $photoFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.6)] dark:shadow-[0_6px_24px_rgba(10,10,20,0.8)]" }}
-  {{ $standardFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.4)] dark:shadow-[0_6px_24px_rgba(10,10,20,0.65)]" }}
+  {{ $photoFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.6)]" }}
+  {{ $standardFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.4)]" }}
   {{ $mediaFrame := $standardFrame }}
   {{ if $isPhoto }}
     {{ $mediaFrame = $photoFrame }}

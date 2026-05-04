@@ -3,7 +3,7 @@
 <section class="py-16" aria-labelledby="blog-heading">
     <div class="container">
         <div class="max-w-6xl mx-auto">
-            <h2 id="blog-heading" class="text-3xl md:text-4xl font-bold text-center text-off-black dark:text-white mb-12">
+            <h2 id="blog-heading" class="text-3xl md:text-4xl font-bold text-center text-off-black mb-12">
                 Latest From Our Blog
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
@@ -11,16 +11,16 @@
                 <article class="content-card">
                     <div class="p-6">
                         {{ if .Date }}
-                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500 dark:text-gray-400">
+                        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-gray-500">
                             {{ .Date.Format "January 2, 2006" }}
                         </time>
                         {{ end }}
-                        <h3 class="text-xl font-semibold text-primary dark:text-primary-dark mt-2 mb-3">
+                        <h3 class="text-xl font-semibold text-primary mt-2 mb-3">
                             <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none">
                                 {{ .Title }}
                             </a>
                         </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
+                        <p class="text-gray-600 text-sm line-clamp-3">
                             {{ .Summary | truncate 150 }}
                         </p>
                         <a href="{{ .RelPermalink }}" class="card-cta-link mt-4 text-sm">
