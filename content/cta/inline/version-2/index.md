@@ -7,7 +7,7 @@ buttons:
     type: solid
     label: Donate
   - href: ./contact
-    type: solid
+    type: outline
     label: Volunteer
 build:
   render: never

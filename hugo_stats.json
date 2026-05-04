@@ -202,7 +202,6 @@
       "md:items-center",
       "md:items-end",
       "md:justify-center",
-      "md:justify-start",
       "md:max-w-3xl",
       "md:order-last",
       "md:py-24",
