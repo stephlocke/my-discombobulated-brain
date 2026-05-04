@@ -1,9 +1,9 @@
 {{- $speedPreset := .speed | default "normal" -}}
-{{- $duration := 23333 -}}
+{{- $duration := 25000 -}}
 {{- if eq $speedPreset "slow" -}}
-  {{- $duration = 35000 -}}
+  {{- $duration = 30000 -}}
 {{- else if eq $speedPreset "fast" -}}
-  {{- $duration = 15555 -}}
+  {{- $duration = 20000 -}}
 {{- end -}}
 {{- with .ctxt -}}
 <section class="container">

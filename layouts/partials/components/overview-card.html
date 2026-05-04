@@ -1,5 +1,5 @@
-<article class="event-card bg-white dark:bg-surface-dark shadow hover:shadow-lg transition-shadow overflow-hidden rounded-lg p-6 focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark">
-    <div class="w-12 h-12 bg-{{ .icon_color }}-100 dark:bg-{{ .icon_color }}-400 rounded-lg flex items-center justify-center mb-4 mx-auto" aria-hidden="true">
+<article class="event-card bg-white dark:bg-surface-dark shadow hover:shadow-lg transition-shadow overflow-hidden rounded-[3rem] p-6 focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark">
+    <div class="w-12 h-12 bg-{{ .icon_color }}-100 dark:bg-{{ .icon_color }}-400 rounded-full flex items-center justify-center mb-4 mx-auto" aria-hidden="true">
         <span>
             <i class="fas fa-solid {{ .icon }} fa-lg text-{{ .icon_color }}-500 dark:text-{{ .icon_color }}-800"></i>
         </span>
@@ -8,5 +8,5 @@
     <p class="text-text mb-6 text-sm line-clamp-3">
         {{ .text }}
     </p>
-    {{ partial "components/button" (dict "type" "solid" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more") }}
+    {{ partial "components/button" (dict "type" "capsule" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more") }}
 </article>

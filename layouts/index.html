@@ -8,9 +8,9 @@
   {{ partial "components/upcoming-events.html" . }}
 {{ end }}
 
-<!-- Working With section -->
-{{ if .Site.Params.workingWithSection }}
-  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
+<!-- Awards and Recognition section -->
+{{ if .Site.Params.awardsSection }}
+  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
 {{ end }}
 
 <!-- Services Detail Panels section -->
@@ -18,9 +18,9 @@
   {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
 {{ end }}
 
-<!-- Awards and Recognition section -->
-{{ if .Site.Params.awardsSection }}
-  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
+<!-- Working With section -->
+{{ if .Site.Params.workingWithSection }}
+  {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
 {{ end }}
 
 <!-- Latest Blog Posts -->

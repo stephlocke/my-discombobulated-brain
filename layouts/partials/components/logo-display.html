@@ -1,10 +1,9 @@
 {{- $ctxt := .ctxt -}}
 {{- $collection := .collection -}}
-{{- $speed := .speed | default "fast" -}}
 {{- with $ctxt.Site.GetPage $collection -}}
   {{- $display := .Params.display | default "grid" -}}
   {{- if eq $display "carousel" -}}
-    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" $speed) -}}
+    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" "normal") -}}
   {{- else -}}
     {{- partial "components/logo-grid.html" (dict "ctxt" .) -}}
   {{- end -}}
