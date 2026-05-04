@@ -1,10 +1,18 @@
 {{- $ctxt := .ctxt -}}
 {{- $collection := .collection -}}
 {{- with $ctxt.Site.GetPage $collection -}}
-  {{- $display := .Params.display | default "grid" -}}
-  {{- if eq $display "carousel" -}}
-    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" "normal") -}}
+  {{- $displayType := "grid" -}}
+  {{- $clickable := true -}}
+  {{- $showTitle := true -}}
+  {{- with .Params.display -}}
+    {{- $displayType = .type | default "grid" -}}
+    {{- $clickable = .clickable | default true -}}
+    {{- $showTitle = .show_title | default true -}}
+  {{- end -}}
+
+  {{- if eq $displayType "carousel" -}}
+    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" "normal" "clickable" $clickable "show_title" $showTitle) -}}
   {{- else -}}
-    {{- partial "components/logo-grid.html" (dict "ctxt" .) -}}
+    {{- partial "components/logo-grid.html" (dict "ctxt" . "clickable" $clickable "show_title" $showTitle) -}}
   {{- end -}}
 {{- end -}}

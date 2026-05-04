@@ -1,4 +1,6 @@
 {{- $speedPreset := .speed | default "normal" -}}
+{{- $clickable := .clickable | default true -}}
+{{- $showTitle := .show_title | default true -}}
 {{- $duration := 25000 -}}
 {{- if eq $speedPreset "slow" -}}
   {{- $duration = 30000 -}}
@@ -8,11 +10,13 @@
 {{- with .ctxt -}}
 <section class="container">
   <div class="py-12">
+    {{- if $showTitle -}}
     <h2 class="mb-6 text-center text-3xl font-bold text-primary">
       <a href="{{ .RelPermalink }}" class="rounded hover:underline focus:outline-none focus:ring-2 focus:ring-primary">
         {{ .Title }}
       </a>
     </h2>
+    {{- end -}}
 
     <div class="relative mx-auto w-[75vw] overflow-hidden py-4" aria-label="{{ .Title }} logos carousel">
       <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-linear-to-r from-white to-transparent"></div>
@@ -22,28 +26,40 @@
         <div data-logo-carousel-track class="flex w-max items-center gap-12 px-6 will-change-transform">
           {{- range .Pages.ByWeight -}}
             <div class="shrink-0">
-              {{- if .Params.link -}}
+              {{- if $clickable -}}
+                {{- if .Params.link -}}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" class="block rounded">
                   {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
                 </a>
-              {{- else -}}
+                {{- else -}}
                 <a href="{{ .RelPermalink }}" title="{{ .Title }}" class="block rounded">
                   {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
                 </a>
+                {{- end -}}
+              {{- else -}}
+                <div title="{{ .Title }}" class="block rounded">
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                </div>
               {{- end -}}
             </div>
           {{- end -}}
 
           {{- range .Pages.ByWeight -}}
             <div class="shrink-0" aria-hidden="true">
-              {{- if .Params.link -}}
+              {{- if $clickable -}}
+                {{- if .Params.link -}}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
                   {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
                 </a>
-              {{- else -}}
+                {{- else -}}
                 <a href="{{ .RelPermalink }}" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
                   {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
                 </a>
+                {{- end -}}
+              {{- else -}}
+                <div title="{{ .Title }}" class="block rounded pointer-events-none" aria-hidden="true">
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                </div>
               {{- end -}}
             </div>
           {{- end -}}
