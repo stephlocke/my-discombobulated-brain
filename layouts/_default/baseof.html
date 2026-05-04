@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale | default "en" }}" class="scroll-smooth">
 <head>
-    {{ partial "head.html" . }}
+    {{ partial "essentials/head.html" . }}
     {{ with (templates.Defer (dict "key" "global")) }}
-      {{ partial "css.html" . }}
+    {{ partial "essentials/css.html" . }}
     {{ end }}
 </head>
 <body class="bg-body text-off-black dark:bg-dark-body dark:text-white transition-colors duration-200 font-exo">
@@ -11,13 +11,13 @@
         Skip to main content
     </a>
     
-    {{ partial "header.html" . }}
+    {{ partial "essentials/header.html" . }}
     
     <main id="main-content" tabindex="-1">
         {{ block "main" . }}{{ end }}
     </main>
     
-    {{ partial "footer.html" . }}
+    {{ partial "essentials/footer.html" . }}
     {{ partial "components/back-to-top.html" . }}
 </body>
 </html>

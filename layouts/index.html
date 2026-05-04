@@ -1,19 +1,19 @@
 {{ define "main" }}
 
 <!-- Hero Section -->
-{{ partial "hero.html" (dict "format" "overview" "ctxt" .) }}
+{{ partial "components/hero.html" (dict "format" "overview" "ctxt" .) }}
 
 <!-- Upcoming Events section -->
-{{ partial "upcoming-events.html" . }}
+{{ partial "components/upcoming-events.html" . }}
 
 <!-- Working With section -->
-{{ partial "logo-grid.html" (dict "ctxt" . "gridCollection" "/working-with") }}
+{{ partial "components/logo-grid.html" (dict "ctxt" . "gridCollection" "/working-with") }}
 
 <!-- Services Detail Panels section -->
 {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
 
 <!-- Awards and Recognition section -->
-{{ partial "logo-grid.html" (dict "ctxt" . "gridCollection" "/awards-and-recognition") }}
+{{ partial "components/logo-grid.html" (dict "ctxt" . "gridCollection" "/awards-and-recognition") }}
 
 <!-- Latest Blog Posts -->
 {{ partial "recent-posts.html" . }}
