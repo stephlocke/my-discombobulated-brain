@@ -6,4 +6,6 @@ buttons:
  - href: ./contact
    type: solid-alt
    label: Get In Touch
+build:
+  render: never
 ---

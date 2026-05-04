@@ -2,6 +2,9 @@
 
 <!-- Hero Section -->
 {{ partial "components/hero.html" (dict "format" "overview" "ctxt" .) }}
+{{ if ge (len .Params.inline_ctas) 1 }}
+  {{ partial "components/cta-display.html" (dict "ctxt" . "location" "inline" "cta" (index .Params.inline_ctas 0)) }}
+{{ end }}
 
 <!-- Upcoming Events section -->
 {{ if .Site.Params.upcomingEventsSection }}
@@ -11,6 +14,9 @@
 <!-- Awards and Recognition section -->
 {{ if .Site.Params.awardsSection }}
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
+{{ end }}
+{{ if ge (len .Params.inline_ctas) 2 }}
+  {{ partial "components/cta-display.html" (dict "ctxt" . "location" "inline" "cta" (index .Params.inline_ctas 1)) }}
 {{ end }}
 
 <!-- Services Detail Panels section -->
@@ -29,10 +35,5 @@
 {{ end }}
 
 <!-- CTA Section -->
-{{ with .Params.footer_cta }}
-      <!-- Get cta file based on value in md file of section -->
-      {{ with $.Site.GetPage (printf "/cta/%s" .) }}
-        {{ partial "components/footer-cta.html" . }}
-      {{ end }}
-    {{ end }}
+{{ partial "components/cta-display.html" (dict "ctxt" . "location" "footer") }}
 {{ end }}

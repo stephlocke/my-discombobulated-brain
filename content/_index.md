@@ -3,6 +3,7 @@ title: home
 hero_title: Your Mental Health Matters
 hero_body: We're here to support you on your journey to better mental health. You're not alone.
 footer_cta: version-1
+inline_ctas: [version-1, version-2]
 overview_cards:
     - header: Support
       text: Providing compassionate support and resources for those facing mental health challenges.

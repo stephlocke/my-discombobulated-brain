@@ -1,0 +1,36 @@
+{{- $cta := .cta | default . -}}
+{{- $location := .location | default "footer" -}}
+{{- $bgClass := "bg-gradient-to-b from-primary to-primary-darken" -}}
+{{- $headlineClass := "text-white" -}}
+{{- $bodyClass := "text-white" -}}
+{{- if eq $location "inline" -}}
+    {{- $bgClass = "bg-primary/25" -}}
+    {{- $headlineClass = "text-primary" -}}
+    {{- $bodyClass = "text-primary" -}}
+{{- end -}}
+
+<section class="py-16 {{ $bgClass }}" aria-labelledby="cta-heading">
+    <div class="container">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold {{ $headlineClass }} mb-6">
+                {{ $cta.Params.headline }}
+            </h2>
+            <p class="text-xl {{ $bodyClass }} mb-8">
+                {{ $cta.Params.body }}
+            </p>
+            {{ with $cta.Params.buttons }}
+                {{ if gt (len .) 1 }}
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        {{ range . }}
+                            {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                        {{ end }}
+                    </div>
+                {{ else }}
+                    {{ range . }}
+                        {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
