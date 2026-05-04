@@ -50,7 +50,7 @@
 
 @layer components {
 	.btn-base {
-		@apply inline-block rounded-lg px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+		@apply inline-block px-8 py-3 text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
 	}
 
 	#site-header {

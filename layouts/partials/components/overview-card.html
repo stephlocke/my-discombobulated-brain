@@ -1,4 +1,13 @@
-<article class="event-card bg-white shadow hover:shadow-lg transition-shadow overflow-hidden rounded-[3rem] p-6 focus-within:ring-2 focus-within:ring-primary">
+{{ $edgesStyle := .Site.Params.edges | default "round" }}
+{{ $cardRounding := "rounded-none" }}
+{{ if eq $edgesStyle "sharp" }}
+  {{ $cardRounding = "rounded-none" }}
+{{ else if eq $edgesStyle "curved" }}
+  {{ $cardRounding = "rounded-lg" }}
+{{ else if eq $edgesStyle "round" }}
+  {{ $cardRounding = "rounded-[3rem]" }}
+{{ end }}
+<article class="event-card bg-white shadow hover:shadow-lg transition-shadow overflow-hidden {{ $cardRounding }} p-6 focus-within:ring-2 focus-within:ring-primary">
     <div class="w-12 h-12 bg-{{ .icon_color }}-100 .icon_color }}-400 rounded-full flex items-center justify-center mb-4 mx-auto" aria-hidden="true">
         <span>
             <i class="fas fa-solid {{ .icon }} fa-lg text-{{ .icon_color }}-500 .icon_color }}-800"></i>
@@ -8,5 +17,5 @@
     <p class="text-text mb-6 text-sm line-clamp-3">
         {{ .text }}
     </p>
-    {{ partial "components/button" (dict "type" "capsule" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more") }}
+    {{ partial "components/button" (dict "type" "solid" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more") }}
 </article>

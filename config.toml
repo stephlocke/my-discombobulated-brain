@@ -54,6 +54,8 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   awardsSection = true
     # Should the blog section be shown on the homepage?
   blogSection = false
+  # Edge rounding style: sharp, curved, or round
+  edges = "round"
   
   # Social media
   twitter = ''

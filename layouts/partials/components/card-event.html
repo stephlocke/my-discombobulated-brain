@@ -1,4 +1,13 @@
-<article class="event-card bg-white shadow hover:shadow-lg transition-shadow overflow-hidden rounded-lg focus-within:ring-2 focus-within:ring-primary">
+{{ $edgesStyle := .Site.Params.edges | default "round" }}
+{{ $cardRounding := "rounded-none" }}
+{{ if eq $edgesStyle "sharp" }}
+  {{ $cardRounding = "rounded-none" }}
+{{ else if eq $edgesStyle "curved" }}
+  {{ $cardRounding = "rounded-lg" }}
+{{ else if eq $edgesStyle "round" }}
+  {{ $cardRounding = "rounded-[3rem]" }}
+{{ end }}
+<article class="event-card bg-white shadow hover:shadow-lg transition-shadow overflow-hidden {{ $cardRounding }} focus-within:ring-2 focus-within:ring-primary">
     {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "TeamCard" "isPhoto" false) }}
     <div class="p-6">
         <h3 class="text-xl font-semibold mb-2 text-primary">
@@ -17,6 +26,10 @@
                 <p><strong>Time:</strong> {{ $startTime.Format "3:04 PM" }} – {{ $endTime.Format "3:04 PM" }}</p>
         </div>
         
-        <a href="{{ .RelPermalink }}" class="mt-4 inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Learn More</a>
+       
+        <div class="mt-4">
+          {{ partial "components/button" (dict "type" "solid" "href" .RelPermalink "label" "Learn More") }}
+        </div>
+       
     </div>
 </article>

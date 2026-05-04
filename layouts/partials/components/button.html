@@ -7,19 +7,20 @@
 {{ $hoverClass := "" }}
 {{ $focusRingClass := "" }}
 {{ $shapeClass := "" }}
+{{ $edgesStyle := .Site.Params.edges | default "round" }}
+{{ if eq $edgesStyle "sharp" }}
+  {{ $shapeClass = "rounded-none" }}
+{{ else if eq $edgesStyle "curved" }}
+  {{ $shapeClass = "rounded-lg" }}
+{{ else if eq $edgesStyle "round" }}
+  {{ $shapeClass = "rounded-full" }}
+{{ end }}
 {{ if eq $type "solid" }}
     {{ $bgClass = "bg-primary" }}
     {{ $textClass = "text-white" }}
     {{ $borderClass = "border-2 border-primary" }}
     {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
     {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
-{{ else if eq $type "capsule" }}
-    {{ $bgClass = "bg-primary" }}
-    {{ $textClass = "text-white" }}
-    {{ $borderClass = "border-2 border-primary" }}
-    {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
-    {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}
-    {{ $shapeClass = "rounded-full" }}
 {{ else if eq $type "outline" }}
     {{ $bgClass = "bg-transparent" }}
     {{ $textClass = "text-primary" }}
