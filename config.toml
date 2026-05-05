@@ -58,6 +58,8 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   [params.style_rules]
     # Edge rounding style: sharp, curved, or round
     edges = "round"
+    # Whether the navigation bar expands vertically when the user is at the top of the page (true) or is always fixed (false)
+    expanded_nav = false
     # Primary and secondary theme colors
     primary_color = "oklch(63.5% 0.15 158)"
     secondary_color = "var(--color-yellow-500)"
