@@ -202,6 +202,7 @@
     const siteHeader = document.getElementById('site-header');
     const siteNav = document.getElementById('site-nav');
     const siteLogo = document.getElementById('site-logo');
+    const shouldExpandNav = {{ .Site.Params.style_rules.expanded_nav | default true }};
     let isHeaderCompact = false;
 
     function setHeaderCompactState(nextIsCompact) {
@@ -229,14 +230,20 @@
     function updateHeaderOnScroll() {
         const scrollY = window.scrollY;
 
-        if (!isHeaderCompact && scrollY > 24) {
-            setHeaderCompactState(true);
-        } else if (isHeaderCompact && scrollY < 8) {
-            setHeaderCompactState(false);
+        if (shouldExpandNav) {
+            if (!isHeaderCompact && scrollY > 24) {
+                setHeaderCompactState(true);
+            } else if (isHeaderCompact && scrollY < 8) {
+                setHeaderCompactState(false);
+            }
         }
     }
 
-    setHeaderCompactState(window.scrollY > 24);
+    if (shouldExpandNav) {
+        setHeaderCompactState(window.scrollY > 24);
+    } else {
+        setHeaderCompactState(true);
+    }
     updateHeaderOnScroll();
     window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
 </script>
