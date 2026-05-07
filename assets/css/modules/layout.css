@@ -119,22 +119,6 @@
 		}
 	}
 
-	a.inline-block.bg-primary,
-	a[class*="bg-primary"][class*="font-semibold"] {
-		@apply inline-block bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-		border-radius: var(--radius-button);
-	}
-
-	a.inline-block.bg-primary:focus-visible,
-	a[class*="bg-primary"][class*="font-semibold"]:focus-visible {
-		@apply bg-primary-darken ring-2 ring-primary-darken ring-offset-2;
-	}
-
-	a.inline-block.bg-primary:hover,
-	a[class*="bg-primary"][class*="font-semibold"]:hover {
-		@apply -translate-y-0.5 shadow-md;
-	}
-
 	.container .prose {
 		@apply prose-headings:text-off-black prose-a:font-semibold prose-a:text-primary;
 	}
