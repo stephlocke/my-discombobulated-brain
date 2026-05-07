@@ -44,7 +44,6 @@
     ],
     "classes": [
       "-translate-x-1/2",
-      ".icon_color",
       "[&.is-compact]:bg-primary/95",
       "[&_li]:leading-7",
       "[&_p]:leading-7",
@@ -334,6 +333,7 @@
       "text-2xl",
       "text-3xl",
       "text-4xl",
+      "text-blue-400",
       "text-blue-500",
       "text-center",
       "text-inverse",
@@ -342,6 +342,7 @@
       "text-muted",
       "text-off-black",
       "text-primary",
+      "text-red-400",
       "text-red-500",
       "text-right",
       "text-secondary",
@@ -351,6 +352,7 @@
       "text-text",
       "text-white",
       "text-xl",
+      "text-yellow-400",
       "text-yellow-500",
       "to-primary-darken",
       "to-surface",
@@ -377,9 +379,7 @@
       "will-change-transform",
       "z-10",
       "z-40",
-      "z-50",
-      "}}-400",
-      "}}-800"
+      "z-50"
     ],
     "ids": [
       "back-to-top",
