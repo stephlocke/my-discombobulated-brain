@@ -67,7 +67,7 @@
         </header>
         
         <!-- Article Content -->
-        <div class="post-prose">
+        <div class="prose prose-base max-w-none md:prose-lg prose-headings:font-bold prose-headings:text-off-black prose-p:leading-relaxed prose-p:text-off-black prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-off-black prose-ul:text-off-black prose-ol:text-off-black prose-blockquote:border-primary prose-blockquote:bg-primary/10 prose-blockquote:px-4 prose-blockquote:py-2 prose-code:rounded prose-code:bg-white-darken prose-code:px-1 prose-code:text-primary prose-pre:bg-off-black prose-img:rounded-lg prose-img:shadow-lg [&_p]:leading-7 md:[&_p]:leading-relaxed [&_li]:leading-7 md:[&_li]:leading-relaxed">
             {{ .Content }}
         </div>
         
@@ -78,7 +78,7 @@
             <div class="flex flex-wrap gap-2">
                 {{ range . }}
                 <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
-                         class="tag-pill">
+                         class="rounded-full bg-white-darken px-3 py-1 text-sm text-off-black hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:bg-primary/10 focus-visible:underline focus-visible:underline-offset-4">
                     #{{ . }}
                 </a>
                 {{ end }}
@@ -91,7 +91,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {{ with .PrevInSection }}
                 <a href="{{ .RelPermalink }}" 
-                   class="adjacent-post-link group">
+                   class="group flex items-center gap-3 bg-white-darken p-4 transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}">
                     <svg class="w-6 h-6 text-off-black group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
@@ -104,7 +104,7 @@
                 
                 {{ with .NextInSection }}
                 <a href="{{ .RelPermalink }}" 
-                         class="adjacent-post-link adjacent-post-link-next group {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
+                         class="group flex items-center justify-end gap-3 bg-white-darken p-4 transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }} {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
                     <div class="text-right">
                         <div class="text-sm text-off-black">Next</div>
                         <div class="font-semibold text-off-black group-hover:text-primary">{{ .Title }}</div>
@@ -124,7 +124,7 @@
                 If this article raised difficult feelings or you need someone to talk to, please reach out for support. You're not alone.
             </p>
             <a href="/contact/" 
-               class="card-cta-link">
+               class="inline-block min-h-11 bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
                 Get Help
             </a>
         </aside>

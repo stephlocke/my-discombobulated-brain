@@ -1,6 +1,6 @@
-<header id="site-header" class="shadow-sm sticky top-0 z-40" role="banner">
+<header id="site-header" class="sticky top-0 z-40 border-b border-primary-darken/20 bg-primary shadow-sm backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95" role="banner">
     <nav id="site-nav" class="container py-4 transition-[padding] duration-300 ease-out" aria-label="Main navigation">
-        <div class="flex justify-around">
+        <div class="flex items-center justify-between gap-4">
             <div class="">
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
@@ -18,7 +18,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
-                         class="site-nav-link {{ if $.IsMenuCurrent "main" . }}site-nav-link-current{{ end }}">
+                         class="rounded px-2 py-1 font-bold text-white hover:text-secondary hover:underline hover:underline-offset-8 focus:bg-white-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
@@ -60,7 +60,7 @@
             <button 
                 id="mobile-menu-button" 
                 type="button"
-                class="md:hidden p-2 text-surface hover:bg-surface-hover {{ partial "components/edge-rounding" (dict "shape" "button") }} focus:outline-none focus:ring-2 focus:ring-primary"
+                class="md:hidden min-h-11 p-2 text-white hover:bg-primary-darken/30 {{ partial "components/edge-rounding" (dict "shape" "button") }} focus:outline-none focus:ring-2 focus:ring-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 aria-label="Toggle mobile menu"
                 aria-expanded="false"
                 aria-controls="mobile-menu">
@@ -71,10 +71,10 @@
         </div>
         
         <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 rounded-xl bg-white/95 p-2 shadow-lg ring-1 ring-primary/10">
             {{ range .Site.Menus.main }}
             <a href="{{ .URL | relLangURL }}" 
-                    class="mobile-nav-link {{ if $.IsMenuCurrent "main" . }}mobile-nav-link-current{{ end }}"
+                    class="block min-h-11 rounded-lg px-4 py-2 font-bold text-off-black hover:bg-primary/10 hover:text-off-black-darken hover:underline hover:underline-offset-8 focus:bg-white-darken focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4 {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-white{{ end }}"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                 {{ .Name }}
             </a>

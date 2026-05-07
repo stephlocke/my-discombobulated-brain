@@ -8,8 +8,8 @@
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
                 {{ range $recentPosts }}
-                <article class="content-card">
-                    <div class="p-6">
+                <article class="border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}">
+                    <div class="space-y-3 p-5 md:p-6">
                         {{ if .Date }}
                         <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
                             {{ .Date.Format "January 2, 2006" }}
@@ -23,7 +23,7 @@
                         <p class="text-muted text-sm line-clamp-3">
                             {{ .Summary | truncate 150 }}
                         </p>
-                        <a href="{{ .RelPermalink }}" class="card-cta-link mt-4 text-sm">
+                        <a href="{{ .RelPermalink }}" class="mt-4 inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
                             Read more
                         </a>
                     </div>
