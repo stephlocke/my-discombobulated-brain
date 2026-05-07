@@ -3,6 +3,9 @@
 {{- if eq .icon_color "red" -}}
     {{- $iconBgClass = "bg-red-100" -}}
     {{- $iconTextClass = "text-red-500" -}}
+{{- else if eq .icon_color "blue" -}}
+    {{- $iconBgClass = "bg-blue-100" -}}
+    {{- $iconTextClass = "text-blue-500" -}}
 {{- else if eq .icon_color "yellow" -}}
     {{- $iconBgClass = "bg-yellow-100" -}}
     {{- $iconTextClass = "text-yellow-500" -}}
