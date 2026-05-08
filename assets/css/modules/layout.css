@@ -187,7 +187,6 @@
 	@media (prefers-reduced-motion: no-preference) {
 		section[aria-labelledby="blog-heading"] article,
 		section.container article[role="listitem"],
-		#site-header,
 		footer {
 			animation: fade-in-up 420ms ease-out both;
 		}

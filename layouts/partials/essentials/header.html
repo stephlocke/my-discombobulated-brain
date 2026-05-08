@@ -1,11 +1,12 @@
-<header id="site-header" class="sticky top-0 z-40 border-b border-primary-darken/20 bg-primary shadow-sm backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95" role="banner">
-    <nav id="site-nav" class="container py-4 transition-[padding] duration-300 ease-out" aria-label="Main navigation">
-        <div class="flex items-center justify-between gap-4">
-            <div class="">
+{{ $shouldExpandNav := .Site.Params.style_rules.expanded_nav | default true }}
+<header id="site-header" class="sticky top-0 z-40 border-b border-primary-darken/20 bg-primary shadow-sm backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95{{ if not $shouldExpandNav }} is-compact{{ end }}" data-expand-nav="{{ if $shouldExpandNav }}true{{ else }}false{{ end }}" role="banner">
+    <nav id="site-nav" class="container {{ if $shouldExpandNav }}py-4{{ else }}py-2{{ end }} transition-[padding] duration-300 ease-out" aria-label="Main navigation">
+        <div class="relative flex items-center justify-between gap-4">
+            <div class="shrink-0">
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
-            <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-inverse hover:text-secondary">
-                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" class="h-12 w-auto transition-[height,transform] duration-300 ease-out">
+            <a href="{{ "./" | relLangURL }}" class="inline-flex text-xl font-bold text-inverse hover:text-secondary">
+                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" width="311" height="205" class="{{ if $shouldExpandNav }}h-12{{ else }}h-10{{ end }} w-auto transition-[height,transform] duration-300 ease-out">
             </a>
             {{ else }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-inverse hover:text-secondary">
@@ -15,7 +16,7 @@
             </div>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
                          class="{{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary hover:underline hover:underline-offset-8 focus:bg-white-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
@@ -42,20 +43,9 @@
                 </button>  */}}
 
             </div>
-
-            <!-- Social Links -->
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="Bluesky">
-                    <i class="fab fa-bluesky fa-xl"></i>
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin fa-xl"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-inverse hover:text-secondary transition" aria-label="YouTube">
-                    <i class="fab fa-youtube fa-xl"></i>
-                </a>
+            <div class="hidden md:flex md:items-center md:shrink-0">
+                {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
             </div>
-            
             <!-- Mobile Menu Button -->
             <button 
                 id="mobile-menu-button" 
@@ -202,7 +192,7 @@
     const siteHeader = document.getElementById('site-header');
     const siteNav = document.getElementById('site-nav');
     const siteLogo = document.getElementById('site-logo');
-    const shouldExpandNav = {{ .Site.Params.style_rules.expanded_nav | default true }};
+    const shouldExpandNav = siteHeader ? siteHeader.dataset.expandNav === 'true' : true;
     let isHeaderCompact = false;
 
     function setHeaderCompactState(nextIsCompact) {
