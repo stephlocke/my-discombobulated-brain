@@ -18,7 +18,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL | relLangURL }}" 
-                         class="rounded px-2 py-1 font-bold text-white hover:text-secondary hover:underline hover:underline-offset-8 focus:bg-white-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
+                         class="{{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary hover:underline hover:underline-offset-8 focus:bg-white-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
@@ -74,7 +74,7 @@
         <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 rounded-xl bg-white/95 p-2 shadow-lg ring-1 ring-primary/10">
             {{ range .Site.Menus.main }}
             <a href="{{ .URL | relLangURL }}" 
-                    class="block min-h-11 rounded-lg px-4 py-2 font-bold text-off-black hover:bg-primary/10 hover:text-off-black-darken hover:underline hover:underline-offset-8 focus:bg-white-darken focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4 {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-white{{ end }}"
+                    class="block min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 font-bold text-off-black hover:bg-primary/10 hover:text-off-black-darken hover:underline hover:underline-offset-8 focus:bg-white-darken focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4 {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-white{{ end }}"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                 {{ .Name }}
             </a>
