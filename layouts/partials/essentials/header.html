@@ -79,6 +79,9 @@
                 <span id="mobile-theme-text">Toggle Dark Mode</span>
             </button>  */}}
         </div>
+        <div id="mobile-menu-donate" class="hidden md:hidden mt-3 text-center">
+            {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
+        </div>
     </nav>
 </header>
 
@@ -179,12 +182,16 @@
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuDonate = document.getElementById('mobile-menu-donate');
     
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
             mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
             mobileMenu.classList.toggle('hidden');
+            if (mobileMenuDonate) {
+                mobileMenuDonate.classList.toggle('hidden');
+            }
         });
     }
 
