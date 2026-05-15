@@ -16,7 +16,7 @@
             </nav>
             
             <!-- Title -->
-            <h1 class="text-4xl md:text-5xl font-bold text-off-black mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">
                 {{ .Title }}
             </h1>
             
@@ -86,8 +86,11 @@
         </div>
         {{ end }}
         
+        <!-- Support Notice -->
+        {{ partial "components/callout.html" (dict "ctxt" . "location" "single") }}
+
         <!-- Navigation to Previous/Next Posts -->
-        <nav class="mt-12 pt-8 border-t border-white-darken" aria-label="Post navigation">
+        <nav class="mt-12 pt-8" aria-label="Post navigation">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {{ with .PrevInSection }}
                 <a href="{{ .RelPermalink }}" 
@@ -117,17 +120,6 @@
             </div>
         </nav>
         
-        <!-- Support Notice -->
-        <aside class="mt-12 p-6 bg-primary/10 border-l-4 border-primary rounded" role="complementary">
-            <h2 class="text-lg font-semibold text-off-black mb-2">Need Support?</h2>
-            <p class="text-off-black mb-4">
-                If this article raised difficult feelings or you need someone to talk to, please reach out for support. You're not alone.
-            </p>
-            <a href="/contact/" 
-               class="inline-block min-h-11 bg-primary px-5 py-2.5 font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
-                Get Help
-            </a>
-        </aside>
     </div>
 </article>
 

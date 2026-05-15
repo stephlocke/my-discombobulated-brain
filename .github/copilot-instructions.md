@@ -47,12 +47,115 @@ This repository uses six specialised agents for code review. When Copilot review
 - Do not add a `tailwind.config.js` file — v4 is configured in CSS only
 - Do not add inline `<style>` blocks in layout files
 
-### Accessibility (Non-Negotiable)
-- Semantic HTML elements at all times (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`)
-- All interactive elements have visible focus rings
-- All images have `alt` text; decorative images use `alt=""` with `aria-hidden="true"`
-- WCAG 2.1 AA minimum; AAA target for crisis/contact content
-- Respect `prefers-reduced-motion` for any animations
+### Accessibility (Non-Negotiable) — WCAG 2.1 AA Compliant
+
+**Read `ACCESSIBILITY.md` for complete guidelines.** This section covers critical patterns.
+
+#### Keyboard Navigation
+- All interactive elements (buttons, links, form inputs) must be keyboard accessible
+- Tab order must be logical (header → main → footer)
+- No keyboard traps
+- Skip to main content link must be first focusable element
+
+#### Focus Indicators
+- **Every** interactive element must have visible focus indicator
+- Use pattern: `focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`
+- Never remove focus indicators without replacing with visible alternative
+- Focus ring offset uses `ring-offset-body` or appropriate background colour
+
+#### Semantic HTML (Non-Negotiable)
+- Use semantic elements always: `<header role="banner">`, `<nav aria-label="...">`, `<main id="main-content">`, `<article>`, `<footer role="contentinfo">`
+- Proper heading hierarchy: one `<h1>` per page, sequential h2-h6 (no skipping)
+- Link text must describe destination (no "click here")
+- Buttons use `<button>` element (not `<a>` styled as button)
+
+#### Screen Reader Support
+- All images have meaningful `alt` text:
+  - Decorative images: `alt=""` with `aria-hidden="true"`
+  - Content images: descriptive alt (80 characters max)
+  - Logo: `alt="{{ .Site.Title }}"`
+- Screen reader only text uses `.sr-only` class:
+  ```html
+  <span class="sr-only">Email:</span>
+  <a href="mailto:...">email@example.com</a>
+  ```
+- Navigation and landmark areas have `aria-label`:
+  ```html
+  <nav aria-label="Main navigation">
+  <nav aria-label="Footer navigation">
+  <nav aria-label="Legal links">
+  ```
+
+#### ARIA Attributes
+- `aria-label`: Buttons with icon-only, unclear text, or interactive elements
+  ```html
+  <button aria-label="Toggle mobile menu">☰</button>
+  <button aria-label="Back to top">↑</button>
+  ```
+- `aria-expanded`: Collapsible/toggleable elements
+  ```html
+  <button aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  ```
+- `aria-current="page"`: Active navigation link
+  ```html
+  <a href="/blog" aria-current="page">Blog</a>
+  ```
+- `aria-hidden="true"`: Decorative elements (SVG icons, visual separators)
+  ```html
+  <svg aria-hidden="true"><!-- decorative --></svg>
+  ```
+
+#### Touch Targets & Click Areas
+- Minimum 44px height/width for all clickable elements: `min-h-11` or `min-w-11`
+- Adequate spacing between touch targets (8px minimum)
+- No overlapping click areas
+
+#### Color & Contrast
+- Text: minimum 4.5:1 contrast ratio (WCAG AA)
+- Crisis/contact content: 7:1 contrast ratio (WCAG AAA)
+- Use semantic colour tokens (`text-primary`, `bg-primary`) not hardcoded colours
+- Colour alone must not convey information (use text, icons, or patterns)
+
+#### Motion & Animation
+- Respect `prefers-reduced-motion: reduce` media query
+- Disable animations for users who opt out:
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; }
+  }
+  ```
+- Check user preference in JavaScript:
+  ```javascript
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  ```
+
+#### Form Accessibility
+- All form inputs have associated `<label with for="id">`
+- Hidden form inputs use `aria-label`
+- Clear focus indicators on all inputs
+- Error messages associated with inputs
+- Required fields marked and announced
+
+#### Heading Hierarchy
+- One `<h1>` per page (page title)
+- Sequential heading levels (h2 → h3 → h4, no skips)
+- Descriptive heading text
+- Sections link to headings via `aria-labelledby`:
+  ```html
+  <section aria-labelledby="blog-heading">
+    <h2 id="blog-heading">Latest Blog Posts</h2>
+  </section>
+  ```
+
+#### Testing Before Commit
+- [ ] Keyboard: Tab through page, all elements accessible
+- [ ] Screen reader: Test with NVDA, JAWS, or VoiceOver
+- [ ] Focus indicators: All interactive elements have visible focus
+- [ ] Colour contrast: Test with Lighthouse or axe DevTools
+- [ ] Mobile: Touch targets 44px+, accessible at all breakpoints
+- [ ] Motion: Verify `prefers-reduced-motion` respected
+- [ ] Images: All have alt text
+- [ ] Headings: Proper hierarchy, no skipped levels
 
 ### Content
 - Never use stigmatising mental health language (see brand-voice-icp agent)
@@ -76,3 +179,16 @@ This repository uses six specialised agents for code review. When Copilot review
 - Do not hardcode secrets, API keys, or email addresses in tracked files
 - Do not use `actions/checkout@main` or other floating action refs — pin to a version tag
 - Do not remove `hugo_stats.json` from the repository — it is required for Tailwind class purging in CI
+
+### Accessibility — Do Not
+- Do not remove focus indicators or use `focus:outline-none` without `focus:ring-*` replacement
+- Do not use images without `alt` text
+- Do not create clickable elements smaller than 44px
+- Do not use colour alone to convey information
+- Do not force animations on users with `prefers-reduced-motion: reduce`
+- Do not skip heading levels (no h1 → h3)
+- Do not use non-semantic elements for interactive purposes (`<div>` as button)
+- Do not hide form inputs without `aria-label`
+- Do not use `aria-hidden="true"` on interactive elements
+- Do not create keyboard traps or inaccessible tab order
+- Do not remove or hide the skip to main content link

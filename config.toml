@@ -1,22 +1,17 @@
 baseURL = 'https://stephlocke.com/my-discombobulated-brain/'
-locale = 'en-us'
-title = 'Mental Health Charity'
-
-# Pagination
-[pagination]
-  pagerSize = 10
-
+locale = 'en-GB'
+title = 'My Discombobulated Brain'
 # Enable emoji support
 enableEmoji = true
-
 # Enable Git info
 enableGitInfo = false
-
 # Enable RSS
 enableRSS = true
-
 # Copyright notice
-copyright = '© 2026 Mental Health Charity. All rights reserved.'
+copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
+# Pagination
+[pagination]
+  pagerSize = 5
 
 # Build configuration for Tailwind CSS
 [build]
@@ -39,11 +34,13 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     target = 'assets/notwatching/hugo_stats.json'
 
 [params]
-  description = 'A mental health charity dedicated to providing support and resources for those in need.'
+  address = '123 Wellness Way, Mindful City, MC1 1CM.'
+  company_number = '12345678'
+  charity_number = '87654321'
   author = 'Mental Health Charity'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
-  favicon = 'images/favicon.ico'
+  favicon = 'images/my-discombob-logo.svg'
   # Should Upcoming Events be shown on the homepage?
   upcomingEventsSection = true
   # Should Working With be shown on the homepage?
@@ -54,6 +51,12 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
   awardsSection = true
     # Should the blog section be shown on the homepage?
   blogSection = false
+
+  [params.about_section]
+    # Used to populate the About section of the footer. Every parameter added here will be displayed in the footer.
+    address = "123 Wellness Way, Mindful City, MC1 1CM"
+    company = "12345678"
+    charity = "87654321"
 
   [params.style_rules]
     # Edge rounding style: sharp, curved, or round
@@ -66,14 +69,29 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     # Font stacks (primary plus fallbacks)
     title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
     body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
+    hero_format = "overview"
     # What image, if any, to use as the hero image on the homepage. The image is stored in static/images, if the image is static/images/hero-image.jpg, the value here should be "hero-image.jpg". If no hero image is desired, this can be left blank. Any image file can be used, but webp format is recommended for best performance. If a hero image is used, it will be displayed at the top of the homepage and will be styled to fit the full width of the screen while maintaining its aspect ratio. The image will also have a dark overlay to ensure that any text displayed on top of it remains legible.
     hero_image = "hero-image.webp"
   
-  # Social media
-  twitter = ''
-  facebook = ''
-  instagram = ''
-  linkedin = ''
+  # Social media profiles. Add one [[params.socials]] entry per platform.
+  # 'icon' must match the Font Awesome brand icon name (e.g. "x-twitter", "facebook").
+  [[params.socials]]
+    icon = 'facebook'
+    url = 'https://www.facebook.com/mydiscombobulatedbrain/'
+    label = 'Facebook'
+  [[params.socials]]
+    icon = 'instagram'
+    url = 'https://www.instagram.com/discombobbrain/'
+    label = 'Instagram'
+  [[params.socials]]
+    icon = 'x-twitter'
+    url = 'https://x.com/DiscombobBrain'
+    label = 'X (formerly Twitter)'
+  [[params.socials]]
+    icon = 'youtube'
+    url = 'https://www.youtube.com/channel/UCozMcQJbz5B1OB0xUfZvP-w'
+    label = 'YouTube'
   
   # Contact
   email = 'contact@example.org'

@@ -1,0 +1,29 @@
+{{- $location := .location | default "single" -}}
+{{- $ctxt := .ctxt | default . -}}
+{{- with $ctxt.Site.GetPage (printf "/callouts/%s" $location) -}}
+  {{- if eq $location "footer" -}}
+    <p class="mt-4 p-3 bg-primary/5 border border-primary/20 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}">
+        <strong class="text-strong">{{ .Params.headline }}:</strong><br>
+        {{ .Params.body }}
+    </p>
+  {{- else if eq $location "single" -}}
+    <aside class="mt-12 p-6 bg-primary/10 border-l-4 border-primary rounded" role="complementary">
+        <h2 class="text-lg font-semibold text-off-black mb-2">{{ .Params.headline }}</h2>
+        <p class="text-off-black mb-4">{{ .Params.body }}</p>
+        {{- with .Params.buttons -}}
+          {{- range . -}}
+            {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+          {{- end -}}
+        {{- end -}}
+    </aside>
+  {{- else if eq $location "404" -}}
+    <section class="pb-16" aria-labelledby="callout-heading">
+        <div class="container">
+            <div class="mx-auto max-w-3xl {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} border border-primary/20 bg-primary/5 p-8 text-center">
+                <h2 id="callout-heading" class="mb-4 text-2xl font-bold text-primary">{{ .Params.headline }}</h2>
+                <p class="text-muted">{{ .Params.body }}</p>
+            </div>
+        </div>
+    </section>
+  {{- end -}}
+{{- end -}}
