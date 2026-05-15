@@ -21,7 +21,7 @@
             {{ $eventDate := index .Params "event_date" }}
             {{ $startTime := index .Params "start_time" }}
             {{ $endTime := index .Params "end_time" }}
-            <article class="bg-surface {{ partial "components/edge-rounding" (dict "shape" "card") }} shadow-sm border border-border-subtle p-6" role="listitem">
+            <article class="bg-surface {{ partial "components/edge-rounding" (dict "shape" "card") }} shadow-sm p-6" role="listitem">
                 <a href="{{ with .Params.link }}{{ . }}{{ else }}{{ .RelPermalink }}{{ end }}"
                    {{ with .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
                    class="grid grid-cols-1 md:grid-cols-[220px_1fr] items-center gap-6 group focus:outline-none focus:ring-2 focus:ring-primary {{ partial "components/edge-rounding" (dict "shape" "card") }}">

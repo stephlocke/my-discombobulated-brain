@@ -86,20 +86,20 @@
 	section[aria-labelledby="blog-heading"] article,
 	section.container article[role="listitem"],
 	article.bg-white.shadow {
-		@apply border border-primary/10 bg-white shadow-sm transition duration-300;
+		@apply bg-white shadow-sm transition duration-300;
 		border-radius: var(--radius-card);
 	}
 
 	section[aria-labelledby="blog-heading"] article:focus-within,
 	section.container article[role="listitem"]:focus-within,
 	article.bg-white.shadow:focus-within {
-		@apply border-primary/30 shadow-lg ring-2 ring-primary/20 ring-offset-2;
+		@apply shadow-lg ring-2 ring-primary/20 ring-offset-2;
 	}
 
 	section[aria-labelledby="blog-heading"] article:hover,
 	section.container article[role="listitem"]:hover,
 	article.bg-white.shadow:hover {
-		@apply -translate-y-0.5 border-primary/20 shadow-lg;
+		@apply -translate-y-0.5 shadow-lg;
 	}
 
 	section[aria-labelledby="blog-heading"] article .p-6,
