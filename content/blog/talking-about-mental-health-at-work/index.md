@@ -32,7 +32,3 @@ There is no single right way, but a few things tend to help:
 ## If you manage others
 
 The most important thing a manager can do is create the conditions in which someone might feel comfortable having this conversation. That means responding without alarm, listening without immediately trying to fix, and following up.
-
----
-
-If you are in crisis or need urgent support, please contact the Samaritans on **116 123** (available 24 hours a day, free to call) or text **SHOUT** to **85258**.
