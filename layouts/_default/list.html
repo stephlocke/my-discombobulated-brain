@@ -3,7 +3,7 @@
 <section class="container py-12">
     <div class="max-w-5xl mx-auto">
         <header class="mb-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-strong mb-4">{{ .Title }}</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ .Title }}</h1>
             {{ with .Content }}
             <div class="prose max-w-3xl mx-auto text-off-black">
                 {{ . }}
@@ -52,40 +52,14 @@
             {{ end }}
         </div>
 
-        {{ if gt $paginator.TotalPages 1 }}
-        <nav class="mt-12" aria-label="Pagination">
-            <ul class="flex items-center justify-center gap-2">
-                {{ if $paginator.HasPrev }}
-                <li>
-                    <a href="{{ $paginator.Prev.URL }}"
-                       class="min-h-11 border border-border-default bg-surface px-4 py-2 text-off-black hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-primary focus-visible:border-primary focus-visible:bg-primary/5 focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}"
-                       aria-label="Go to previous page">
-                        Previous
-                    </a>
-                </li>
-                {{ end }}
-                <li>
-                    <span class="px-4 py-2 text-off-black">
-                        Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}
-                    </span>
-                </li>
-                {{ if $paginator.HasNext }}
-                <li>
-                    <a href="{{ $paginator.Next.URL }}"
-                       class="min-h-11 border border-border-default bg-surface px-4 py-2 text-off-black hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-primary focus-visible:border-primary focus-visible:bg-primary/5 focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}"
-                       aria-label="Go to next page">
-                        Next
-                    </a>
-                </li>
-                {{ end }}
-            </ul>
-        </nav>
-        {{ end }}
+        {{ partial "components/paginator.html" (dict "paginator" $paginator) }}
         {{ end }}
 
         {{ else }}
+        {{ $paginator := .Paginate (.RegularPages.ByWeight) }}
+        {{ if $paginator.Pages }}
         <div class="space-y-6" role="list">
-            {{ range .RegularPages.ByWeight }}
+            {{ range $paginator.Pages }}
             <article class="border border-primary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
                 <a href="{{ with .Params.link }}{{ . }}{{ else }}{{ .RelPermalink }}{{ end }}"
                    {{ with .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
@@ -103,6 +77,9 @@
             </article>
             {{ end }}
         </div>
+
+        {{ partial "components/paginator.html" (dict "paginator" $paginator) }}
+        {{ end }}
         {{ end }}
     </div>
 </section>

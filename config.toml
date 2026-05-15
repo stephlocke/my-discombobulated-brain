@@ -11,7 +11,7 @@ enableRSS = true
 copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
 # Pagination
 [pagination]
-  pagerSize = 10
+  pagerSize = 5
 
 # Build configuration for Tailwind CSS
 [build]
