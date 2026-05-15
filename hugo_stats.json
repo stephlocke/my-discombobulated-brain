@@ -195,7 +195,6 @@
       "left-0",
       "left-1/2",
       "left-10",
-      "lg:grid-cols-3",
       "lg:w-[calc(33.333%-1rem)]",
       "line-clamp-3",
       "max-h-96",

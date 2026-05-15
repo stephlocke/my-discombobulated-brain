@@ -2,7 +2,11 @@
 {{ $heroImage := site.Params.style_rules.hero_image }}
 {{ $heroBackgroundAttr := "" }}
 {{ if $heroImage }}
-    {{ $heroBackgroundStyle := printf "background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9)), url('%s'); background-size: cover; background-position: center;" ($heroImage | relURL) }}
+    {{ $heroImagePath := $heroImage }}
+    {{ if not (or (hasPrefix $heroImage "images/") (hasPrefix $heroImage "/images/")) }}
+        {{ $heroImagePath = printf "images/%s" $heroImage }}
+    {{ end }}
+    {{ $heroBackgroundStyle := printf "background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9)), url('%s'); background-size: cover; background-position: center;" ($heroImagePath | relURL) }}
     {{ $heroBackgroundAttr = printf "style=%q" $heroBackgroundStyle }}
 {{ end }}
 {{ if eq .format "cta" }}
