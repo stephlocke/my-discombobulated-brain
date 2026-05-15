@@ -40,7 +40,7 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   author = 'Mental Health Charity'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
-  favicon = 'images/favicon.ico'
+  favicon = 'images/my-discombob-logo.svg'
   # Should Upcoming Events be shown on the homepage?
   upcomingEventsSection = true
   # Should Working With be shown on the homepage?
