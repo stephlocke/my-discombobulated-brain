@@ -69,6 +69,8 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     # Font stacks (primary plus fallbacks)
     title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
     body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
+    hero_format = "overview"
     # What image, if any, to use as the hero image on the homepage. The image is stored in static/images, if the image is static/images/hero-image.jpg, the value here should be "hero-image.jpg". If no hero image is desired, this can be left blank. Any image file can be used, but webp format is recommended for best performance. If a hero image is used, it will be displayed at the top of the homepage and will be styled to fit the full width of the screen while maintaining its aspect ratio. The image will also have a dark overlay to ensure that any text displayed on top of it remains legible.
     hero_image = "hero-image.webp"
   
