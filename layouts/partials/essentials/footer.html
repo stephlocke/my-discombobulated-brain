@@ -1,6 +1,6 @@
 <footer class="bg-surface-muted border-t border-border-subtle" role="contentinfo">
     <div class="container py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- About Section -->
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
@@ -40,6 +40,20 @@
                 </nav>
             </div>
             
+            <!-- Legal Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4 text-strong">Legal</h3>
+                <nav aria-label="Legal links">
+                    <ul class="space-y-2">
+                        {{ $legals := where (where .Site.Pages "Section" "legals") ".Kind" "==" "page" }}
+                        {{ range $legals }}
+                        <li>
+                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </nav>
+            </div>
             <!-- Contact & Resources -->
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">Get Help</h3>

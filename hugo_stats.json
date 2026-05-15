@@ -8,6 +8,7 @@
       "br",
       "button",
       "div",
+      "em",
       "footer",
       "h1",
       "h2",
@@ -221,6 +222,7 @@
       "md:gap-6",
       "md:grid-cols-2",
       "md:grid-cols-3",
+      "md:grid-cols-4",
       "md:grid-cols-[220px_1fr]",
       "md:group-focus-visible:left-4",
       "md:group-focus-visible:opacity-100",
@@ -396,7 +398,9 @@
       "get-involved",
       "hero-heading",
       "how-to-start-the-conversation",
+      "how-we-use-your-information",
       "if-you-manage-others",
+      "limitation-of-liability",
       "main-content",
       "mobile-menu",
       "mobile-menu-button",
@@ -406,6 +410,9 @@
       "our-mission",
       "our-story",
       "our-values",
+      "privacy-policy",
+      "reporting-concerns",
+      "safeguarding",
       "service-heading-0",
       "service-heading-1",
       "service-heading-2",
@@ -416,10 +423,14 @@
       "some-approaches-that-can-help",
       "support",
       "support-heading",
+      "terms-and-conditions",
       "the-case-for-opening-up",
+      "use-of-site",
       "what-anxiety-actually-is",
+      "what-information-we-collect",
       "what-we-do",
-      "why-the-silence-persists"
+      "why-the-silence-persists",
+      "your-rights"
     ]
   }
 }
