@@ -52,6 +52,12 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     # Should the blog section be shown on the homepage?
   blogSection = false
 
+  [params.about_section]
+    # Used to populate the About section of the footer. Every parameter added here will be displayed in the footer.
+    address = "123 Wellness Way, Mindful City, MC1 1CM"
+    company = "12345678"
+    charity = "87654321"
+
   [params.style_rules]
     # Edge rounding style: sharp, curved, or round
     edges = "round"
