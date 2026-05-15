@@ -1,22 +1,17 @@
 baseURL = 'https://stephlocke.com/my-discombobulated-brain/'
-locale = 'en-us'
-title = 'Mental Health Charity'
-
+locale = 'en-GB'
+title = 'My Discombobulated Brain'
+# Enable emoji support
+enableEmoji = true
+# Enable Git info
+enableGitInfo = false
+# Enable RSS
+enableRSS = true
+# Copyright notice
+copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
 # Pagination
 [pagination]
   pagerSize = 10
-
-# Enable emoji support
-enableEmoji = true
-
-# Enable Git info
-enableGitInfo = false
-
-# Enable RSS
-enableRSS = true
-
-# Copyright notice
-copyright = '© 2026 Mental Health Charity. All rights reserved.'
 
 # Build configuration for Tailwind CSS
 [build]
@@ -39,7 +34,9 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     target = 'assets/notwatching/hugo_stats.json'
 
 [params]
-  description = 'A mental health charity dedicated to providing support and resources for those in need.'
+  address = '123 Wellness Way, Mindful City, MC1 1CM.'
+  company_number = '12345678'
+  charity_number = '87654321'
   author = 'Mental Health Charity'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'

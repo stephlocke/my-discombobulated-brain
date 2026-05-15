@@ -184,6 +184,31 @@
 }
 
 @layer utilities {
+	/* Screen reader only: hidden from sight but available to screen readers */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
+	/* Ensure sr-only is visible on focus (keyboard navigation) */
+	.sr-only:focus {
+		position: static;
+		width: auto;
+		height: auto;
+		padding: inherit;
+		margin: inherit;
+		overflow: visible;
+		clip-path: auto;
+		white-space: normal;
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		section[aria-labelledby="blog-heading"] article,
 		section.container article[role="listitem"],

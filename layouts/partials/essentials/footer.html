@@ -2,11 +2,11 @@
     <div class="container py-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- About Section -->
-            <div>
+            <div class="md:border-r md:border-border-subtle md:pr-8">
                 <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
-                <p class="text-muted text-sm">
-                    {{ .Site.Params.description }}
-                </p>
+                <p class="text-muted text-sm"><span class="text-primary font-semibold">Address:</span> {{ .Site.Params.address }}</p>
+                <p class="text-muted text-sm"><span class="text-primary font-semibold">Company:</span> {{ .Site.Params.company_number }}</p>
+                <p class="text-muted text-sm"><span class="text-primary font-semibold">Charity:</span> {{ .Site.Params.charity_number }}</p>
                 <div class="mt-4">
                     <h4 class="text-sm font-semibold text-strong">Social</h4>
                     <nav aria-label="Social media links" class="mt-3 flex items-center space-x-4">
@@ -83,10 +83,13 @@
         </div>
         
         <!-- Copyright -->
-        <div class="mt-8 pt-8 border-t border-border-subtle">
+        <div class="mt-0 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-sm text-muted">
+                <p class="text-sm text-muted/75 text-center mx-auto">
                     {{ .Site.Copyright }}
+                </p>
+                <p class="text-sm text-muted/75 text-center mx-auto">
+                    Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.
                 </p>
             </div>
         </div>
