@@ -66,6 +66,8 @@ copyright = '© 2026 Mental Health Charity. All rights reserved.'
     # Font stacks (primary plus fallbacks)
     title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
     body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    # What image, if any, to use as the hero image on the homepage
+    hero_image = "images/hero-image.png"
   
   # Social media
   twitter = ''
