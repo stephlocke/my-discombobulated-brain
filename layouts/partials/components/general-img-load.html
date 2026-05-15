@@ -99,7 +99,7 @@
         {{ if $zoomable }}
           <div class="zoom-container mb-6 content-center md:col-10 md:mb-0 lg:col-6 {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }} relative cursor-zoom-in [&_input[type='checkbox']]:hidden [&_img]:transition-transform [&_img]:duration-300 [&_video]:transition-transform [&_video]:duration-300">
             <label>
-              <input type="checkbox" class="peer" aria-label="Toggle image zoom" />
+              <input type="checkbox" class="peer" />
               {{ if $is_video }}
                 <video
                   class="h-auto w-full {{ $mediaFrame }}"

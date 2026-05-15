@@ -1,14 +1,25 @@
 <footer class="bg-surface-muted border-t border-border-subtle" role="contentinfo">
     <div class="container py-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- About Section -->
-            <div class="md:border-r md:border-border-subtle md:pr-8">
+            <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
-                {{ range $key, $value := .Site.Params.about_section }}
-                <p class="text-muted text-sm"><span class="text-primary font-semibold">{{ $key | humanize | title }}:</span> {{ $value }}</p>
-                {{ end }}
+                <p class="text-muted text-sm">
+                    {{ .Site.Params.description }}
+                </p>
                 <div class="mt-4">
-                    {{ partial "components/social-links" . }}
+                    <h4 class="text-sm font-semibold text-strong">Social</h4>
+                    <nav aria-label="Social media links" class="mt-3 flex items-center space-x-4">
+                        <a href="https://bsky.app" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded" aria-label="Follow us on Bluesky">
+                            <i class="fab fa-bluesky fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded" aria-label="Follow us on LinkedIn">
+                            <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded" aria-label="Follow us on YouTube">
+                            <i class="fab fa-youtube fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </nav>
                 </div>
             </div>
             
@@ -29,20 +40,6 @@
                 </nav>
             </div>
             
-            <!-- Legal Section -->
-            <div>
-                <h3 class="text-lg font-semibold mb-4 text-strong">Legal</h3>
-                <nav aria-label="Legal links">
-                    <ul class="space-y-2">
-                        {{ $legals := where (where .Site.Pages "Section" "legals") ".Kind" "==" "page" }}
-                        {{ range $legals }}
-                        <li>
-                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
-                        </li>
-                        {{ end }}
-                    </ul>
-                </nav>
-            </div>
             <!-- Contact & Resources -->
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">Get Help</h3>
@@ -63,19 +60,19 @@
                         </a>
                     </p>
                     {{ end }}
-                    {{ partial "components/callout.html" (dict "ctxt" . "location" "footer") }}
+                    <p class="mt-4 p-3 bg-primary/5 border border-primary/20 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}">
+                        <strong class="text-strong">Crisis Support:</strong><br>
+                        If you're in crisis, please call your local emergency services or crisis hotline.
+                    </p>
                 </div>
             </div>
         </div>
         
         <!-- Copyright -->
-        <div class="mt-0 pt-8">
+        <div class="mt-8 pt-8 border-t border-border-subtle">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-sm text-muted/75 text-center mx-auto">
+                <p class="text-sm text-muted">
                     {{ .Site.Copyright }}
-                </p>
-                <p class="text-sm text-muted/75 text-center mx-auto">
-                    Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.
                 </p>
             </div>
         </div>

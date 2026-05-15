@@ -35,3 +35,6 @@ There is no single solution that works for everyone, but the following are worth
 
 **Talking to someone** is not a sign of weakness. Whether that is a trusted friend, a peer support group, or a trained therapist, being heard makes a difference.
 
+---
+
+If you are in crisis or need urgent support, please contact the Samaritans on **116 123** (available 24 hours a day, free to call) or text **SHOUT** to **85258**.

@@ -30,11 +30,7 @@
 {{ end }}
 
 <!-- Favicon -->
-{{- $favicon := .Site.Params.favicon | default "favicon.ico" -}}
-{{- $faviconMimeTypes := dict ".ico" "image/x-icon" ".png" "image/png" ".svg" "image/svg+xml" ".webp" "image/webp" ".jpg" "image/jpeg" ".jpeg" "image/jpeg" -}}
-{{- $faviconExt := lower (path.Ext $favicon) -}}
-{{- $faviconType := or (index $faviconMimeTypes $faviconExt) "image/x-icon" -}}
-<link rel="icon" type="{{ $faviconType }}" href="{{ $favicon | relURL }}">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
 
 <!-- Dark Mode Script (runs before page load to prevent flash) -->
 <script>

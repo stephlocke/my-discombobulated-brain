@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <!-- Hero Section -->
-{{ partial "components/hero.html" (dict "ctxt" .) }}
+{{ partial "components/hero.html" (dict "format" "overview" "ctxt" .) }}
 
 {{ if ge (len .Params.inline_ctas) 1 }}
   {{ partial "components/cta-display.html" (dict "ctxt" . "location" "inline" "cta" (index .Params.inline_ctas 0)) }}
