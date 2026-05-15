@@ -22,6 +22,7 @@
         <div class="space-y-8" role="list">
             {{ range $paginator.Pages }}
             <article class="bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
+                <div class="space-y-3 p-5 md:p-6">
                     {{ if .Date }}
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
                         {{ .Date.Format "January 2, 2006" }}
