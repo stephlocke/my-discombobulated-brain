@@ -26,7 +26,7 @@
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
   {{ $imageRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
-  {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") }}
+  {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") (eq $placement "BlogCard") }}
     {{ $imageRounding = "rounded-none" }}
   {{ end }}
   <!-- Support old multi-resource format for backwards compatibility -->
@@ -184,6 +184,27 @@
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
             {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ end }}
+        </div>
+      {{ end }}
+      {{ if and (eq $placement "BlogCard") (not $is_svg) }}
+        <div class="relative h-full min-h-44 w-full overflow-hidden">
+          {{ if $is_video }}
+            <video
+              class="absolute inset-0 h-full w-full object-cover {{ $mediaFrame }} {{ $imageRounding }}"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              {{ if $poster }}poster="{{ $poster }}"{{ end }}>
+              <source src="{{ .RelPermalink }}" type="video/{{ $image_ext }}" />
+              {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
+            </video>
+          {{ else if $is_gif }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ else }}
+            {{ partial "components/image" (dict "Src" (.Fill " 1200x900 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "900") }}
           {{ end }}
         </div>
       {{ end }}
