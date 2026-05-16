@@ -1,0 +1,142 @@
+{{ define "main" }}
+{{- $edgesStyle := .Site.Params.style_rules.edges | default "round" -}}
+{{- $proseImgRounding := printf "prose-img:%s" (partial "components/edge-rounding" (dict "context" . "shape" "card-compact")) -}}
+{{- $proseBlockquoteRounding := printf "[&_blockquote]:%s" (partial "components/edge-rounding" (dict "context" . "shape" "card-compact")) -}}
+{{- $proseBlockquoteBorderWidth := "[&_blockquote]:border-l-4" -}}
+{{- if eq $edgesStyle "round" -}}
+{{- $proseBlockquoteBorderWidth = "[&_blockquote]:border-l-8" -}}
+{{- end -}}
+
+<article class="container py-12">
+    <div class="max-w-3xl mx-auto">
+        <!-- Article Header -->
+        <header class="mb-8">
+            <!-- Breadcrumb Navigation -->
+            <nav aria-label="Breadcrumb" class="mb-4">
+                <ol class="flex items-center gap-2 text-sm text-off-black">
+                    <li><a href="{{ "./" | relLangURL }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">Home</a></li>
+                    {{ with .Section }}
+                    <li aria-hidden="true">/</li>
+                    <li><a href="{{ . | relURL }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ . | title }}</a></li>
+                    {{ end }}
+                    <li aria-hidden="true">/</li>
+                    <li aria-current="page">{{ .Title }}</li>
+                </ol>
+            </nav>
+            
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">
+                {{ .Title }}
+            </h1>
+            
+            <!-- Hero Image -->
+            {{ with .Params.resource }}
+            <div class="mb-8">
+                {{ partial "components/general-img-load.html" (dict "ctxt" $ "placement" "Hero" "zoomable" false "isPhoto" true "resource" (dict "src" .src "alt" .alt)) }}
+            </div>
+            {{ end }}
+
+            <!-- Meta Information -->
+            <div class="flex flex-wrap items-center gap-4 text-sm text-off-black border-b border-white-darken pb-4">
+                {{ if .Date }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">
+                        {{ .Date.Format "January 2, 2006" }}
+                    </time>
+                </div>
+                {{ end }}
+                
+                {{ if .ReadingTime }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>{{ .ReadingTime }} min read</span>
+                </div>
+                {{ end }}
+                
+                {{ with .Params.categories }}
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                    </svg>
+                    <span class="flex gap-2">
+                        {{ range . }}
+                        <span class="bg-primary/10 text-primary px-2 py-1 {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
+                            {{ . }}
+                        </span>
+                        {{ end }}
+                    </span>
+                </div>
+                {{ end }}
+            </div>
+            
+            <!-- Summary/Description -->
+            {{ with .Description }}
+            <p class="text-xl text-off-black mt-6 italic">
+                {{ . }}
+            </p>
+            {{ end }}
+        </header>
+        
+        <!-- Article Content -->
+        <div class="prose prose-base max-w-none md:prose-lg prose-headings:font-bold prose-headings:text-off-black prose-p:leading-relaxed prose-p:text-off-black prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-off-black prose-ul:text-off-black prose-ol:text-off-black prose-blockquote:border-primary prose-blockquote:bg-primary/10 prose-blockquote:px-4 prose-blockquote:py-2 prose-code:rounded prose-code:bg-white-darken prose-code:px-1 prose-code:text-primary prose-pre:bg-off-black {{ $proseImgRounding }} {{ $proseBlockquoteRounding }} {{ $proseBlockquoteBorderWidth }} prose-img:shadow-lg [&_ol]:list-inside [&_ul]:list-inside md:[&_ol]:list-outside md:[&_ul]:list-outside [&_li]:pl-0 [&_li]:leading-7 md:[&_li]:leading-relaxed [&_p]:leading-7 md:[&_p]:leading-relaxed">
+            {{ .Content }}
+        </div>
+        
+        <!-- Tags -->
+        {{ with .Params.tags }}
+        <div class="mt-12 pt-8 border-t border-white-darken">
+            <h2 class="text-sm font-semibold text-off-black mb-3">Tags:</h2>
+            <div class="flex flex-wrap gap-2">
+                {{ range . }}
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
+                         class="{{ partial "components/edge-rounding" (dict "context" . "shape" "button") }} bg-white-darken px-3 py-1 text-sm text-off-black hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:bg-primary/10 focus-visible:underline focus-visible:underline-offset-4">
+                    #{{ . }}
+                </a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+        
+        <!-- Support Notice -->
+        {{ partial "components/callout.html" (dict "ctxt" . "location" "single") }}
+
+        <!-- Navigation to Previous/Next Posts -->
+        <nav class="mt-12 pt-8" aria-label="Post navigation">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {{ with .PrevInSection }}
+                <a href="{{ .RelPermalink }}" 
+                   class="group flex items-center gap-3 bg-white-darken p-4 transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}">
+                    <svg class="w-6 h-6 text-off-black group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <div>
+                        <div class="text-sm text-off-black">Previous</div>
+                        <div class="font-semibold text-off-black group-hover:text-primary">{{ .Title }}</div>
+                    </div>
+                </a>
+                {{ end }}
+                
+                {{ with .NextInSection }}
+                <a href="{{ .RelPermalink }}" 
+                         class="group flex items-center justify-end gap-3 bg-white-darken p-4 transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus-visible:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }} {{ if not $.PrevInSection }}md:col-start-2{{ end }}">
+                    <div class="text-right">
+                        <div class="text-sm text-off-black">Next</div>
+                        <div class="font-semibold text-off-black group-hover:text-primary">{{ .Title }}</div>
+                    </div>
+                    <svg class="w-6 h-6 text-off-black group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                {{ end }}
+            </div>
+        </nav>
+        
+    </div>
+</article>
+
+{{ end }}
