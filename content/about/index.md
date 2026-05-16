@@ -10,6 +10,8 @@ description: "Learn about our mission to support mental health and provide resou
 
 We are a dedicated mental health charity committed to providing compassionate support, resources, and advocacy for individuals facing mental health challenges. Founded on the belief that mental health matters just as much as physical health, we work tirelessly to break down stigma and create a more supportive world.
 
+> You do not have to go through this on your own. Reaching out is a brave first step, and we are here to walk alongside you.
+
 ## Our Mission
 
 Our mission is threefold:

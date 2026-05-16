@@ -190,9 +190,9 @@
       {{ if and (eq $placement "TeamCardMicro") (not $is_svg) }}
         <div class="">
           {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 aspect-square size-[200px] %s object-cover grayscale transition duration-500 hover:grayscale-0" $imageRounding) "size" "200x200") }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 aspect-square size-[200px] %s object-cover grayscale transition duration-500 hover:grayscale-0" $imageRounding) "size" "200x200") }}
           {{ end }}
         </div>
       {{ end }}
