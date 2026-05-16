@@ -6,7 +6,7 @@
         <header class="mb-10 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ .Title }}</h1>
             {{ with .Content }}
-            <div class="prose max-w-3xl mx-auto text-off-black {{ $proseBlockquoteRounding }}">
+            <div class="prose max-w-3xl mx-auto text-off-black {{ $proseBlockquoteRounding }} [&_ol]:list-inside [&_ul]:list-inside md:[&_ol]:list-outside md:[&_ul]:list-outside [&_li]:pl-0">
                 {{ . }}
             </div>
             {{ end }}
