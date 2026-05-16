@@ -7,6 +7,16 @@
 {{ $hoverClass := "" }}
 {{ $focusRingClass := "" }}
 {{ $paddingClass := "px-8 py-3" }}
+{{ $positionClass := "" }}
+{{ with .position }}
+    {{ if eq . "left" }}
+        {{ $positionClass = "md:self-start" }}
+    {{ else if eq . "right" }}
+        {{ $positionClass = "md:self-end" }}
+    {{ else if eq . "center" }}
+        {{ $positionClass = "md:mx-auto" }}
+    {{ end }}
+{{ end }}
 {{ $shapeClass := partial "components/edge-rounding" (dict "context" . "shape" "button") }}
 {{ if eq $type "solid" }}
     {{ $bgClass = "bg-primary" }}
@@ -62,6 +72,6 @@
 {{ end }}
 
 <a href="{{ $href }}" 
-    class="inline-block min-h-11 {{ $paddingClass }} text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 {{ $bgClass }} {{ $textClass }} {{ $borderClass }} {{ $hoverClass }} {{ $focusRingClass }} {{ $shapeClass }}">
+    class="inline-block min-h-11 {{ $paddingClass }} text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 {{ $bgClass }} {{ $textClass }} {{ $borderClass }} {{ $hoverClass }} {{ $focusRingClass }} {{ $shapeClass }} {{ $positionClass}}">
     {{ $label }}
 </a>

@@ -8,7 +8,7 @@
     {{- $headlineClass = "text-primary" -}}
     {{- $bodyClass = "text-primary" -}}
 {{- end -}}
-
+{{ $stackedButtonPosition := site.Params.style_rules.stacked_button_position | default "center" -}}
 <section class="{{ $bgClass }}" aria-labelledby="cta-heading">
     <div class="container">
         {{ if eq $location "inline" }}
@@ -22,9 +22,9 @@
                 </p>
             </div>
             {{ with $cta.Params.buttons }}
-            <div class="flex shrink-0 flex-col gap-3 md:items-end">
+            <div class="flex shrink-0 flex-row flex-wrap items-center justify-center gap-3 md:flex-col md:flex-nowrap">
                 {{ range . }}
-                {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                {{ partial "components/button" (dict "type" .type "href" .href "label" .label "position" $stackedButtonPosition) }}
                 {{ end }}
             </div>
             {{ end }}
@@ -39,15 +39,17 @@
             </p>
             {{ with $cta.Params.buttons }}
                 {{ if gt (len .) 1 }}
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div class="flex flex-row flex-wrap gap-4 justify-center md:flex-col md:flex-nowrap">
                         {{ range . }}
-                            {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                            {{ partial "components/button" (dict "type" .type "href" .href "label" .label "position" $stackedButtonPosition) }}
                         {{ end }}
                     </div>
                 {{ else }}
-                    {{ range . }}
-                        {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
-                    {{ end }}
+                    <div class="flex justify-center">
+                        {{ range . }}
+                            {{ partial "components/button" (dict "type" .type "href" .href "label" .label "position" $stackedButtonPosition) }}
+                        {{ end }}
+                    </div>
                 {{ end }}
             {{ end }}
         </div>
