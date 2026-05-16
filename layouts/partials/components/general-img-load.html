@@ -188,7 +188,7 @@
         </div>
       {{ end }}
       {{ if and (eq $placement "ListCard") (not $is_svg) }}
-        <div class="relative h-full min-h-44 w-full overflow-hidden">
+        <div class="relative h-full w-full overflow-hidden">
           {{ if $is_video }}
             <video
               class="absolute inset-0 h-full w-full object-cover {{ $mediaFrame }} {{ $imageRounding }}"
@@ -216,17 +216,6 @@
             {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 aspect-square size-[200px] %s object-cover grayscale transition duration-500 hover:grayscale-0" $imageRounding) "size" "200x200") }}
           {{ end }}
         </div>
-      {{ end }}
-      {{ if eq $placement "ListCard" }}
-        {{ if or $is_svg $is_gif }}
-          <div>
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-contain %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
-          </div>
-        {{ else }}
-          <div>
-            {{ partial "components/image" (dict "Src" (.Fill " 1200x640 webp ").RelPermalink "Context" $.Page "Alt" $.Title "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
-          </div>
-        {{ end }}
       {{ end }}
       {{ if eq $placement "SectionSmall" }}
         <div class="mb-6 content-center {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">

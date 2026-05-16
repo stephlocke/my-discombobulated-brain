@@ -1,8 +1,8 @@
-<article class="overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
+<article class="overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
     <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] md:items-stretch">
-        <div class="h-full w-full self-stretch overflow-hidden">
+        <a href="{{ .RelPermalink }}" class="block h-full w-full self-stretch overflow-hidden focus:outline-none" aria-label="Read {{ .Title }}">
             {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "ListCard" "zoomable" false "isPhoto" true) }}
-        </div>
+        </a>
         <div class="space-y-3 p-5 md:p-6">
             {{ if .Date }}
             <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
@@ -24,6 +24,22 @@
                 {{ . | truncate 200 }}
             </p>
             {{ end }}
+            {{ end }}
+            {{ $eventDate := index .Params "event_date" }}
+            {{ $startTime := index .Params "start_time" }}
+            {{ $endTime := index .Params "end_time" }}
+            {{ if or $eventDate (or $startTime $endTime) }}
+            <div class="space-y-1 text-sm text-muted sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-1 sm:space-y-0">
+                {{ with $eventDate }}
+                <p><span class="font-semibold text-off-black">Date:</span> {{ (time.AsTime .).Format "January 2, 2006" }}</p>
+                {{ end }}
+                {{ with $startTime }}
+                <p><span class="font-semibold text-off-black">Start:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                {{ end }}
+                {{ with $endTime }}
+                <p><span class="font-semibold text-off-black">End:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                {{ end }}
+            </div>
             {{ end }}
             <a href="{{ .RelPermalink }}" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
                 Read more
