@@ -1,5 +1,6 @@
 {{ $image:= "" }}
 {{ $alt := "" }}
+{{ $resourceOverride := .resource }}
 {{ $placement := .placement }}
 {{ $index := 0 }}
 {{ with .index }}
@@ -24,15 +25,7 @@
   {{ if $isPhoto }}
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
-  {{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
-  {{ $imageRounding := "rounded-none" }}
-  {{ if eq $edgesStyle "sharp" }}
-    {{ $imageRounding = "rounded-none" }}
-  {{ else if eq $edgesStyle "curved" }}
-    {{ $imageRounding = "rounded-lg" }}
-  {{ else if eq $edgesStyle "round" }}
-    {{ $imageRounding = "rounded-[2rem]" }}
-  {{ end }}
+  {{ $imageRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
   {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") }}
     {{ $imageRounding = "rounded-none" }}
   {{ end }}
@@ -45,6 +38,14 @@
   {{ with .Params.resource }}
     {{ $image = .src }}
     {{ $alt = .alt }}
+  {{ end }}
+  {{ with $resourceOverride }}
+    {{ with .src }}
+      {{ $image = . }}
+    {{ end }}
+    {{ with .alt }}
+      {{ $alt = . }}
+    {{ end }}
   {{ end }}
   
   <!-- SVGs cannot use the fill method, so we need to identify them -->
@@ -102,7 +103,7 @@
               <input type="checkbox" class="peer" aria-label="Toggle image zoom" />
               {{ if $is_video }}
                 <video
-                  class="h-auto w-full {{ $mediaFrame }}"
+                  class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                   autoplay
                   muted
                   loop
@@ -120,7 +121,7 @@
               <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-overlay peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
                 {{ if $is_video }}
                   <video
-                    class="h-auto w-full {{ $mediaFrame }}"
+                    class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                     autoplay
                     muted
                     loop
@@ -142,7 +143,7 @@
           <div class="mb-6 content-center md:col-10 md:mb-0 lg:col-6 {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">
             {{ if $is_video }}
               <video
-                class="h-auto w-full {{ $mediaFrame }}"
+                class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                 autoplay
                 muted
                 loop
