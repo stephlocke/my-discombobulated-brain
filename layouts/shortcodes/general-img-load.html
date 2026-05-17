@@ -14,6 +14,8 @@
   {{- $zoomable = or (eq . true) (eq . "true") -}}
 {{- end -}}
 
+{{- $placement = replace $placement "ListCard" "HorCard" -}}
+{{- $placement = replace $placement "TeamCard" "VerCard" -}}
 {{- partial "components/general-img-load.html" (dict
   "ctxt" .Page
   "placement" $placement

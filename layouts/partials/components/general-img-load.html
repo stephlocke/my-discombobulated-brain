@@ -26,7 +26,7 @@
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
   {{ $imageRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
-  {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") (eq $placement "BlogCard") }}
+  {{ if or (eq $placement "VerCard") (eq $placement "HorCard") (eq $placement "BlogCard") }}
     {{ $imageRounding = "rounded-none" }}
   {{ end }}
   <!-- Support old multi-resource format for backwards compatibility -->
@@ -184,7 +184,7 @@
           {{ end }}
         </div>
       {{ end }}
-      {{ if  and (eq $placement "TeamCard") (not $is_svg) }}
+      {{ if  and (eq $placement "VerCard") (not $is_svg) }}
         <div class="cursor-pointer">
           {{ if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
@@ -193,7 +193,7 @@
           {{ end }}
         </div>
       {{ end }}
-      {{ if and (eq $placement "ListCard") (not $is_svg) }}
+      {{ if and (eq $placement "HorCard") (not $is_svg) }}
         <div class="relative h-full w-full overflow-hidden cursor-pointer">
           {{ if $is_video }}
             <video
