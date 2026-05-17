@@ -28,6 +28,13 @@
             <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">
                 {{ .Title }}
             </h1>
+
+            <!-- Hero Image -->
+            {{ with .Params.resource }}
+            <figure class="mb-8">
+                {{ partial "components/general-img-load.html" (dict "ctxt" $ "placement" "Hero" "zoomable" false "isPhoto" true "resource" (dict "src" .src "alt" .alt)) }}
+            </figure>
+            {{ end }}
             
             <!-- Meta Information -->
             <div class="flex flex-wrap items-center gap-4 text-sm text-off-black border-b border-white-darken pb-4">
