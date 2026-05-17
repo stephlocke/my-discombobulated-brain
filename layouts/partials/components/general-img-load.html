@@ -185,7 +185,7 @@
         </div>
       {{ end }}
       {{ if  and (eq $placement "TeamCard") (not $is_svg) }}
-        <div>
+        <div class="cursor-pointer">
           {{ if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
@@ -194,7 +194,7 @@
         </div>
       {{ end }}
       {{ if and (eq $placement "ListCard") (not $is_svg) }}
-        <div class="relative h-full w-full overflow-hidden">
+        <div class="relative h-full w-full overflow-hidden cursor-pointer">
           {{ if $is_video }}
             <video
               class="absolute inset-0 h-full w-full object-cover {{ $mediaFrame }} {{ $imageRounding }}"
