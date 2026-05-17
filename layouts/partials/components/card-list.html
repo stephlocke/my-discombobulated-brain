@@ -1,8 +1,23 @@
 <article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
-    <div class="grid h-full grid-cols-1 md:grid-cols-[220px_1fr] md:items-stretch">
+    {{ $hasResource := false }}
+    {{ with .Params.resource }}
+        {{ with .src }}
+            {{ $hasResource = true }}
+        {{ end }}
+    {{ end }}
+    {{ if not $hasResource }}
+        {{ with index .Params.Resources 0 }}
+            {{ with .src }}
+                {{ $hasResource = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    <div class="grid h-full grid-cols-1 {{ if $hasResource }}md:grid-cols-[220px_1fr] md:items-stretch{{ end }}">
+        {{ if $hasResource }}
         <a href="{{ .RelPermalink }}" class="block h-full w-full self-stretch overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body" aria-label="Read {{ .Title }}">
             {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "ListCard" "zoomable" false "isPhoto" true) }}
         </a>
+        {{ end }}
         <div class="space-y-3 p-5 md:p-6">
             {{ if .Date }}
             <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">

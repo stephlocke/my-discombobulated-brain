@@ -92,7 +92,13 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ $heroImage := . }}
+            {{ if and (not $is_svg) (not $is_gif) }}
+              {{ with .Fill "1600x900 webp q80" }}
+                {{ $heroImage = . }}
+              {{ end }}
+            {{ end }}
+            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImage.Width "Height" $heroImage.Height) }}
           {{ end }}
         </div>
       {{ end }}
