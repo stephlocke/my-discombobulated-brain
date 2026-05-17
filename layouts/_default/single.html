@@ -31,9 +31,9 @@
 
             <!-- Hero Image -->
             {{ with .Params.resource }}
-            <div class="mb-8">
+            <figure class="mb-8">
                 {{ partial "components/general-img-load.html" (dict "ctxt" $ "placement" "Hero" "zoomable" false "isPhoto" true "resource" (dict "src" .src "alt" .alt)) }}
-            </div>
+            </figure>
             {{ end }}
             
             <!-- Meta Information -->

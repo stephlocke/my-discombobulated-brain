@@ -25,10 +25,9 @@
         </a>
         {{ end }}
         <div class="space-y-3 p-5 md:p-6">
-            {{ with .Params.date }}
-            {{ $cardDate := time.AsTime . }}
-            <time datetime="{{ $cardDate.Format "2006-01-02" }}" class="text-sm text-subtle">
-                {{ $cardDate.Format "January 2, 2006" }}
+            {{ if isset .Params "date" }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
+                {{ .Date.Format "January 2, 2006" }}
             </time>
             {{ end }}
             <h2 class="text-2xl font-semibold text-primary mt-2 mb-3">
