@@ -1,15 +1,21 @@
 <article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
     {{ $hasResource := false }}
+    {{ $resourcePath := "" }}
     {{ with .Params.resource }}
         {{ with .src }}
-            {{ $hasResource = true }}
+            {{ $resourcePath = . }}
         {{ end }}
     {{ end }}
-    {{ if not $hasResource }}
+    {{ if not $resourcePath }}
         {{ with index .Params.Resources 0 }}
             {{ with .src }}
-                {{ $hasResource = true }}
+                {{ $resourcePath = . }}
             {{ end }}
+        {{ end }}
+    {{ end }}
+    {{ with $resourcePath }}
+        {{ with $.Resources.Get . }}
+            {{ $hasResource = true }}
         {{ end }}
     {{ end }}
     <div class="grid h-full grid-cols-1 {{ if $hasResource }}md:grid-cols-[220px_1fr] md:items-stretch{{ end }}">
