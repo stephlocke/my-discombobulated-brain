@@ -28,7 +28,7 @@
         <!-- List of Pages, by date if blog posts, or by weight if not -->
         {{ $paginator := .Paginate (.RegularPages.ByWeight) }}
         {{ if eq .Section "blog" }}
-            {{ $paginator := .Paginate (.RegularPages.ByDate.Reverse) 10 }}
+            {{ $paginator = .Paginate (.RegularPages.ByDate.Reverse) 10 }}
         {{ end }}
         
         {{ if $paginator.Pages }}
