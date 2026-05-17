@@ -5,7 +5,7 @@ body: Remember, seeking help is a sign of strength, not weakness. We're here for
 buttons: 
  - href: ./contact
    type: solid
-   label: Let us Help
+   label: Let Us Help
 build:
   render: never
 ---
