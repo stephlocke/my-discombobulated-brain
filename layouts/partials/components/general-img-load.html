@@ -181,9 +181,9 @@
       {{ if  and (eq $placement "TeamCard") (not $is_svg) }}
         <div>
           {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ end }}
         </div>
       {{ end }}

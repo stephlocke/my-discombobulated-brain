@@ -34,7 +34,7 @@
         {{ if $paginator.Pages }}
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" role="list">
             {{ range $paginator.Pages }}
-                {{ partial "components/list-card.html" . }}
+                {{ partial "components/card-list.html" . }}
             {{ end }}
         </div>
 
