@@ -1,5 +1,5 @@
-<article class="overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
-    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] md:items-stretch">
+<article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
+    <div class="grid h-full grid-cols-1 md:grid-cols-[220px_1fr] md:items-stretch">
         <a href="{{ .RelPermalink }}" class="block h-full w-full self-stretch overflow-hidden focus:outline-none" aria-label="Read {{ .Title }}">
             {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "ListCard" "zoomable" false "isPhoto" true) }}
         </a>
@@ -14,14 +14,25 @@
                     {{ .Title }}
                 </a>
             </h2>
+            {{ $maxDescriptionLength := 100 }}
             {{ with .Description }}
+            {{ $descriptionText := . | plainify }}
             <p class="text-muted mb-4">
-                {{ . }}
+                {{ if gt (len $descriptionText) $maxDescriptionLength }}
+                {{ printf "%s..." (slicestr $descriptionText 0 $maxDescriptionLength) }}
+                {{ else }}
+                {{ $descriptionText }}
+                {{ end }}
             </p>
             {{ else }}
             {{ with .Summary }}
+            {{ $summaryText := . | plainify }}
             <p class="text-muted mb-4">
-                {{ . | truncate 200 }}
+                {{ if gt (len $summaryText) $maxDescriptionLength }}
+                {{ printf "%s..." (slicestr $summaryText 0 $maxDescriptionLength) }}
+                {{ else }}
+                {{ $summaryText }}
+                {{ end }}
             </p>
             {{ end }}
             {{ end }}
