@@ -9,5 +9,5 @@ resource:
 ---
 
 
-Self-care isn't selfish—it's essential, even when you're busy.
+Self-care isn't selfish, it's essential, even when you're busy.
 
