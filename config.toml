@@ -38,6 +38,7 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   company_number = '12345678'
   charity_number = '87654321'
   author = 'Mental Health Charity'
+  description = 'Compassionate mental health support, resources, and community for people and carers across the UK.'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
   favicon = 'images/my-discombob-logo.svg'

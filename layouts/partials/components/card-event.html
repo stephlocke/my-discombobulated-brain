@@ -21,7 +21,7 @@
         
        
         <div class="mt-4">
-          {{ partial "components/button" (dict "type" "solid" "href" .RelPermalink "label" "Learn More") }}
+                    {{ partial "components/button" (dict "type" "solid" "href" .RelPermalink "label" (printf "Learn more about %s" .Title)) }}
         </div>
        
     </div>
