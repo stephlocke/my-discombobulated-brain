@@ -2,7 +2,7 @@
 title: Resources
 description: We provide a range of resources for helping handle mental health issues.
 weight: 3
-icon: fa-toolbox
+icon: toolbox
 icon_color: yellow
 resource:
     src: festival.webp

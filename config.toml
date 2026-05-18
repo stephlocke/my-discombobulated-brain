@@ -77,7 +77,7 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     stacked_button_position = "center"
   
   # Social media profiles. Add one [[params.socials]] entry per platform.
-  # 'icon' must match the Font Awesome brand icon name (e.g. "x-twitter", "facebook").
+  # 'icon' must match a supported local icon name (e.g. "x-twitter", "facebook").
   [[params.socials]]
     icon = 'facebook'
     url = 'https://www.facebook.com/mydiscombobulatedbrain/'
