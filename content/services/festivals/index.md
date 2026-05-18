@@ -2,7 +2,7 @@
 title: Festivals
 description: We provide reviews and advice to help you get the most out of your festival experience.
 weight: 1
-icon: fa-music
+icon: music
 icon_color: red
 resource:
     src: festival.webp

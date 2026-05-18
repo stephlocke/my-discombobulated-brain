@@ -18,21 +18,27 @@
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M21.582 7.193a2.51 2.51 0 0 0-1.767-1.778C18.255 5 12 5 12 5s-6.255 0-7.815.415A2.51 2.51 0 0 0 2.418 7.193C2 8.764 2 12 2 12s0 3.236.418 4.807a2.51 2.51 0 0 0 1.767 1.778C5.745 19 12 19 12 19s6.255 0 7.815-.415a2.51 2.51 0 0 0 1.767-1.778C22 15.236 22 12 22 12s0-3.236-.418-4.807ZM10 15.5v-7l6 3.5-6 3.5Z" />
   </svg>
-{{- else if eq $name "fa-music" -}}
+{{- else if eq $name "music" -}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M9 18V6l10-2v12" />
     <circle cx="7" cy="18" r="2" />
     <circle cx="17" cy="16" r="2" />
   </svg>
-{{- else if eq $name "fa-toolbox" -}}
+{{- else if eq $name "toolbox" -}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M3.75 9.75h16.5v8.5A1.75 1.75 0 0 1 18.5 20h-13A1.75 1.75 0 0 1 3.75 18.25v-8.5Z" />
     <path d="M9 9.75V7.5A1.5 1.5 0 0 1 10.5 6h3A1.5 1.5 0 0 1 15 7.5v2.25" />
     <path d="M3.75 13h16.5" />
   </svg>
-{{- else if eq $name "fa-hand-holding-hand" -}}
+{{- else if eq $name "hand-holding-hand" -}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M2.75 13.5 7 10.5a2 2 0 0 1 2.35.08l1.47 1.16a2 2 0 0 0 2.53-.06l.98-.82a2 2 0 0 1 2.56.02l4.36 3.62" />
     <path d="M3 13.5v3.25A2.25 2.25 0 0 0 5.25 19h3a2.25 2.25 0 0 0 1.59-.66l1.41-1.4a2.25 2.25 0 0 1 1.59-.66H18.5A2.5 2.5 0 0 0 21 13.78V13.5" />
+  </svg>
+{{- else -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 8v4" />
+    <circle cx="12" cy="16" r=".75" fill="currentColor" stroke="none" />
   </svg>
 {{- end -}}

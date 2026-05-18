@@ -2,7 +2,7 @@
 title: Projects
 description: We work closely with a wide range of organisations to help improve mental health support.
 weight: 2
-icon: fa-hand-holding-hand
+icon: hand-holding-hand
 icon_color: blue
 resource:
     src: festival.webp
