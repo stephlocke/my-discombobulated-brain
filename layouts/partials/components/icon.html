@@ -36,6 +36,7 @@
     <path d="M3 13.5v3.25A2.25 2.25 0 0 0 5.25 19h3a2.25 2.25 0 0 0 1.59-.66l1.41-1.4a2.25 2.25 0 0 1 1.59-.66H18.5A2.5 2.5 0 0 0 21 13.78V13.5" />
   </svg>
 {{- else -}}
+  {{/* Fallback icon for unsupported icon names - displays an alert/info indicator */}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <circle cx="12" cy="12" r="8" />
     <path d="M12 8v4" />
