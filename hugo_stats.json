@@ -205,6 +205,7 @@
       "lg:w-[calc(33.333%-1rem)]",
       "line-clamp-3",
       "max-h-96",
+      "max-sm:hidden",
       "max-w-2xl",
       "max-w-3xl",
       "max-w-4xl",
@@ -349,6 +350,7 @@
       "shadow-sm",
       "shrink-0",
       "size-5",
+      "sm:block",
       "sm:flex",
       "sm:flex-row",
       "sm:flex-wrap",
@@ -410,6 +412,7 @@
       "w-max",
       "whitespace-nowrap",
       "will-change-transform",
+      "z-0",
       "z-10",
       "z-40",
       "z-50"
