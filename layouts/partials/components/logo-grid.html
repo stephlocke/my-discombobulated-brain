@@ -14,12 +14,14 @@
             {{ range .Pages.ByWeight }}
                 {{ if $clickable }}
                   {{ if .Params.link }}
-                <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" alt="{{ .Title }}">
+                                <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" aria-label="Visit {{ .Title }}">
                     {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                                        <span class="sr-only">{{ .Title }}</span>
                 </a>
                   {{ else }}
-                <a href="{{ .RelPermalink }}" class="" title="{{ .Title }}" alt="{{ .Title }}">
+                                <a href="{{ .RelPermalink }}" class="" title="{{ .Title }}" aria-label="Read more about {{ .Title }}">
                     {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                                        <span class="sr-only">{{ .Title }}</span>
                 </a>
                   {{ end }}
                 {{ else }}

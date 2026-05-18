@@ -47,6 +47,9 @@
       {{ $alt = . }}
     {{ end }}
   {{ end }}
+  {{ if and $image (not $alt) }}
+    {{ $alt = .Title }}
+  {{ end }}
   
   <!-- SVGs cannot use the fill method, so we need to identify them -->
   {{ $is_svg:= false }}
@@ -238,13 +241,25 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ $sectionSmallImage := . }}
+            {{ if and (not $is_svg) (not $is_gif) }}
+              {{ with .Fit "720x720 webp q72" }}
+                {{ $sectionSmallImage = . }}
+              {{ end }}
+            {{ end }}
+            {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallImage.Width "Height" $sectionSmallImage.Height) }}
           {{ end }}
         </div>
       {{ end }}
       {{ if and (eq $placement "Grid") (not $is_svg) }}
         <div class="">
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 transition-transform duration-300 hover:scale-105") }}
+            {{ $gridImage := . }}
+            {{ if not $is_gif }}
+              {{ with .Fit "360x240 webp q72" }}
+                {{ $gridImage = . }}
+              {{ end }}
+            {{ end }}
+            {{ partial "components/image" (dict "Src" $gridImage.RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 w-auto transition-transform duration-300 hover:scale-105" "Width" $gridImage.Width "Height" $gridImage.Height) }}
         </div>
       {{ end }}
     {{ end }}
