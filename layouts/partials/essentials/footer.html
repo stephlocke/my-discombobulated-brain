@@ -1,4 +1,5 @@
-<footer class="bg-surface-muted border-t border-border-subtle" role="contentinfo">
+{{- $footerLinkRounding := printf "[&_a]:%s" (partial "components/edge-rounding" (dict "shape" "button")) -}}
+<footer class="bg-surface-muted border-t border-border-subtle {{ $footerLinkRounding }}" role="contentinfo">
     <div class="container py-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- About Section -->
@@ -19,8 +20,8 @@
                     <ul class="space-y-2">
                         {{ range .Site.Menus.main }}
                         <li>
-                            <a href="{{ .URL | relLangURL }}" 
-                               class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                                     <a href="{{ .URL | relLangURL }}" 
+                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
                                 {{ .Name }}
                             </a>
                         </li>
@@ -37,7 +38,7 @@
                         {{ $legals := where (where .Site.Pages "Section" "legals") ".Kind" "==" "page" }}
                         {{ range $legals }}
                         <li>
-                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">{{ .Title }}</a>
                         </li>
                         {{ end }}
                     </ul>
@@ -50,7 +51,7 @@
                     {{ with .Site.Params.email }}
                     <p>
                         <span class="sr-only">Email:</span>
-                        <a href="mailto:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                        <a href="mailto:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary">
                             {{ . }}
                         </a>
                     </p>
@@ -58,7 +59,7 @@
                     {{ with .Site.Params.phone }}
                     <p>
                         <span class="sr-only">Phone:</span>
-                        <a href="tel:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded">
+                        <a href="tel:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary">
                             {{ . }}
                         </a>
                     </p>
@@ -75,7 +76,7 @@
                     {{ .Site.Copyright }}
                 </p>
                 <p class="text-sm text-muted/75 text-center mx-auto">
-                    Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.
+                    Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.
                 </p>
             </div>
         </div>

@@ -4,6 +4,56 @@
 > @workspace /new  hugo static site project with tailwind and the tailwindcli. implement a typical multisection home pagean about,  and a blog directory. add layouts for home, head (seo etc), list, and singles. Use minimal tailwind classes to begin with. support light mode and darkmode. this site is going to be for a mental health charity so accessability is critical - scaffold and design with tha tin mind.
 
 
+## Style Rules Configuration (Required)
+
+This site uses `params.style_rules` in `config.toml` as the source of truth for presentation behaviour. Any component, template, or styling update must check whether a relevant style rule already exists and wire to it rather than hardcoding values.
+
+### Current style_rules keys
+
+- `edges`: Controls corner radius site-wide (`sharp`, `curved`, `round`).
+- `expanded_nav`: Controls nav expansion/compact behaviour.
+- `hero_format`: Selects hero mode (for example, overview or CTA).
+- `hero_image`: Defines hero media/background image source.
+- `stacked_button_position`: Controls alignment for vertically stacked button groups.
+- `primary_color`, `secondary_color`: Theme colour values.
+- `title_font`, `body_font`: Site typography stacks.
+
+### Non-negotiable implementation rules
+
+1. Do not hardcode visual behaviour already represented in `params.style_rules`.
+2. Prefer shared helpers/partials over repeated conditional class logic.
+3. For rounding, prefer `layouts/partials/components/edge-rounding.html`.
+4. If a new configurable visual rule is needed, add it to `params.style_rules`, document it here, and wire all related components.
+
+### Edges (rounding) wiring standard
+
+Use the shared edge-rounding partial:
+
+```html
+{{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}
+{{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}
+{{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
+```
+
+Expected behaviour:
+
+- `sharp` -> square corners (`rounded-none`)
+- `curved` -> moderate radius (`rounded-lg`)
+- `round` -> strongest radius (shape-dependent, such as `rounded-full`/`rounded-[2rem]`/`rounded-[3rem]`)
+
+### Template vs CSS rule of thumb
+
+- Hugo conditionals cannot run inside CSS files.
+- If styling depends on config (`style_rules`), apply those classes in templates/partials.
+- For nested content (for example prose), use selector variants on the template element, for example:
+
+```html
+<div class="prose [&_blockquote]:{{ partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}">
+```
+
+This keeps config-driven styling explicit, testable, and consistent across pages.
+
+
 
 ## Steps to replicate for a new Hugo site
 ### Step 1: Install Hugo

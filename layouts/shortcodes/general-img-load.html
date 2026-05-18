@@ -1,0 +1,26 @@
+{{- $placement := .Get "placement" | default "Generic" -}}
+{{- $index := .Get "index" | default 0 -}}
+{{- $image := .Get "image" | default (.Get "src") -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $resource := dict "src" $image "alt" $alt -}}
+
+{{- $isPhoto := false -}}
+{{- with .Get "isPhoto" -}}
+  {{- $isPhoto = or (eq . true) (eq . "true") -}}
+{{- end -}}
+
+{{- $zoomable := false -}}
+{{- with .Get "zoomable" -}}
+  {{- $zoomable = or (eq . true) (eq . "true") -}}
+{{- end -}}
+
+{{- $placement = replace $placement "ListCard" "HorCard" -}}
+{{- $placement = replace $placement "TeamCard" "VerCard" -}}
+{{- partial "components/general-img-load.html" (dict
+  "ctxt" .Page
+  "placement" $placement
+  "index" $index
+  "isPhoto" $isPhoto
+  "zoomable" $zoomable
+  "resource" $resource
+) -}}

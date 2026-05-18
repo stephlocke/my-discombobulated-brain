@@ -3,7 +3,11 @@ title: "Talking About Mental Health at Work"
 date: 2024-06-10
 draft: false
 description: "Opening up about mental health in a workplace setting can feel daunting. This post explores why those conversations matter and how to approach them with confidence."
+resource:
+    src: IMG_1968.webp
+    alt: A group of people in front of a festival flag
 ---
+
 
 Talking about mental health at work remains difficult for many people. Fear of judgement, concerns about job security, and uncertainty about how a manager might respond all play a part. Yet the cost of staying silent, both to individuals and to organisations, is significant.
 
@@ -32,3 +36,5 @@ There is no single right way, but a few things tend to help:
 ## If you manage others
 
 The most important thing a manager can do is create the conditions in which someone might feel comfortable having this conversation. That means responding without alarm, listening without immediately trying to fix, and following up.
+
+

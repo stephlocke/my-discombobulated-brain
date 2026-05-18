@@ -1,11 +1,21 @@
 {{ define "main" }}
+{{- $proseBlockquoteRounding := printf "[&_blockquote]:%s" (partial "components/edge-rounding" (dict "context" . "shape" "card-compact")) -}}
+{{- $listTitle := .Title -}}
+{{- if not $listTitle -}}
+    {{- $listTitle = .LinkTitle -}}
+{{- end -}}
+{{- if and (not $listTitle) .Section -}}
+    {{- $listTitle = .Section | humanize -}}
+{{- end -}}
 
 <section class="container py-12">
     <div class="max-w-5xl mx-auto">
         <header class="mb-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ .Title }}</h1>
+            {{ with $listTitle }}
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ . }}</h1>
+            {{ end }}
             {{ with .Content }}
-            <div class="prose max-w-3xl mx-auto text-off-black">
+            <div class="prose max-w-3xl mx-auto text-off-black {{ $proseBlockquoteRounding }} [&_ol]:list-inside [&_ul]:list-inside md:[&_ol]:list-outside md:[&_ul]:list-outside [&_li]:pl-0">
                 {{ . }}
             </div>
             {{ end }}
@@ -15,72 +25,22 @@
             </p>
             {{ end }}
         </header>
-
-        {{ if eq .Section "blog" }}
-        {{ $paginator := .Paginate (.RegularPages.ByDate.Reverse) }}
-        {{ if $paginator.Pages }}
-        <div class="space-y-8" role="list">
-            {{ range $paginator.Pages }}
-            <article class="border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
-                <div class="space-y-3 p-5 md:p-6">
-                    {{ if .Date }}
-                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-subtle">
-                        {{ .Date.Format "January 2, 2006" }}
-                    </time>
-                    {{ end }}
-                    <h2 class="text-2xl font-semibold text-primary mt-2 mb-3">
-                        <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">
-                            {{ .Title }}
-                        </a>
-                    </h2>
-                    {{ with .Description }}
-                    <p class="text-muted mb-4">
-                        {{ . }}
-                    </p>
-                    {{ else }}
-                    {{ with .Summary }}
-                    <p class="text-muted mb-4">
-                        {{ . | truncate 200 }}
-                    </p>
-                    {{ end }}
-                    {{ end }}
-                    <a href="{{ .RelPermalink }}" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
-                        Read more
-                    </a>
-                </div>
-            </article>
-            {{ end }}
-        </div>
-
-        {{ partial "components/paginator.html" (dict "paginator" $paginator) }}
-        {{ end }}
-
-        {{ else }}
+        <!-- List of Pages, by date if blog posts, or by weight if not -->
         {{ $paginator := .Paginate (.RegularPages.ByWeight) }}
+        {{ if eq .Section "blog" }}
+            {{ $paginator = .Paginate (.RegularPages.ByDate.Reverse) 10 }}
+        {{ end }}
+        
         {{ if $paginator.Pages }}
-        <div class="space-y-6" role="list">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" role="list">
             {{ range $paginator.Pages }}
-            <article class="border border-primary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}" role="listitem">
-                <a href="{{ with .Params.link }}{{ . }}{{ else }}{{ .RelPermalink }}{{ end }}"
-                   {{ with .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
-                   class="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] focus:outline-none focus:ring-2 focus:ring-primary group">
-                    <div>
-                        {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-semibold text-primary group-hover:underline group-focus-visible:underline group-focus-visible:underline-offset-4">{{ .Title }}</h2>
-                        {{ with .Description }}
-                        <p class="text-muted mt-2">{{ . }}</p>
-                        {{ end }}
-                    </div>
-                </a>
-            </article>
+                {{ partial "components/card-list.html" . }}
             {{ end }}
         </div>
 
         {{ partial "components/paginator.html" (dict "paginator" $paginator) }}
         {{ end }}
-        {{ end }}
+
     </div>
 </section>
 

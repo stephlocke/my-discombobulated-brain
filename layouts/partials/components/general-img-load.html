@@ -1,5 +1,6 @@
 {{ $image:= "" }}
 {{ $alt := "" }}
+{{ $resourceOverride := .resource }}
 {{ $placement := .placement }}
 {{ $index := 0 }}
 {{ with .index }}
@@ -24,16 +25,8 @@
   {{ if $isPhoto }}
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
-  {{ $edgesStyle := .Site.Params.style_rules.edges | default "round" }}
-  {{ $imageRounding := "rounded-none" }}
-  {{ if eq $edgesStyle "sharp" }}
-    {{ $imageRounding = "rounded-none" }}
-  {{ else if eq $edgesStyle "curved" }}
-    {{ $imageRounding = "rounded-lg" }}
-  {{ else if eq $edgesStyle "round" }}
-    {{ $imageRounding = "rounded-[2rem]" }}
-  {{ end }}
-  {{ if or (eq $placement "TeamCard") (eq $placement "ListCard") }}
+  {{ $imageRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
+  {{ if or (eq $placement "VerCard") (eq $placement "HorCard") (eq $placement "BlogCard") }}
     {{ $imageRounding = "rounded-none" }}
   {{ end }}
   <!-- Support old multi-resource format for backwards compatibility -->
@@ -45,6 +38,14 @@
   {{ with .Params.resource }}
     {{ $image = .src }}
     {{ $alt = .alt }}
+  {{ end }}
+  {{ with $resourceOverride }}
+    {{ with .src }}
+      {{ $image = . }}
+    {{ end }}
+    {{ with .alt }}
+      {{ $alt = . }}
+    {{ end }}
   {{ end }}
   
   <!-- SVGs cannot use the fill method, so we need to identify them -->
@@ -91,7 +92,13 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ $heroImage := . }}
+            {{ if and (not $is_svg) (not $is_gif) }}
+              {{ with .Fill "1600x900 webp q80" }}
+                {{ $heroImage = . }}
+              {{ end }}
+            {{ end }}
+            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImage.Width "Height" $heroImage.Height) }}
           {{ end }}
         </div>
       {{ end }}
@@ -102,7 +109,7 @@
               <input type="checkbox" class="peer" aria-label="Toggle image zoom" />
               {{ if $is_video }}
                 <video
-                  class="h-auto w-full {{ $mediaFrame }}"
+                  class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                   autoplay
                   muted
                   loop
@@ -120,7 +127,7 @@
               <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-overlay peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
                 {{ if $is_video }}
                   <video
-                    class="h-auto w-full {{ $mediaFrame }}"
+                    class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                     autoplay
                     muted
                     loop
@@ -142,7 +149,7 @@
           <div class="mb-6 content-center md:col-10 md:mb-0 lg:col-6 {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">
             {{ if $is_video }}
               <video
-                class="h-auto w-full {{ $mediaFrame }}"
+                class="h-auto w-full {{ $mediaFrame }} {{ $imageRounding }}"
                 autoplay
                 muted
                 loop
@@ -177,34 +184,44 @@
           {{ end }}
         </div>
       {{ end }}
-      {{ if  and (eq $placement "TeamCard") (not $is_svg) }}
-        <div>
+      {{ if  and (eq $placement "VerCard") (not $is_svg) }}
+        <div class="cursor-pointer">
           {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ end }}
+        </div>
+      {{ end }}
+      {{ if and (eq $placement "HorCard") (not $is_svg) }}
+        <div class="relative h-full w-full overflow-hidden cursor-pointer">
+          {{ if $is_video }}
+            <video
+              class="absolute inset-0 h-full w-full object-cover {{ $mediaFrame }} {{ $imageRounding }}"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              {{ if $poster }}poster="{{ $poster }}"{{ end }}>
+              <source src="{{ .RelPermalink }}" type="video/{{ $image_ext }}" />
+              {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
+            </video>
+          {{ else if $is_gif }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ else }}
+            {{ partial "components/image" (dict "Src" (.Fill " 1200x900 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "900") }}
           {{ end }}
         </div>
       {{ end }}
       {{ if and (eq $placement "TeamCardMicro") (not $is_svg) }}
         <div class="">
           {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 aspect-square size-[200px] %s object-cover grayscale transition duration-500 hover:grayscale-0" $imageRounding) "size" "200x200") }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 aspect-square size-[200px] rounded-full object-cover grayscale transition duration-500 hover:grayscale-0" "size" "200x200") }}
+            {{ partial "components/image" (dict "Src" (.Fill " 200x200 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 aspect-square size-[200px] %s object-cover grayscale transition duration-500 hover:grayscale-0" $imageRounding) "size" "200x200") }}
           {{ end }}
         </div>
-      {{ end }}
-      {{ if eq $placement "ListCard" }}
-        {{ if or $is_svg $is_gif }}
-          <div>
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-contain %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
-          </div>
-        {{ else }}
-          <div>
-            {{ partial "components/image" (dict "Src" (.Fill " 1200x640 webp ").RelPermalink "Context" $.Page "Alt" $.Title "Class" (printf "mx-auto mb-6 w-full aspect-[1200/640] object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "640") }}
-          </div>
-        {{ end }}
       {{ end }}
       {{ if eq $placement "SectionSmall" }}
         <div class="mb-6 content-center {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">

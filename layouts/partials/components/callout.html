@@ -1,5 +1,9 @@
 {{- $location := .location | default "single" -}}
 {{- $ctxt := .ctxt | default . -}}
+{{- $singleCalloutBorderWidth := "border-l-4" -}}
+{{- if eq ($ctxt.Site.Params.style_rules.edges | default "round") "round" -}}
+  {{- $singleCalloutBorderWidth = "border-l-8" -}}
+{{- end -}}
 {{- with $ctxt.Site.GetPage (printf "/callouts/%s" $location) -}}
   {{- if eq $location "footer" -}}
     <p class="mt-4 p-3 bg-primary/5 border border-primary/20 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}">
@@ -7,7 +11,7 @@
         {{ .Params.body }}
     </p>
   {{- else if eq $location "single" -}}
-    <aside class="mt-12 p-6 bg-primary/10 border-l-4 border-primary rounded" role="complementary">
+    <aside class="mt-12 p-6 bg-primary/10 {{ $singleCalloutBorderWidth }} border-primary {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}" role="complementary">
         <h2 class="text-lg font-semibold text-off-black mb-2">{{ .Params.headline }}</h2>
         <p class="text-off-black mb-4">{{ .Params.body }}</p>
         {{- with .Params.buttons -}}

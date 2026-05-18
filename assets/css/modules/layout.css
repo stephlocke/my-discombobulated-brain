@@ -132,7 +132,7 @@
 	}
 
 	.container .prose blockquote {
-		@apply rounded-r-xl border-primary/30;
+		@apply border-primary/30;
 	}
 
 	footer {
@@ -144,7 +144,7 @@
 	}
 
 	footer a {
-		@apply rounded-sm hover:text-primary focus:ring-primary;
+		@apply hover:text-primary focus:ring-primary;
 	}
 
 	footer a:focus-visible {
@@ -157,7 +157,7 @@
 	}
 
 	#back-to-top {
-		@apply h-11 w-11 rounded-full shadow-md transition duration-300 hover:w-36;
+		@apply h-11 w-11 shadow-md transition duration-300 hover:w-36;
 	}
 
 	@media (width < theme(--breakpoint-md)) {

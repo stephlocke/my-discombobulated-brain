@@ -43,6 +43,16 @@ This repository uses six specialised agents for code review. When Copilot review
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
 - If a needed colour token does not exist yet, add or update the custom theme tokens in `assets/css/main.css` first, then use those tokens in templates and styles
 - **Rounding (edges parameter):** All cards, buttons, and rounded components must respect the `style_rules.edges` parameter. Extract `$edgesStyle := .Site.Params.style_rules.edges | default "round"` and apply conditional rounding: `sharp` → `rounded-none`, `curved` → `rounded-lg`, `round` → `rounded-full` (buttons) or `rounded-[2rem]`/`rounded-[3rem]` (cards). This ensures consistency across the site when the edges setting changes.
+- **Config-driven styling is required:** Any new UI component or visual behaviour must check and use values from `params.style_rules` in `config.toml` where relevant. Do not hardcode styles that duplicate or bypass these controls.
+- **When building or updating components, verify style_rules integration:**
+  - `style_rules.edges`: shape/rounding via shared logic (prefer `components/edge-rounding`)
+  - `style_rules.expanded_nav`: navigation expansion/compact behaviour
+  - `style_rules.hero_format`: hero layout mode selection
+  - `style_rules.hero_image`: hero background media source
+  - `style_rules.stacked_button_position`: alignment of stacked button groups
+  - `style_rules.primary_color` and `style_rules.secondary_color`: site theme colours
+  - `style_rules.title_font` and `style_rules.body_font`: typography families
+- Prefer shared partials/helpers for style_rules behaviour instead of re-implementing conditional class logic in multiple files.
 - Do not add `dark:` variants or other dark mode styles unless explicitly requested
 - Do not add a `tailwind.config.js` file — v4 is configured in CSS only
 - Do not add inline `<style>` blocks in layout files

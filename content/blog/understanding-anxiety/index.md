@@ -3,7 +3,11 @@ title: "Understanding Anxiety: What It Is and How to Cope"
 date: 2024-03-15
 draft: false
 description: "Anxiety is one of the most common mental health experiences. Here we explore what anxiety feels like, why it happens, and some practical approaches to managing it day to day."
+resource:
+    src: IMG_1968.webp
+    alt: A group of people in front of a festival flag
 ---
+
 
 Anxiety is one of the most common mental health experiences, affecting people in many different ways. For some it appears as a persistent hum of worry in the background of daily life. For others it can feel sudden and overwhelming. Neither experience is unusual, and neither means something is fundamentally wrong with you.
 
@@ -34,4 +38,6 @@ There is no single solution that works for everyone, but the following are worth
 **Paced breathing** activates the parasympathetic nervous system and can reduce the intensity of a physical anxiety response. Breathing in for four counts, holding for four, and out for six is a commonly used pattern.
 
 **Talking to someone** is not a sign of weakness. Whether that is a trusted friend, a peer support group, or a trained therapist, being heard makes a difference.
+
+
 
