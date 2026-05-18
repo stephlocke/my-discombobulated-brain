@@ -38,6 +38,22 @@ This repository uses six specialised agents for code review. When Copilot review
 - Use `$` to access outer scope inside `range` loops
 - Components go in `layouts/partials/components/`; partials use kebab-case filenames
 
+#### Icon Component
+Icons are handled via `layouts/partials/components/icon.html`. Render icons with the `icon` partial, passing `name` (required) and optional `class`:
+```html
+{{ partial "components/icon" (dict "name" "facebook" "class" "h-6 w-6") }}
+```
+
+**Supported icon names:**
+- Social: `facebook`, `instagram`, `x-twitter`, `youtube`
+- Functional: `music`, `toolbox`, `hand-holding-hand`
+- Unsupported names fall back to a generic info icon
+
+**Usage:**
+- `name`: Icon identifier (required)
+- `class`: SVG Tailwind classes (default: `h-5 w-5`). Always use Tailwind size classes, never hardcoded dimensions.
+- All icons include `aria-hidden="true"` automatically (decorative by default). Pair with `aria-label` on parent element if icon conveys meaning.
+
 ### Tailwind CSS v4
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
