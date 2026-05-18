@@ -96,12 +96,15 @@
             </video>
           {{ else }}
             {{ $heroImage := . }}
+            {{ $heroImageSrcset := "" }}
             {{ if and (not $is_svg) (not $is_gif) }}
-              {{ with .Fill "1600x900 webp q80" }}
-                {{ $heroImage = . }}
-              {{ end }}
+              {{ $heroMobile := .Fill "640x360 webp q58" }}
+              {{ $heroTablet := .Fill "960x540 webp q62" }}
+              {{ $heroDesktop := .Fill "1280x720 webp q66" }}
+              {{ $heroImage = $heroDesktop }}
+              {{ $heroImageSrcset = printf "%s 640w, %s 960w, %s 1280w" $heroMobile.RelPermalink $heroTablet.RelPermalink $heroDesktop.RelPermalink }}
             {{ end }}
-            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImage.Width "Height" $heroImage.Height) }}
+            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImage.Width "Height" $heroImage.Height "Srcset" $heroImageSrcset "Sizes" "(max-width: 768px) 100vw, 768px") }}
           {{ end }}
         </div>
       {{ end }}
@@ -213,7 +216,8 @@
           {{ else if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fill " 1200x900 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" "1200" "Height" "900") }}
+            {{ $horCardImage := .Fill "720x540 webp q62" }}
+            {{ partial "components/image" (dict "Src" $horCardImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" $horCardImage.Width "Height" $horCardImage.Height) }}
           {{ end }}
         </div>
       {{ end }}

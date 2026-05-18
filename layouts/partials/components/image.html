@@ -9,6 +9,8 @@
 {{- $displayXL := .DisplayXL | default "" -}}
 {{- $displayLG := .DisplayLG | default "" -}}
 {{- $displayMD := .DisplayMD | default "" -}}
+{{- $srcset := .Srcset | default "" -}}
+{{- $sizes := .Sizes | default "" -}}
 {{- $context := .Context -}}
 
 {{- /* If no explicit width/height provided but size is provided, extract from size */ -}}
@@ -29,6 +31,8 @@
     alt="{{ $alt }}"
     class="{{ $class }}"
     {{- if $fetchpriority }} fetchpriority="{{ $fetchpriority }}"{{ end }}
+    {{- if $srcset }} srcset="{{ $srcset }}"{{ end }}
+    {{- if $sizes }} sizes="{{ $sizes }}"{{ end }}
     {{- if $width }} width="{{ $width }}"{{ end }}
     {{- if $height }} height="{{ $height }}"{{ end }} />
 </picture>
