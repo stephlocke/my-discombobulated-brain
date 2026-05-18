@@ -1,5 +1,5 @@
 <article class="overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 focus-within:ring-offset-2 {{ partial "components/edge-rounding" (dict "context" . "shape" "card") }}">
-        <a href="{{ .RelPermalink }}" class="block focus:outline-none" aria-label="Read {{ .Title }}">
+        <a href="{{ .RelPermalink }}" class="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body" aria-label="Read {{ .Title }}">
             {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "VerCard" "isPhoto" false) }}
         </a>
     <div class="space-y-3 p-5 md:p-6">
