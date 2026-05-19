@@ -45,7 +45,6 @@
     ],
     "classes": [
       "-translate-x-1/2",
-      "-z-10",
       "[&.is-compact]:bg-primary/95",
       "[&_a]:rounded-full",
       "[&_blockquote]:border-l-8",
@@ -205,7 +204,6 @@
       "lg:w-[calc(33.333%-1rem)]",
       "line-clamp-3",
       "max-h-96",
-      "max-sm:hidden",
       "max-w-2xl",
       "max-w-3xl",
       "max-w-4xl",
@@ -225,7 +223,6 @@
       "md:[&_p]:leading-relaxed",
       "md:[&_ul]:list-outside",
       "md:absolute",
-      "md:block",
       "md:border-border-subtle",
       "md:border-r",
       "md:col-10",

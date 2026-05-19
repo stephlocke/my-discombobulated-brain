@@ -20,7 +20,7 @@
 {{ $shapeClass := partial "components/edge-rounding" (dict "context" . "shape" "button") }}
 {{ if eq $type "solid" }}
     {{ $bgClass = "bg-primary" }}
-    {{ $textClass = "text-inverse" }}
+    {{ $textClass = "text-inverse text-sm" }}
     {{ $borderClass = "border-2 border-primary" }}
     {{ $hoverClass = "hover:bg-primary-darken hover:border-primary-darken" }}
     {{ $focusRingClass = "focus:ring-primary focus:ring-offset-body" }}

@@ -65,7 +65,7 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     # Whether the navigation bar expands vertically when the user is at the top of the page (true) or is always fixed (false)
     expanded_nav = false
     # Primary and secondary theme colors
-    primary_color = "oklch(63.5% 0.15 158)"
+    primary_color = "oklch(50% 0.15 158)"
     secondary_color = "var(--color-yellow-500)"
     # Font stacks (primary plus fallbacks)
     title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
