@@ -25,16 +25,16 @@ jobs:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.3.1
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3.0.0
+        uses: peaceiris/actions-hugo@v3.2.1
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
       - name: Setup Node
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: '20'
 
@@ -45,7 +45,7 @@ jobs:
         run: hugo --gc --minify
 
       - name: Install Netlify CLI
-        run: npm install --global netlify-cli
+        run: npm install --global netlify-cli@26.0.2
 
       - name: Deploy preview to Netlify
         id: netlify
@@ -55,7 +55,7 @@ jobs:
           echo "deploy_url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
 
       - name: Comment preview URL on pull request
-        uses: actions/github-script@v7.0.0
+        uses: actions/github-script@v7.1.0
         env:
           DEPLOY_URL: ${{ steps.netlify.outputs.deploy_url }}
         with:
