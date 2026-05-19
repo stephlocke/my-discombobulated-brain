@@ -318,6 +318,20 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 
 **Button variants**: `solid`, `outline`, `solid-alt`, `outline-alt`, `ghost`, `danger`, `success`, `warning`
 
+### Shared Partials Usage Rules
+
+#### `general-img-load` partial
+- File: `layouts/partials/components/general-img-load.html`
+- Purpose: standardise image/video rendering, responsive sizing, optimisation, and consistent framing/rounding.
+- Rule: use this partial for hero, section, and card media instead of direct `<img>` in layout templates.
+- Minimum inputs: `ctxt` and `placement`; optionally pass `index`, `isPhoto`, `zoomable`, and `resource` override data.
+
+#### `icon` partial
+- File: `layouts/partials/components/icon.html`
+- Purpose: centralised SVG icon rendering with consistent sizing and accessibility defaults.
+- Rule: use this partial for social and functional icons; do not inline custom SVGs in templates unless introducing a new reusable icon in this partial.
+- Inputs: `name` (required), `class` (optional, Tailwind utility classes only).
+
 ### Dark Mode
 - Implemented via a `.dark` class on `<html>`; NOT using `prefers-color-scheme` media query directly
 - JavaScript in `header.html` manages three states: `light`, `dark`, `auto` (follows system)

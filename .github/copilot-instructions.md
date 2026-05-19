@@ -54,6 +54,15 @@ Icons are handled via `layouts/partials/components/icon.html`. Render icons with
 - `class`: SVG Tailwind classes (default: `h-5 w-5`). Always use Tailwind size classes, never hardcoded dimensions.
 - All icons include `aria-hidden="true"` automatically (decorative by default). Pair with `aria-label` on parent element if icon conveys meaning.
 
+#### Image Loading Component
+Images and media should be rendered via `layouts/partials/components/general-img-load.html` rather than direct `<img>` usage in templates.
+
+**Usage:**
+- Always call `general-img-load` for page/section/card/hero imagery so resizing, optimisation, alt handling, and responsive behavior remain consistent.
+- Pass page context with `ctxt` and a valid `placement` mode (`Hero`, `Section`, `Generic`, `VerCard`, `HorCard`, `TeamCardMicro`, `SectionSmall`, `Grid`, or project-defined variants).
+- Prefer adding new behaviour to `general-img-load` and/or `components/image` rather than bypassing with custom per-template image markup.
+- Direct `<img>` tags are only acceptable for narrow edge cases where `general-img-load` is not suitable; if used, include explicit width/height and appropriate loading/fetchpriority attributes.
+
 ### Tailwind CSS v4
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
