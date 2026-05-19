@@ -57,7 +57,9 @@ Icons are handled via `layouts/partials/components/icon.html`. Render icons with
 ### Tailwind CSS v4
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes
+- Use only defined colour tokens/classes. Do not add hardcoded colour values in templates, classes, or CSS (for example, avoid inline `style` colours, arbitrary colour utilities, or literal hex/rgb/oklch values in layout files).
 - If a needed colour token does not exist yet, add or update the custom theme tokens in `assets/css/main.css` first, then use those tokens in templates and styles
+- Prefer inline Tailwind utility classes in layout/partial templates for component styling. Use `assets/css/modules/layout.css` only for shared cross-component rules, global utilities, keyframes, or cases that cannot be expressed cleanly inline.
 - **Rounding (edges parameter):** All cards, buttons, and rounded components must respect the `style_rules.edges` parameter. Extract `$edgesStyle := .Site.Params.style_rules.edges | default "round"` and apply conditional rounding: `sharp` → `rounded-none`, `curved` → `rounded-lg`, `round` → `rounded-full` (buttons) or `rounded-[2rem]`/`rounded-[3rem]` (cards). This ensures consistency across the site when the edges setting changes.
 - **Config-driven styling is required:** Any new UI component or visual behaviour must check and use values from `params.style_rules` in `config.toml` where relevant. Do not hardcode styles that duplicate or bypass these controls.
 - **When building or updating components, verify style_rules integration:**

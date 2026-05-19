@@ -292,6 +292,12 @@ The personas below give each audience segment a human face. Reference them when 
 
 All colours are defined as CSS custom properties in `assets/css/main.css` under `@theme {}`.
 
+### Styling Implementation Rules
+- Use only defined semantic colour tokens (for example `bg-primary`, `text-primary`, `border-border-subtle`). Do not hardcode colour values in templates or component classes.
+- If a new colour is needed, add it as a named token in `assets/css/main.css` first, then consume that token in templates.
+- Prefer inline Tailwind utility classes directly in `layouts/**/*.html` for component styling.
+- Use `assets/css/modules/layout.css` only for shared/global rules (for example reusable utilities, keyframes, media-query-driven global behavior, and other patterns that are not practical inline).
+
 ### Typography
 - **Font family**: Exo (Google Fonts) — `--font-exo: 'Exo', sans-serif;`
 - Applied via Tailwind utility classes; body copy is `font-exo` by default
