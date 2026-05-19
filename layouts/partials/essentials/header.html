@@ -85,7 +85,7 @@
             </button>  */}}
 
             <!-- Mobile Search -->
-            <div class="mt-2 pt-2 border-t border-primary/20">
+            <div class="pt-4 border-t border-primary/20">
                 <form action="{{ "search/" | relLangURL }}" method="get" role="search" class="flex gap-2">
                     <label for="mobile-search-input" class="sr-only">Search</label>
                     <input
@@ -93,7 +93,7 @@
                         id="mobile-search-input"
                         name="q"
                         placeholder="Search…"
-                        class="flex-1 min-h-11 px-4 py-2 {{ partial "components/edge-rounding" (dict "shape" "button") }} bg-white border border-primary/20 text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm"
+                        class="flex-1 min-h-11 px-4 py-2 {{ partial "components/edge-rounding" (dict "shape" "button") }} bg-white border border-primary/20 text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:border-primary text-sm"
                         autocomplete="off"
                     >
                     <button
