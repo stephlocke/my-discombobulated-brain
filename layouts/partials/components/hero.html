@@ -31,7 +31,7 @@
     <section class="relative overflow-hidden bg-linear-to-b from-hero-tint to-surface py-12 md:py-16" aria-labelledby="hero-heading">
         {{ if $heroImageRel }}
             <div class="pointer-events-none absolute inset-0 z-0 hidden sm:block" aria-hidden="true">
-                <img src="{{ $heroImageRel }}" alt="" loading="eager" fetchpriority="high" decoding="async" width="{{ $heroImageWidth }}" height="{{ $heroImageHeight }}" class="h-full w-full object-cover" {{ if $heroImageSrcset }}srcset="{{ $heroImageSrcset }}" sizes="100vw"{{ end }}>
+                {{ partial "components/general-img-load" (dict "ctxt" $ctxt "placement" "HeroBackground" "src" $heroImageRel "alt" "" "class" "h-full w-full object-cover" "loading" "eager" "fetchpriority" "high" "width" $heroImageWidth "height" $heroImageHeight "srcset" $heroImageSrcset "sizes" "100vw") }}
                 <div class="absolute inset-0 bg-white/85"></div>
             </div>
         {{ end }}
@@ -64,7 +64,7 @@
     <section class="relative overflow-hidden bg-linear-to-b from-hero-tint to-surface py-8 md:py-10" aria-labelledby="hero-heading">
         {{ if $heroImageRel }}
             <div class="pointer-events-none absolute inset-0 z-0 hidden sm:block" aria-hidden="true">
-                <img src="{{ $heroImageRel }}" alt="" loading="eager" fetchpriority="high" decoding="async" width="{{ $heroImageWidth }}" height="{{ $heroImageHeight }}" class="h-full w-full object-cover" {{ if $heroImageSrcset }}srcset="{{ $heroImageSrcset }}" sizes="100vw"{{ end }}>
+                {{ partial "components/general-img-load" (dict "ctxt" $ctxt "placement" "HeroBackground" "src" $heroImageRel "alt" "" "class" "h-full w-full object-cover" "loading" "eager" "fetchpriority" "high" "width" $heroImageWidth "height" $heroImageHeight "srcset" $heroImageSrcset "sizes" "100vw") }}
                 <div class="absolute inset-0 bg-white/85"></div>
             </div>
         {{ end }}

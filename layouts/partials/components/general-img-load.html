@@ -2,6 +2,15 @@
 {{ $alt := "" }}
 {{ $resourceOverride := .resource }}
 {{ $placement := .placement }}
+{{ $directSrc := .src | default "" }}
+{{ $directAlt := .alt | default "" }}
+{{ $directClass := .class | default "" }}
+{{ $directLoading := .loading | default "lazy" }}
+{{ $directFetchPriority := .fetchpriority | default "" }}
+{{ $directWidth := .width | default "" }}
+{{ $directHeight := .height | default "" }}
+{{ $directSrcset := .srcset | default "" }}
+{{ $directSizes := .sizes | default "" }}
 {{ $index := 0 }}
 {{ with .index }}
   {{ $candidate := printf "%v" . }}
@@ -19,6 +28,9 @@
 {{ end }}
 <!-- This with statement is needed to bring in the page context as we're using a variable dict in the partial call -->
 {{ with .ctxt }}
+  {{ if and (eq $placement "HeroBackground") $directSrc }}
+    {{ partial "components/image" (dict "Src" $directSrc "Alt" $directAlt "Class" $directClass "Loading" $directLoading "Fetchpriority" $directFetchPriority "Width" $directWidth "Height" $directHeight "Srcset" $directSrcset "Sizes" $directSizes) }}
+  {{ else }}
   {{ $photoFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.6)]" }}
   {{ $standardFrame := "shadow-[0_4px_16px_rgba(20,20,30,0.4)]" }}
   {{ $mediaFrame := $standardFrame }}
@@ -267,5 +279,6 @@
         </div>
       {{ end }}
     {{ end }}
+  {{ end }}
   {{ end }}
 {{ end }}
