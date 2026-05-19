@@ -43,7 +43,12 @@
                 </button>  */}}
 
             </div>
-            <div class="hidden md:flex md:items-center md:shrink-0">
+            <div class="hidden md:flex md:items-center md:shrink-0 md:gap-2">
+                <a href="{{ "search/" | relLangURL }}"
+                   class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 text-white hover:bg-primary-darken/30 {{ partial "components/edge-rounding" (dict "shape" "button") }} focus:outline-none focus:ring-2 focus:ring-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary transition"
+                   aria-label="Search">
+                    {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
+                </a>
                 {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
             </div>
             <!-- Mobile Menu Button -->
@@ -78,6 +83,28 @@
                 aria-label="Toggle dark mode">
                 <span id="mobile-theme-text">Toggle Dark Mode</span>
             </button>  */}}
+
+            <!-- Mobile Search -->
+            <div class="mt-2 pt-2 border-t border-primary/20">
+                <form action="{{ "search/" | relLangURL }}" method="get" role="search" class="flex gap-2">
+                    <label for="mobile-search-input" class="sr-only">Search</label>
+                    <input
+                        type="search"
+                        id="mobile-search-input"
+                        name="q"
+                        placeholder="Search…"
+                        class="flex-1 min-h-11 px-4 py-2 {{ partial "components/edge-rounding" (dict "shape" "button") }} bg-white border border-primary/20 text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm"
+                        autocomplete="off"
+                    >
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 bg-primary text-white {{ partial "components/edge-rounding" (dict "shape" "button") }} hover:bg-primary-darken focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition"
+                        aria-label="Submit search"
+                    >
+                        {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
+                    </button>
+                </form>
+            </div>
         </div>
         <div id="mobile-menu-donate" class="hidden md:hidden mt-3 text-center">
             {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
