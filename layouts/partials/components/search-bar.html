@@ -44,16 +44,6 @@
         return div.innerHTML;
     }
 
-    function truncateText(html, limit) {
-        const temp = document.createElement('div');
-        temp.innerHTML = html || '';
-        const text = temp.textContent || temp.innerText || '';
-        if (text.length > limit) {
-            return escapeHtml(text.substring(0, limit).trim() + '\u2026');
-        }
-        return html;
-    }
-
     function highlightTerms(html, terms, limit) {
         const temp = document.createElement('div');
         temp.innerHTML = html || '';
