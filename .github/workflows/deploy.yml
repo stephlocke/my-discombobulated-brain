@@ -61,4 +61,6 @@ jobs:
           branch: gh-pages
           folder: public
           clean: true
-          clean-exclude: pr-preview
+          clean-exclude: |
+            pr-preview
+            CNAME
