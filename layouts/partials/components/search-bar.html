@@ -58,6 +58,8 @@
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
                 matchLength = term.length;
+            } else if (currentIndex !== -1 && currentIndex === firstMatchIndex && term.length > matchLength) {
+                matchLength = term.length;
             }
         });
 
@@ -74,7 +76,7 @@
         const snippetEnd = Math.min(text.length, snippetStart + limit);
         const hasLeadingText = snippetStart > 0;
         const hasTrailingText = snippetEnd < text.length;
-        const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd).trim() + (hasTrailingText ? '\u2026' : '');
+        const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
         
         // Highlight matching terms (case-insensitive)
         let highlighted = escapeHtml(truncated);

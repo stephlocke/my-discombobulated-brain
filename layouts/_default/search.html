@@ -55,6 +55,8 @@
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
                 matchLength = term.length;
+            } else if (currentIndex !== -1 && currentIndex === firstMatchIndex && term.length > matchLength) {
+                matchLength = term.length;
             }
         });
 
@@ -71,7 +73,7 @@
         var snippetEnd = Math.min(text.length, snippetStart + limit);
         var hasLeadingText = snippetStart > 0;
         var hasTrailingText = snippetEnd < text.length;
-        var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd).trim() + (hasTrailingText ? '\u2026' : '');
+        var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
         
         // Highlight matching terms (case-insensitive)
         var highlighted = escapeHtml(truncated);
