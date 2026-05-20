@@ -45,6 +45,8 @@
     --color-off-black-darken: var(--color-gray-800);
     --color-white-darken: var(--color-gray-200);
 
+    --color-search-highlight: var(--color-yellow-200);
+
     --font-title: {{ site.Params.style_rules.title_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
     --font-body: {{ site.Params.style_rules.body_font | default "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }};
 

@@ -41,15 +41,54 @@
         return div.innerHTML;
     }
 
-    function renderResult(item) {
+    function truncateText(html, limit) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html || '';
+        var text = temp.textContent || temp.innerText || '';
+        if (text.length > limit) {
+            return escapeHtml(text.substring(0, limit).trim() + '\u2026');
+        }
+        return html;
+    }
+
+    function highlightTerms(html, terms, limit) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html || '';
+        var text = temp.textContent || temp.innerText || '';
+        
+        // Truncate text first
+        var truncated = text;
+        if (text.length > limit) {
+            truncated = text.substring(0, limit).trim() + '\u2026';
+        }
+        
+        // Highlight matching terms (case-insensitive) with inline styles
+        var highlighted = escapeHtml(truncated);
+        terms.forEach(function(term) {
+            var regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            highlighted = highlighted.replace(regex, '<span style="background-color: var(--color-search-highlight); padding: 0 2px;">$1</span>');
+        });
+        
+        return highlighted;
+    }
+
+    function renderResult(item, terms) {
         var li = document.createElement('li');
         li.innerHTML =
-            '<a href="' + escapeHtml(item.url) + '" ' +
-                'class="group block bg-surface border border-border-subtle p-5 ' + cardRounding + ' hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body transition">' +
-                '<p class="text-lg font-bold text-primary mb-1 group-hover:underline group-hover:underline-offset-4">' + escapeHtml(item.title) + '</p>' +
-                (item.summary ? '<p class="text-off-black text-sm line-clamp-3">' + escapeHtml(item.summary) + '</p>' : '') +
-                (item.date ? '<p class="text-subtle text-xs mt-2">' + escapeHtml(item.date) + '</p>' : '') +
-            '</a>';
+            '<article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 ' + cardRounding + '" role="listitem">' +
+                '<div class="space-y-3 p-5 md:p-6">' +
+                    '<h2 class="text-2xl font-semibold text-primary mb-3">' +
+                        '<a href="' + escapeHtml(item.url) + '" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">' +
+                            highlightTerms(item.title, terms, 999) +
+                        '</a>' +
+                    '</h2>' +
+                    (item.summary ? '<p class="text-muted mb-4">' + highlightTerms(item.summary, terms, 150) + '</p>' : '') +
+                    (item.date && item.date.trim() && item.date !== '0001-01-01' ? '<time class="text-sm text-subtle mb-4 block">' + escapeHtml(item.date) + '</time>' : '') +
+                    '<a href="' + escapeHtml(item.url) + '" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken ' + cardRounding + '">' +
+                        'Read more' +
+                    '</a>' +
+                '</div>' +
+            '</article>';
         return li;
     }
 
@@ -105,7 +144,7 @@
 
         status.textContent = results.length + ' result' + (results.length !== 1 ? 's' : '') + ' for \u201c' + escapeHtml(query) + '\u201d';
         results.forEach(function (item) {
-            list.appendChild(renderResult(item));
+            list.appendChild(renderResult(item, terms));
         });
     }
 
