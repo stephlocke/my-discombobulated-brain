@@ -181,6 +181,11 @@
 	#back-to-top:focus-visible {
 		@apply ring-2 ring-secondary ring-offset-2 ring-offset-white;
 	}
+
+	.search-term-highlight {
+		background-color: var(--color-search-highlight);
+		padding: 0 2px;
+	}
 }
 
 @layer utilities {

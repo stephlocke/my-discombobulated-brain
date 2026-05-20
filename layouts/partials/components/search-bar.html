@@ -65,11 +65,11 @@
             truncated = text.substring(0, limit).trim() + '\u2026';
         }
         
-        // Highlight matching terms (case-insensitive) with inline styles
+        // Highlight matching terms (case-insensitive)
         let highlighted = escapeHtml(truncated);
         terms.forEach(function(term) {
             const regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-            highlighted = highlighted.replace(regex, '<span style="background-color: var(--color-search-highlight); padding: 0 2px;">$1</span>');
+            highlighted = highlighted.replace(regex, '<span class="search-term-highlight">$1</span>');
         });
         
         return highlighted;
