@@ -50,18 +50,23 @@
         const text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
         const lowercaseText = text.toLowerCase();
         let snippetStart = 0;
-        let matchLength = 0;
         let firstMatchIndex = -1;
 
         terms.forEach(function (term) {
             const currentIndex = lowercaseText.indexOf(term.toLowerCase());
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
-                matchLength = term.length;
-            } else if (currentIndex !== -1 && currentIndex === firstMatchIndex && term.length > matchLength) {
-                matchLength = term.length;
             }
         });
+
+        let matchLength = 0;
+        if (firstMatchIndex !== -1) {
+            terms.forEach(function (term) {
+                if (lowercaseText.indexOf(term.toLowerCase()) === firstMatchIndex && term.length > matchLength) {
+                    matchLength = term.length;
+                }
+            });
+        }
 
         if (firstMatchIndex !== -1 && text.length > limit) {
             const availableContext = Math.max(limit - matchLength, 0);
@@ -73,7 +78,11 @@
             }
         }
 
-        const snippetEnd = Math.min(text.length, snippetStart + limit);
+        let snippetEnd = Math.min(text.length, snippetStart + limit);
+        if (firstMatchIndex !== -1 && snippetEnd < firstMatchIndex + matchLength) {
+            snippetStart = Math.max(0, firstMatchIndex + matchLength - limit);
+            snippetEnd = Math.min(text.length, snippetStart + limit);
+        }
         const hasLeadingText = snippetStart > 0;
         const hasTrailingText = snippetEnd < text.length;
         const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');

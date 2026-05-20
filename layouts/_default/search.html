@@ -47,18 +47,23 @@
         var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
         var lowercaseText = text.toLowerCase();
         var snippetStart = 0;
-        var matchLength = 0;
         var firstMatchIndex = -1;
 
         terms.forEach(function (term) {
             var currentIndex = lowercaseText.indexOf(term.toLowerCase());
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
-                matchLength = term.length;
-            } else if (currentIndex !== -1 && currentIndex === firstMatchIndex && term.length > matchLength) {
-                matchLength = term.length;
             }
         });
+
+        var matchLength = 0;
+        if (firstMatchIndex !== -1) {
+            terms.forEach(function (term) {
+                if (lowercaseText.indexOf(term.toLowerCase()) === firstMatchIndex && term.length > matchLength) {
+                    matchLength = term.length;
+                }
+            });
+        }
 
         if (firstMatchIndex !== -1 && text.length > limit) {
             var availableContext = Math.max(limit - matchLength, 0);
@@ -71,6 +76,10 @@
         }
 
         var snippetEnd = Math.min(text.length, snippetStart + limit);
+        if (firstMatchIndex !== -1 && snippetEnd < firstMatchIndex + matchLength) {
+            snippetStart = Math.max(0, firstMatchIndex + matchLength - limit);
+            snippetEnd = Math.min(text.length, snippetStart + limit);
+        }
         var hasLeadingText = snippetStart > 0;
         var hasTrailingText = snippetEnd < text.length;
         var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
