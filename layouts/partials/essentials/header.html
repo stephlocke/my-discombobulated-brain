@@ -1,5 +1,5 @@
 {{ $shouldExpandNav := .Site.Params.style_rules.expanded_nav | default true }}
-<header id="site-header" class="sticky top-0 z-40 border-b border-primary-darken/20 bg-primary shadow-sm backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95{{ if not $shouldExpandNav }} is-compact{{ end }}" data-expand-nav="{{ if $shouldExpandNav }}true{{ else }}false{{ end }}" role="banner">
+<header id="site-header" class="sticky top-0 z-40 border-b border-none bg-primary shadow-md backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95{{ if not $shouldExpandNav }} is-compact{{ end }}" data-expand-nav="{{ if $shouldExpandNav }}true{{ else }}false{{ end }}" role="banner">
     <nav id="site-nav" class="container {{ if $shouldExpandNav }}py-4{{ else }}py-2{{ end }} transition-[padding] duration-300 ease-out" aria-label="Main navigation">
         <div class="relative flex items-center justify-between gap-4">
             <div class="shrink-0">
