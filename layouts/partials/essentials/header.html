@@ -44,11 +44,15 @@
 
             </div>
             <div class="hidden md:flex md:items-center md:shrink-0 md:gap-2">
-                <a href="{{ "search/" | relLangURL }}"
-                   class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 text-white hover:bg-primary-darken/30 {{ partial "components/edge-rounding" (dict "shape" "button") }} focus:outline-none focus:ring-2 focus:ring-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary transition"
-                   aria-label="Search">
+                <button 
+                    id="navbar-search-toggle"
+                    type="button"
+                    class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 text-white hover:bg-primary-darken/30 {{ partial "components/edge-rounding" (dict "shape" "button") }} focus:outline-none focus:ring-2 focus:ring-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary transition"
+                    aria-label="Toggle search bar"
+                    aria-expanded="false"
+                    aria-controls="desktop-search-bar">
                     {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
-                </a>
+                </button>
                 {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
             </div>
             <!-- Mobile Menu Button -->
@@ -112,6 +116,8 @@
     </nav>
 </header>
 
+{{ partial "components/search-bar" . }}
+
 <script>
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -134,7 +140,18 @@
     const siteNav = document.getElementById('site-nav');
     const siteLogo = document.getElementById('site-logo');
     const shouldExpandNav = siteHeader ? siteHeader.dataset.expandNav === 'true' : true;
+    const searchToggleButton = document.getElementById('navbar-search-toggle');
+    const desktopSearchBar = document.getElementById('desktop-search-bar');
     let isHeaderCompact = false;
+
+    // Update aria-expanded when search bar visibility changes
+    if (searchToggleButton && desktopSearchBar) {
+        const observer = new MutationObserver(() => {
+            const isHidden = desktopSearchBar.classList.contains('hidden');
+            searchToggleButton.setAttribute('aria-expanded', String(!isHidden));
+        });
+        observer.observe(desktopSearchBar, { attributes: true, attributeFilter: ['class'] });
+    }
 
     function setHeaderCompactState(nextIsCompact) {
         if (isHeaderCompact === nextIsCompact) {
