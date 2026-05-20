@@ -94,7 +94,7 @@ Apply this agent whenever reviewing:
 - [ ] `node_modules/` is in `.gitignore` and never committed
 
 ### Hosting and Deployment
-- [ ] GitHub Pages deployment is via the Actions artifact upload method (not the legacy `gh-pages` branch method)
+- [ ] GitHub Pages deployment is via the `gh-pages` branch method (using `JamesIves/github-pages-deploy-action`), which is required to support PR previews via `pr-preview.yml`
 - [ ] The `baseURL` in `config.toml` matches the actual deployed URL
 - [ ] The repository has a custom domain configured if applicable (check Pages settings)
 
