@@ -47,13 +47,34 @@
     function highlightTerms(html, terms, limit) {
         const temp = document.createElement('div');
         temp.innerHTML = html || '';
-        const text = temp.textContent || temp.innerText || '';
-        
-        // Truncate text first
-        let truncated = text;
-        if (text.length > limit) {
-            truncated = text.substring(0, limit).trim() + '\u2026';
+        const text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+        const lowercaseText = text.toLowerCase();
+        let snippetStart = 0;
+        let matchLength = 0;
+        let firstMatchIndex = -1;
+
+        terms.forEach(function (term) {
+            const currentIndex = lowercaseText.indexOf(term.toLowerCase());
+            if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
+                firstMatchIndex = currentIndex;
+                matchLength = term.length;
+            }
+        });
+
+        if (firstMatchIndex !== -1 && text.length > limit) {
+            const availableContext = Math.max(limit - matchLength, 0);
+            const contextBefore = Math.floor(availableContext / 2);
+            snippetStart = Math.max(0, firstMatchIndex - contextBefore);
+
+            if (snippetStart + limit > text.length) {
+                snippetStart = Math.max(0, text.length - limit);
+            }
         }
+
+        const snippetEnd = Math.min(text.length, snippetStart + limit);
+        const hasLeadingText = snippetStart > 0;
+        const hasTrailingText = snippetEnd < text.length;
+        const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd).trim() + (hasTrailingText ? '\u2026' : '');
         
         // Highlight matching terms (case-insensitive)
         let highlighted = escapeHtml(truncated);
@@ -71,7 +92,7 @@
             '<a href="' + escapeHtml(item.url) + '" ' +
                 'class="block bg-white border border-primary/20 p-3 ' + cardRounding + ' hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary text-sm transition">' +
                 '<p class="font-semibold text-primary hover:underline hover:underline-offset-2 line-clamp-1">' + highlightTerms(item.title, terms, 999) + '</p>' +
-                (item.summary ? '<p class="text-off-black text-xs mt-1">' + highlightTerms(item.summary, terms, 100) + '</p>' : '') +
+                ((item.content || item.summary) ? '<p class="text-off-black text-xs mt-1">' + highlightTerms(item.content || item.summary, terms, 100) + '</p>' : '') +
             '</a>';
         return li;
     }
@@ -118,6 +139,7 @@
                 item._haystack = [
                     item.title || '',
                     item.summary || '',
+                    item.content || '',
                     (item.tags || []).join(' ')
                 ].join(' ').toLowerCase();
             }

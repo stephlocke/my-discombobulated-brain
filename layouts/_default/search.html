@@ -44,13 +44,34 @@
     function highlightTerms(html, terms, limit) {
         var temp = document.createElement('div');
         temp.innerHTML = html || '';
-        var text = temp.textContent || temp.innerText || '';
-        
-        // Truncate text first
-        var truncated = text;
-        if (text.length > limit) {
-            truncated = text.substring(0, limit).trim() + '\u2026';
+        var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+        var lowercaseText = text.toLowerCase();
+        var snippetStart = 0;
+        var matchLength = 0;
+        var firstMatchIndex = -1;
+
+        terms.forEach(function (term) {
+            var currentIndex = lowercaseText.indexOf(term.toLowerCase());
+            if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
+                firstMatchIndex = currentIndex;
+                matchLength = term.length;
+            }
+        });
+
+        if (firstMatchIndex !== -1 && text.length > limit) {
+            var availableContext = Math.max(limit - matchLength, 0);
+            var contextBefore = Math.floor(availableContext / 2);
+            snippetStart = Math.max(0, firstMatchIndex - contextBefore);
+
+            if (snippetStart + limit > text.length) {
+                snippetStart = Math.max(0, text.length - limit);
+            }
         }
+
+        var snippetEnd = Math.min(text.length, snippetStart + limit);
+        var hasLeadingText = snippetStart > 0;
+        var hasTrailingText = snippetEnd < text.length;
+        var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd).trim() + (hasTrailingText ? '\u2026' : '');
         
         // Highlight matching terms (case-insensitive)
         var highlighted = escapeHtml(truncated);
@@ -72,7 +93,7 @@
                             highlightTerms(item.title, terms, 999) +
                         '</a>' +
                     '</h2>' +
-                    (item.summary ? '<p class="text-muted mb-4">' + highlightTerms(item.summary, terms, 150) + '</p>' : '') +
+                    ((item.content || item.summary) ? '<p class="text-muted mb-4">' + highlightTerms(item.content || item.summary, terms, 150) + '</p>' : '') +
                     (item.date && item.date.trim() && item.date !== '0001-01-01' ? '<time class="text-sm text-subtle mb-4 block">' + escapeHtml(item.date) + '</time>' : '') +
                     '<a href="' + escapeHtml(item.url) + '" aria-label="Read ' + escapeHtml(item.title) + '" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken ' + cardRounding + '">' +
                         'Read more' +
@@ -119,6 +140,7 @@
                 item._haystack = [
                     item.title || '',
                     item.summary || '',
+                    item.content || '',
                     (item.tags || []).join(' ')
                 ].join(' ').toLowerCase();
             }
