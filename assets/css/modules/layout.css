@@ -185,6 +185,14 @@
 	.search-term-highlight {
 		background-color: var(--color-search-highlight);
 		padding: 0 2px;
+	
+		#desktop-search-results {
+			@apply overflow-y-auto;
+		}
+	
+		#desktop-search-results:has(:focus) {
+			@apply overflow-visible;
+		}
 	}
 }
 
