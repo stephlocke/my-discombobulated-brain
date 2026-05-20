@@ -5,7 +5,7 @@
 <div id="desktop-search-bar" class="hidden bg-surface border-b border-primary-darken/20 shadow-sm">
     <div class="container max-w-[85%] py-3">
 
-        <form id="desktop-search-form" role="search" class="flex gap-2">
+        <form id="desktop-search-form" role="search" action='{{ "search/" | relLangURL }}' method="get" class="flex gap-2">
             <label for="desktop-search-input" class="sr-only">Search</label>
             <input
                 type="search"
