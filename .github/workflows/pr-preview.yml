@@ -28,7 +28,7 @@ jobs:
   deploy-preview:
     name: Deploy PR preview
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
     env:
       HUGO_VERSION: 0.146.6
     steps:
@@ -72,7 +72,7 @@ jobs:
   remove-preview:
     name: Remove PR preview
     runs-on: ubuntu-latest
-    if: github.event.action == 'closed'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed'
     steps:
       - name: Remove PR preview
         uses: rossjrw/pr-preview-action@v1
