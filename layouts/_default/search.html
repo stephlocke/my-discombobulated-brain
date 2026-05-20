@@ -1,0 +1,144 @@
+{{ define "main" }}
+{{- $cardRounding := partial "components/edge-rounding" (dict "shape" "card-compact") -}}
+{{- $buttonRounding := partial "components/edge-rounding" (dict "shape" "button") -}}
+<section class="container py-12">
+    <div class="max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary mb-8">Search</h1>
+
+        <form action="{{ "search/" | relLangURL }}" method="get" role="search" class="flex gap-2 mb-10">
+            <label for="search-input" class="sr-only">Search</label>
+            <input
+                type="search"
+                id="search-input"
+                name="q"
+                placeholder="Search…"
+                class="flex-1 min-h-11 px-4 py-2 {{ $buttonRounding }} bg-surface border border-border-default text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body focus:border-primary"
+                autocomplete="off"
+            >
+            <button
+                type="submit"
+                class="min-h-11 px-5 py-2 bg-primary text-white {{ $buttonRounding }} hover:bg-primary-darken focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-semibold transition"
+            >
+                Search
+            </button>
+        </form>
+
+        <div id="search-results">
+            <p id="search-status" role="status" class="text-off-black mb-6"></p>
+            <ul id="search-results-list" class="space-y-4" role="list"></ul>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    var indexUrl = '{{ "index.json" | relLangURL }}';
+    var cardRounding = '{{ $cardRounding }}';
+
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str || '';
+        return div.innerHTML;
+    }
+
+    function highlightTerms(html, terms, limit) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html || '';
+        var text = temp.textContent || temp.innerText || '';
+        
+        // Truncate text first
+        var truncated = text;
+        if (text.length > limit) {
+            truncated = text.substring(0, limit).trim() + '\u2026';
+        }
+        
+        // Highlight matching terms (case-insensitive)
+        var highlighted = escapeHtml(truncated);
+        terms.forEach(function(term) {
+            var regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            highlighted = highlighted.replace(regex, '<span class="search-term-highlight">$1</span>');
+        });
+        
+        return highlighted;
+    }
+
+    function renderResult(item, terms) {
+        var li = document.createElement('li');
+        li.innerHTML =
+            '<article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 ' + cardRounding + '">' +
+                '<div class="space-y-3 p-5 md:p-6">' +
+                    '<h2 class="text-2xl font-semibold text-primary mb-3">' +
+                        '<a href="' + escapeHtml(item.url) + '" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">' +
+                            highlightTerms(item.title, terms, 999) +
+                        '</a>' +
+                    '</h2>' +
+                    (item.summary ? '<p class="text-muted mb-4">' + highlightTerms(item.summary, terms, 150) + '</p>' : '') +
+                    (item.date && item.date.trim() && item.date !== '0001-01-01' ? '<time class="text-sm text-subtle mb-4 block">' + escapeHtml(item.date) + '</time>' : '') +
+                    '<a href="' + escapeHtml(item.url) + '" aria-label="Read ' + escapeHtml(item.title) + '" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken ' + cardRounding + '">' +
+                        'Read more' +
+                    '</a>' +
+                '</div>' +
+            '</article>';
+        return li;
+    }
+
+    async function initSearch() {
+        var params = new URLSearchParams(window.location.search);
+        var query = params.get('q') || '';
+
+        var searchInput = document.getElementById('search-input');
+        if (searchInput && query) {
+            searchInput.value = query;
+        }
+
+        var status = document.getElementById('search-status');
+        var list = document.getElementById('search-results-list');
+
+        if (!query.trim()) {
+            status.textContent = 'Enter a search term to find content.';
+            return;
+        }
+
+        status.textContent = 'Searching\u2026';
+
+        var index;
+        try {
+            var response = await fetch(indexUrl);
+            if (!response.ok) { throw new Error('index unavailable'); }
+            index = await response.json();
+        } catch (e) {
+            status.textContent = 'Search is temporarily unavailable.';
+            return;
+        }
+
+        var q = query.toLowerCase().trim();
+        var terms = q.split(/\s+/).filter(Boolean);
+
+        var results = index.filter(function (item) {
+            if (!item._haystack) {
+                item._haystack = [
+                    item.title || '',
+                    item.summary || '',
+                    (item.tags || []).join(' ')
+                ].join(' ').toLowerCase();
+            }
+            return terms.every(function (term) { return item._haystack.includes(term); });
+        });
+
+        list.innerHTML = '';
+
+        if (results.length === 0) {
+            status.textContent = 'No results found for \u201c' + escapeHtml(query) + '\u201d.';
+            return;
+        }
+
+        status.textContent = results.length + ' result' + (results.length !== 1 ? 's' : '') + ' for \u201c' + escapeHtml(query) + '\u201d';
+        results.forEach(function (item) {
+            list.appendChild(renderResult(item, terms));
+        });
+    }
+
+    initSearch();
+}());
+</script>
+{{ end }}
