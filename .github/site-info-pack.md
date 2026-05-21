@@ -559,5 +559,6 @@ Crisis and safety information must:
 - Do not add inline `<style>` blocks; use Tailwind utilities or `assets/css/custom.css`
 - Store JavaScript in dedicated files under `assets/js/`; do not inline JavaScript in templates
 - Pass Hugo values to JavaScript via `data-*` attributes or JSON script payloads consumed by external scripts
+- Include scripts with the canonical production-conditional pattern: skip minify/fingerprint in development; add SRI (`integrity` + `crossorigin="anonymous"`) in production only (see README §JavaScript Location Rules for the full template snippet)
 - `config.toml` is the single site configuration file; do not add `hugo.yaml` or `hugo.json`
 - Branch `main` is the production branch; GitHub Actions deploys on push to `main`

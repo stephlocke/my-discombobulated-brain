@@ -35,6 +35,17 @@ This repository uses six specialised agents for code review. When Copilot review
 - Add a concise explanatory comment immediately above each JavaScript function describing what it does.
 - Store JavaScript in dedicated files under `assets/js/`; do not place JavaScript inline in layout or partial HTML files.
 - Pass Hugo template values to JavaScript via `data-*` attributes or JSON script payloads, then read them in the external script file.
+- Include scripts using the canonical production-conditional pattern: skip minify/fingerprint in development and add SRI (`integrity` + `crossorigin="anonymous"`) in production only:
+  ```html
+  {{- with resources.Get "js/my-script.js" -}}
+  {{- $myScript := . -}}
+  {{- if hugo.IsProduction -}}
+  {{- $myScript = $myScript | minify | fingerprint -}}
+  {{- end -}}
+  <script src="{{ $myScript.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $myScript.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
+  {{- end -}}
+  ```
+- Add `defer` to `<script>` tags for scripts that do not need to run before first paint. Exception: `theme-init.js` must run synchronously to prevent FOUC.
 
 ### Hugo Templates
 - Use `{{- ... -}}` whitespace trimming in templates

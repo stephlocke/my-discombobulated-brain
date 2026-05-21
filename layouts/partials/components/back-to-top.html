@@ -11,6 +11,10 @@
     </span>
 </button>
 
-{{- with resources.Get "js/back-to-top.js" | minify | fingerprint -}}
-<script src="{{ .RelPermalink }}"></script>
+{{- with resources.Get "js/back-to-top.js" -}}
+{{- $backToTopJS := . -}}
+{{- if hugo.IsProduction -}}
+{{- $backToTopJS = $backToTopJS | minify | fingerprint -}}
+{{- end -}}
+<script src="{{ $backToTopJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $backToTopJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}

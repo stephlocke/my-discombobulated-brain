@@ -39,6 +39,9 @@
 </div>
 
 {{- with resources.Get "js/search-bar.js" -}}
-{{- $searchBarJS := . | minify | fingerprint -}}
-<script src="{{ $searchBarJS.RelPermalink }}" integrity="{{ $searchBarJS.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- $searchBarJS := . -}}
+{{- if hugo.IsProduction -}}
+{{- $searchBarJS = $searchBarJS | minify | fingerprint -}}
+{{- end -}}
+<script src="{{ $searchBarJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $searchBarJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
