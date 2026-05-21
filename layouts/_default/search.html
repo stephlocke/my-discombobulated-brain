@@ -36,6 +36,10 @@
 </section>
 
 {{- with resources.Get "js/search.js" -}}
-<script src="{{ .RelPermalink }}"></script>
+    {{- $searchScript := . -}}
+    {{- if hugo.IsProduction -}}
+        {{- $searchScript = $searchScript | minify | fingerprint -}}
+    {{- end -}}
+<script src="{{ $searchScript.RelPermalink }}"></script>
 {{- end -}}
 {{ end }}
