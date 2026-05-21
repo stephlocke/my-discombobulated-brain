@@ -38,6 +38,7 @@
 
     // Escapes potentially unsafe HTML so user-facing text is rendered as plain text.
     function escapeHtml(str) {
+        // Use a DOM element so the browser handles escaping for us.
         var div = document.createElement('div');
         div.textContent = str || '';
         return div.innerHTML;
@@ -45,6 +46,7 @@
 
     // Builds a snippet around the earliest matched term and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
+        // Convert rich text to normalized plain text for predictable snippet calculations.
         var temp = document.createElement('div');
         temp.innerHTML = html || '';
         var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
@@ -52,6 +54,7 @@
         var snippetStart = 0;
         var firstMatchIndex = -1;
 
+        // Find the earliest matching term position in the source text.
         terms.forEach(function (term) {
             var currentIndex = lowercaseText.indexOf(term.toLowerCase());
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
@@ -59,6 +62,7 @@
             }
         });
 
+        // Capture the matched term length so we can keep the full match visible in the snippet.
         var matchLength = 0;
         if (firstMatchIndex !== -1) {
             terms.forEach(function (term) {
@@ -68,21 +72,26 @@
             });
         }
 
+        // Center the snippet window around the first match when the text exceeds the limit.
         if (firstMatchIndex !== -1 && text.length > limit) {
             var availableContext = Math.max(limit - matchLength, 0);
             var contextBefore = Math.floor(availableContext / 2);
             snippetStart = Math.max(0, firstMatchIndex - contextBefore);
 
+            // Shift the snippet back if it would overflow the source text.
             if (snippetStart + limit > text.length) {
                 snippetStart = Math.max(0, text.length - limit);
             }
         }
 
+        // Build the final snippet boundaries and ensure the first full match fits in view.
         var snippetEnd = Math.min(text.length, snippetStart + limit);
         if (firstMatchIndex !== -1 && snippetEnd < firstMatchIndex + matchLength) {
             snippetStart = Math.max(0, firstMatchIndex + matchLength - limit);
             snippetEnd = Math.min(text.length, snippetStart + limit);
         }
+
+        // Add ellipses when the snippet starts or ends mid-text.
         var hasLeadingText = snippetStart > 0;
         var hasTrailingText = snippetEnd < text.length;
         var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
@@ -90,6 +99,7 @@
         // Highlight matching terms (case-insensitive)
         var highlighted = escapeHtml(truncated);
         terms.forEach(function(term) {
+            // Escape regex characters in each term before building the highlighter regex.
             var regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
             highlighted = highlighted.replace(regex, '<span class="search-term-highlight">$1</span>');
         });
@@ -99,7 +109,9 @@
 
     // Creates one search-result list item with highlighted title and summary text.
     function renderResult(item, terms) {
+        // Compose one result card using escaped values and highlighted snippets.
         var li = document.createElement('li');
+        // Error here is just because the parser can't recognise the hugo call
         li.innerHTML =
             '<article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 ' + cardRounding + '">' +
                 '<div class="space-y-3 p-5 md:p-6">' +
@@ -120,6 +132,7 @@
 
     // Reads the query string, loads the search index, filters matching content, and renders results.
     async function initSearch() {
+        // Read the search query from the URL and mirror it into the input field.
         var params = new URLSearchParams(window.location.search);
         var query = params.get('q') || '';
 
@@ -128,9 +141,11 @@
             searchInput.value = query;
         }
 
+        // Resolve output targets used for status messaging and result rendering.
         var status = document.getElementById('search-status');
         var list = document.getElementById('search-results-list');
 
+        // Short-circuit when there is no query to run.
         if (!query.trim()) {
             status.textContent = 'Enter a search term to find content.';
             return;
@@ -138,21 +153,26 @@
 
         status.textContent = 'Searching\u2026';
 
+        // Fetch and parse the generated search index.
         var index;
         try {
             var response = await fetch(indexUrl);
             if (!response.ok) { throw new Error('index unavailable'); }
             index = await response.json();
         } catch (e) {
+            // Surface a friendly failure message when index loading fails.
             status.textContent = 'Search is temporarily unavailable.';
             return;
         }
 
+        // Normalize and split the query into independent search terms.
         var q = query.toLowerCase().trim();
         var terms = q.split(/\s+/).filter(Boolean);
 
+        // Keep only items that include every term in their precomputed haystack.
         var results = index.filter(function (item) {
             if (!item._haystack) {
+                // Build a cached lowercase search string on first use.
                 item._haystack = [
                     item.title || '',
                     item.summary || '',
@@ -163,6 +183,7 @@
             return terms.every(function (term) { return item._haystack.includes(term); });
         });
 
+        // Clear stale results before rendering the new result set.
         list.innerHTML = '';
 
         if (results.length === 0) {
@@ -170,6 +191,7 @@
             return;
         }
 
+        // Report count and append each matching result card.
         status.textContent = results.length + ' result' + (results.length !== 1 ? 's' : '') + ' for \u201c' + escapeHtml(query) + '\u201d';
         results.forEach(function (item) {
             list.appendChild(renderResult(item, terms));

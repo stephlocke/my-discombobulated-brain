@@ -72,20 +72,27 @@
 <script>
   // Starts a continuous logo-track animation unless reduced motion is preferred.
   (() => {
+    // Read animation duration from the Hugo speed preset.
     const duration = Number('{{ $duration }}');
+
+    // Respect user motion preferences before applying continuous animation.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
       return;
     }
 
+    // Select only tracks that have not already been animated.
     const tracks = document.querySelectorAll('[data-logo-carousel-track]:not([data-animated])');
     tracks.forEach((track) => {
+      // Skip tracks that are not yet measurable.
       if (!track.scrollWidth) {
         return;
       }
 
+      // Mark the track to avoid duplicate animation initialization.
       track.setAttribute('data-animated', 'true');
 
+      // Animate by half the duplicated track width to create a seamless loop.
       const distance = track.scrollWidth / 2;
       track.animate(
         [

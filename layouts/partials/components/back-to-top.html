@@ -14,13 +14,16 @@
 <script>
     // Initializes the back-to-top button click behavior.
     (() => {
+        // Resolve the back-to-top control once for this script scope.
         const backToTopButton = document.getElementById('back-to-top');
 
+        // Exit early when the button is not present in the current layout.
         if (!backToTopButton) {
             return;
         }
 
         backToTopButton.addEventListener('click', () => {
+            // Smoothly return to the top of the page for better orientation.
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     })();
