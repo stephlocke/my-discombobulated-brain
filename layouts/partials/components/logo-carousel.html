@@ -23,7 +23,7 @@
       <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-linear-to-l from-surface to-transparent"></div>
 
       <div class="relative overflow-hidden">
-        <div data-logo-carousel-track class="flex w-max items-center gap-12 px-6 will-change-transform">
+        <div data-logo-carousel-track data-logo-carousel-duration="{{ $duration }}" class="flex w-max items-center gap-12 px-6 will-change-transform">
           {{- range .Pages.ByWeight -}}
             <div class="shrink-0">
               {{- if $clickable -}}
@@ -69,43 +69,7 @@
   </div>
 </section>
 
-<script>
-  // Starts a continuous logo-track animation unless reduced motion is preferred.
-  (() => {
-    // Read animation duration from the Hugo speed preset.
-    const duration = Number('{{ $duration }}');
-
-    // Respect user motion preferences before applying continuous animation.
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
-      return;
-    }
-
-    // Select only tracks that have not already been animated.
-    const tracks = document.querySelectorAll('[data-logo-carousel-track]:not([data-animated])');
-    tracks.forEach((track) => {
-      // Skip tracks that are not yet measurable.
-      if (!track.scrollWidth) {
-        return;
-      }
-
-      // Mark the track to avoid duplicate animation initialization.
-      track.setAttribute('data-animated', 'true');
-
-      // Animate by half the duplicated track width to create a seamless loop.
-      const distance = track.scrollWidth / 2;
-      track.animate(
-        [
-          { transform: 'translateX(0)' },
-          { transform: `translateX(-${distance}px)` },
-        ],
-        {
-          duration,
-          iterations: Infinity,
-          easing: 'linear',
-        },
-      );
-    });
-  })();
-</script>
+{{- with resources.Get "js/logo-carousel.js" -}}
+<script src="{{ .RelPermalink }}"></script>
+{{- end -}}
 {{- end -}}
