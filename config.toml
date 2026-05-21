@@ -42,16 +42,22 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
   favicon = 'images/my-discombob-logo.svg'
-  # Should Upcoming Events be shown on the homepage?
-  upcomingEventsSection = true
-  # Should Working With be shown on the homepage?
-  workingWithSection = true
-  # Should Services be shown on the homepage?
-  servicesSection = true
-  # Should Awards and Recognition be shown on the homepage?
-  awardsSection = true
-    # Should the blog section be shown on the homepage?
-  blogSection = false
+
+  [params.homepage_config]
+    # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
+    hero_format = "overview"
+    # What image, if any, to use as the hero image on the homepage. The image is stored in static/images, if the image is static/images/hero-image.jpg, the value here should be "hero-image.jpg". If no hero image is desired, this can be left blank. Any image file can be used, but webp format is recommended for best performance.
+    hero_image = "hero-image.webp"
+    # Should Upcoming Events be shown on the homepage?
+    upcomingEventsSection = true
+    # Should Working With be shown on the homepage?
+    workingWithSection = true
+    # Should Services be shown on the homepage?
+    servicesSection = true
+    # Should Awards and Recognition be shown on the homepage?
+    awardsSection = true
+      # Should the blog section be shown on the homepage?
+    blogSection = false
 
   [params.about_section]
     # Used to populate the About section of the footer. Every parameter added here will be displayed in the footer.
@@ -70,10 +76,6 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     # Font stacks (primary plus fallbacks)
     title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
     body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
-    hero_format = "overview"
-    # What image, if any, to use as the hero image on the homepage. The image is stored in static/images, if the image is static/images/hero-image.jpg, the value here should be "hero-image.jpg". If no hero image is desired, this can be left blank. Any image file can be used, but webp format is recommended for best performance.
-    hero_image = "hero-image.webp"
     # Stacked button position: "left", "right", or "center". This controls the alignment of buttons in stacked layouts (e.g. the hero CTA format). This setting only affects button alignment in layouts where buttons are stacked vertically; in horizontal layouts, buttons will always be center-aligned.
     stacked_button_position = "center"
   

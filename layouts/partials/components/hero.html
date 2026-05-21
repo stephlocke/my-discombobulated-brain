@@ -1,10 +1,10 @@
 {{ $ctxt := .ctxt }}
-{{ $heroImage := site.Params.style_rules.hero_image }}
+{{ $heroImage := site.Params.homepage_config.hero_image }}
 {{ $heroImageRel := "" }}
 {{ $heroImageSrcset := "" }}
 {{ $heroImageWidth := "1920" }}
 {{ $heroImageHeight := "1080" }}
-{{ $heroFormat := site.Params.style_rules.hero_format | default "overview" }}
+{{ $heroFormat := site.Params.homepage_config.hero_format | default "overview" }}
 {{ if $heroImage }}
     {{ $heroImagePath := $heroImage }}
     {{ if not (or (hasPrefix $heroImage "images/") (hasPrefix $heroImage "/images/")) }}

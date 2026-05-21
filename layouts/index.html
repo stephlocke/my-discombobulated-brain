@@ -8,12 +8,12 @@
 {{ end }}
 
 <!-- Upcoming Events section -->
-{{ if .Site.Params.upcomingEventsSection }}
+{{ if .Site.Params.homepage_config.upcomingEventsSection }}
   {{ partial "components/upcoming-events.html" . }}
 {{ end }}
 
 <!-- Awards and Recognition section -->
-{{ if .Site.Params.awardsSection }}
+{{ if .Site.Params.homepage_config.awardsSection }}
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
 {{ end }}
 
@@ -22,17 +22,17 @@
 {{ end }}
 
 <!-- Services Detail Panels section -->
-{{ if .Site.Params.servicesSection }}
+{{ if .Site.Params.homepage_config.servicesSection }}
   {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
 {{ end }}
 
 <!-- Working With section -->
-{{ if .Site.Params.workingWithSection }}
+{{ if .Site.Params.homepage_config.workingWithSection }}
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
 {{ end }}
 
 <!-- Latest Blog Posts -->
-{{ if .Site.Params.blogSection }}
+{{ if .Site.Params.homepage_config.blogSection }}
   {{ partial "recent-posts.html" . }}
 {{ end }}
 
