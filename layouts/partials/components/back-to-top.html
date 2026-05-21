@@ -11,6 +11,6 @@
     </span>
 </button>
 
-{{- with resources.Get "js/back-to-top.js" -}}
+{{- with resources.Get "js/back-to-top.js" | minify | fingerprint -}}
 <script src="{{ .RelPermalink }}"></script>
 {{- end -}}
