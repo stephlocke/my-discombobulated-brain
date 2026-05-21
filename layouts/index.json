@@ -4,7 +4,7 @@
     "title"   .Title
     "url"     .RelPermalink
     "summary" .Summary
-    "content" .Plain
+    "content" (.Plain | truncate 500 "")
     "tags"    .Params.tags
     "date"    (.Date.Format "2006-01-02")
   -}}
