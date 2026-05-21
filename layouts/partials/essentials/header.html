@@ -119,5 +119,6 @@
 {{ partial "components/search-bar" . }}
 
 {{- with resources.Get "js/header.js" -}}
-<script src="{{ .RelPermalink }}"></script>
+{{- $headerJS := . | minify | fingerprint -}}
+<script src="{{ $headerJS.RelPermalink }}" defer></script>
 {{- end -}}
