@@ -39,5 +39,6 @@
 </div>
 
 {{- with resources.Get "js/search-bar.js" -}}
-<script src="{{ .RelPermalink }}"></script>
+{{- $searchBarJS := . | minify | fingerprint -}}
+<script src="{{ $searchBarJS.RelPermalink }}" integrity="{{ $searchBarJS.Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end -}}
