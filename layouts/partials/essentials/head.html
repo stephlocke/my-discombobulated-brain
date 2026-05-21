@@ -38,7 +38,11 @@
 
 <!-- Dark Mode Script (runs before page load to prevent flash) -->
 {{- with resources.Get "js/theme-init.js" -}}
-<script src="{{ .RelPermalink }}"></script>
+{{- $themeInit := . -}}
+{{- if hugo.IsProduction -}}
+{{- $themeInit = $themeInit | minify | fingerprint -}}
+{{- end -}}
+<script src="{{ $themeInit.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $themeInit.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
 
 <!-- Preload critical resources for accessibility -->
