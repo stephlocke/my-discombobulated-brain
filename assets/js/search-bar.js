@@ -25,9 +25,9 @@
 
     // Builds a snippet around the first match and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
-        // Normalize to plain text so highlighting logic is independent of source markup.
+        // Treat the source as plain text so literal angle-bracket sequences are preserved.
         var temp = document.createElement('div');
-        temp.innerHTML = html || '';
+        temp.textContent = html || '';
         var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
         var lowercaseText = text.toLowerCase();
         var snippetStart = 0;
