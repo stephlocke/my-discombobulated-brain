@@ -70,6 +70,8 @@
 </section>
 
 {{- with resources.Get "js/logo-carousel.js" -}}
+  {{- with . | minify | fingerprint -}}
 <script src="{{ .RelPermalink }}"></script>
+  {{- end -}}
 {{- end -}}
 {{- end -}}
