@@ -22,9 +22,9 @@
 
     // Builds a snippet around the earliest matched term and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
-        // Convert rich text to normalized plain text for predictable snippet calculations.
+        // Treat the source as plain text so literal angle brackets are preserved for matching/snippets.
         var temp = document.createElement('div');
-        temp.innerHTML = html || '';
+        temp.textContent = html || '';
         var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
         var lowercaseText = text.toLowerCase();
         var snippetStart = 0;
