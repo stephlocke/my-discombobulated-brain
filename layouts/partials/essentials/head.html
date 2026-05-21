@@ -37,19 +37,13 @@
 <link rel="icon" type="{{ $faviconType }}" href="{{ $favicon | relURL }}">
 
 <!-- Dark Mode Script (runs before page load to prevent flash) -->
-<script>
-    // Apply saved mode when valid, otherwise default to auto (system preference).
-    const savedTheme = localStorage.getItem('theme');
-    const mode = savedTheme === 'dark' || savedTheme === 'light' || savedTheme === 'auto'
-        ? savedTheme
-        : 'auto';
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldUseDark = mode === 'dark' || (mode === 'auto' && prefersDark);
-
-    if (shouldUseDark) {
-        document.documentElement.classList.add('dark');
-    }
-</script>
+{{- with resources.Get "js/theme-init.js" -}}
+{{- $themeInit := . -}}
+{{- if hugo.IsProduction -}}
+{{- $themeInit = $themeInit | minify | fingerprint -}}
+{{- end -}}
+<script src="{{ $themeInit.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $themeInit.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
+{{- end -}}
 
 <!-- Preload critical resources for accessibility -->
 <link rel="preconnect" href="{{ .Site.BaseURL }}">
@@ -67,7 +61,4 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">

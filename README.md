@@ -54,6 +54,26 @@ Expected behaviour:
 This keeps config-driven styling explicit, testable, and consistent across pages.
 
 
+## JavaScript Location Rules (Required)
+
+This site keeps JavaScript in dedicated files under `assets/js/`.
+
+### Non-negotiable JavaScript rules
+
+1. Do not place JavaScript inline in `layouts/**/*.html` templates or partials.
+2. Do not use inline JavaScript event handler attributes in markup.
+3. Load scripts from `assets/js/*.js` via Hugo template includes.
+4. Pass dynamic Hugo values to scripts via `data-*` attributes or JSON payloads.
+
+### Example include pattern
+
+```html
+{{- with resources.Get "js/search.js" -}}
+<script src="{{ .RelPermalink }}"></script>
+{{- end -}}
+```
+
+
 
 ## Steps to replicate for a new Hugo site
 ### Step 1: Install Hugo

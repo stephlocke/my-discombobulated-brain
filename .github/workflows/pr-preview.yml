@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
     env:
-      HUGO_VERSION: 0.146.6
+      HUGO_VERSION: 0.160.1
     steps:
       - name: Checkout
         uses: actions/checkout@v6

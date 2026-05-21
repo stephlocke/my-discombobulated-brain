@@ -76,7 +76,7 @@ jobs:
     name: Hugo Build Check
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.146.6
+      HUGO_VERSION: 0.160.1
     outputs:
       build-status: ${{ steps.build.outputs.status }}
       build-detail: ${{ steps.build.outputs.detail }}

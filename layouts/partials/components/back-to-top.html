@@ -11,16 +11,6 @@
     </span>
 </button>
 
-<script>
-    (() => {
-        const backToTopButton = document.getElementById('back-to-top');
-
-        if (!backToTopButton) {
-            return;
-        }
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    })();
-</script>
+{{- with resources.Get "js/back-to-top.js" | minify | fingerprint -}}
+<script src="{{ .RelPermalink }}"></script>
+{{- end -}}
