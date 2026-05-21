@@ -33,6 +33,8 @@ This repository uses six specialised agents for code review. When Copilot review
 
 ### JavaScript
 - Add a concise explanatory comment immediately above each JavaScript function describing what it does.
+- Store JavaScript in dedicated files under `assets/js/`; do not place JavaScript inline in layout or partial HTML files.
+- Pass Hugo template values to JavaScript via `data-*` attributes or JSON script payloads, then read them in the external script file.
 
 ### Hugo Templates
 - Use `{{- ... -}}` whitespace trimming in templates
@@ -214,6 +216,7 @@ Images and media should be rendered via `layouts/partials/components/general-img
 
 - Do not add a `tailwind.config.js` file
 - Do not add inline `<style>` tags to layout files
+- Do not add inline `<script>` blocks or inline JavaScript event handlers in layout/partial templates
 - Do not commit the `public/` directory or `node_modules/`
 - Do not remove the crisis support notice from `single.html` or `footer.html`
 - Do not hardcode secrets, API keys, or email addresses in tracked files

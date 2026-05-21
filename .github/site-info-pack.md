@@ -334,7 +334,7 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 
 ### Dark Mode
 - Implemented via a `.dark` class on `<html>`; NOT using `prefers-color-scheme` media query directly
-- JavaScript in `header.html` manages three states: `light`, `dark`, `auto` (follows system)
+- JavaScript is loaded from dedicated files in `assets/js/` and included in templates via Hugo `resources.Get`
 - Preference persisted in `localStorage` under the key `theme`
 - All components must include `dark:` variant classes where colours or backgrounds differ
 
@@ -361,6 +361,7 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 ### Key File Locations
 - Site config: `config.toml`
 - CSS entry point: `assets/css/main.css`
+- JavaScript files: `assets/js/*.js`
 - Custom styles: `assets/css/custom.css` (currently empty — extend here)
 - Base layout: `layouts/_default/baseof.html`
 - Home page layout: `layouts/index.html`
@@ -556,6 +557,7 @@ Crisis and safety information must:
 - New content types require an archetype in `archetypes/`
 - Tailwind classes are purged via `hugo_stats.json`; rebuild stats after adding new classes
 - Do not add inline `<style>` blocks; use Tailwind utilities or `assets/css/custom.css`
-- JavaScript is inline in the relevant partial (no separate JS build pipeline currently)
+- Store JavaScript in dedicated files under `assets/js/`; do not inline JavaScript in templates
+- Pass Hugo values to JavaScript via `data-*` attributes or JSON script payloads consumed by external scripts
 - `config.toml` is the single site configuration file; do not add `hugo.yaml` or `hugo.json`
 - Branch `main` is the production branch; GitHub Actions deploys on push to `main`
