@@ -18,7 +18,7 @@
             >
             <button
                 type="submit"
-                class="min-h-11 px-5 py-2 bg-primary text-white {{ $buttonRounding }} hover:bg-primary-darken focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-semibold transition"
+                class="min-h-11 px-5 py-2 bg-primary text-white {{ $buttonRounding }} hover:bg-primary-darken hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-semibold transition"
             >
                 Search
             </button>
@@ -40,6 +40,6 @@
     {{- if hugo.IsProduction -}}
         {{- $searchScript = $searchScript | minify | fingerprint -}}
     {{- end -}}
-<script src="{{ $searchScript.RelPermalink }}"></script>
+<script src="{{ $searchScript.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $searchScript.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
 {{ end }}
