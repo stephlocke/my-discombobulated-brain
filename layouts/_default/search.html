@@ -31,16 +31,19 @@
 </section>
 
 <script>
+// Initializes search behavior on page load and keeps variables scoped to this script.
 (function () {
     var indexUrl = '{{ "index.json" | relLangURL }}';
     var cardRounding = '{{ $cardRounding }}';
 
+    // Escapes potentially unsafe HTML so user-facing text is rendered as plain text.
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str || '';
         return div.innerHTML;
     }
 
+    // Builds a snippet around the earliest matched term and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
         var temp = document.createElement('div');
         temp.innerHTML = html || '';
@@ -94,6 +97,7 @@
         return highlighted;
     }
 
+    // Creates one search-result list item with highlighted title and summary text.
     function renderResult(item, terms) {
         var li = document.createElement('li');
         li.innerHTML =
@@ -104,7 +108,7 @@
                             highlightTerms(item.title, terms, 999) +
                         '</a>' +
                     '</h2>' +
-                    ((item.content || item.summary) ? '<p class="text-muted mb-4">' + highlightTerms(item.content || item.summary, terms, 150) + '</p>' : '') +
+                    ((item.content || item.summary) ? '<p class="text-muted mb-4">' + highlightTerms(item.content || item.summary, terms, {{ .Site.Params.searchSummaryLength | default 150 }}) + '</p>' : '') +
                     (item.date && item.date.trim() && item.date !== '0001-01-01' ? '<time class="text-sm text-subtle mb-4 block">' + escapeHtml(item.date) + '</time>' : '') +
                     '<a href="' + escapeHtml(item.url) + '" aria-label="Read ' + escapeHtml(item.title) + '" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken ' + cardRounding + '">' +
                         'Read more' +
@@ -114,6 +118,7 @@
         return li;
     }
 
+    // Reads the query string, loads the search index, filters matching content, and renders results.
     async function initSearch() {
         var params = new URLSearchParams(window.location.search);
         var query = params.get('q') || '';

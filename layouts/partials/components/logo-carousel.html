@@ -70,6 +70,7 @@
 </section>
 
 <script>
+  // Starts a continuous logo-track animation unless reduced motion is preferred.
   (() => {
     const duration = Number('{{ $duration }}');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

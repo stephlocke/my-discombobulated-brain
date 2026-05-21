@@ -52,6 +52,9 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   awardsSection = true
     # Should the blog section be shown on the homepage?
   blogSection = false
+  #Search text truncation length in characters. Set to 0 for no truncation.
+  searchSummaryLength = 250
+  searchSummaryLengthMicro = 100
 
   [params.about_section]
     # Used to populate the About section of the footer. Every parameter added here will be displayed in the footer.

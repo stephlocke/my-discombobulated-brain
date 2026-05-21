@@ -153,6 +153,7 @@
         observer.observe(desktopSearchBar, { attributes: true, attributeFilter: ['class'] });
     }
 
+    // Applies compact or expanded header classes to match the current scroll state.
     function setHeaderCompactState(nextIsCompact) {
         if (isHeaderCompact === nextIsCompact) {
             return;
@@ -175,6 +176,7 @@
         }
     }
 
+    // Updates the header size based on scroll position when expanded navigation is enabled.
     function updateHeaderOnScroll() {
         const scrollY = window.scrollY;
 

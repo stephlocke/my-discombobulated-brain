@@ -31,6 +31,9 @@ This repository uses six specialised agents for code review. When Copilot review
 
 ## General Coding Standards
 
+### JavaScript
+- Add a concise explanatory comment immediately above each JavaScript function describing what it does.
+
 ### Hugo Templates
 - Use `{{- ... -}}` whitespace trimming in templates
 - Pass multiple parameters to partials via `dict`: `{{ partial "foo" (dict "key" "val") }}`

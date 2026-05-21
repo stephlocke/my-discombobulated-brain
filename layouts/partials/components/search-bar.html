@@ -32,18 +32,21 @@
 </div>
 
 <script>
+// Initializes desktop search interactions and keeps search code scoped.
 (function () {
     const indexUrl = '{{ "index.json" | relLangURL }}';
     const cardRounding = '{{ $cardRounding }}';
     let searchIndex = null;
     let searchTimeout = null;
 
+    // Escapes potentially unsafe HTML before rendering user-facing text.
     function escapeHtml(str) {
         const div = document.createElement('div');
         div.textContent = str || '';
         return div.innerHTML;
     }
 
+    // Builds a snippet around the first match and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
         const temp = document.createElement('div');
         temp.innerHTML = html || '';
@@ -97,17 +100,19 @@
         return highlighted;
     }
 
+    // Creates one search result item for the desktop search dropdown list.
     function renderResult(item, terms) {
         const li = document.createElement('li');
         li.innerHTML =
             '<a href="' + escapeHtml(item.url) + '" ' +
                 'class="block bg-white border border-primary/20 p-3 ' + cardRounding + ' hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary text-sm transition">' +
                 '<p class="font-semibold text-primary hover:underline hover:underline-offset-2 line-clamp-1">' + highlightTerms(item.title, terms, 999) + '</p>' +
-                ((item.content || item.summary) ? '<p class="text-off-black text-xs mt-1">' + highlightTerms(item.content || item.summary, terms, 100) + '</p>' : '') +
+                ((item.content || item.summary) ? '<p class="text-off-black text-xs mt-1">' + highlightTerms(item.content || item.summary, terms, {{ .Site.Params.searchSummaryLengthMicro | default 100 }}) + '</p>' : '') +
             '</a>';
         return li;
     }
 
+    // Loads and caches the search index JSON so repeated searches are fast.
     async function loadIndex() {
         if (searchIndex) return searchIndex;
         try {
@@ -121,6 +126,7 @@
         }
     }
 
+    // Filters index entries by query terms and updates dropdown results and status text.
     async function performSearch(query) {
         const searchInput = document.getElementById('desktop-search-input');
         const resultsList = document.getElementById('desktop-search-results-list');
@@ -177,6 +183,7 @@
     }
 
 
+    // Wires up search bar events for toggle, typing, submit, and keyboard dismissal.
     function initSearchBar() {
         const searchInput = document.getElementById('desktop-search-input');
         const searchForm = document.getElementById('desktop-search-form');
