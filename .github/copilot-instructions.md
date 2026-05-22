@@ -79,6 +79,23 @@ Images and media should be rendered via `layouts/partials/components/general-img
 - Prefer adding new behaviour to `general-img-load` and/or `components/image` rather than bypassing with custom per-template image markup.
 - Direct `<img>` tags are only acceptable for narrow edge cases where `general-img-load` is not suitable; if used, include explicit width/height and appropriate loading/fetchpriority attributes.
 
+#### Button Labels with Screen Reader Context
+Use `layouts/partials/components/button.html` for CTA links and buttons, and keep visible labels concise when repeated across cards.
+
+**Usage:**
+- Use a short visual `label` such as `Read more` or `Learn more`.
+- Pass extra context via `srSuffix` so assistive tech gets a descriptive name.
+- `srSuffix` whitespace is normalised by the component, and rendered as ` <span class="sr-only"> about Example</span>` with a single leading space.
+
+```html
+{{ partial "components/button" (dict
+  "element" "a"
+  "href" .RelPermalink
+  "label" "Read more"
+  "srSuffix" (printf " about %s" .Title)
+) }}
+```
+
 ### Tailwind CSS v4
 - All colours and font tokens are CSS custom properties in `assets/css/main.css` under `@theme {}`
 - Use named token classes (`bg-primary`, `text-primary`) and semantic custom tokens, not hardcoded Tailwind palette colour classes

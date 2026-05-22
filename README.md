@@ -54,6 +54,24 @@ Expected behaviour:
 This keeps config-driven styling explicit, testable, and consistent across pages.
 
 
+## Accessible Button Label Pattern (Required)
+
+Use the shared `layouts/partials/components/button.html` partial for CTA links and buttons.
+
+When several cards use repeated CTA text, keep the visible `label` short and pass extra context using `srSuffix`. This preserves clear screen reader link names without visual clutter.
+
+```html
+{{ partial "components/button" (dict
+  "element" "a"
+  "href" .RelPermalink
+  "label" "Read more"
+  "srSuffix" (printf " about %s" .Title)
+) }}
+```
+
+`srSuffix` is whitespace-normalised by the component and always rendered with one separating space before the hidden text.
+
+
 ## JavaScript Location Rules (Required)
 
 This site keeps JavaScript in dedicated files under `assets/js/`.
