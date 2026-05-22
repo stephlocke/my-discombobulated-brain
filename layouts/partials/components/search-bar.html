@@ -43,5 +43,5 @@
 {{- if hugo.IsProduction -}}
 {{- $searchBarJS = $searchBarJS | minify | fingerprint -}}
 {{- end -}}
-<script src="{{ $searchBarJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $searchBarJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
+<script defer src="{{ $searchBarJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $searchBarJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
