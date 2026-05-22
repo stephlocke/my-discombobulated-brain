@@ -1,9 +1,13 @@
+"""Read Hugo settings from config.toml and emit GitHub Actions outputs."""
+
 import os
 import tomllib
 
-
-with open("config.toml", "rb") as config_file:
-    config = tomllib.load(config_file)
+try:
+    with open("config.toml", "rb") as config_file:
+        config = tomllib.load(config_file)
+except OSError as error:
+    raise SystemExit(f"Failed to read config.toml: {error}") from error
 
 hugo_config = config.get("params", {}).get("hugo", {})
 version = hugo_config.get("version")
