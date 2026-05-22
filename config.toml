@@ -45,6 +45,10 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   searchSummaryLength = 250
   searchSummaryLengthMicro = 150
 
+  [params.hugo]
+    version = '0.160.1'
+    extended = true
+
   [params.homepage_config]
     # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
     hero_format = "overview"

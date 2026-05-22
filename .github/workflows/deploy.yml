@@ -24,8 +24,6 @@ defaults:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.160.1
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -33,11 +31,35 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Read Hugo config
+        id: hugo-config
+        run: |
+          python3 - <<'PY'
+          import os
+          import tomllib
+
+          with open("config.toml", "rb") as config_file:
+              config = tomllib.load(config_file)
+
+          hugo_config = config.get("params", {}).get("hugo", {})
+          version = hugo_config.get("version")
+          extended = hugo_config.get("extended")
+
+          if not isinstance(version, str) or not version.strip():
+              raise SystemExit("config.toml params.hugo.version must be a non-empty string")
+          if not isinstance(extended, bool):
+              raise SystemExit("config.toml params.hugo.extended must be true or false")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as github_output:
+              github_output.write(f"version={version.strip()}\n")
+              github_output.write(f"extended={'true' if extended else 'false'}\n")
+          PY
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
+          hugo-version: ${{ steps.hugo-config.outputs.version }}
+          extended: ${{ steps.hugo-config.outputs.extended }}
 
       - name: Setup Node
         uses: actions/setup-node@v6
