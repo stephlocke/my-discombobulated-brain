@@ -127,7 +127,7 @@
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
     {{ if $isDisabled }}disabled{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}{{- with $srSuffix }}<span class="sr-only">{{ . }}</span>{{- end }}
+    {{ $label }}{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
 </button>
 {{ else }}
 <a href="{{ $href }}"
