@@ -45,7 +45,7 @@ This repository uses six specialised agents for code review. When Copilot review
   <script src="{{ $myScript.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $myScript.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
   {{- end -}}
   ```
-- Add `defer` to `<script>` tags for scripts that do not need to run before first paint. Exception: `theme-init.js` must run synchronously to prevent FOUC.
+- When adding new script calls, add `defer` to `<script>` tags for scripts that do not need to run before first paint. Exception: `theme-init.js` must run synchronously to prevent FOUC.
 
 ### Hugo Templates
 - Use `{{- ... -}}` whitespace trimming in templates

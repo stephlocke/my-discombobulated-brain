@@ -79,7 +79,7 @@ All scripts must use the following pattern. It skips minification and fingerprin
 {{- end -}}
 ```
 
-Add `defer` to the `<script>` tag when the script does not need to run before the page is rendered. The `theme-init.js` script is a known exception: it must execute synchronously before paint to prevent a flash of unstyled content (FOUC), so it has no `defer`.
+When adding new script calls, add `defer` to the `<script>` tag whenever the script does not need to run before the page is rendered. The `theme-init.js` script is a known exception: it must execute synchronously before paint to prevent a flash of unstyled content (FOUC), so it has no `defer`.
 
 
 

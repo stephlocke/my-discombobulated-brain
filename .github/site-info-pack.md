@@ -560,5 +560,6 @@ Crisis and safety information must:
 - Store JavaScript in dedicated files under `assets/js/`; do not inline JavaScript in templates
 - Pass Hugo values to JavaScript via `data-*` attributes or JSON script payloads consumed by external scripts
 - Include scripts with the canonical production-conditional pattern: skip minify/fingerprint in development; add SRI (`integrity` + `crossorigin="anonymous"`) in production only (see README §JavaScript Location Rules for the full template snippet)
+- When adding new script calls, add `defer` to `<script>` tags whenever the script does not need to run before first paint; keep `theme-init.js` synchronous to avoid FOUC
 - `config.toml` is the single site configuration file; do not add `hugo.yaml` or `hugo.json`
 - Branch `main` is the production branch; GitHub Actions deploys on push to `main`
