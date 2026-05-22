@@ -1,12 +1,21 @@
 {{- $footerLinkRounding := printf "[&_a]:%s" (partial "components/edge-rounding" (dict "shape" "button")) -}}
 <footer class="bg-surface-muted border-t border-border-subtle {{ $footerLinkRounding }}" role="contentinfo">
     <div class="container py-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <!-- About Section -->
             <div class="md:border-r md:border-border-subtle md:pr-8">
                 <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
-                {{ range $key, $value := .Site.Params.about_section }}
-                <p class="text-muted text-sm"><span class="text-primary font-semibold">{{ $key | humanize | title }}:</span> {{ $value }}</p>
+                {{ range $key, $value := .Site.Params.footer.about_section }}
+                <p class="text-muted text-sm">
+                    <span class="text-primary font-semibold">{{ $key | humanize | title }}:</span>
+                    {{ if eq $key "email" }}
+                    <a href="mailto:{{ $value }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary">
+                        {{ $value }}
+                    </a>
+                    {{ else }}
+                    {{ $value }}
+                    {{ end }}
+                </p>
                 {{ end }}
                 <div class="mt-4">
                     {{ partial "components/social-links" . }}
@@ -44,11 +53,11 @@
                     </ul>
                 </nav>
             </div>
-            <!-- Contact & Resources -->
+            <!-- Get Help Section -->
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">Get Help</h3>
                 <div class="space-y-2 text-sm text-muted">
-                    {{ with .Site.Params.email }}
+                    {{ with .Site.Params.footer.support_section.email }}
                     <p>
                         <span class="sr-only">Email:</span>
                         <a href="mailto:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary">
@@ -56,7 +65,7 @@
                         </a>
                     </p>
                     {{ end }}
-                    {{ with .Site.Params.phone }}
+                    {{ with .Site.Params.footer.support_section.phone }}
                     <p>
                         <span class="sr-only">Phone:</span>
                         <a href="tel:{{ . }}" class="hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary">
@@ -69,7 +78,7 @@
             </div>
         </div>
         
-        <!-- Copyright -->
+        <!-- Copyright and site info -->
         <div class="mt-0 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm text-muted/75 text-center mx-auto">
