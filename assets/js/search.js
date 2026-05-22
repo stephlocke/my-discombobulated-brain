@@ -1,6 +1,6 @@
 // Initializes search behavior on page load and keeps variables scoped to this script.
 (function () {
-    var searchResults = document.getElementById('search-results');
+    const searchResults = document.getElementById('search-results');
 
     // Exit early when the search page container is not present.
     if (!searchResults) {
@@ -8,14 +8,14 @@
     }
 
     // Read Hugo-provided configuration from data attributes.
-    var indexUrl = searchResults.dataset.indexUrl || '/index.json';
-    var cardRounding = searchResults.dataset.cardRounding || '';
-    var summaryLimit = Number(searchResults.dataset.summaryLimit || 150);
+    const indexUrl = searchResults.dataset.indexUrl || '/index.json';
+    const cardRounding = searchResults.dataset.cardRounding || '';
+    const summaryLimit = Number(searchResults.dataset.summaryLimit || 150);
 
     // Escapes potentially unsafe HTML so user-facing text is rendered as plain text.
     function escapeHtml(str) {
         // Use a DOM element so the browser handles escaping for us.
-        var div = document.createElement('div');
+        const div = document.createElement('div');
         div.textContent = str || '';
         return div.innerHTML;
     }
@@ -23,23 +23,23 @@
     // Builds a snippet around the earliest matched term and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
         // Treat the source as plain text so literal angle brackets are preserved for matching/snippets.
-        var temp = document.createElement('div');
+        const temp = document.createElement('div');
         temp.textContent = html || '';
-        var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
-        var lowercaseText = text.toLowerCase();
-        var snippetStart = 0;
-        var firstMatchIndex = -1;
+        const text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+        const lowercaseText = text.toLowerCase();
+        let snippetStart = 0;
+        let firstMatchIndex = -1;
 
         // Find the earliest matching term position in the source text.
         terms.forEach(function (term) {
-            var currentIndex = lowercaseText.indexOf(term.toLowerCase());
+            const currentIndex = lowercaseText.indexOf(term.toLowerCase());
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
             }
         });
 
         // Capture the matched term length so we can keep the full match visible in the snippet.
-        var matchLength = 0;
+        let matchLength = 0;
         if (firstMatchIndex !== -1) {
             terms.forEach(function (term) {
                 if (lowercaseText.indexOf(term.toLowerCase()) === firstMatchIndex && term.length > matchLength) {
@@ -50,8 +50,8 @@
 
         // Center the snippet window around the first match when the text exceeds the limit.
         if (firstMatchIndex !== -1 && text.length > limit) {
-            var availableContext = Math.max(limit - matchLength, 0);
-            var contextBefore = Math.floor(availableContext / 2);
+            const availableContext = Math.max(limit - matchLength, 0);
+            const contextBefore = Math.floor(availableContext / 2);
             snippetStart = Math.max(0, firstMatchIndex - contextBefore);
 
             // Shift the snippet back if it would overflow the source text.
@@ -61,22 +61,22 @@
         }
 
         // Build the final snippet boundaries and ensure the first full match fits in view.
-        var snippetEnd = Math.min(text.length, snippetStart + limit);
+        let snippetEnd = Math.min(text.length, snippetStart + limit);
         if (firstMatchIndex !== -1 && snippetEnd < firstMatchIndex + matchLength) {
             snippetStart = Math.max(0, firstMatchIndex + matchLength - limit);
             snippetEnd = Math.min(text.length, snippetStart + limit);
         }
 
         // Add ellipses when the snippet starts or ends mid-text.
-        var hasLeadingText = snippetStart > 0;
-        var hasTrailingText = snippetEnd < text.length;
-        var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
+        const hasLeadingText = snippetStart > 0;
+        const hasTrailingText = snippetEnd < text.length;
+        const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
 
         // Highlight matching terms (case-insensitive).
-        var highlighted = escapeHtml(truncated);
+        let highlighted = escapeHtml(truncated);
         terms.forEach(function (term) {
             // Escape regex characters in each term before building the highlighter regex.
-            var regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            const regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
             highlighted = highlighted.replace(regex, '<span class="search-term-highlight">$1</span>');
         });
 
@@ -86,7 +86,7 @@
     // Creates one search-result list item with highlighted title and summary text.
     function renderResult(item, terms) {
         // Compose one result card using escaped values and highlighted snippets.
-        var li = document.createElement('li');
+        const li = document.createElement('li');
         li.innerHTML =
             '<article class="h-full overflow-hidden border border-primary/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg focus-within:border-primary/30 focus-within:shadow-lg focus-within:ring-2 focus-within:ring-primary/20 ' + cardRounding + '">' +
                 '<div class="space-y-3 p-5 md:p-6">' +
@@ -108,17 +108,17 @@
     // Reads the query string, loads the search index, filters matching content, and renders results.
     async function initSearch() {
         // Read the search query from the URL and mirror it into the input field.
-        var params = new URLSearchParams(window.location.search);
-        var query = params.get('q') || '';
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('q') || '';
 
-        var searchInput = document.getElementById('search-input');
+        const searchInput = document.getElementById('search-input');
         if (searchInput && query) {
             searchInput.value = query;
         }
 
         // Resolve output targets used for status messaging and result rendering.
-        var status = document.getElementById('search-status');
-        var list = document.getElementById('search-results-list');
+        const status = document.getElementById('search-status');
+        const list = document.getElementById('search-results-list');
 
         // Short-circuit when there is no query to run.
         if (!query.trim()) {
@@ -129,9 +129,9 @@
         status.textContent = 'Searching\u2026';
 
         // Fetch and parse the generated search index.
-        var index;
+        let index;
         try {
-            var response = await fetch(indexUrl);
+            const response = await fetch(indexUrl);
             if (!response.ok) {
                 throw new Error('index unavailable');
             }
@@ -143,11 +143,11 @@
         }
 
         // Normalize and split the query into independent search terms.
-        var q = query.toLowerCase().trim();
-        var terms = q.split(/\s+/).filter(Boolean);
+        const q = query.toLowerCase().trim();
+        const terms = q.split(/\s+/).filter(Boolean);
 
         // Keep only items that include every term in their precomputed haystack.
-        var results = index.filter(function (item) {
+        const results = index.filter(function (item) {
             if (!item._haystack) {
                 // Build a cached lowercase search string on first use.
                 item._haystack = [

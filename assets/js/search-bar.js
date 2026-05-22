@@ -1,6 +1,6 @@
 // Initializes desktop search interactions and keeps search code scoped.
 (function () {
-    var searchBar = document.getElementById('desktop-search-bar');
+    const searchBar = document.getElementById('desktop-search-bar');
 
     // Exit when desktop search markup is not present on the page.
     if (!searchBar) {
@@ -8,17 +8,17 @@
     }
 
     // Read Hugo-provided configuration from data attributes.
-    var indexUrl = searchBar.dataset.indexUrl || '/index.json';
-    var cardRounding = searchBar.dataset.cardRounding || '';
-    var summaryLimitMicro = Number(searchBar.dataset.summaryLimitMicro || 100);
-    var searchPageUrl = searchBar.dataset.searchPageUrl || '/search/';
-    var searchIndex = null;
-    var searchTimeout = null;
+    const indexUrl = searchBar.dataset.indexUrl || '/index.json';
+    const cardRounding = searchBar.dataset.cardRounding || '';
+    const summaryLimitMicro = Number(searchBar.dataset.summaryLimitMicro || 100);
+    const searchPageUrl = searchBar.dataset.searchPageUrl || '/search/';
+    let searchIndex = null;
+    let searchTimeout = null;
 
     // Escapes potentially unsafe HTML before rendering user-facing text.
     function escapeHtml(str) {
         // Use a detached element so the browser encodes any special characters safely.
-        var div = document.createElement('div');
+        const div = document.createElement('div');
         div.textContent = str || '';
         return div.innerHTML;
     }
@@ -26,23 +26,23 @@
     // Builds a snippet around the first match and highlights all matched terms.
     function highlightTerms(html, terms, limit) {
         // Treat the source as plain text so literal angle-bracket sequences are preserved.
-        var temp = document.createElement('div');
+        const temp = document.createElement('div');
         temp.textContent = html || '';
-        var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
-        var lowercaseText = text.toLowerCase();
-        var snippetStart = 0;
-        var firstMatchIndex = -1;
+        const text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+        const lowercaseText = text.toLowerCase();
+        let snippetStart = 0;
+        let firstMatchIndex = -1;
 
         // Find the earliest matching term in the searchable text.
         terms.forEach(function (term) {
-            var currentIndex = lowercaseText.indexOf(term.toLowerCase());
+            const currentIndex = lowercaseText.indexOf(term.toLowerCase());
             if (currentIndex !== -1 && (firstMatchIndex === -1 || currentIndex < firstMatchIndex)) {
                 firstMatchIndex = currentIndex;
             }
         });
 
         // Track the longest term at the first match to keep full matches visible.
-        var matchLength = 0;
+        let matchLength = 0;
         if (firstMatchIndex !== -1) {
             terms.forEach(function (term) {
                 if (lowercaseText.indexOf(term.toLowerCase()) === firstMatchIndex && term.length > matchLength) {
@@ -53,8 +53,8 @@
 
         // Center a fixed-length snippet around the first match when truncation is needed.
         if (firstMatchIndex !== -1 && text.length > limit) {
-            var availableContext = Math.max(limit - matchLength, 0);
-            var contextBefore = Math.floor(availableContext / 2);
+            const availableContext = Math.max(limit - matchLength, 0);
+            const contextBefore = Math.floor(availableContext / 2);
             snippetStart = Math.max(0, firstMatchIndex - contextBefore);
 
             // Clamp the start if the snippet would run beyond the text length.
@@ -64,22 +64,22 @@
         }
 
         // Finalize snippet boundaries and guarantee the first full match is included.
-        var snippetEnd = Math.min(text.length, snippetStart + limit);
+        let snippetEnd = Math.min(text.length, snippetStart + limit);
         if (firstMatchIndex !== -1 && snippetEnd < firstMatchIndex + matchLength) {
             snippetStart = Math.max(0, firstMatchIndex + matchLength - limit);
             snippetEnd = Math.min(text.length, snippetStart + limit);
         }
 
         // Add leading and trailing ellipses when content is omitted.
-        var hasLeadingText = snippetStart > 0;
-        var hasTrailingText = snippetEnd < text.length;
-        var truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
+        const hasLeadingText = snippetStart > 0;
+        const hasTrailingText = snippetEnd < text.length;
+        const truncated = (hasLeadingText ? '\u2026' : '') + text.slice(snippetStart, snippetEnd) + (hasTrailingText ? '\u2026' : '');
 
         // Highlight matching terms (case-insensitive).
-        var highlighted = escapeHtml(truncated);
+        let highlighted = escapeHtml(truncated);
         terms.forEach(function (term) {
             // Escape term regex tokens before creating the case-insensitive matcher.
-            var regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            const regex = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
             highlighted = highlighted.replace(regex, '<span class="search-term-highlight">$1</span>');
         });
 
@@ -89,7 +89,7 @@
     // Creates one search result item for the desktop search dropdown list.
     function renderResult(item, terms) {
         // Build a compact result row with highlighted title and snippet preview.
-        var li = document.createElement('li');
+        const li = document.createElement('li');
         li.innerHTML =
             '<a href="' + escapeHtml(item.url) + '" ' +
                 'class="block bg-white border border-primary/20 p-3 ' + cardRounding + ' hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary text-sm transition">' +
@@ -108,7 +108,7 @@
 
         try {
             // Fetch and parse the search index once per page load.
-            var response = await fetch(indexUrl);
+            const response = await fetch(indexUrl);
             if (!response.ok) {
                 throw new Error('index unavailable');
             }
@@ -124,9 +124,9 @@
     // Filters index entries by query terms and updates dropdown results and status text.
     async function performSearch(query) {
         // Resolve current UI targets used during each search update cycle.
-        var resultsList = document.getElementById('desktop-search-results-list');
-        var resultsContainer = document.getElementById('desktop-search-results');
-        var statusText = document.getElementById('desktop-search-status');
+        const resultsList = document.getElementById('desktop-search-results-list');
+        const resultsContainer = document.getElementById('desktop-search-results');
+        const statusText = document.getElementById('desktop-search-status');
 
         // Hide everything when the input is empty.
         if (!query.trim()) {
@@ -137,7 +137,7 @@
         }
 
         // Ensure the index is available before filtering.
-        var index = await loadIndex();
+        const index = await loadIndex();
         if (!index) {
             statusText.textContent = 'Search is temporarily unavailable.';
             statusText.classList.remove('hidden');
@@ -146,11 +146,11 @@
         }
 
         // Split the query into normalized terms for an AND-style match.
-        var q = query.toLowerCase().trim();
-        var terms = q.split(/\s+/).filter(Boolean);
+        const q = query.toLowerCase().trim();
+        const terms = q.split(/\s+/).filter(Boolean);
 
         // Match items whose cached haystack contains every query term.
-        var results = index.filter(function (item) {
+        const results = index.filter(function (item) {
             if (!item._haystack) {
                 // Build and cache a lowercase searchable corpus from key fields.
                 item._haystack = [
@@ -190,10 +190,10 @@
     // Wires up search bar events for toggle, typing, submit, and keyboard dismissal.
     function initSearchBar() {
         // Resolve all interactive elements used by search bar behavior.
-        var searchInput = document.getElementById('desktop-search-input');
-        var searchForm = document.getElementById('desktop-search-form');
-        var resultsContainer = document.getElementById('desktop-search-results');
-        var searchToggleButton = document.getElementById('navbar-search-toggle');
+        const searchInput = document.getElementById('desktop-search-input');
+        const searchForm = document.getElementById('desktop-search-form');
+        const resultsContainer = document.getElementById('desktop-search-results');
+        const searchToggleButton = document.getElementById('navbar-search-toggle');
 
         if (!searchInput) {
             return;
@@ -228,7 +228,7 @@
         searchForm.addEventListener('submit', function (e) {
             // Keep search UX on the client by handling query routing ourselves.
             e.preventDefault();
-            var query = searchInput.value.trim();
+            const query = searchInput.value.trim();
             if (query) {
                 window.location.href = searchPageUrl + '?q=' + encodeURIComponent(query);
             }

@@ -64,6 +64,7 @@ This site keeps JavaScript in dedicated files under `assets/js/`.
 2. Do not use inline JavaScript event handler attributes in markup.
 3. Load scripts from `assets/js/*.js` via Hugo template includes.
 4. Pass dynamic Hugo values to scripts via `data-*` attributes or JSON payloads.
+5. Use `const` by default and `let` only when reassignment is required; do not use `var`.
 
 ### Canonical script-loading pattern
 
