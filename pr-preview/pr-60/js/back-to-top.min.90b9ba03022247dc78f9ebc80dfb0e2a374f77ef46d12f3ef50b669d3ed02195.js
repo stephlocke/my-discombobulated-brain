@@ -1,1 +1,0 @@
-(function(){var e=document.getElementById("back-to-top");if(!e)return;e.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})})()
