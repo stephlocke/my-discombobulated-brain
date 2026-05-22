@@ -100,13 +100,7 @@
                         class="flex-1 min-h-11 px-4 py-2 {{ partial "components/edge-rounding" (dict "shape" "button") }} bg-white border border-primary/20 text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:border-primary text-sm"
                         autocomplete="off"
                     >
-                    <button
-                        type="submit"
-                        class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 bg-primary text-white {{ partial "components/edge-rounding" (dict "shape" "button") }} hover:bg-primary-darken cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition"
-                        aria-label="Submit search"
-                    >
-                        {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
-                    </button>
+                    {{ partial "components/icon-button" (dict "type" "search-mobile" "buttonType" "submit" "ariaLabel" "Submit search" "iconName" "search" "iconClass" "h-5 w-5") }}
                 </form>
             </div>
         </div>
@@ -119,6 +113,11 @@
 {{ partial "components/search-bar" . }}
 
 {{- with resources.Get "js/header.js" -}}
-{{- $headerJS := . | minify | fingerprint -}}
+{{- $headerJS := . -}}
+{{- if hugo.IsProduction -}}
+{{- $headerJS = $headerJS | minify | fingerprint -}}
+<script src="{{ $headerJS.RelPermalink }}" integrity="{{ $headerJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{- else -}}
 <script src="{{ $headerJS.RelPermalink }}" defer></script>
+{{- end -}}
 {{- end -}}

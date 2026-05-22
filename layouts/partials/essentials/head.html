@@ -61,4 +61,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">
+<link id="google-fonts-exo" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">
+<script>
+    (function () {
+        var googleFontsLink = document.getElementById('google-fonts-exo');
+        if (!googleFontsLink) {
+            return;
+        }
+        googleFontsLink.addEventListener('load', function () {
+            googleFontsLink.rel = 'stylesheet';
+        }, { once: true });
+    }());
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">
+</noscript>
