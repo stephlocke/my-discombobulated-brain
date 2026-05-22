@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{- $cardRounding := partial "components/edge-rounding" (dict "shape" "card-compact") -}}
 {{- $buttonRounding := partial "components/edge-rounding" (dict "shape" "button") -}}
-{{- $searchSummaryLimit := .Site.Params.searchSummaryLength | default 150 -}}
+{{- $searchSummaryLimit := .Site.Params.configs.searchSummaryLength | default 150 -}}
 <section class="container py-12">
     <div class="max-w-3xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-bold text-primary mb-8">Search</h1>
