@@ -26,7 +26,7 @@
                 </h3>
                 <p class="text-center md:text-left text-lg text-muted">{{ $p.Description }}</p>
                 <div class="text-center md:text-left prose max-w-none prose-a:text-primary {{ $proseBlockquoteRounding }} [&_ol]:list-inside [&_ul]:list-inside md:[&_ol]:list-outside md:[&_ul]:list-outside [&_li]:pl-0">{{ $p.Content }}</div>
-                {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" (printf "Learn more about %s" $p.Title)) -}}
+                {{- partial "components/button" (dict "type" "solid" "href" $p.RelPermalink "label" "Learn more" "srSuffix" (printf " about %s" $p.Title)) -}}
               </div>
             </div>
           </div>

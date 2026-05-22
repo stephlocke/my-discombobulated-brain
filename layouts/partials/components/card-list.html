@@ -73,7 +73,7 @@
                 {{ end }}
             </div>
             {{ end }}
-            {{ partial "components/button" (dict "type" "solid-card" "href" .RelPermalink "label" (printf "Read more about %s" .Title) "class" "shadow-sm duration-200") }}
+            {{ partial "components/button" (dict "type" "solid-card" "href" .RelPermalink "label" "Read more" "srSuffix" (printf " about %s" .Title) "class" "shadow-sm duration-200") }}
         </div>
     </div>
     </article>

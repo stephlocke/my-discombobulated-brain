@@ -2,6 +2,7 @@
 {{ $element := .element | default "a" }}
 {{ $href := .href | default "#" }}
 {{ $label := .label | default "Placeholder" }}
+{{ $srSuffix := .srSuffix | default "" }}
 {{ $buttonType := .buttonType | default "button" }}
 {{ $id := .id }}
 {{ $name := .name }}
@@ -126,12 +127,12 @@
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
     {{ if $isDisabled }}disabled{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}
+    {{ $label }}{{- with $srSuffix }}<span class="sr-only">{{ . }}</span>{{- end }}
 </button>
 {{ else }}
 <a href="{{ $href }}"
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}
+    {{ $label }}{{- with $srSuffix }}<span class="sr-only">{{ . }}</span>{{- end }}
 </a>
 {{ end }}
