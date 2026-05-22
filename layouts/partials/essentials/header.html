@@ -113,6 +113,11 @@
 {{ partial "components/search-bar" . }}
 
 {{- with resources.Get "js/header.js" -}}
-{{- $headerJS := . | minify | fingerprint -}}
+{{- $headerJS := . -}}
+{{- if hugo.IsProduction -}}
+{{- $headerJS = $headerJS | minify | fingerprint -}}
+<script src="{{ $headerJS.RelPermalink }}" integrity="{{ $headerJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{- else -}}
 <script src="{{ $headerJS.RelPermalink }}" defer></script>
+{{- end -}}
 {{- end -}}
