@@ -35,6 +35,7 @@ This repository uses six specialised agents for code review. When Copilot review
 - Add a concise explanatory comment immediately above each JavaScript function describing what it does.
 - Store JavaScript in dedicated files under `assets/js/`; do not place JavaScript inline in layout or partial HTML files.
 - Pass Hugo template values to JavaScript via `data-*` attributes or JSON script payloads, then read them in the external script file.
+- Declare JavaScript variables with `const` by default, and use `let` only when reassignment is required; do not use `var`.
 - Include scripts using the canonical production-conditional pattern: skip minify/fingerprint in development and add SRI (`integrity` + `crossorigin="anonymous"`) in production only:
   ```html
   {{- with resources.Get "js/my-script.js" -}}
