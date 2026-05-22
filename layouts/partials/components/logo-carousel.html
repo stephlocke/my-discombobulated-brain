@@ -70,7 +70,11 @@
 </section>
 
 {{- with resources.Get "js/logo-carousel.js" -}}
-  {{- with . | minify | fingerprint -}}
+  {{- if hugo.IsProduction -}}
+    {{- with . | minify | fingerprint -}}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end -}}
+  {{- else -}}
 <script src="{{ .RelPermalink }}"></script>
   {{- end -}}
 {{- end -}}
