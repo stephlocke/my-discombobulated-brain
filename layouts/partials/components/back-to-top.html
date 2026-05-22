@@ -16,5 +16,5 @@
 {{- if hugo.IsProduction -}}
 {{- $backToTopJS = $backToTopJS | minify | fingerprint -}}
 {{- end -}}
-<script src="{{ $backToTopJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $backToTopJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
+<script defer src="{{ $backToTopJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $backToTopJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
