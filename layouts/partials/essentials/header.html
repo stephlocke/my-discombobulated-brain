@@ -116,8 +116,6 @@
 {{- $headerJS := . -}}
 {{- if hugo.IsProduction -}}
 {{- $headerJS = $headerJS | minify | fingerprint -}}
-<script src="{{ $headerJS.RelPermalink }}" integrity="{{ $headerJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
-{{- else -}}
-<script src="{{ $headerJS.RelPermalink }}" defer></script>
 {{- end -}}
+<script src="{{ $headerJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $headerJS.Data.Integrity }}" crossorigin="anonymous"{{ end }} defer></script>
 {{- end -}}

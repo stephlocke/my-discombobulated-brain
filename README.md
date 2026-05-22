@@ -65,13 +65,21 @@ This site keeps JavaScript in dedicated files under `assets/js/`.
 3. Load scripts from `assets/js/*.js` via Hugo template includes.
 4. Pass dynamic Hugo values to scripts via `data-*` attributes or JSON payloads.
 
-### Example include pattern
+### Canonical script-loading pattern
+
+All scripts must use the following pattern. It skips minification and fingerprinting during development (faster builds, readable source) and adds Subresource Integrity (SRI) in production for security.
 
 ```html
-{{- with resources.Get "js/search.js" -}}
-<script src="{{ .RelPermalink }}"></script>
+{{- with resources.Get "js/my-script.js" -}}
+{{- $myScript := . -}}
+{{- if hugo.IsProduction -}}
+{{- $myScript = $myScript | minify | fingerprint -}}
+{{- end -}}
+<script src="{{ $myScript.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $myScript.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
 ```
+
+When adding new script calls, add `defer` to the `<script>` tag whenever the script does not need to run before the page is rendered. The `theme-init.js` script is a known exception: it must execute synchronously before paint to prevent a flash of unstyled content (FOUC), so it has no `defer`.
 
 
 

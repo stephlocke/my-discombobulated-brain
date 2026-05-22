@@ -12,11 +12,9 @@
 </button>
 
 {{- with resources.Get "js/back-to-top.js" -}}
-    {{- if hugo.IsProduction -}}
-        {{- with . | minify | fingerprint -}}
-<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-        {{- end -}}
-    {{- else -}}
-<script src="{{ .RelPermalink }}"></script>
-    {{- end -}}
+{{- $backToTopJS := . -}}
+{{- if hugo.IsProduction -}}
+{{- $backToTopJS = $backToTopJS | minify | fingerprint -}}
+{{- end -}}
+<script defer src="{{ $backToTopJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $backToTopJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
