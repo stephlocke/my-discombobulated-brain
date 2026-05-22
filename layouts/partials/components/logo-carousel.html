@@ -74,6 +74,6 @@
 {{- if hugo.IsProduction -}}
 {{- $logoCarouselJS = $logoCarouselJS | minify | fingerprint -}}
 {{- end -}}
-<script src="{{ $logoCarouselJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $logoCarouselJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
+<script defer src="{{ $logoCarouselJS.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $logoCarouselJS.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
 {{- end -}}
 {{- end -}}
