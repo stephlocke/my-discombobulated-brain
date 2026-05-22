@@ -39,6 +39,8 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
   logo = 'images/my-discombob-logo.svg'
   favicon = 'images/my-discombob-logo.svg'
+  searchSummaryLength = 250
+  searchSummaryLengthMicro = 150
 
   [params.configs]
     # Defines the maximum length of search result summaries in characters. Longer summaries will be truncated with an ellipsis.
