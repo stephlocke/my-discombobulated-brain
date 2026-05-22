@@ -318,6 +318,11 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 
 **Button variants**: `solid`, `outline`, `solid-alt`, `outline-alt`, `ghost`, `danger`, `success`, `warning`
 
+**Button accessible label pattern**:
+- Keep repeated card CTA text visually short (`Read more`, `Learn more`).
+- Pass descriptive context via `srSuffix` in the button partial, for example `srSuffix: " about {{ .Title }}"`.
+- The button partial normalises `srSuffix` whitespace and ensures proper spacing in the accessible name.
+
 ### Shared Partials Usage Rules
 
 #### `general-img-load` partial
@@ -557,6 +562,7 @@ Crisis and safety information must:
 - New content types require an archetype in `archetypes/`
 - Tailwind classes are purged via `hugo_stats.json`; rebuild stats after adding new classes
 - Do not add inline `<style>` blocks; use Tailwind utilities or `assets/css/custom.css`
+- For repeated CTA labels, use `label` + `srSuffix` in `components/button` so visible text stays short and assistive text stays descriptive
 - Store JavaScript in dedicated files under `assets/js/`; do not inline JavaScript in templates
 - Pass Hugo values to JavaScript via `data-*` attributes or JSON script payloads consumed by external scripts
 - Declare JavaScript variables with `const` by default, and use `let` only when reassignment is required; do not use `var`

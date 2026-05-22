@@ -19,5 +19,5 @@
     <p class="text-text mb-6 text-sm line-clamp-3">
         {{ .text }}
     </p>
-    {{ partial "components/button" (dict "type" "solid" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more") }}
+    {{ partial "components/button" (dict "type" "solid" "href" (or .href (printf "#%s" (lower .header))) "label" "Read more" "srSuffix" (printf " about %s" .header)) }}
 </article>
