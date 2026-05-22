@@ -1,0 +1,88 @@
+{{ define "main" }}
+{{- $contactFormat := .Site.Params.configs.contactFormat | default "list" -}}
+{{- $cardRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") -}}
+
+<article class="container py-12">
+  <div class="max-w-3xl mx-auto space-y-8">
+    <header>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ .Title }}</h1>
+    </header>
+
+    <div class="prose prose-base max-w-none md:prose-lg prose-headings:font-bold prose-headings:text-off-black prose-p:leading-relaxed prose-p:text-off-black prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-off-black prose-ul:text-off-black prose-ol:text-off-black">
+      {{ .Content }}
+    </div>
+
+    {{- if eq $contactFormat "list" -}}
+    <section aria-labelledby="contact-details-heading" class="overflow-x-auto">
+      <h2 id="contact-details-heading" class="text-2xl font-bold text-off-black mb-4">Contact Details</h2>
+      <table class="w-full border border-white-darken text-left">
+        <caption class="sr-only">Contact methods and details</caption>
+        <thead class="bg-primary text-white font-semibold">
+          <tr>
+            <th scope="col" class="px-4 py-3">Method</th>
+            <th scope="col" class="px-4 py-3">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{- range $key, $value := .Site.Params.contact -}}
+          {{- $valueString := printf "%v" $value -}}
+          {{- $trimmedValue := $valueString | strings.TrimSpace -}}
+          {{- $isEmail := findRE "^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" $trimmedValue -}}
+          {{- $isPhone := findRE "^\\+?[0-9()\\-\\s]{7,}$" $trimmedValue -}}
+          <tr class="border-t border-white-darken">
+            <th scope="row" class="px-4 py-3 font-medium text-off-black">{{ $key | humanize }}</th>
+            <td class="px-4 py-3 text-off-black">
+              {{- if gt (len $isEmail) 0 -}}
+              <a href="mailto:{{ $trimmedValue }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ $trimmedValue }}</a>
+              {{- else if gt (len $isPhone) 0 -}}
+              {{- $telValue := $trimmedValue | replaceRE "[^0-9+]" "" -}}
+              <a href="tel:{{ $telValue }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ $trimmedValue }}</a>
+              {{- else -}}
+              {{ $trimmedValue }}
+              {{- end -}}
+            </td>
+          </tr>
+          {{- end -}}
+        </tbody>
+      </table>
+    </section>
+    {{- else if eq $contactFormat "form" -}}
+    <section aria-labelledby="contact-form-heading">
+      <h2 id="contact-form-heading" class="text-2xl font-bold text-off-black mb-0">Send Us a Message</h2>
+
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="p-6 md:p-8 space-y-6 {{ $cardRounding }}">
+        <input type="hidden" name="form-name" value="contact">
+
+        <p class="hidden" aria-hidden="true">
+          <label for="contact-bot-field">Do not fill this out if you are human:</label>
+          <input id="contact-bot-field" name="bot-field" tabindex="-1" autocomplete="off">
+        </p>
+
+        <div>
+          <label for="contact-name" class="block text-sm font-semibold text-off-black mb-2">Name <span aria-hidden="true">*</span></label>
+          <input id="contact-name" name="name" type="text" required autocomplete="name" class="w-full min-h-11 border border-primary bg-body px-4 py-3 text-off-black focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body {{ $cardRounding }}">
+        </div>
+
+        <div>
+          <label for="contact-email" class="block text-sm font-semibold text-off-black mb-2">Email <span aria-hidden="true">*</span></label>
+          <input id="contact-email" name="email" type="email" required autocomplete="email" class="w-full min-h-11 border border-primary bg-body px-4 py-3 text-off-black focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body {{ $cardRounding }}">
+        </div>
+
+        <div>
+          <label for="contact-phone" class="block text-sm font-semibold text-off-black mb-2">Phone (optional)</label>
+          <input id="contact-phone" name="phone" type="tel" autocomplete="tel" class="w-full min-h-11 border border-primary bg-body px-4 py-3 text-off-black focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body {{ $cardRounding }}">
+        </div>
+
+        <div>
+          <label for="contact-message" class="block text-sm font-semibold text-off-black mb-2">Message <span aria-hidden="true">*</span></label>
+          <textarea id="contact-message" name="message" rows="6" required class="w-full border border-primary bg-body px-4 py-3 text-off-black focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body {{ $cardRounding }}"></textarea>
+        </div>
+
+        {{ partial "components/button" (dict "element" "button" "buttonType" "submit" "type" "solid" "label" "Send message") }}
+      </form>
+    </section>
+    {{- end -}}
+  </div>
+</article>
+
+{{ end }}

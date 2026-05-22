@@ -73,9 +73,7 @@
                 {{ end }}
             </div>
             {{ end }}
-            <a href="{{ .RelPermalink }}" class="inline-block min-h-11 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:bg-primary-darken focus-visible:ring-primary-darken {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
-                {{ printf "Read more about %s" .Title }}
-            </a>
+            {{ partial "components/button" (dict "type" "solid-card" "href" .RelPermalink "label" (printf "Read more about %s" .Title) "class" "shadow-sm duration-200") }}
         </div>
     </div>
     </article>

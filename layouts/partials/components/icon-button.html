@@ -1,0 +1,43 @@
+{{ $element := .element | default "button" }}
+{{ $buttonType := .buttonType | default "button" }}
+{{ $href := .href | default "#" }}
+{{ $id := .id }}
+{{ $name := .name }}
+{{ $value := .value }}
+{{ $ariaLabel := .ariaLabel | default "Button" }}
+{{ $iconName := .iconName | default "search" }}
+{{ $iconClass := .iconClass | default "h-5 w-5" }}
+{{ $type := .type | default "search-desktop" }}
+{{ $extraClass := .class | default "" }}
+{{ $isDisabled := .disabled | default false }}
+
+{{ $baseClass := printf "inline-flex cursor-pointer items-center justify-center min-h-11 min-w-11 p-2 %s bg-primary text-white hover:bg-primary-darken focus:outline-none focus:ring-2 transition" (partial "components/edge-rounding" (dict "context" . "shape" "button")) }}
+{{ $variantClass := "focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary" }}
+{{ if eq $type "search-mobile" }}
+  {{ $variantClass = "focus:ring-primary focus:ring-offset-2" }}
+{{ else if eq $type "search-desktop" }}
+  {{ $variantClass = "focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary" }}
+{{ else if eq $type "primary" }}
+  {{ $variantClass = "focus:ring-primary focus:ring-offset-2 focus:ring-offset-body" }}
+{{ end }}
+
+{{ $classes := printf "%s %s %s" $baseClass $variantClass $extraClass }}
+
+{{ if eq $element "a" }}
+<a href="{{ $href }}"
+   {{ with $id }}id="{{ . }}"{{ end }}
+   {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+   class="{{ $classes }}">
+  {{ partial "components/icon" (dict "name" $iconName "class" $iconClass) }}
+</a>
+{{ else }}
+<button type="{{ $buttonType }}"
+        {{ with $id }}id="{{ . }}"{{ end }}
+        {{ with $name }}name="{{ . }}"{{ end }}
+        {{ with $value }}value="{{ . }}"{{ end }}
+        {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+        {{ if $isDisabled }}disabled{{ end }}
+        class="{{ $classes }}">
+  {{ partial "components/icon" (dict "name" $iconName "class" $iconClass) }}
+</button>
+{{ end }}
