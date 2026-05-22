@@ -22,14 +22,7 @@
                 class="flex-1 min-h-11 px-4 py-2 {{ $buttonRounding }} bg-white border-2 border-primary/20 text-off-black placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:border-primary text-sm"
                 autocomplete="off"
             >
-            <button
-                type="submit"
-                id="desktop-search-submit"
-                class="inline-flex cursor-pointer items-center justify-center min-h-11 min-w-11 p-2 bg-primary text-white {{ $buttonRounding }} hover:bg-primary-darken focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary transition"
-                aria-label="Submit search"
-            >
-                {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
-            </button>
+            {{ partial "components/icon-button" (dict "type" "search-desktop" "buttonType" "submit" "id" "desktop-search-submit" "ariaLabel" "Submit search" "iconName" "search" "iconClass" "h-5 w-5") }}
         </form>
         <div id="desktop-search-results" class="mt-3 max-h-96 overflow-y-auto hidden">
             <ul id="desktop-search-results-list" class="space-y-2 p-2" role="list"></ul>
