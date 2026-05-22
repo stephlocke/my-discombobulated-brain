@@ -1,6 +1,6 @@
 {{- $buttonRounding := partial "components/edge-rounding" (dict "shape" "button") -}}
 {{- $cardRounding := partial "components/edge-rounding" (dict "shape" "card-compact") -}}
-{{- $searchSummaryLimitMicro := .Site.Params.configs.searchSummaryLengthMicro | default 150 -}}
+{{- $searchSummaryLimitMicro := .Site.Params.configs.searchSummaryLengthMicro | default 100 -}}
 
 <!-- Desktop Search Bar -->
 <div
