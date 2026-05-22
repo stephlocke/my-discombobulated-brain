@@ -42,6 +42,9 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   searchSummaryLength = 250
   searchSummaryLengthMicro = 150
 
+  [params.hugo]
+    version = '0.160.1'
+    extended = true
   [params.configs]
     # Defines the maximum length of search result summaries in characters. Longer summaries will be truncated with an ellipsis.
     searchSummaryLength = 250

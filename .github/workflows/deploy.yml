@@ -24,8 +24,6 @@ defaults:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.160.1
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -33,11 +31,15 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Read Hugo config
+        id: hugo-config
+        run: python3 .github/scripts/read_hugo_config.py
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
+          hugo-version: ${{ steps.hugo-config.outputs.version }}
+          extended: ${{ steps.hugo-config.outputs.extended }}
 
       - name: Setup Node
         uses: actions/setup-node@v6
