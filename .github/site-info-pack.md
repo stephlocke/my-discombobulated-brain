@@ -321,7 +321,7 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 **Button accessible label pattern**:
 - Keep repeated card CTA text visually short (`Read more`, `Learn more`).
 - Pass descriptive context via `srSuffix` in the button partial, for example `srSuffix: " about {{ .Title }}"`.
-- The button partial trims `srSuffix` and inserts one leading space in `<span class="sr-only">`, so accessible names remain properly spaced even when callers omit leading whitespace.
+- The button partial normalises `srSuffix` whitespace and ensures proper spacing in the accessible name.
 
 ### Shared Partials Usage Rules
 

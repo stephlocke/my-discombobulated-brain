@@ -58,7 +58,7 @@ This keeps config-driven styling explicit, testable, and consistent across pages
 
 Use the shared `layouts/partials/components/button.html` partial for CTA links and buttons.
 
-When several cards use repeated CTA text, keep the visible `label` short and pass extra context using `srSuffix`. This preserves clear screen reader link names without visual clutter.
+When several cards use repeated CTA text, keep the visible `label` short and pass extra context using `srSuffix`. This preserves clear accessible names for screen readers without visual clutter.
 
 ```html
 {{ partial "components/button" (dict
