@@ -133,6 +133,6 @@
 <a href="{{ $href }}"
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}{{- with $srSuffix }}<span class="sr-only">{{ . }}</span>{{- end }}
+    {{ $label }}{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
 </a>
 {{ end }}
