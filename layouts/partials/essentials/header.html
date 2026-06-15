@@ -53,7 +53,7 @@
                     aria-controls="desktop-search-bar">
                     {{ partial "components/icon" (dict "name" "search" "class" "h-5 w-5") }}
                 </button>
-                {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
+                {{ partial "components/cta-display.html" (dict "ctxt" .Site.Home "location" "header") }}
             </div>
             <!-- Mobile Menu Button -->
             <button 
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div id="mobile-menu-donate" class="hidden md:hidden mt-3 text-center">
-            {{ partial "components/button" (dict "type" "solid-alt-small" "href" ("./donate/" | relLangURL) "label" "Donate") }}
+            {{ partial "components/cta-display.html" (dict "ctxt" .Site.Home "location" "header") }}
         </div>
     </nav>
 </header>

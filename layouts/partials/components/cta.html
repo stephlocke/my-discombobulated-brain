@@ -1,5 +1,12 @@
 {{- $cta := .cta | default . -}}
 {{- $location := .location | default "footer" -}}
+{{- if eq $location "header" -}}
+    {{- with $cta.Params.buttons -}}
+        {{- range . -}}
+            {{- partial "components/button" (dict "type" .type "href" .href "label" .label) -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
 {{- $bgClass := "bg-gradient-to-b from-primary to-primary-darken" -}}
 {{- $headlineClass := "text-inverse" -}}
 {{- $bodyClass := "text-inverse" -}}
@@ -56,3 +63,4 @@
         {{ end }}
     </div>
 </section>
+{{- end -}}
