@@ -4,11 +4,11 @@
   {{- with .Site.GetPage $collection -}}
     {{- $pages := .Pages.ByWeight -}}
     {{- if $pages -}}
-      <section class="pt-16 bg-surface" aria-labelledby="services-overview-heading">
+      <section class="pt-16 pb-0 bg-surface" aria-labelledby="services-overview-heading">
         <div class="container">
           <h2 id="services-overview-heading" class="text-center text-3xl font-bold text-primary">
             <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">
-              What We Do
+              {{ .Title }}
             </a>
           </h2>
         </div>
