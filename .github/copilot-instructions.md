@@ -14,7 +14,7 @@ Read **`.github/site-info-pack.md`** for full site context (organisation, missio
 
 ## Specialised Review Agents
 
-This repository uses six specialised agents for code review. When Copilot reviews a pull request or is asked to review code, apply the relevant agent's checklist from `.github/agents/`:
+This repository uses seven specialised agents. When Copilot reviews a pull request or is asked to review code, apply the relevant review checklist from `.github/agents/`. The Modularity & Rebrand Audit agent is intended for on-demand repository audits rather than line-by-line PR review:
 
 | Agent | File | Apply when reviewing… |
 |---|---|---|
@@ -24,6 +24,7 @@ This repository uses six specialised agents for code review. When Copilot review
 | **Hugo Practices** | `.github/agents/hugo-practices.md` | `layouts/`, `config.toml`, `archetypes/`, `hugo_stats.json` |
 | **Maintainer** | `.github/agents/maintainer.md` | `package.json`, `.github/workflows/`, `static/admin/config.yml` |
 | **Performance** | `.github/agents/performance.md` | `layouts/partials/head.html`, `assets/css/`, images, third-party scripts |
+| **Modularity & Rebrand Audit** | `.github/agents/modularity-rebrand-audit.md` | On-demand site audits for modularity, CMS coverage, config ownership, and non-technical rebrand readiness |
 
 > When reviewing a pull request that touches multiple areas, apply **all relevant agents** and group your comments by agent using the emoji prefix defined in each agent file (🔍 SEO/AEO, 💬 Brand Voice, 🎨 Design/Style, 🦔 Hugo, 🔧 Maintainer, ⚡ Performance).
 
