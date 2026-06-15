@@ -8,6 +8,12 @@
       {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
     {{- end -}}
   {{- end -}}
+{{- else if eq $location "header" -}}
+  {{- with (or $cta $ctxt.Params.header_cta) -}}
+    {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location .) -}}
+      {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
+    {{- end -}}
+  {{- end -}}
 {{- else if eq $location "inline" -}}
   {{- if $cta -}}
     {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location $cta) -}}
