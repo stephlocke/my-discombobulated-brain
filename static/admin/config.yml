@@ -13,32 +13,433 @@ public_folder: "/images/uploads"
 # Enable editorial workflow (draft, review, publish)
 publish_mode: editorial_workflow
 
+aliases:
+  field_title: &field_title { label: "Title", name: "title", widget: "string", required: false }
+  field_description: &field_description { label: "Description", name: "description", widget: "text", required: false }
+  field_date: &field_date { label: "Date", name: "date", widget: "datetime", required: false }
+  field_draft: &field_draft { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+  field_body: &field_body { label: "Body", name: "body", widget: "markdown", required: false }
+  field_summary: &field_summary { label: "Summary", name: "summary", widget: "text", required: false }
+  field_type: &field_type { label: "Type", name: "type", widget: "string", required: false }
+  field_headline: &field_headline { label: "Headline", name: "headline", widget: "string", required: false }
+  field_weight: &field_weight { label: "Weight", name: "weight", widget: "number", required: false }
+  field_icon: &field_icon { label: "Icon", name: "icon", widget: "string", required: false }
+  field_icon_color: &field_icon_color { label: "Icon Colour", name: "icon_color", widget: "string", required: false }
+  field_hero_title: &field_hero_title { label: "Hero Title", name: "hero_title", widget: "string", required: false }
+  field_hero_body: &field_hero_body { label: "Hero Body", name: "hero_body", widget: "text", required: false }
+
+  field_resource: &field_resource
+    label: "Resource"
+    name: "resource"
+    widget: "object"
+    required: false
+    fields:
+      - { label: "Image", name: "src", widget: "image", required: false }
+      - { label: "Alt text", name: "alt", widget: "string", required: false }
+
+  field_display: &field_display
+    label: "Display"
+    name: "display"
+    widget: "object"
+    required: false
+    fields:
+      - { label: "Type", name: "type", widget: "string", required: false }
+      - { label: "Clickable", name: "clickable", widget: "boolean", required: false }
+      - { label: "Show title", name: "show_title", widget: "boolean", required: false }
+
+  field_buttons: &field_buttons
+    label: "Buttons"
+    name: "buttons"
+    widget: "list"
+    required: false
+    fields:
+      - { label: "URL", name: "href", widget: "string" }
+      - { label: "Variant", name: "type", widget: "string" }
+      - { label: "Label", name: "label", widget: "string" }
+
+  field_build: &field_build
+    label: "Build"
+    name: "build"
+    widget: "object"
+    required: false
+    fields:
+      - { label: "Render", name: "render", widget: "string", required: false }
+
 collections:
-  - name: "blog"
-    label: "Blog Posts"
+  - name: "site-config"
+    label: "config.toml"
+    editor:
+      preview: false
+    files:
+      - name: "config_toml_params"
+        label: "config.toml (params)"
+        file: "config.toml"
+        format: "toml"
+        fields:
+          - label: "params"
+            name: "params"
+            widget: "object"
+            fields:
+              - { label: "author", name: "author", widget: "string", required: false }
+              - { label: "description", name: "description", widget: "text", required: false }
+              - label: "keywords"
+                name: "keywords"
+                widget: "list"
+                required: false
+                field: { label: "keyword", name: "keyword", widget: "string" }
+              - { label: "logo", name: "logo", widget: "string", required: false }
+              - { label: "favicon", name: "favicon", widget: "string", required: false }
+              - { label: "searchSummaryLength", name: "searchSummaryLength", widget: "number", required: false }
+              - { label: "searchSummaryLengthMicro", name: "searchSummaryLengthMicro", widget: "number", required: false }
+              - label: "hugo"
+                name: "hugo"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "version", name: "version", widget: "string", required: false }
+                  - { label: "extended", name: "extended", widget: "boolean", required: false }
+              - label: "configs"
+                name: "configs"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "searchSummaryLength", name: "searchSummaryLength", widget: "number", required: false }
+                  - { label: "searchSummaryLengthMicro", name: "searchSummaryLengthMicro", widget: "number", required: false }
+                  - { label: "contactFormat", name: "contactFormat", widget: "string", required: false }
+              - label: "homepage_config"
+                name: "homepage_config"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "hero_format", name: "hero_format", widget: "string", required: false }
+                  - { label: "hero_image", name: "hero_image", widget: "string", required: false }
+                  - { label: "upcomingEventsSection", name: "upcomingEventsSection", widget: "boolean", required: false }
+                  - { label: "workingWithSection", name: "workingWithSection", widget: "boolean", required: false }
+                  - { label: "servicesSection", name: "servicesSection", widget: "boolean", required: false }
+                  - { label: "awardsSection", name: "awardsSection", widget: "boolean", required: false }
+                  - { label: "blogSection", name: "blogSection", widget: "boolean", required: false }
+              - label: "footer"
+                name: "footer"
+                widget: "object"
+                required: false
+                fields:
+                  - label: "about_section"
+                    name: "about_section"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - { label: "address", name: "address", widget: "string", required: false }
+                      - { label: "company", name: "company", widget: "string", required: false }
+                      - { label: "charity", name: "charity", widget: "string", required: false }
+                  - label: "support_section"
+                    name: "support_section"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - { label: "email", name: "email", widget: "string", required: false }
+                      - { label: "phone", name: "phone", widget: "string", required: false }
+              - label: "contact"
+                name: "contact"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "email_users", name: "email_users", widget: "string", required: false }
+                  - { label: "email_donations", name: "email_donations", widget: "string", required: false }
+                  - { label: "email_volunteer", name: "email_volunteer", widget: "string", required: false }
+                  - { label: "email_media", name: "email_media", widget: "string", required: false }
+                  - { label: "phone_users", name: "phone_users", widget: "string", required: false }
+                  - { label: "phone_donations", name: "phone_donations", widget: "string", required: false }
+                  - { label: "phone_volunteer", name: "phone_volunteer", widget: "string", required: false }
+                  - { label: "phone_media", name: "phone_media", widget: "string", required: false }
+              - label: "style_rules"
+                name: "style_rules"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "edges", name: "edges", widget: "string", required: false }
+                  - { label: "expanded_nav", name: "expanded_nav", widget: "boolean", required: false }
+                  - { label: "primary_color", name: "primary_color", widget: "string", required: false }
+                  - { label: "secondary_color", name: "secondary_color", widget: "string", required: false }
+                  - { label: "title_font", name: "title_font", widget: "string", required: false }
+                  - { label: "body_font", name: "body_font", widget: "string", required: false }
+                  - { label: "stacked_button_position", name: "stacked_button_position", widget: "string", required: false }
+              - label: "socials"
+                name: "socials"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "icon", name: "icon", widget: "string", required: false }
+                  - { label: "url", name: "url", widget: "string", required: false }
+                  - { label: "label", name: "label", widget: "string", required: false }
+              - { label: "email", name: "email", widget: "string", required: false }
+              - { label: "phone", name: "phone", widget: "string", required: false }
+              - { label: "showReadingTime", name: "showReadingTime", widget: "boolean", required: false }
+              - { label: "showShareButtons", name: "showShareButtons", widget: "boolean", required: false }
+              - { label: "showDateUpdated", name: "showDateUpdated", widget: "boolean", required: false }
+
+  - name: "site-files"
+    label: "Site Files"
+    editor:
+      preview: false
+    files:
+      - label: "content/_index.md"
+        name: "content_home_index"
+        file: "content/_index.md"
+        fields:
+          - *field_title
+          - *field_hero_title
+          - *field_hero_body
+          - { label: "footer_cta", name: "footer_cta", widget: "string", required: false }
+          - { label: "header_cta", name: "header_cta", widget: "string", required: false }
+          - label: "inline_ctas"
+            name: "inline_ctas"
+            widget: "list"
+            required: false
+            field: { label: "inline_cta", name: "inline_cta", widget: "string" }
+          - { label: "hero_cta", name: "hero_cta", widget: "string", required: false }
+          - *field_body
+      - label: "content/contact.md"
+        name: "content_contact"
+        file: "content/contact.md"
+        fields:
+          - *field_title
+          - *field_type
+          - *field_draft
+          - *field_body
+      - label: "content/search.md"
+        name: "content_search"
+        file: "content/search.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_type
+          - *field_body
+      - label: "content/about/index.md"
+        name: "content_about_index"
+        file: "content/about/index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_date
+          - *field_body
+      - label: "content/donate/index.md"
+        name: "content_donate_index"
+        file: "content/donate/index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_date
+          - *field_draft
+          - *field_body
+      - label: "content/blog/_index.md"
+        name: "content_blog_section"
+        file: "content/blog/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - label: "content/events/_index.md"
+        name: "content_events_section"
+        file: "content/events/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - label: "content/services/_index.md"
+        name: "content_services_section"
+        file: "content/services/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - label: "content/working-with/_index.md"
+        name: "content_working_with_section"
+        file: "content/working-with/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_display
+          - *field_draft
+          - *field_body
+      - label: "content/awards-and-recognition/_index.md"
+        name: "content_awards_section"
+        file: "content/awards-and-recognition/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_display
+          - *field_draft
+          - *field_body
+
+  - name: "blog-items"
+    label: "content/blog/*/index.md"
     folder: "content/blog"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
     editor:
       preview: false
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - { label: "Categories", name: "categories", widget: "list", required: false }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - *field_title
+      - *field_date
+      - *field_summary
+      - *field_description
+      - *field_draft
+      - *field_resource
+      - *field_body
 
-  - name: "pages"
-    label: "Pages"
+  - name: "event-items"
+    label: "content/events/*/index.md"
+    folder: "content/events"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - { label: "event_date", name: "event_date", widget: "datetime", required: false }
+      - { label: "start_time", name: "start_time", widget: "datetime", required: false }
+      - { label: "end_time", name: "end_time", widget: "datetime", required: false }
+      - *field_resource
+      - *field_body
+
+  - name: "service-items"
+    label: "content/services/*/index.md"
+    folder: "content/services"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - *field_weight
+      - *field_icon
+      - *field_icon_color
+      - *field_resource
+      - *field_body
+
+  - name: "working-with-items"
+    label: "content/working-with/*/index.md"
+    folder: "content/working-with"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - *field_weight
+      - *field_resource
+      - *field_body
+
+  - name: "award-items"
+    label: "content/awards-and-recognition/*/index.md"
+    folder: "content/awards-and-recognition"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - *field_weight
+      - *field_resource
+      - *field_body
+
+  - name: "legal-items"
+    label: "content/legals/*/index.md"
+    folder: "content/legals"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_date
+      - *field_description
+      - *field_body
+
+  - name: "cta-files"
+    label: "CTA and callout files"
+    editor:
+      preview: false
     files:
-      - label: "About Page"
-        name: "about"
-        file: "content/about.md"
+      - label: "content/cta/footer/version-1/index.md"
+        name: "cta_footer_version_1"
+        file: "content/cta/footer/version-1/index.md"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text", required: false }
-          - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Body", name: "body", widget: "markdown" }
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/cta/header/donate/index.md"
+        name: "cta_header_donate"
+        file: "content/cta/header/donate/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/cta/hero/version-1/index.md"
+        name: "cta_hero_version_1"
+        file: "content/cta/hero/version-1/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/cta/inline/version-1/index.md"
+        name: "cta_inline_version_1"
+        file: "content/cta/inline/version-1/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/cta/inline/version-2/index.md"
+        name: "cta_inline_version_2"
+        file: "content/cta/inline/version-2/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/callouts/footer/index.md"
+        name: "callouts_footer"
+        file: "content/callouts/footer/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/callouts/single/index.md"
+        name: "callouts_single"
+        file: "content/callouts/single/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
+      - label: "content/callouts/404/index.md"
+        name: "callouts_404"
+        file: "content/callouts/404/index.md"
+        fields:
+          - *field_title
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - *field_buttons
+          - *field_build
