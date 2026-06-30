@@ -89,6 +89,7 @@ collections:
   # intentionally excluded. The CMS never touches config.toml.
   - name: "site-settings"
     label: "Site Settings"
+    icon: settings
     media_folder: "static/images"
     public_folder: "images"
     editor:
@@ -198,6 +199,7 @@ collections:
   # Section visibility toggles are in Site Settings → Homepage Display.
   - name: "homepage"
     label: "Homepage"
+    icon: home
     editor:
       preview: false
     files:
@@ -253,6 +255,7 @@ collections:
   # ─── 3. PAGES ──────────────────────────────────────────────────────────────
   - name: "pages"
     label: "Pages"
+    icon: article
     editor:
       preview: false
     files:
@@ -293,6 +296,7 @@ collections:
   # The introductory pages for each content section listing (e.g. /blog, /events).
   - name: "section-headers"
     label: "Section Page Headers"
+    icon: toc
     editor:
       preview: false
     files:
@@ -342,6 +346,7 @@ collections:
   # media_folder: "" uploads images into the post's page bundle folder
   - name: "blog"
     label: "Blog"
+    icon: edit_note
     folder: "content/blog"
     create: true
     path: "{{slug}}/index"
@@ -362,6 +367,7 @@ collections:
   # ─── 6. EVENTS ─────────────────────────────────────────────────────────────
   - name: "events"
     label: "Events"
+    icon: event
     folder: "content/events"
     create: true
     path: "{{slug}}/index"
@@ -382,6 +388,7 @@ collections:
   # ─── 7. SERVICES ───────────────────────────────────────────────────────────
   - name: "services"
     label: "Services"
+    icon: volunteer_activism
     folder: "content/services"
     create: true
     path: "{{slug}}/index"
@@ -402,6 +409,7 @@ collections:
   # ─── 8. WORKING WITH ───────────────────────────────────────────────────────
   - name: "working-with"
     label: "Working With"
+    icon: handshake
     folder: "content/working-with"
     create: true
     path: "{{slug}}/index"
@@ -420,6 +428,7 @@ collections:
   # ─── 9. AWARDS & RECOGNITION ───────────────────────────────────────────────
   - name: "awards"
     label: "Awards & Recognition"
+    icon: emoji_events
     folder: "content/awards-and-recognition"
     create: true
     path: "{{slug}}/index"
@@ -441,6 +450,7 @@ collections:
   # ─── 10. LEGAL PAGES ───────────────────────────────────────────────────────
   - name: "legals"
     label: "Legal Pages"
+    icon: gavel
     folder: "content/legals"
     create: true
     path: "{{slug}}/index"
@@ -459,6 +469,7 @@ collections:
   # look up these pages by hardcoded slug (footer, single, 404).
   - name: "callouts"
     label: "Callouts"
+    icon: campaign
     editor:
       preview: false
     files:
@@ -495,6 +506,7 @@ collections:
   # The Name field is the lookup key used in Homepage → Header CTA.
   - name: "cta-header"
     label: "CTA — Header"
+    icon: smart_button
     folder: "content/cta/header"
     create: true
     path: "{{slug}}/index"
@@ -514,6 +526,7 @@ collections:
   # Shown in the hero section when Hero Style is set to 'CTA'.
   - name: "cta-hero"
     label: "CTA — Hero"
+    icon: featured_play_list
     folder: "content/cta/hero"
     create: true
     path: "{{slug}}/index"
@@ -535,6 +548,7 @@ collections:
   # Full-width call-to-action block shown above the page footer.
   - name: "cta-footer"
     label: "CTA — Footer"
+    icon: call_to_action
     folder: "content/cta/footer"
     create: true
     path: "{{slug}}/index"
@@ -556,6 +570,7 @@ collections:
   # CTAs displayed inline within page content.
   - name: "cta-inline"
     label: "CTA — Inline"
+    icon: format_quote
     folder: "content/cta/inline"
     create: true
     path: "{{slug}}/index"
