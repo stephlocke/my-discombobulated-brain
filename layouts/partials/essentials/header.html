@@ -6,11 +6,11 @@
             <!-- Logo/Site Title -->
             {{ with .Site.Params.logo }}
             <a href="{{ "./" | relLangURL }}" class="inline-flex text-xl font-bold text-inverse hover:text-secondary">
-                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ $.Site.Title }}" width="311" height="205" class="{{ if $shouldExpandNav }}h-12{{ else }}h-10{{ end }} w-auto transition-[height,transform] duration-300 ease-out">
+                <img id="site-logo" src="{{ . | relLangURL }}" alt="{{ site.Params.title }}" width="311" height="205" class="{{ if $shouldExpandNav }}h-12{{ else }}h-10{{ end }} w-auto transition-[height,transform] duration-300 ease-out">
             </a>
             {{ else }}
             <a href="{{ "./" | relLangURL }}" class="text-xl font-bold text-inverse hover:text-secondary">
-                {{ .Site.Title }}
+                {{ site.Params.title }}
             </a>
             {{ end }}
             </div>

@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <!-- About Section -->
             <div class="md:border-r md:border-border-subtle md:pr-8">
-                <h3 class="text-lg font-semibold mb-4 text-strong">{{ .Site.Title }}</h3>
+                <h3 class="text-lg font-semibold mb-4 text-strong">{{ site.Params.title }}</h3>
                 {{ range $key, $value := hugo.Data.footer.about_section }}
                 <p class="text-muted text-sm">
                     <span class="text-primary font-semibold">{{ $key | humanize | title }}:</span>
@@ -82,7 +82,7 @@
         <div class="mt-0 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm text-muted/75 text-center mx-auto">
-                    {{ .Site.Copyright }}
+                    {{ site.Params.copyright }}
                 </p>
                 <p class="text-sm text-muted/75 text-center mx-auto">
                     Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.

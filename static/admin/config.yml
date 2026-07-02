@@ -153,8 +153,10 @@ singletons:
     editor:
       preview: false
     fields:
-      - { label: "Site Author", name: "author", widget: "string", required: false, hint: "The name or organisation that owns this website." }
-      - { label: "Site Description", name: "description", widget: "text", required: false, hint: "A short summary shown in search engine results and social shares." }
+      - { label: "Site Title", name: "title", widget: "string", hint: "The site name shown in the browser tab, header, footer, and search results." }
+      - { label: "Copyright", name: "copyright", widget: "string", hint: "Copyright notice shown in the site footer. Use © and the current year." }
+      - { label: "Site Author", name: "author", widget: "string", hint: "The name or organisation that owns this website." }
+      - { label: "Site Description", name: "description", widget: "text", hint: "A short summary shown in search engine results and social shares." }
       - label: "Keywords"
         name: "keywords"
         widget: "list"

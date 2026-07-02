@@ -2,7 +2,7 @@
 {{- $permalink := $page.Permalink -}}
 {{- $encodedPermalink := $permalink | urlquery -}}
 {{- $encodedTitle := $page.Title | urlquery -}}
-{{- $mailSubject := printf "Check out this post on %s" site.Title | urlquery | replaceRE `\+` "%20" -}}
+{{- $mailSubject := printf "Check out this post on %s" site.Params.title | urlquery | replaceRE `\+` "%20" -}}
 {{- $mailBody := printf "%s\n\n%s" $page.Title $permalink | urlquery | replaceRE `\+` "%20" -}}
 {{- $mailHref := printf "mailto:?subject=%s&body=%s" $mailSubject $mailBody -}}
 
