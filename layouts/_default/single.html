@@ -102,6 +102,11 @@
         </div>
         {{ end }}
         
+        <!-- Share Buttons -->
+        {{ if ne site.Params.blog_settings.showShareButtons false }}
+        {{ partial "components/share-buttons.html" (dict "page" .) }}
+        {{ end }}
+
         <!-- Support Notice -->
         {{ partial "components/callout.html" (dict "ctxt" . "location" "single") }}
 

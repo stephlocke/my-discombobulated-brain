@@ -181,6 +181,23 @@ singletons:
         fields:
           - { label: "Show Reading Time", name: "showReadingTime", widget: "boolean", required: false, hint: "Display estimated reading time on blog posts." }
           - { label: "Show Share Buttons", name: "showShareButtons", widget: "boolean", required: false, hint: "Display share buttons on blog posts." }
+          - label: "Share Buttons"
+            name: "shareButtons"
+            widget: "select"
+            multiple: true
+            required: false
+            hint: "Select which share options to display on blog posts. Leave all unchecked to show none. Drag and drop to reorder."
+            options:
+              - { label: "Bluesky", value: "bluesky" }
+              - { label: "Facebook", value: "facebook" }
+              - { label: "LinkedIn", value: "linkedin" }
+              - { label: "X (Twitter)", value: "x-twitter" }
+              - { label: "Pinterest", value: "pinterest" }
+              - { label: "Reddit", value: "reddit" }
+              - { label: "WhatsApp", value: "whatsapp" }
+              - { label: "Telegram", value: "telegram" }
+              - { label: "Copy link", value: "copy" }
+              - { label: "Email", value: "email" }
           - { label: "Show Date Last Updated", name: "showDateUpdated", widget: "boolean", required: false, hint: "Display the last-updated date on pages where it differs from the published date." }
       - label: "Search"
         name: "configs"
