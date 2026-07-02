@@ -18,7 +18,3 @@ stacked_button_position = "center"
 [configs]
 searchSummaryLength = 250
 searchSummaryLengthMicro = 150
-
-[hugo]
-version = "0.160.1"
-extended = true
