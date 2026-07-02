@@ -15,71 +15,130 @@ publish_mode: editorial_workflow
 
 aliases:
   field_title: &field_title
-    { label: "Title", name: "title", widget: "string", required: false }
+    label: "Title"
+    name: "title"
+    widget: "string"
+    required: false
+    hint: "The title shown at the top of the page and in search results."
   field_description: &field_description
-    { label: "Description", name: "description", widget: "text", required: false }
+    label: "Description"
+    name: "description"
+    widget: "text"
+    required: false
+    hint: "A short summary shown in search results and social media previews."
   field_date: &field_date
-    { label: "Date", name: "date", widget: "datetime", required: false }
+    label: "Date"
+    name: "date"
+    widget: "datetime"
+    required: false
+    hint: "The date this content was published."
   field_draft: &field_draft
-    { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+    label: "Draft"
+    name: "draft"
+    widget: "boolean"
+    default: false
+    required: false
+    hint: "Draft items are not published to the live site."
   field_body: &field_body
-    { label: "Body", name: "body", widget: "markdown", required: false }
+    label: "Body"
+    name: "body"
+    widget: "markdown"
+    required: false
+    hint: "The main content of the page. Supports headings, lists, links, and images."
   field_summary: &field_summary
-    { label: "Summary", name: "summary", widget: "text", required: false }
+    label: "Summary"
+    name: "summary"
+    widget: "text"
+    required: false
+    hint: "A short preview shown on listing pages and in search results. If left blank, the description is used."
   field_headline: &field_headline
-    { label: "Headline", name: "headline", widget: "string", required: false }
+    label: "Headline"
+    name: "headline"
+    widget: "string"
+    required: false
+    hint: "Large display text shown prominently, separate from the page title."
   field_weight: &field_weight
-    { label: "Weight", name: "weight", widget: "number", required: false }
+    label: "Weight"
+    name: "weight"
+    widget: "number"
+    required: false
+    hint: "Controls the order of items in lists. Lower numbers appear first."
   field_icon: &field_icon
-    { label: "Icon", name: "icon", widget: "string", required: false }
+    label: "Icon"
+    name: "icon"
+    widget: "string"
+    required: false
+    hint: "Icon identifier from the site icon set (e.g. heart, star, arrow-right)."
   field_icon_color: &field_icon_color
-    { label: "Icon Colour", name: "icon_color", widget: "string", required: false }
+    label: "Icon Colour"
+    name: "icon_color"
+    widget: "string"
+    required: false
+    hint: "Colour for the icon. Accepts a CSS colour value or Tailwind class (e.g. text-primary, #007649)."
   field_hero_title: &field_hero_title
-    { label: "Hero Title", name: "hero_title", widget: "string", required: false }
+    label: "Hero Title"
+    name: "hero_title"
+    widget: "string"
+    required: false
+    hint: "The large heading shown in the hero banner at the top of the homepage."
   field_hero_body: &field_hero_body
-    { label: "Hero Body", name: "hero_body", widget: "text", required: false }
+    label: "Hero Body"
+    name: "hero_body"
+    widget: "text"
+    required: false
+    hint: "Supporting text shown below the hero title on the homepage."
 
   field_resource: &field_resource
     label: "Image"
     name: "resource"
     widget: "object"
     required: false
+    hint: "The main image for this content, shown at the top of the page."
     fields:
-      - { label: "Image", name: "src", widget: "image", required: false }
+      - { label: "Image", name: "src", widget: "image" }
       - { label: "Alt text", name: "alt", widget: "string", required: false, hint: "Describe the image for screen readers and search engines." }
 
   field_display: &field_display
     label: "Display"
     name: "display"
     widget: "object"
-    required: false
+    hint: "Controls how items in this section are displayed."
     fields:
-      - { label: "Type", name: "type", widget: "string", required: false }
-      - { label: "Clickable", name: "clickable", widget: "boolean", required: false }
-      - { label: "Show title", name: "show_title", widget: "boolean", required: false }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        hint: "Carousel — items in a horizontally scrollable row. Grid — items arranged in a multi-column layout."
+        options:
+          - { label: "Carousel", value: "carousel" }
+          - { label: "Grid", value: "grid" }
+      - { label: "Clickable", name: "clickable", widget: "boolean", required: false, hint: "When on, each item links to its full content page." }
+      - { label: "Show title", name: "show_title", widget: "boolean", required: false, hint: "When on, the item's title is shown beneath its image." }
 
   field_buttons: &field_buttons
     label: "Buttons"
     name: "buttons"
     widget: "list"
     required: false
+    hint: "Call-to-action buttons shown in this section."
     fields:
-      - { label: "URL", name: "href", widget: "string" }
-      - { label: "Variant", name: "type", widget: "string" }
-      - { label: "Label", name: "label", widget: "string" }
+      - { label: "URL", name: "href", widget: "string", hint: "The page or external URL this button links to." }
+      - { label: "Variant", name: "type", widget: "hidden" }
+      - { label: "Label", name: "label", widget: "string", hint: "The text shown on the button." }
 
   # build.render is always "never" for CTAs and callouts — hidden so users cannot change it
   field_build: &field_build
-    label: "Build"
     name: "build"
-    widget: "object"
-    required: false
-    fields:
-      - { label: "Render", name: "render", widget: "hidden", default: "never" }
+    widget: "hidden"
+    default:
+      render: "never"
 
   # Plain text body for CTAs (not markdown)
   field_cta_body: &field_cta_body
-    { label: "Body", name: "body", widget: "text", required: false }
+    label: "Body"
+    name: "body"
+    widget: "text"
+    required: false
+    hint: "Supporting text shown below the headline. Plain text only — no formatting."
 
 singletons:
   # Site Settings — manages config/_default/params.toml
@@ -102,8 +161,8 @@ singletons:
         required: false
         hint: "Words and phrases that describe the site, used by search engines."
         field: { label: "Keyword", name: "keyword", widget: "string" }
-      - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo. Recommended: SVG or PNG with a transparent background." }
-      - { label: "Favicon", name: "favicon", widget: "image", required: false, hint: "The small icon shown in browser tabs. Usually the same as the logo." }
+      - { label: "Logo", name: "logo", widget: "image", hint: "The site logo. Recommended: SVG or PNG with a transparent background." }
+      - { label: "Favicon", name: "favicon", widget: "image", hint: "The small icon shown in browser tabs. Usually the same as the logo." }
       - label: "Style"
         name: "style_rules"
         widget: "object"
@@ -433,9 +492,9 @@ collections:
     fields:
       - *field_title
       - *field_description
-      - { label: "Event Date", name: "event_date", widget: "datetime", required: false }
-      - { label: "Start Time", name: "start_time", widget: "datetime", required: false }
-      - { label: "End Time", name: "end_time", widget: "datetime", required: false }
+      - { label: "Event Date", name: "event_date", widget: "datetime" }
+      - { label: "Start Time", name: "start_time", widget: "datetime" }
+      - { label: "End Time", name: "end_time", widget: "datetime" }
       - *field_resource
       - *field_body
 
