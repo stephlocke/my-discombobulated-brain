@@ -115,18 +115,42 @@ singletons:
           - { label: "Heading Font", name: "title_font", widget: "string", hint: "Font stack for headings. Start with a Google Font name followed by fallbacks (e.g. 'Roboto', sans-serif)." }
           - { label: "Body Font", name: "body_font", widget: "string", hint: "Font stack for body text." }
           - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
-      - label: "Homepage Display"
-        name: "homepage_config"
+      - label: "Search"
+        name: "configs"
         widget: "object"
-        hint: "Controls the hero section — the large banner at the top of the homepage. 'Overview' fills it with a grid of content cards; 'CTA' fills it with a call-to-action panel (headline, body text, and buttons)."
+        required: false
         fields:
-          - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", hint: "'Overview' shows a grid of content cards. 'CTA' shows a full-width call-to-action panel." }
-          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero image." }
-          - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", required: false }
-          - { label: "Show Services Section", name: "servicesSection", widget: "boolean", required: false }
-          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", required: false }
-          - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", required: false }
-          - { label: "Show Blog Section", name: "blogSection", widget: "boolean", required: false }
+          - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, hint: "Maximum characters shown in a full search result summary." }
+          - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, hint: "Characters shown in compact desktop search bar results." }
+
+  # Homepage Settings — manages data/homepage.toml
+  - name: "homepage-settings"
+    label: "Homepage"
+    icon: tune
+    file: "data/homepage.toml"
+    format: "toml"
+    media_folder: "static/images"
+    public_folder: "images"
+    editor:
+      preview: false
+    fields:
+      - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", hint: "'Overview' shows a grid of content cards. 'CTA' shows a full-width call-to-action panel." }
+      - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero image." }
+      - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", required: false }
+      - { label: "Show Services Section", name: "servicesSection", widget: "boolean", required: false }
+      - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", required: false }
+      - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", required: false }
+      - { label: "Show Blog Section", name: "blogSection", widget: "boolean", required: false }
+
+  # Contact Settings — manages data/contact.toml
+  - name: "contact-settings"
+    label: "Contact"
+    icon: contact_mail
+    file: "data/contact.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
       - { label: "General Email", name: "email", widget: "string", required: false, hint: "Fallback email address shown across the site." }
       - { label: "General Phone", name: "phone", widget: "string", required: false }
       - { label: "Contact Page Format", name: "contactFormat", widget: "select", options: ["list", "form"], default: "list", hint: "'List' shows contact details as a table. 'Form' shows a contact form." }
@@ -149,24 +173,40 @@ singletons:
           - { label: "Contact Type", name: "name", widget: "string", hint: "E.g. General Enquiries, Donations, Volunteering." }
           - { label: "Email", name: "email", widget: "string", required: false }
           - { label: "Phone", name: "phone", widget: "string", required: false }
-      - label: "Footer"
-        name: "footer"
+
+  # Footer Settings — manages data/footer.toml
+  - name: "footer-settings"
+    label: "Footer"
+    icon: horizontal_split
+    file: "data/footer.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - label: "About"
+        name: "about_section"
         widget: "object"
         fields:
-          - label: "About"
-            name: "about_section"
-            widget: "object"
-            fields:
-              - { label: "Address", name: "address", widget: "string", required: false }
-              - { label: "Company Registration Number", name: "company", widget: "string", required: false }
-              - { label: "Charity Registration Number", name: "charity", widget: "string", required: false }
-          - label: "Support"
-            name: "support_section"
-            widget: "object"
-            fields:
-              - { label: "Support Email", name: "email", widget: "string", required: false }
-              - { label: "Support Phone", name: "phone", widget: "string", required: false }
-      - label: "Social Media"
+          - { label: "Address", name: "address", widget: "string", required: false }
+          - { label: "Company Registration Number", name: "company", widget: "string", required: false }
+          - { label: "Charity Registration Number", name: "charity", widget: "string", required: false }
+      - label: "Support"
+        name: "support_section"
+        widget: "object"
+        fields:
+          - { label: "Support Email", name: "email", widget: "string", required: false }
+          - { label: "Support Phone", name: "phone", widget: "string", required: false }
+
+  # Social Media Settings — manages data/socials.toml
+  - name: "socials-settings"
+    label: "Social Media"
+    icon: share
+    file: "data/socials.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - label: "Social Media Links"
         name: "socials"
         widget: "list"
         required: false
@@ -175,37 +215,36 @@ singletons:
           - { label: "Icon Name", name: "icon", widget: "string", hint: "Icon identifier (e.g. facebook, instagram, x-twitter, youtube, linkedin)." }
           - { label: "URL", name: "url", widget: "string" }
           - { label: "Accessible Label", name: "label", widget: "string", hint: "Label for screen readers (e.g. 'Facebook', 'Instagram')." }
-      - label: "Blog Settings"
-        name: "blog_settings"
-        widget: "object"
-        fields:
-          - { label: "Show Reading Time", name: "showReadingTime", widget: "boolean", required: false, hint: "Display estimated reading time on blog posts." }
-          - { label: "Show Share Buttons", name: "showShareButtons", widget: "boolean", required: false, hint: "Display share buttons on blog posts." }
-          - label: "Share Buttons"
-            name: "shareButtons"
-            widget: "select"
-            multiple: true
-            required: false
-            hint: "Select which share options to display on blog posts. Leave all unchecked to show none. Drag and drop to reorder."
-            options:
-              - { label: "Bluesky", value: "bluesky" }
-              - { label: "Facebook", value: "facebook" }
-              - { label: "LinkedIn", value: "linkedin" }
-              - { label: "X (Twitter)", value: "x-twitter" }
-              - { label: "Pinterest", value: "pinterest" }
-              - { label: "Reddit", value: "reddit" }
-              - { label: "WhatsApp", value: "whatsapp" }
-              - { label: "Telegram", value: "telegram" }
-              - { label: "Copy link", value: "copy" }
-              - { label: "Email", value: "email" }
-          - { label: "Show Date Last Updated", name: "showDateUpdated", widget: "boolean", required: false, hint: "Display the last-updated date on pages where it differs from the published date." }
-      - label: "Search"
-        name: "configs"
-        widget: "object"
+
+  # Blog Settings — manages data/blog.toml
+  - name: "blog-settings"
+    label: "Blog"
+    icon: rss_feed
+    file: "data/blog.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - { label: "Show Reading Time", name: "showReadingTime", widget: "boolean", required: false, hint: "Display estimated reading time on blog posts." }
+      - { label: "Show Share Buttons", name: "showShareButtons", widget: "boolean", required: false, hint: "Display share buttons on blog posts." }
+      - label: "Share Buttons"
+        name: "shareButtons"
+        widget: "select"
+        multiple: true
         required: false
-        fields:
-          - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, hint: "Maximum characters shown in a full search result summary." }
-          - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, hint: "Characters shown in compact desktop search bar results." }
+        hint: "Select which share options to display on blog posts. Leave all unchecked to show none. Drag and drop to reorder."
+        options:
+          - { label: "Bluesky", value: "bluesky" }
+          - { label: "Facebook", value: "facebook" }
+          - { label: "LinkedIn", value: "linkedin" }
+          - { label: "X (Twitter)", value: "x-twitter" }
+          - { label: "Pinterest", value: "pinterest" }
+          - { label: "Reddit", value: "reddit" }
+          - { label: "WhatsApp", value: "whatsapp" }
+          - { label: "Telegram", value: "telegram" }
+          - { label: "Copy link", value: "copy" }
+          - { label: "Email", value: "email" }
+      - { label: "Show Date Last Updated", name: "showDateUpdated", widget: "boolean", required: false, hint: "Display the last-updated date on pages where it differs from the published date." }
 
 collections:
 

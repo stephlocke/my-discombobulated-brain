@@ -6,7 +6,7 @@
 {{- $mailBody := printf "%s\n\n%s" $page.Title $permalink | urlquery | replaceRE `\+` "%20" -}}
 {{- $mailHref := printf "mailto:?subject=%s&body=%s" $mailSubject $mailBody -}}
 
-{{- $shareButtons := site.Params.blog_settings.shareButtons -}}
+{{- $shareButtons := hugo.Data.blog.shareButtons -}}
 {{- $showAll := not $shareButtons -}}
 
 <div class="mt-12 pt-8 border-t border-white-darken">

@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $contactFormat := .Site.Params.contactFormat | default "list" -}}
+{{- $contactFormat := hugo.Data.contact.contactFormat | default "list" -}}
 {{- $cardRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") -}}
 
 <article class="container py-12">
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          {{- range .Site.Params.contact -}}
+          {{- range hugo.Data.contact.contact -}}
           {{- if or .email .phone -}}
           <tr class="border-t border-white-darken">
             <th scope="row" class="px-4 py-3 font-medium text-off-black">{{ .name }}</th>
@@ -47,8 +47,8 @@
       </table>
     </section>
     {{- else if eq $contactFormat "form" -}}
-    {{- $formName := site.Params.contact_form.form_name | default "contact" -}}
-    {{- $successUrl := site.Params.contact_form.success_url | default "" -}}
+    {{- $formName := hugo.Data.contact.contact_form.form_name | default "contact" -}}
+    {{- $successUrl := hugo.Data.contact.contact_form.success_url | default "" -}}
     <section aria-labelledby="contact-form-heading">
       <h2 id="contact-form-heading" class="text-2xl font-bold text-off-black mb-0">Send Us a Message</h2>
 

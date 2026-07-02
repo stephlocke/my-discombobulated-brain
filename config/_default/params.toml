@@ -1,88 +1,17 @@
 author = "My Discombobulated Brain"
 description = "Compassionate mental health support, resources, and community for people and carers across the UK."
-keywords = [ "mental health", "charity", "support", "wellness", "resources" ]
+keywords = ["mental health", "charity", "support", "wellness", "resources"]
 logo = "images/my-discombob-logo.svg"
 favicon = "images/my-discombob-logo.svg"
-email = "contact@example.org"
-phone = ""
-contactFormat = "list"
 
 [style_rules]
-edges = "curved"
+edges = "round"
 expanded_nav = false
 primary_color = "#007649"
 secondary_color = "#EAB308"
 title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
 body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
 stacked_button_position = "center"
-
-[homepage_config]
-hero_format = "overview"
-hero_image = "hero-image.webp"
-upcomingEventsSection = true
-servicesSection = true
-workingWithSection = true
-awardsSection = true
-blogSection = false
-
-[contact_form]
-form_name = "contact"
-success_url = ""
-
-[[contact]]
-name = "General Enquiries"
-email = "contact@example.org"
-phone = "0123 456 7890"
-
-[[contact]]
-name = "Donations"
-email = "donations@example.org"
-phone = "0123 456 7890"
-
-[[contact]]
-name = "Volunteering"
-email = "volunteers@example.org"
-phone = "0123 456 7890"
-
-[[contact]]
-name = "Media Enquiries"
-email = "media@example.org"
-phone = "0123 456 7890"
-
-[footer.about_section]
-address = "123 Wellness Way, Mindful City, MC1 1CM"
-company = "12345678"
-charity = "87654321"
-
-[footer.support_section]
-email = "support@example.org"
-phone = "0123 456 7890"
-
-[[socials]]
-icon = "facebook"
-url = "https://www.facebook.com/mydiscombobulatedbrain/"
-label = "Facebook"
-
-[[socials]]
-icon = "instagram"
-url = "https://www.instagram.com/discombobbrain/"
-label = "Instagram"
-
-[[socials]]
-icon = "x-twitter"
-url = "https://x.com/DiscombobBrain"
-label = "X (formerly Twitter)"
-
-[[socials]]
-icon = "youtube"
-url = "https://www.youtube.com/channel/UCozMcQJbz5B1OB0xUfZvP-w"
-label = "YouTube"
-
-[blog_settings]
-showReadingTime = true
-showShareButtons = true
-shareButtons = [ "bluesky", "facebook", "linkedin", "pinterest", "reddit", "whatsapp", "email", "copy" ]
-showDateUpdated = false
 
 [configs]
 searchSummaryLength = 250
