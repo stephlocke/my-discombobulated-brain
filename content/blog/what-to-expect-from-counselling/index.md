@@ -1,6 +1,7 @@
 ---
 title: "What to Expect from Counselling"
 date: 2026-05-11
+lastmod: 2026-07-02
 summary: "A guide to the counselling process for first-timers."
 description: "Counselling can feel daunting—here's what happens and how it can help."
 resource:
@@ -8,6 +9,5 @@ resource:
     alt: A group of people in front of a festival flag
 ---
 
-
-Counselling is a safe space to talk and find support.
+Counselling is a safe space to talk, listen, and find support.
 

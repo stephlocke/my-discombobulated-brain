@@ -82,7 +82,7 @@ label = "YouTube"
 showReadingTime = true
 showShareButtons = true
 shareButtons = [ "bluesky", "facebook", "linkedin", "pinterest", "reddit", "whatsapp", "email", "copy" ]
-showDateUpdated = true
+showDateUpdated = false
 
 [configs]
 searchSummaryLength = 250
