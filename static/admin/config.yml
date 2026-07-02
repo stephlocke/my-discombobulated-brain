@@ -81,118 +81,116 @@ aliases:
   field_cta_body: &field_cta_body
     { label: "Body", name: "body", widget: "text", required: false }
 
-collections:
-
-  # ─── 1. SITE SETTINGS ──────────────────────────────────────────────────────
-  # Edits config/_default/params.toml — only content and style params are exposed.
-  # Hugo build settings, menus, markup, and outputs live in config.toml and are
-  # intentionally excluded. The CMS never touches config.toml.
+singletons:
+  # Site Settings — manages config/_default/params.toml
+  # Hugo build settings live in config.toml and are never touched by the CMS.
   - name: "site-settings"
     label: "Site Settings"
     icon: settings
+    file: "config/_default/params.toml"
+    format: "toml"
     media_folder: "static/images"
     public_folder: "images"
     editor:
       preview: false
-    files:
-      - name: "config"
-        label: "Site Settings"
-        file: "config/_default/params.toml"
-        format: "toml"
+    fields:
+      - { label: "Site Author", name: "author", widget: "string", required: false, hint: "The name or organisation that owns this website." }
+      - { label: "Site Description", name: "description", widget: "text", required: false, hint: "A short summary shown in search engine results and social shares." }
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        required: false
+        hint: "Words and phrases that describe the site, used by search engines."
+        field: { label: "Keyword", name: "keyword", widget: "string" }
+      - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo. Recommended: SVG or PNG with a transparent background." }
+      - { label: "Favicon", name: "favicon", widget: "image", required: false, hint: "The small icon shown in browser tabs. Usually the same as the logo." }
+      - label: "Style"
+        name: "style_rules"
+        widget: "object"
         fields:
-          - { label: "Site Author", name: "author", widget: "string", required: false, hint: "The name or organisation that owns this website." }
-          - { label: "Site Description", name: "description", widget: "text", required: false, hint: "A short summary shown in search engine results and social shares." }
-          - label: "Keywords"
-            name: "keywords"
-            widget: "list"
-            required: false
-            hint: "Words and phrases that describe the site, used by search engines."
-            field: { label: "Keyword", name: "keyword", widget: "string" }
-          - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo. Recommended: SVG or PNG with a transparent background." }
-          - { label: "Favicon", name: "favicon", widget: "image", required: false, hint: "The small icon shown in browser tabs. Usually the same as the logo." }
-          - label: "Style"
-            name: "style_rules"
+          - { label: "Edge Style", name: "edges", widget: "select", options: ["sharp", "curved", "round"], default: "round", hint: "Controls the roundness of corners on cards, buttons, and containers." }
+          - { label: "Expanded Navigation", name: "expanded_nav", widget: "boolean", required: false, hint: "When on, the navigation bar expands at the top of the page and shrinks on scroll." }
+          - { label: "Primary Colour", name: "primary_color", widget: "color", allowInput: true, hint: "Main brand colour." }
+          - { label: "Secondary Colour", name: "secondary_color", widget: "color", allowInput: true, hint: "Accent colour used for highlights and hover states." }
+          - { label: "Heading Font", name: "title_font", widget: "string", hint: "Font stack for headings. Start with a Google Font name followed by fallbacks (e.g. 'Roboto', sans-serif)." }
+          - { label: "Body Font", name: "body_font", widget: "string", hint: "Font stack for body text." }
+          - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
+      - label: "Homepage Display"
+        name: "homepage_config"
+        widget: "object"
+        hint: "Controls the hero section — the large banner at the top of the homepage. 'Overview' fills it with a grid of content cards; 'CTA' fills it with a call-to-action panel (headline, body text, and buttons)."
+        fields:
+          - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", hint: "'Overview' shows a grid of content cards. 'CTA' shows a full-width call-to-action panel." }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero image." }
+          - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", required: false }
+          - { label: "Show Services Section", name: "servicesSection", widget: "boolean", required: false }
+          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", required: false }
+          - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", required: false }
+          - { label: "Show Blog Section", name: "blogSection", widget: "boolean", required: false }
+      - { label: "General Email", name: "email", widget: "string", required: false, hint: "Fallback email address shown across the site." }
+      - { label: "General Phone", name: "phone", widget: "string", required: false }
+      - { label: "Contact Page Format", name: "contactFormat", widget: "select", options: ["list", "form"], default: "list", hint: "'List' shows contact details as a table. 'Form' shows a contact form." }
+      - label: "Netlify Form Details"
+        name: "contact_form"
+        widget: "object"
+        hint: "Settings for the contact form. The form is always submitted through Netlify."
+        fields:
+          - { label: "Form Name", name: "form_name", widget: "string", default: "contact", hint: "Identifies this form in your Netlify dashboard. Use a short lowercase name with no spaces (e.g. contact, enquiries)." }
+          - { label: "Success Redirect URL", name: "success_url", widget: "string", required: false, hint: "Page to show after a successful submission (e.g. /thank-you). Leave blank to use Netlify's default confirmation page." }
+      - label: "Contact Details"
+        name: "contact"
+        widget: "list"
+        required: false
+        hint: "Contact details shown on the contact page. Add one entry per contact type (e.g. General Enquiries, Donations)."
+        condition:
+          field: "contactFormat"
+          value: "list"
+        fields:
+          - { label: "Contact Type", name: "name", widget: "string", hint: "E.g. General Enquiries, Donations, Volunteering." }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - { label: "Phone", name: "phone", widget: "string", required: false }
+      - label: "Footer"
+        name: "footer"
+        widget: "object"
+        fields:
+          - label: "About"
+            name: "about_section"
             widget: "object"
             fields:
-              - { label: "Edge Style", name: "edges", widget: "select", options: ["sharp", "curved", "round"], default: "round", hint: "Controls the roundness of corners on cards, buttons, and containers." }
-              - { label: "Expanded Navigation", name: "expanded_nav", widget: "boolean", required: false, hint: "When on, the navigation bar expands at the top of the page and shrinks on scroll." }
-              - { label: "Primary Colour", name: "primary_color", widget: "color", allowInput: true, hint: "Main brand colour." }
-              - { label: "Secondary Colour", name: "secondary_color", widget: "color", allowInput: true, hint: "Accent colour used for highlights and hover states." }
-              - { label: "Heading Font", name: "title_font", widget: "string", hint: "Font stack for headings. Start with a Google Font name followed by fallbacks (e.g. 'Roboto', sans-serif)." }
-              - { label: "Body Font", name: "body_font", widget: "string", hint: "Font stack for body text." }
-              - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
-          - label: "Homepage Display"
-            name: "homepage_config"
-            widget: "object"
-            hint: "Controls the hero section — the large banner at the top of the homepage. 'Overview' fills it with a grid of content cards; 'CTA' fills it with a call-to-action panel (headline, body text, and buttons)."
-            fields:
-              - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", hint: "'Overview' shows a grid of content cards. 'CTA' shows a full-width call-to-action panel." }
-              - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero image." }
-              - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", required: false }
-              - { label: "Show Services Section", name: "servicesSection", widget: "boolean", required: false }
-              - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", required: false }
-              - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", required: false }
-              - { label: "Show Blog Section", name: "blogSection", widget: "boolean", required: false }
-          - { label: "General Email", name: "email", widget: "string", required: false, hint: "Fallback email address shown across the site." }
-          - { label: "General Phone", name: "phone", widget: "string", required: false }
-          - { label: "Contact Page Format", name: "contactFormat", widget: "select", options: ["list", "form"], default: "list", hint: "'List' shows contact details as a table. 'Form' shows a contact form." }
-          - label: "Netlify Form Details"
-            name: "contact_form"
-            widget: "object"
-            hint: "Settings for the contact form. The form is always submitted through Netlify."
-            fields:
-              - { label: "Form Name", name: "form_name", widget: "string", default: "contact", hint: "Identifies this form in your Netlify dashboard. Use a short lowercase name with no spaces (e.g. contact, enquiries)." }
-              - { label: "Success Redirect URL", name: "success_url", widget: "string", required: false, hint: "Page to show after a successful submission (e.g. /thank-you). Leave blank to use Netlify's default confirmation page." }
-          - label: "Contact Details"
-            name: "contact"
-            widget: "list"
-            required: false
-            hint: "Contact details shown on the contact page. Add one entry per contact type (e.g. General Enquiries, Donations)."
-            condition:
-              field: "contactFormat"
-              value: "list"
-            fields:
-              - { label: "Contact Type", name: "name", widget: "string", hint: "E.g. General Enquiries, Donations, Volunteering." }
-              - { label: "Email", name: "email", widget: "string", required: false }
-              - { label: "Phone", name: "phone", widget: "string", required: false }
-          - label: "Footer"
-            name: "footer"
+              - { label: "Address", name: "address", widget: "string", required: false }
+              - { label: "Company Registration Number", name: "company", widget: "string", required: false }
+              - { label: "Charity Registration Number", name: "charity", widget: "string", required: false }
+          - label: "Support"
+            name: "support_section"
             widget: "object"
             fields:
-              - label: "About"
-                name: "about_section"
-                widget: "object"
-                fields:
-                  - { label: "Address", name: "address", widget: "string", required: false }
-                  - { label: "Company Registration Number", name: "company", widget: "string", required: false }
-                  - { label: "Charity Registration Number", name: "charity", widget: "string", required: false }
-              - label: "Support"
-                name: "support_section"
-                widget: "object"
-                fields:
-                  - { label: "Support Email", name: "email", widget: "string", required: false }
-                  - { label: "Support Phone", name: "phone", widget: "string", required: false }
-          - label: "Social Media"
-            name: "socials"
-            widget: "list"
-            required: false
-            hint: "Social media profile links shown in the footer."
-            fields:
-              - { label: "Icon Name", name: "icon", widget: "string", hint: "Icon identifier (e.g. facebook, instagram, x-twitter, youtube, linkedin)." }
-              - { label: "URL", name: "url", widget: "string" }
-              - { label: "Accessible Label", name: "label", widget: "string", hint: "Label for screen readers (e.g. 'Facebook', 'Instagram')." }
+              - { label: "Support Email", name: "email", widget: "string", required: false }
+              - { label: "Support Phone", name: "phone", widget: "string", required: false }
+      - label: "Social Media"
+        name: "socials"
+        widget: "list"
+        required: false
+        hint: "Social media profile links shown in the footer."
+        fields:
+          - { label: "Icon Name", name: "icon", widget: "string", hint: "Icon identifier (e.g. facebook, instagram, x-twitter, youtube, linkedin)." }
+          - { label: "URL", name: "url", widget: "string" }
+          - { label: "Accessible Label", name: "label", widget: "string", hint: "Label for screen readers (e.g. 'Facebook', 'Instagram')." }
+      - label: "Blog Settings"
+        name: "blog_settings"
+        widget: "object"
+        fields:
           - { label: "Show Reading Time", name: "showReadingTime", widget: "boolean", required: false, hint: "Display estimated reading time on blog posts." }
           - { label: "Show Share Buttons", name: "showShareButtons", widget: "boolean", required: false, hint: "Display share buttons on blog posts." }
           - { label: "Show Date Last Updated", name: "showDateUpdated", widget: "boolean", required: false, hint: "Display the last-updated date on pages where it differs from the published date." }
-          - label: "Search"
-            name: "configs"
-            widget: "object"
-            required: false
-            fields:
-              - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, hint: "Maximum characters shown in a full search result summary." }
-              - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, hint: "Characters shown in compact desktop search bar results." }
+      - label: "Search"
+        name: "configs"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, hint: "Maximum characters shown in a full search result summary." }
+          - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, hint: "Characters shown in compact desktop search bar results." }
 
-  - divider: true
+collections:
 
   # ─── 2. HOMEPAGE ───────────────────────────────────────────────────────────
   # Hero content and CTA references for the homepage.
