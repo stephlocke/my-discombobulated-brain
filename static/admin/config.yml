@@ -469,7 +469,6 @@ collections:
             search_fields: ["title"]
             required: false
             hint: "The full-width call-to-action block above the page footer. Create options under 'CTA — Footer' first. Leave blank for no footer CTA block."
-          - *field_body
 
   # ─── 3. PAGES ──────────────────────────────────────────────────────────────
   - name: "pages"
@@ -619,11 +618,19 @@ collections:
     fields:
       - *field_title
       - *field_description
+      - { label: "Summary", name: "summary", widget: "text", required: true, hint: "A short paragraph introducing this service, shown on the homepage above the summary points. This must not be left blank." }
+      - label: "Summary Points"
+        name: "summary_bullets"
+        widget: "list"
+        required: true
+        min: 1
+        hint: "Short bullet points shown on the homepage below the summary. Add at least one."
+        field: { label: "Point", name: "point", widget: "string", required: true }
       - *field_weight
       - *field_icon
       - *field_icon_color
       - *field_resource
-      - *field_body
+      - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
 
   # ─── 8. WORKING WITH ───────────────────────────────────────────────────────
   - name: "working-with"
