@@ -73,6 +73,117 @@
   <svg class="{{ $class }}" viewBox="0 0 640 640" fill="currentColor" aria-hidden="true">
     <path d="M498.8 250.5L541.3 208L576 208C593.7 208 608 193.7 608 176L608 112C608 94.3 593.7 80 576 80L255.6 80C226.6 80 198.3 89.3 174.9 106.5L48.3 199.8C30.5 212.9 26.7 237.9 39.8 255.7C52.9 273.5 77.9 277.3 95.7 264.2L215.4 176L328 176C341.3 176 352 186.7 352 200C352 213.3 341.3 224 328 224L256 224C238.3 224 224 238.3 224 256C224 273.7 238.3 288 256 288L408.2 288C442.1 288 474.7 274.5 498.7 250.5zM141.3 389.5L98.7 432L64 432C46.3 432 32 446.3 32 464L32 528C32 545.7 46.3 560 64 560L384.5 560C413.5 560 441.8 550.7 465.2 533.5L591.8 440.2C609.6 427.1 613.4 402.1 600.3 384.3C587.2 366.5 562.2 362.7 544.4 375.8L424.6 464L312 464C298.7 464 288 453.3 288 440C288 426.7 298.7 416 312 416L384 416C401.7 416 416 401.7 416 384C416 366.3 401.7 352 384 352L231.8 352C197.9 352 165.3 365.5 141.3 389.5z" />
   </svg>
+{{- else if eq $name "heart" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 20.5s-7-4.35-9.5-8.6C.9 8.9 2.3 5.5 5.6 5.5c1.9 0 3.4 1 4.9 2.9 1.5-1.9 3-2.9 4.9-2.9 3.3 0 4.7 3.4 3.1 6.4C19 16.15 12 20.5 12 20.5Z" />
+  </svg>
+{{- else if eq $name "star" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 3.5Z" />
+  </svg>
+{{- else if eq $name "shield-check" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-2.5Z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+{{- else if eq $name "lightbulb" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.45 1 .95 1.1 1.6h4.8c.1-.65.5-1.15 1.1-1.6A6 6 0 0 0 12 3Z" />
+    <path d="M9.7 18.5h4.6" />
+    <path d="M10.3 21h3.4" />
+  </svg>
+{{- else if eq $name "users" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="9" cy="8" r="3" />
+    <path d="M3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5" />
+    <circle cx="17" cy="9" r="2.3" />
+    <path d="M15.7 14.3c2.3.5 4 2.5 4.3 5.2" />
+  </svg>
+{{- else if eq $name "home" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 11.5 12 4l8 7.5" />
+    <path d="M6 10v9.5h5v-5.5h2v5.5h5V10" />
+  </svg>
+{{- else if eq $name "book-open" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 6c-1.7-1.2-4-2-6.5-2v13c2.5 0 4.8.8 6.5 2 1.7-1.2 4-2 6.5-2V4c-2.5 0-4.8.8-6.5 2Z" />
+    <path d="M12 6v13" />
+  </svg>
+{{- else if eq $name "chart-bar" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4.5 20V13" stroke-width="3.2" />
+    <path d="M12 20V8" stroke-width="3.2" />
+    <path d="M19.5 20v-6" stroke-width="3.2" />
+  </svg>
+{{- else if eq $name "calendar" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.75" y="5" width="16.5" height="15" rx="2" />
+    <path d="M3.75 9.5h16.5" />
+    <path d="M8 3.5v3" />
+    <path d="M16 3.5v3" />
+  </svg>
+{{- else if eq $name "briefcase" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.5" y="7.5" width="17" height="11" rx="1.8" />
+    <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5" />
+    <path d="M3.5 12.5h17" />
+  </svg>
+{{- else if eq $name "gift" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.5" y="9.5" width="17" height="4" rx="0.8" />
+    <rect x="4.5" y="13.5" width="15" height="7" rx="1" />
+    <path d="M12 9.5v11" />
+    <path d="M12 9.5c-1.2-2.5-5.5-2.7-5.5-.3 0 1.6 2.4 1.9 5.5.3Z" />
+    <path d="M12 9.5c1.2-2.5 5.5-2.7 5.5-.3 0 1.6-2.4 1.9-5.5.3Z" />
+  </svg>
+{{- else if eq $name "phone" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M6.5 3.5h3l1.2 4-2 1.5a12 12 0 0 0 5.3 5.3l1.5-2 4 1.2v3a1.7 1.7 0 0 1-1.9 1.7A16.5 16.5 0 0 1 4.8 5.4a1.7 1.7 0 0 1 1.7-1.9Z" />
+  </svg>
+{{- else if eq $name "map-pin" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 21s-6.5-5.7-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.3-6.5 11-6.5 11Z" />
+    <circle cx="12" cy="10" r="2.3" />
+  </svg>
+{{- else if eq $name "clock" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <path d="M12 7.5V12l3.2 2" />
+  </svg>
+{{- else if eq $name "check-circle" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <path d="M8 12.3l2.7 2.7 5.3-5.5" />
+  </svg>
+{{- else if eq $name "target" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <circle cx="12" cy="12" r="4.5" />
+    <circle cx="12" cy="12" r=".75" fill="currentColor" stroke="none" />
+  </svg>
+{{- else if eq $name "rocket" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5c2.5 2 3.8 5 3.5 9-1 .3-2.3.5-3.5.5s-2.5-.2-3.5-.5c-.3-4 1-7 3.5-9Z" />
+    <path d="M9.2 13c-1.8.6-2.7 2.3-2.7 4.5 2.2 0 3.9-.9 4.5-2.7" />
+    <path d="M14.8 13c1.8.6 2.7 2.3 2.7 4.5-2.2 0-3.9-.9-4.5-2.7" />
+    <circle cx="12" cy="9" r="1.3" fill="currentColor" stroke="none" />
+    <path d="M10.3 17.5 9.5 20.5 12 19l2.5 1.5-.8-3" />
+  </svg>
+{{- else if eq $name "camera" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M8 7l1.5-2.5h5L16 7" />
+    <circle cx="12" cy="13.5" r="3.5" />
+  </svg>
+{{- else if eq $name "wrench" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L4 16.5 7.5 20l5.3-5.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2.1-2.1 2.6-2.6Z" />
+  </svg>
+{{- else if eq $name "sparkles" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5 13 8l4.5 1-4.5 1-1 4.5-1-4.5L6.5 9l4.5-1 1-4.5Z" />
+    <path d="M18.5 15.5 19 17.5l2 .5-2 .5-.5 2-.5-2-2-.5 2-.5.5-2Z" />
+  </svg>
 {{- else -}}
   {{/* Fallback icon for unsupported icon names - displays an alert/info indicator */}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

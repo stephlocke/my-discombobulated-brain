@@ -1,5 +1,3 @@
-email = "contact@example.org"
-phone = ""
 contactFormat = "list"
 
 [contact_form]

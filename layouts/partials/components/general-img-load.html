@@ -91,7 +91,23 @@
   {{ end }}
 
   {{ if $image }}
-    {{ with .Resources.Get $image }}
+    <!-- Resolve the image: first as a page bundle resource, then fall back to the
+         global static/images asset pipeline (used when the CMS media library
+         stores an image outside the current page's bundle). -->
+    {{ $imageLookup := strings.TrimPrefix "./" $image }}
+    {{ $imgResource := .Resources.Get $imageLookup }}
+    {{ if not $imgResource }}
+      {{ $imgResource = resources.Get (strings.TrimPrefix "/" $imageLookup) }}
+    {{ end }}
+    {{ with $imgResource }}
+      <!-- SVGs don't support .Width/.Height in Hugo, so fall back to blank
+           (the image partial omits the attribute entirely when blank). -->
+      {{ $safeWidth := "" }}
+      {{ $safeHeight := "" }}
+      {{ if not $is_svg }}
+        {{ $safeWidth = .Width }}
+        {{ $safeHeight = .Height }}
+      {{ end }}
       {{ if eq $placement "Hero" }}
         <div class="mb-6 content-center md:col-10 md:mb-0 lg:col-6">
           {{ if $is_video }}
@@ -109,14 +125,18 @@
           {{ else }}
             {{ $heroImage := . }}
             {{ $heroImageSrcset := "" }}
+            {{ $heroImageWidth := $safeWidth }}
+            {{ $heroImageHeight := $safeHeight }}
             {{ if and (not $is_svg) (not $is_gif) }}
               {{ $heroMobile := .Fill "640x360 webp q58" }}
               {{ $heroTablet := .Fill "960x540 webp q62" }}
               {{ $heroDesktop := .Fill "1280x720 webp q66" }}
               {{ $heroImage = $heroDesktop }}
+              {{ $heroImageWidth = $heroDesktop.Width }}
+              {{ $heroImageHeight = $heroDesktop.Height }}
               {{ $heroImageSrcset = printf "%s 640w, %s 960w, %s 1280w" $heroMobile.RelPermalink $heroTablet.RelPermalink $heroDesktop.RelPermalink }}
             {{ end }}
-            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImage.Width "Height" $heroImage.Height "Srcset" $heroImageSrcset "Sizes" "(max-width: 768px) 100vw, 768px") }}
+            {{ partial "components/image" (dict "Src" $heroImage.RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "Loading" "eager" "Fetchpriority" "high" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $heroImageWidth "Height" $heroImageHeight "Srcset" $heroImageSrcset "Sizes" "(max-width: 768px) 100vw, 768px") }}
           {{ end }}
         </div>
       {{ end }}
@@ -140,7 +160,7 @@
                   {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
                 </video>
               {{ else }}
-                {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+                {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $safeWidth "Height" $safeHeight) }}
               {{ end }}
               <div class="zoomed fixed inset-0 z-50 hidden items-center justify-center bg-overlay peer-checked:flex [&_img]:max-h-full [&_img]:max-w-full [&_img]:cursor-zoom-out [&_video]:max-h-full [&_video]:max-w-full">
                 {{ if $is_video }}
@@ -158,7 +178,7 @@
                     {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
                   </video>
                 {{ else }}
-                  {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+                  {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $safeWidth "Height" $safeHeight) }}
                 {{ end }}
               </div>
             </label>
@@ -178,7 +198,7 @@
                 {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
               </video>
             {{ else }}
-              {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+              {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $safeWidth "Height" $safeHeight) }}
             {{ end }}
           </div>
         {{ end }}
@@ -198,7 +218,7 @@
               {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
             </video>
           {{ else }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "mx-auto w-full h-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $safeWidth "Height" $safeHeight) }}
           {{ end }}
         </div>
       {{ end }}
@@ -258,12 +278,16 @@
             </video>
           {{ else }}
             {{ $sectionSmallImage := . }}
+            {{ $sectionSmallWidth := $safeWidth }}
+            {{ $sectionSmallHeight := $safeHeight }}
             {{ if and (not $is_svg) (not $is_gif) }}
               {{ with .Fit "720x720 webp q72" }}
                 {{ $sectionSmallImage = . }}
+                {{ $sectionSmallWidth = .Width }}
+                {{ $sectionSmallHeight = .Height }}
               {{ end }}
             {{ end }}
-            {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallImage.Width "Height" $sectionSmallImage.Height) }}
+            {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallWidth "Height" $sectionSmallHeight) }}
           {{ end }}
         </div>
       {{ end }}

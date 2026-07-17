@@ -4,7 +4,7 @@ date: 2026-02-02
 description: "Learn about our mission to support mental health and provide resources for those in need"
 ---
 
-{{< general-img-load src="P8220092.webp" alt="Two people standing in a tent holding flyers" placement="Section">}}
+![Two people standing in a tent holding flyers](P8220092.webp)
 
 ## Our Story
 
@@ -25,7 +25,7 @@ Through workshops, resources, and open conversations, we work to increase awaren
 ### Community
 We foster safe, inclusive spaces where people can share their experiences, find connection, and receive support without judgment. No one should face mental health challenges alone.
 
-{{< general-img-load src="IMG_1968.webp" alt="Three people standing in front of a flag for Found Festival" placement="Section">}}
+![Three people standing in front of a flag for Found Festival](IMG_1968.webp)
 
 ## Our Values
 

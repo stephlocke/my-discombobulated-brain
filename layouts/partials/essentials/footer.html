@@ -1,4 +1,5 @@
 {{- $footerLinkRounding := printf "[&_a]:%s" (partial "components/edge-rounding" (dict "shape" "button")) -}}
+{{- $navLabels := dict "home" hugo.Data.nav.home_label "about" hugo.Data.nav.about_label "blog" hugo.Data.nav.blog_label "contact" hugo.Data.nav.contact_label -}}
 <footer class="bg-surface-muted border-t border-border-subtle {{ $footerLinkRounding }}" role="contentinfo">
     <div class="container py-8">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -6,6 +7,7 @@
             <div class="md:border-r md:border-border-subtle md:pr-8">
                 <h3 class="text-lg font-semibold mb-4 text-strong">{{ site.Params.title }}</h3>
                 {{ range $key, $value := hugo.Data.footer.about_section }}
+                {{ if $value }}
                 <p class="text-muted text-sm">
                     <span class="text-primary font-semibold">{{ $key | humanize | title }}:</span>
                     {{ if eq $key "email" }}
@@ -16,6 +18,7 @@
                     {{ $value }}
                     {{ end }}
                 </p>
+                {{ end }}
                 {{ end }}
                 <div class="mt-4">
                     {{ partial "components/social-links" . }}
@@ -28,10 +31,12 @@
                 <nav aria-label="Footer navigation">
                     <ul class="space-y-2">
                         {{ range .Site.Menus.main }}
+                        {{ $navLabel := .Name }}
+                        {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
                         <li>
-                                     <a href="{{ .URL | relLangURL }}" 
+                                     <a href="{{ .URL | relLangURL }}"
                                          class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                                {{ .Name }}
+                                {{ $navLabel }}
                             </a>
                         </li>
                         {{ end }}
@@ -82,7 +87,7 @@
         <div class="mt-0 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm text-muted/75 text-center mx-auto">
-                    {{ site.Params.copyright }}
+                    &copy; {{ site.Params.author }} {{ now.Year }}. All rights reserved.
                 </p>
                 <p class="text-sm text-muted/75 text-center mx-auto">
                     Built with <a href="https://gohugo.io" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Hugo</a> and <a href="https://tailwindcss.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> by <a href="https://stephlocke.com" class="text-primary hover:text-secondary focus:outline-none focus:ring-2 focus:ring-primary" target="_blank" rel="noopener noreferrer">Steph and Zoe Locke</a>.

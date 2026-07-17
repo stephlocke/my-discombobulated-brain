@@ -7,8 +7,6 @@ enableEmoji = true
 enableGitInfo = false
 # Enable RSS
 enableRSS = true
-# Copyright notice
-copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
 
 [params.hugo]
   version = "0.160.1"

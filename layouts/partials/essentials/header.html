@@ -1,4 +1,5 @@
 {{ $shouldExpandNav := .Site.Params.style_rules.expanded_nav | default true }}
+{{ $navLabels := dict "home" hugo.Data.nav.home_label "about" hugo.Data.nav.about_label "blog" hugo.Data.nav.blog_label "contact" hugo.Data.nav.contact_label }}
 <header id="site-header" class="sticky top-0 z-40 border-b border-none bg-primary shadow-md backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95{{ if not $shouldExpandNav }} is-compact{{ end }}" data-expand-nav="{{ if $shouldExpandNav }}true{{ else }}false{{ end }}" role="banner">
     <nav id="site-nav" class="container {{ if $shouldExpandNav }}py-4{{ else }}py-2{{ end }} transition-[padding] duration-300 ease-out" aria-label="Main navigation">
         <div class="relative flex items-center justify-between gap-4">
@@ -18,9 +19,11 @@
             <!-- Desktop Navigation -->
             <div class="hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:space-x-6">
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL | relLangURL }}" 
+                {{ $navLabel := .Name }}
+                {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
+                <a href="{{ .URL | relLangURL }}"
                          class="{{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
-                    {{ .Name }}
+                    {{ $navLabel }}
                 </a>
                 {{ end }}
                 
@@ -72,10 +75,12 @@
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} bg-white/95 p-2 shadow-lg ring-1 ring-primary/10">
             {{ range .Site.Menus.main }}
-            <a href="{{ .URL | relLangURL }}" 
+            {{ $navLabel := .Name }}
+            {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
+            <a href="{{ .URL | relLangURL }}"
                     class="block min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
-                {{ .Name }}
+                {{ $navLabel }}
             </a>
             {{ end }}
             

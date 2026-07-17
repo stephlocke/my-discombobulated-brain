@@ -4,4 +4,4 @@ upcomingEventsSection = true
 servicesSection = true
 workingWithSection = true
 awardsSection = true
-blogSection = false
+blogSection = true

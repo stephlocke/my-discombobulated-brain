@@ -61,17 +61,21 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script>
-    (function () {
-        const googleFontsLink = document.getElementById('google-fonts-exo');
-        if (!googleFontsLink) {
-            return;
-        }
-        googleFontsLink.addEventListener('load', function () {
-            googleFontsLink.rel = 'stylesheet';
-        }, { once: true });
-    }());
-</script>
-<noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">
-</noscript>
+{{- $defaultFontStack := "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" -}}
+{{- $titleFontStack := site.Params.style_rules.title_font | default $defaultFontStack -}}
+{{- $bodyFontStack := site.Params.style_rules.body_font | default $defaultFontStack -}}
+{{- $titleFamily := replaceRE "^'([^']+)'.*$" "$1" $titleFontStack -}}
+{{- $bodyFamily := replaceRE "^'([^']+)'.*$" "$1" $bodyFontStack -}}
+{{- $titleFamilyParam := replace $titleFamily " " "+" -}}
+{{- $bodyFamilyParam := replace $bodyFamily " " "+" -}}
+{{- $fontFamilies := slice $titleFamilyParam -}}
+{{- if ne $bodyFamilyParam $titleFamilyParam -}}
+  {{- $fontFamilies = $fontFamilies | append $bodyFamilyParam -}}
+{{- end -}}
+{{- $fontQuery := "" -}}
+{{- range $i, $f := $fontFamilies -}}
+  {{- if $i -}}{{- $fontQuery = printf "%s&" $fontQuery -}}{{- end -}}
+  {{- $fontQuery = printf "%sfamily=%s:ital,wght@0,300..800;1,300..800" $fontQuery $f -}}
+{{- end -}}
+{{- $fontHref := printf "https://fonts.googleapis.com/css2?%s&display=swap" $fontQuery -}}
+<link rel="stylesheet" href="{{ $fontHref | safeURL }}">

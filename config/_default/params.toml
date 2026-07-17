@@ -1,8 +1,7 @@
 title = "My Discombobulated Brain"
-copyright = "© My Discombobulated Brain 2026. All rights reserved."
 author = "My Discombobulated Brain"
 description = "Compassionate mental health support, resources, and community for people and carers across the UK."
-keywords = ["mental health", "charity", "support", "wellness", "resources"]
+keywords = [ "mental health", "charity", "support", "wellness", "resources" ]
 logo = "images/my-discombob-logo.svg"
 favicon = "images/my-discombob-logo.svg"
 

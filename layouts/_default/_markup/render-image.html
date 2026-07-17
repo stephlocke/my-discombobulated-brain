@@ -1,0 +1,16 @@
+{{- /*
+  Render hook for standard markdown images (the CMS's built-in "insert image"
+  button writes ![alt](src) — editors are not expected to know about the
+  general-img-load shortcode). Route every markdown image through the same
+  partial the shortcode uses, so images always get proper Hugo image
+  processing (resizing, webp, responsive sizes, lazy loading).
+*/ -}}
+{{- $alt := .PlainText -}}
+{{- if not $alt -}}{{- $alt = .Text -}}{{- end -}}
+{{- $resource := dict "src" .Destination "alt" $alt -}}
+{{- partial "components/general-img-load.html" (dict
+  "ctxt" .Page
+  "placement" "Section"
+  "index" .Ordinal
+  "resource" $resource
+) -}}
