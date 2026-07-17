@@ -232,6 +232,7 @@ singletons:
         field: { label: "Keyword", name: "keyword", widget: "string", required: true }
       - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
       - { label: "Favicon", name: "favicon", widget: "image", required: true, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
+      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
       - label: "Style"
         name: "style_rules"
         widget: "object"
@@ -509,6 +510,13 @@ collections:
           - *field_title
           - *field_description
           - { label: "Type", name: "type", widget: "hidden", default: "search" }
+      - name: "sitemap"
+        label: "Sitemap"
+        file: "content/sitemap.md"
+        fields:
+          - *field_title
+          - *field_description
+          - { label: "Type", name: "type", widget: "hidden", default: "sitemap" }
 
   # ─── 4. SECTION PAGE HEADERS ───────────────────────────────────────────────
   # The introductory pages for each content section listing (e.g. /blog, /events).

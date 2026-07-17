@@ -1,5 +1,5 @@
 baseURL = 'https://stephlocke.com/my-discombobulated-brain/'
-locale = 'en-GB'
+languageCode = 'en-GB'
 title = 'My Discombobulated Brain'
 # Enable emoji support
 enableEmoji = true
@@ -7,6 +7,8 @@ enableEmoji = true
 enableGitInfo = false
 # Enable RSS
 enableRSS = true
+# Enable robots.txt generation (see layouts/robots.txt)
+enableRobotsTXT = true
 
 [params.hugo]
   version = "0.160.1"

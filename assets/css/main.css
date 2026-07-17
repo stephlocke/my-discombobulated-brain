@@ -1,12 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:where(.dark, .dark *));
 @source "hugo_stats.json";
 @import "modules/layout.css";
 
 @theme {
     --color-body: var(--color-white);
-    --color-dark-body: var(--color-gray-900);
     --color-surface: var(--color-white);
     --color-surface-muted: var(--color-gray-50);
     --color-surface-hover: var(--color-gray-100);
@@ -24,12 +22,6 @@
 
     --color-secondary: {{ site.Params.style_rules.secondary_color | default "var(--color-yellow-500)" }};
     --color-secondary-darken: color-mix(in oklch, var(--color-secondary) 85%, black);
-
-    --color-dark-primary: color-mix(in oklch, var(--color-primary) 70%, black);
-    --color-dark-primary-darken: color-mix(in oklch, var(--color-dark-primary) 85%, black);
-
-    --color-dark-secondary: color-mix(in oklch, var(--color-secondary) 70%, black);
-    --color-dark-secondary-darken: color-mix(in oklch, var(--color-dark-secondary) 85%, black);
 
     --color-danger: var(--color-red-600);
     --color-danger-darken: color-mix(in oklch, var(--color-danger) 85%, black);

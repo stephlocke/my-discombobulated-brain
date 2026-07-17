@@ -8,18 +8,56 @@
 <meta name="author" content="{{ .Site.Params.author }}">
 <meta name="keywords" content="{{ if .Keywords }}{{ delimit .Keywords ", " }}{{ else }}{{ delimit .Site.Params.keywords ", " }}{{ end }}">
 
+<!-- Search engine indexing: keep thin/utility pages (search, unused taxonomies) out of search results -->
+{{- $noindexKinds := slice "taxonomy" "term" -}}
+{{- if or (in $noindexKinds .Kind) (eq .Type "search") -}}
+<meta name="robots" content="noindex, follow">
+{{- end }}
+
+<!-- Shared social share image: prefer the page's own image, then the site's social image, then the logo -->
+{{- $shareImagePath := "" -}}
+{{- $shareImageIsBundleRelative := false -}}
+{{- with .Params.resource -}}
+  {{- with .src -}}
+    {{- $shareImagePath = . -}}
+    {{- $shareImageIsBundleRelative = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $shareImagePath -}}
+  {{- $shareImagePath = .Site.Params.social_image | default .Site.Params.logo -}}
+{{- end -}}
+{{- $shareImage := "" -}}
+{{- with $shareImagePath -}}
+  {{- $lookup := strings.TrimPrefix "./" . -}}
+  {{- if $shareImageIsBundleRelative -}}
+    {{- with $.Resources.Get $lookup -}}
+      {{- $shareImage = .Permalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with resources.Get (strings.TrimPrefix "/" $lookup) -}}
+      {{- $shareImage = .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Params.title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ with .Site.Params.logo }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+<meta property="og:site_name" content="{{ site.Params.title }}">
+<meta property="og:locale" content="en_GB">
+{{ with $shareImage }}<meta property="og:image" content="{{ . }}">{{ end }}
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Params.title }}{{ else }}{{ .Title }}{{ end }}">
 <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ with $shareImage }}<meta name="twitter:image" content="{{ . }}">{{ end }}
 {{ with .Site.Params.twitter }}<meta name="twitter:site" content="@{{ . }}">{{ end }}
+
+<!-- Structured Data -->
+{{ partial "essentials/structured-data.html" . }}
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
@@ -35,15 +73,6 @@
 {{- $faviconExt := lower (path.Ext $favicon) -}}
 {{- $faviconType := or (index $faviconMimeTypes $faviconExt) "image/x-icon" -}}
 <link rel="icon" type="{{ $faviconType }}" href="{{ $favicon | relURL }}">
-
-<!-- Dark Mode Script (runs before page load to prevent flash) -->
-{{- with resources.Get "js/theme-init.js" -}}
-{{- $themeInit := . -}}
-{{- if hugo.IsProduction -}}
-{{- $themeInit = $themeInit | minify | fingerprint -}}
-{{- end -}}
-<script src="{{ $themeInit.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $themeInit.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
-{{- end -}}
 
 <!-- Preload critical resources for accessibility -->
 <link rel="preconnect" href="{{ .Site.BaseURL }}">
