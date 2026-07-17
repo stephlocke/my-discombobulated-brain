@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: stephlocke/my-discombobulated-brain
-  branch: main
+  branch: copilot/update-cms
   base_url: https://sveltia-cms-auth.accounts-9c9.workers.dev/
 
 # Uncomment for local development
