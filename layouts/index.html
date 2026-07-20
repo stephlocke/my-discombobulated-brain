@@ -3,8 +3,8 @@
 <!-- Hero Section -->
 {{ partial "components/hero.html" (dict "ctxt" .) }}
 
-{{ if ge (len .Params.inline_ctas) 1 }}
-  {{ partial "components/cta-display.html" (dict "ctxt" . "location" "inline" "cta" (index .Params.inline_ctas 0)) }}
+{{ with .Params.inline_cta_1 }}
+  {{ partial "components/cta-display.html" (dict "ctxt" $ "location" "inline" "cta" .) }}
 {{ end }}
 
 <!-- Upcoming Events section -->
@@ -17,8 +17,8 @@
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
 {{ end }}
 
-{{ if ge (len .Params.inline_ctas) 2 }}
-  {{ partial "components/cta-display.html" (dict "ctxt" . "location" "inline" "cta" (index .Params.inline_ctas 1)) }}
+{{ with .Params.inline_cta_2 }}
+  {{ partial "components/cta-display.html" (dict "ctxt" $ "location" "inline" "cta" .) }}
 {{ end }}
 
 <!-- Services Detail Panels section -->

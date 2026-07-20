@@ -426,7 +426,6 @@ collections:
         label: "Homepage"
         file: "content/_index.md"
         fields:
-          - *field_title
           - *field_hero_title
           - *field_hero_body
           - label: "Hero CTA"
@@ -447,20 +446,24 @@ collections:
             search_fields: ["title"]
             required: false
             hint: "The button shown in the site header. Create options under 'CTA — Header' first. Leave blank for no header button."
-          - label: "Inline CTAs"
-            name: "inline_ctas"
-            widget: "list"
+          - label: "First Inline CTA"
+            name: "inline_cta_1"
+            widget: "relation"
+            collection: "cta-inline"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
             required: false
-            hint: "CTAs shown inline within page content. Create options under 'CTA — Inline' first."
-            field:
-              label: "CTA"
-              name: "inline_cta"
-              widget: "relation"
-              collection: "cta-inline"
-              value_field: "title"
-              display_fields: ["title"]
-              search_fields: ["title"]
-              required: true
+            hint: "An inline CTA shown near the top of the homepage, just after the hero section. Create options under 'CTA — Inline' first. Leave blank for none."
+          - label: "Second Inline CTA"
+            name: "inline_cta_2"
+            widget: "relation"
+            collection: "cta-inline"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "An inline CTA shown further down the homepage, after the Awards & Recognition section. Create options under 'CTA — Inline' first. Leave blank for none."
           - label: "Footer CTA"
             name: "footer_cta"
             widget: "relation"
