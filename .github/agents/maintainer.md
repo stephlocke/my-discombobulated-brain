@@ -70,7 +70,7 @@ Apply this agent whenever reviewing:
 - [ ] OAuth backend uses HTTPS — verify `base_url` in `static/admin/config.yml`
 - [ ] The Cloudflare Worker auth URL is not a public URL that accepts arbitrary OAuth redirects
 - [ ] GitHub OAuth app is scoped to `repo` permissions only (not `admin:org` or broader)
-- [ ] Editorial workflow is enabled in CMS to prevent accidental direct publishes to `main`
+- [ ] Editorial workflow is intentionally NOT enabled (`publish_mode` is unset in the CMS config) — this is a small site used by one or two people, so direct publishes to `main` are expected
 
 ### Content Security
 - [ ] No user-supplied content is rendered as raw HTML in templates without sanitisation

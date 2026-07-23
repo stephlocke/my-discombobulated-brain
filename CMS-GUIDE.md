@@ -13,12 +13,10 @@ The sidebar is split into two kinds of entries:
   Contact, Social Media, Blog settings. Change these rarely, and changes here affect the whole
   site at once (e.g. the site title, theme colours, footer text). Use the Site Settings file to edit how the site looks and behaves.
 
-## Publishing works in two steps
+## Publishing is immediate
 
-This site uses an **editorial workflow**. When you save a change, it doesn't go live
-immediately — it's saved as a draft entry waiting for review. Someone then needs to review and
-publish it before it appears on the real website. If you don't see your change live yet, check
-whether it's still sitting as an unpublished draft.
+Saving a change here commits it directly — there's no draft/review step. It goes live as soon
+as the site finishes rebuilding after your save.
 
 ## A warning about "Name" fields on CTAs
 

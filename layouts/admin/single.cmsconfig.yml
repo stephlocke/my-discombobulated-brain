@@ -19,9 +19,6 @@ local_backend: true
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
-# Enable editorial workflow (draft, review, publish)
-publish_mode: editorial_workflow
-
 aliases:
   field_title: &field_title
     label: "Title"

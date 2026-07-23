@@ -495,8 +495,9 @@ tags: []
 featured_image: ""       # path relative to static/images/
 ```
 
-### Editorial Workflow (Sveltia CMS)
-Draft → Review → Publish (editorial workflow enabled in CMS config)
+### Publishing (Sveltia CMS)
+Simple workflow — saving a change commits directly, no draft/review step. This is a small
+site used by one or two people, so editorial workflow is intentionally not enabled.
 
 ### Content Tone Checklist
 - [ ] Empathetic, non-stigmatising language throughout

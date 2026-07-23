@@ -110,7 +110,7 @@ Apply this agent whenever reviewing:
 - [ ] Every front matter field used in templates has a corresponding CMS field definition
 - [ ] New required front matter fields are marked `required: true` in the CMS config
 - [ ] Media upload path (`media_folder`, `public_folder`) is consistent with how templates reference images
-- [ ] Editorial workflow is enabled (`publish_mode: editorial_workflow`)
+- [ ] Editorial workflow is intentionally NOT enabled — `publish_mode` is left unset so saves publish immediately (small site, one or two editors)
 - [ ] Slug format for blog posts follows Hugo's expected path pattern
 
 ---
