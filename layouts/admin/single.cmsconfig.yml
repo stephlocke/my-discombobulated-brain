@@ -218,51 +218,6 @@ aliases:
     - { label: "Work Sans", value: "'Work Sans', 'Segoe UI', Arial, sans-serif" }
 
 singletons:
-  # Site Settings — manages config/_default/params.toml
-  # Hugo build settings live in config.toml and are never touched by the CMS.
-  - name: "site-settings"
-    label: "Site Settings"
-    icon: settings
-    file: "config/_default/params.toml"
-    format: "toml"
-    media_folder: "static/images"
-    public_folder: "images"
-    editor:
-      preview: false
-    fields:
-      - { label: "Site Title", name: "title", widget: "string", required: true, hint: "The site name shown in the browser tab, header, footer, and search results. This must not be left blank." }
-      - { label: "Site Author", name: "author", widget: "string", required: true, hint: "The name or organisation that owns this website. Also used to build the copyright notice shown in the footer (e.g. © Your Business Name 2026. All rights reserved.) — the year is added automatically." }
-      - { label: "Site Description", name: "description", widget: "text", required: true, hint: "A short summary shown in search engine results and social shares." }
-      - label: "Keywords"
-        name: "keywords"
-        widget: "list"
-        required: false
-        hint: "Words and phrases that describe the site, used by search engines. Optional."
-        field: { label: "Keyword", name: "keyword", widget: "string", required: true }
-      - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
-      - { label: "Favicon", name: "favicon", widget: "image", required: true, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
-      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
-      - label: "Style"
-        name: "style_rules"
-        widget: "object"
-        required: true
-        fields:
-          - { label: "Edge Style", name: "edges", widget: "select", options: ["sharp", "curved", "round"], default: "round", required: true, hint: "Controls the roundness of corners on cards, buttons, and containers." }
-          - { label: "Expanded Navigation", name: "expanded_nav", widget: "boolean", default: true, required: true, hint: "When on, the navigation bar expands at the top of the page and shrinks on scroll." }
-          - { label: "Primary Colour", name: "primary_color", widget: "color", allowInput: true, required: true, hint: "Main brand colour, used for the header, buttons, and links." }
-          - { label: "Secondary Colour", name: "secondary_color", widget: "color", allowInput: true, required: true, hint: "Accent colour used for highlights and hover states." }
-          - { label: "Heading Font", name: "title_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for headings across the site.", options: *font_options }
-          - { label: "Body Font", name: "body_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for paragraph text across the site.", options: *font_options }
-          - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", required: true, hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
-      - label: "Search"
-        name: "configs"
-        widget: "object"
-        required: false
-        hint: "Advanced search settings. Safe to leave at their defaults."
-        fields:
-          - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, hint: "Maximum characters shown in a full search result summary." }
-          - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, hint: "Characters shown in compact desktop search bar results." }
-
   # Navigation Labels — manages data/nav.toml
   # Controls only the TEXT of each menu link. URLs, order, and structure remain fixed in config.toml (never CMS-editable).
   - name: "nav-settings"
@@ -391,6 +346,61 @@ collections:
         format: "raw"
         fields:
           - { label: "Guide", name: "body", widget: "markdown", required: true, hint: "Editable guide shown to anyone using this CMS." }
+
+  - divider: true
+
+  # ─── SITE SETTINGS ──────────────────────────────────────────────────────
+  - name: "site-settings"
+    label: "Site Settings"
+    icon: settings
+    editor:
+      preview: false
+    files:
+      - name: "general"
+        label: "General"
+        file: "config/_default/params.toml"
+        format: "toml"
+        media_folder: "static/images"
+        public_folder: "images"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string", required: true, hint: "The site name shown in the browser tab, header, footer, and search results. This must not be left blank." }
+          - { label: "Site Author", name: "author", widget: "string", required: true, hint: "The name or organisation that owns this website. Also used to build the copyright notice shown in the footer (e.g. © Your Business Name 2026. All rights reserved.) — the year is added automatically." }
+          - { label: "Site Description", name: "description", widget: "text", required: true, hint: "A short summary shown in search engine results and social shares." }
+          - label: "Keywords"
+            name: "keywords"
+            widget: "list"
+            required: false
+            hint: "Words and phrases that describe the site, used by search engines. Optional."
+            field: { label: "Keyword", name: "keyword", widget: "string", required: true }
+          - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
+          - { label: "Favicon", name: "favicon", widget: "image", required: true, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
+          - { label: "Social Share Image", name: "social_image", widget: "image", required: false, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
+          - label: "Style"
+            name: "style_rules"
+            widget: "object"
+            required: true
+            fields:
+              - { label: "Edge Style", name: "edges", widget: "select", options: ["sharp", "curved", "round"], default: "round", required: true, hint: "Controls the roundness of corners on cards, buttons, and containers." }
+              - { label: "Expanded Navigation", name: "expanded_nav", widget: "boolean", default: true, required: true, hint: "When on, the navigation bar expands at the top of the page and shrinks on scroll." }
+              - { label: "Primary Colour", name: "primary_color", widget: "color", allowInput: true, required: true, hint: "Main brand colour, used for the header, buttons, and links." }
+              - { label: "Secondary Colour", name: "secondary_color", widget: "color", allowInput: true, required: true, hint: "Accent colour used for highlights and hover states." }
+              - { label: "Heading Font", name: "title_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for headings across the site.", options: *font_options }
+              - { label: "Body Font", name: "body_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for paragraph text across the site.", options: *font_options }
+              - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", required: true, hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
+          - label: "Search"
+            name: "configs"
+            widget: "object"
+            required: false
+            hint: "Advanced search settings. Safe to leave at their defaults."
+            fields:
+              - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, hint: "Maximum characters shown in a full search result summary." }
+              - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, hint: "Characters shown in compact desktop search bar results." }
+      - name: "domain"
+        label: "Domain"
+        file: "config/_default/hugo.toml"
+        format: "toml"
+        fields:
+          - { label: "Site URL", name: "baseURL", widget: "string", required: true, hint: "The site's full public web address, including https:// and a trailing slash (e.g. https://example.org/). Changing this changes every link, canonical tag, RSS feed, and sitemap entry the whole site generates — only change this once the site's real hosting/domain has been updated to match, otherwise the site will describe itself with the wrong address." }
 
   - divider: true
 
