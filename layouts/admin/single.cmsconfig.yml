@@ -71,6 +71,7 @@ aliases:
     name: "weight"
     widget: "number"
     required: false
+    min: 0
     hint: "Controls the order of items in lists. Lower numbers appear first. Leave blank to let the system decide the order."
   field_icon: &field_icon
     label: "Icon"
@@ -161,7 +162,12 @@ aliases:
     min: 1
     hint: "Call-to-action buttons shown in this section. At least one is required."
     fields:
-      - { label: "URL", name: "href", widget: "string", required: true, hint: "The page or external URL this button links to (e.g. /donate or https://example.com)." }
+      - label: "URL"
+        name: "href"
+        widget: "string"
+        required: true
+        pattern: ["^(/|https?://)", "Must be a relative path starting with / or a full URL starting with http:// or https://."]
+        hint: "The page or external URL this button links to (e.g. /donate or https://example.com)."
       - { label: "Variant", name: "type", widget: "hidden", default: "solid" }
       - { label: "Label", name: "label", widget: "string", required: true, hint: "The text shown on the button." }
 
@@ -185,6 +191,7 @@ aliases:
     label: "External Link"
     name: "link"
     widget: "string"
+    type: "url"
     required: false
     hint: "Optional external website URL (e.g. https://example.com). If provided, clicking this logo opens that URL in a new tab. Leave blank to link to this item's own page on your site instead."
 
@@ -249,8 +256,19 @@ singletons:
         required: true
         hint: "Settings for the contact form. Only used when Contact Page Format is 'Form'. The form is always submitted through Netlify."
         fields:
-          - { label: "Form Name", name: "form_name", widget: "string", default: "contact", required: true, hint: "Identifies this form in your Netlify dashboard. Use a short lowercase name with no spaces (e.g. contact, enquiries)." }
-          - { label: "Success Redirect URL", name: "success_url", widget: "string", required: false, hint: "Page to show after a successful submission (e.g. /thank-you). Leave blank to use Netlify's default confirmation page." }
+          - label: "Form Name"
+            name: "form_name"
+            widget: "string"
+            default: "contact"
+            required: true
+            pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. contact, general-enquiries) — no spaces or capital letters."]
+            hint: "Identifies this form in your Netlify dashboard. Use a short lowercase name with no spaces (e.g. contact, enquiries)."
+          - label: "Success Redirect URL"
+            name: "success_url"
+            widget: "string"
+            required: false
+            pattern: ["^(/|https?://)", "Must be a relative path starting with / or a full URL starting with http:// or https://."]
+            hint: "Page to show after a successful submission (e.g. /thank-you). Leave blank to use Netlify's default confirmation page."
       - label: "Contact Details"
         name: "contact"
         widget: "list"
@@ -261,7 +279,7 @@ singletons:
           value: "list"
         fields:
           - { label: "Contact Type", name: "name", widget: "string", required: true, hint: "E.g. General Enquiries, Donations, Volunteering." }
-          - { label: "Email", name: "email", widget: "string", required: false, hint: "Provide at least an email or a phone number for this contact type." }
+          - { label: "Email", name: "email", widget: "string", type: "email", required: false, hint: "Provide at least an email or a phone number for this contact type." }
           - { label: "Phone", name: "phone", widget: "string", required: false }
 
   # Social Media Settings — manages data/socials.toml
@@ -296,7 +314,7 @@ singletons:
               - { label: "WhatsApp", value: "whatsapp" }
               - { label: "Telegram", value: "telegram" }
               - { label: "LinkedIn", value: "linkedin" }
-          - { label: "URL", name: "url", widget: "string", required: true, hint: "The full web address of your profile, starting with https://" }
+          - { label: "URL", name: "url", widget: "string", type: "url", required: true, hint: "The full web address of your profile, starting with https://" }
           - { label: "Accessible Label", name: "label", widget: "string", required: true, hint: "Label for screen readers (e.g. 'Facebook', 'Instagram')." }
 
   # Blog Settings — manages data/blog.toml
@@ -393,14 +411,20 @@ collections:
             required: false
             hint: "Advanced search settings. Safe to leave at their defaults."
             fields:
-              - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, hint: "Maximum characters shown in a full search result summary." }
-              - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, hint: "Characters shown in compact desktop search bar results." }
+              - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, min: 20, max: 2000, hint: "Maximum characters shown in a full search result summary." }
+              - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, min: 20, max: 2000, hint: "Characters shown in compact desktop search bar results." }
       - name: "domain"
         label: "Domain"
         file: "config/_default/hugo.toml"
         format: "toml"
         fields:
-          - { label: "Site URL", name: "baseURL", widget: "string", required: true, hint: "The site's full public web address, including https:// and a trailing slash (e.g. https://example.org/). Changing this changes every link, canonical tag, RSS feed, and sitemap entry the whole site generates — only change this once the site's real hosting/domain has been updated to match, otherwise the site will describe itself with the wrong address." }
+          - label: "Site URL"
+            name: "baseURL"
+            widget: "string"
+            type: "url"
+            required: true
+            pattern: ["^https?://.+/$", "Must start with http:// or https:// and end with a trailing slash."]
+            hint: "The site's full public web address, including https:// and a trailing slash (e.g. https://example.org/). Changing this changes every link, canonical tag, RSS feed, and sitemap entry the whole site generates — only change this once the site's real hosting/domain has been updated to match, otherwise the site will describe itself with the wrong address."
 
   - divider: true
 
@@ -594,7 +618,7 @@ collections:
             required: true
             hint: "Shown in the footer's 'Get Help' column. Leave a field blank to hide that line."
             fields:
-              - { label: "Support Email", name: "email", widget: "string", required: false, hint: "Leave blank to hide this line." }
+              - { label: "Support Email", name: "email", widget: "string", type: "email", required: false, hint: "Leave blank to hide this line." }
               - { label: "Support Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to hide this line." }
           - *field_build
 
@@ -707,7 +731,7 @@ collections:
     fields:
       - *field_title
       - *field_description
-      - { label: "Year", name: "year", widget: "number", required: false, hint: "The year this award was received. Optional." }
+      - { label: "Year", name: "year", widget: "number", required: false, min: 1900, max: 2100, hint: "The year this award was received. Optional." }
       - *field_weight
       - *field_link
       - *field_resource
@@ -786,6 +810,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
         hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'donate'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected as the Homepage's Header CTA, do not rename it — renaming removes it from the header until you re-select it there."
       - *field_buttons
       - *field_build
@@ -806,6 +831,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
         hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'version-1'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
       - *field_headline
       - *field_cta_body
@@ -828,6 +854,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
         hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'winter-appeal'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
       - *field_headline
       - *field_cta_body
@@ -850,6 +877,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
         hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'donate-appeal'). Used to select this CTA from the Homepage editor's Inline CTAs list. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
       - *field_headline
       - *field_cta_body
