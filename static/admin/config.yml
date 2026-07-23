@@ -300,33 +300,6 @@ singletons:
           - { label: "Email", name: "email", widget: "string", required: false, hint: "Provide at least an email or a phone number for this contact type." }
           - { label: "Phone", name: "phone", widget: "string", required: false }
 
-  # Footer Settings — manages data/footer.toml
-  - name: "footer-settings"
-    label: "Footer"
-    icon: horizontal_split
-    file: "data/footer.toml"
-    format: "toml"
-    editor:
-      preview: false
-    fields:
-      - label: "About"
-        name: "about_section"
-        widget: "object"
-        required: true
-        hint: "Shown under your site title in the footer's About column. Leave any field blank to hide that line entirely."
-        fields:
-          - { label: "Address", name: "address", widget: "string", required: false, hint: "Your postal address. Leave blank to hide this line." }
-          - { label: "Company Registration Number", name: "company", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
-          - { label: "Charity Registration Number", name: "charity", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
-      - label: "Support"
-        name: "support_section"
-        widget: "object"
-        required: true
-        hint: "Shown in the footer's 'Get Help' column. Leave a field blank to hide that line."
-        fields:
-          - { label: "Support Email", name: "email", widget: "string", required: false, hint: "Leave blank to hide this line." }
-          - { label: "Support Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to hide this line." }
-
   # Social Media Settings — manages data/socials.toml
   - name: "socials-settings"
     label: "Social Media"
@@ -394,7 +367,7 @@ singletons:
 
 collections:
 
-  # ─── 2. HOMEPAGE ───────────────────────────────────────────────────────────
+  # ─── HOMEPAGE ───────────────────────────────────────────────────────────
   # Hero content, section visibility, and CTA references for the homepage.
   - name: "homepage"
     label: "Homepage"
@@ -463,7 +436,7 @@ collections:
           - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
           - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
 
-  # ─── 3. PAGES ──────────────────────────────────────────────────────────────
+  # ─── PAGES ──────────────────────────────────────────────────────────────
   - name: "pages"
     label: "Pages"
     icon: article
@@ -510,10 +483,10 @@ collections:
           - *field_description
           - { label: "Type", name: "type", widget: "hidden", default: "sitemap" }
 
-  # ─── 4. SECTION PAGE HEADERS ───────────────────────────────────────────────
+  # ─── SECTIONS ───────────────────────────────────────────────
   # The introductory pages for each content section listing (e.g. /blog, /events).
   - name: "section-headers"
-    label: "Section Page Headers"
+    label: "Sections"
     icon: toc
     editor:
       preview: false
@@ -558,9 +531,39 @@ collections:
           - *field_draft
           - *field_body
 
+  # ─── FOOTER ────────────────────────────────────────────────────────────
+  - name: "footer-settings"
+    label: "Footer"
+    icon: horizontal_split
+    editor:
+      preview: false
+    files:
+      - name: "footer_content"
+        label: "Footer"
+        file: "content/footer/index.md"
+        fields:
+          - label: "About"
+            name: "about_section"
+            widget: "object"
+            required: true
+            hint: "Shown under your site title in the footer's About column. Leave any field blank to hide that line entirely."
+            fields:
+              - { label: "Address", name: "address", widget: "string", required: false, hint: "Your postal address. Leave blank to hide this line." }
+              - { label: "Company Registration Number", name: "company", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
+              - { label: "Charity Registration Number", name: "charity", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
+          - label: "Support"
+            name: "support_section"
+            widget: "object"
+            required: true
+            hint: "Shown in the footer's 'Get Help' column. Leave a field blank to hide that line."
+            fields:
+              - { label: "Support Email", name: "email", widget: "string", required: false, hint: "Leave blank to hide this line." }
+              - { label: "Support Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to hide this line." }
+          - *field_build
+
   - divider: true
 
-  # ─── 5. BLOG ───────────────────────────────────────────────────────────────
+  # ─── BLOG ───────────────────────────────────────────────────────────────
   # media_folder: "" uploads images into the post's page bundle folder
   - name: "blog"
     label: "Blog"
@@ -582,7 +585,7 @@ collections:
       - *field_resource
       - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the blog post. This must not be left blank." }
 
-  # ─── 6. EVENTS ─────────────────────────────────────────────────────────────
+  # ─── EVENTS ─────────────────────────────────────────────────────────────
   - name: "events"
     label: "Events"
     icon: event
@@ -603,7 +606,7 @@ collections:
       - *field_resource
       - *field_body
 
-  # ─── 7. SERVICES ───────────────────────────────────────────────────────────
+  # ─── SERVICES ───────────────────────────────────────────────────────────
   - name: "services"
     label: "Services"
     icon: volunteer_activism
@@ -632,7 +635,7 @@ collections:
       - *field_resource
       - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
 
-  # ─── 8. WORKING WITH ───────────────────────────────────────────────────────
+  # ─── WORKING WITH ───────────────────────────────────────────────────────
   - name: "working-with"
     label: "Working With"
     icon: handshake
@@ -652,7 +655,7 @@ collections:
       - *field_resource
       - *field_body
 
-  # ─── 9. AWARDS & RECOGNITION ───────────────────────────────────────────────
+  # ─── AWARDS & RECOGNITION ───────────────────────────────────────────────
   - name: "awards"
     label: "Awards & Recognition"
     icon: emoji_events
@@ -675,7 +678,7 @@ collections:
 
   - divider: true
 
-  # ─── 10. LEGAL PAGES ───────────────────────────────────────────────────────
+  # ─── LEGAL PAGES ───────────────────────────────────────────────────────
   - name: "legals"
     label: "Legal Pages"
     icon: gavel
@@ -692,7 +695,7 @@ collections:
 
   - divider: true
 
-  # ─── 11. CALLOUTS ──────────────────────────────────────────────────────────
+  # ─── CALLOUTS ──────────────────────────────────────────────────────────
   # Fixed-purpose support messages. Kept as named files because the layouts
   # look up these pages by hardcoded slug (footer, single, 404).
   - name: "callouts"
@@ -729,7 +732,7 @@ collections:
 
   - divider: true
 
-  # ─── 12. CTA — HEADER ──────────────────────────────────────────────────────
+  # ─── CTA — HEADER ──────────────────────────────────────────────────────
   # Small buttons shown in the site header.
   # The Name field is the lookup key used in Homepage → Header CTA.
   - name: "cta-header"
@@ -750,7 +753,7 @@ collections:
       - *field_buttons
       - *field_build
 
-  # ─── 13. CTA — HERO ────────────────────────────────────────────────────────
+  # ─── CTA — HERO ────────────────────────────────────────────────────────
   # Shown in the hero section when Hero Style is set to 'CTA'.
   - name: "cta-hero"
     label: "CTA — Hero"
@@ -772,7 +775,7 @@ collections:
       - *field_buttons
       - *field_build
 
-  # ─── 14. CTA — FOOTER ──────────────────────────────────────────────────────
+  # ─── CTA — FOOTER ──────────────────────────────────────────────────────
   # Full-width call-to-action block shown above the page footer.
   - name: "cta-footer"
     label: "CTA — Footer"
@@ -794,7 +797,7 @@ collections:
       - *field_buttons
       - *field_build
 
-  # ─── 15. CTA — INLINE ──────────────────────────────────────────────────────
+  # ─── CTA — INLINE ──────────────────────────────────────────────────────
   # CTAs displayed inline within page content.
   - name: "cta-inline"
     label: "CTA — Inline"
@@ -815,3 +818,4 @@ collections:
       - *field_cta_body
       - *field_buttons
       - *field_build
+
