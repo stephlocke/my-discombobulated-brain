@@ -8,12 +8,12 @@
 {{ end }}
 
 <!-- Upcoming Events section -->
-{{ if hugo.Data.homepage.upcomingEventsSection }}
+{{ if .Params.upcomingEventsSection }}
   {{ partial "components/upcoming-events.html" . }}
 {{ end }}
 
 <!-- Awards and Recognition section -->
-{{ if hugo.Data.homepage.awardsSection }}
+{{ if .Params.awardsSection }}
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/awards-and-recognition") }}
 {{ end }}
 
@@ -22,17 +22,17 @@
 {{ end }}
 
 <!-- Services Detail Panels section -->
-{{ if hugo.Data.homepage.servicesSection }}
+{{ if .Params.servicesSection }}
   {{ partial "service-details.html" (dict "ctxt" . "collection" "/services") }}
 {{ end }}
 
 <!-- Working With section -->
-{{ if hugo.Data.homepage.workingWithSection }}
+{{ if .Params.workingWithSection }}
   {{ partial "components/logo-display.html" (dict "ctxt" . "collection" "/working-with") }}
 {{ end }}
 
 <!-- Latest Blog Posts -->
-{{ if hugo.Data.homepage.blogSection }}
+{{ if .Params.blogSection }}
   {{ partial "recent-posts.html" . }}
 {{ end }}
 

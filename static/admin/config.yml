@@ -254,25 +254,6 @@ singletons:
           - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, hint: "Maximum characters shown in a full search result summary." }
           - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, hint: "Characters shown in compact desktop search bar results." }
 
-  # Homepage Settings — manages data/homepage.toml
-  - name: "homepage-settings"
-    label: "Homepage"
-    icon: tune
-    file: "data/homepage.toml"
-    format: "toml"
-    media_folder: "static/images"
-    public_folder: "images"
-    editor:
-      preview: false
-    fields:
-      - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", required: true, hint: "'Overview' shows a grid of cards generated from your Services. 'CTA' shows a full-width call-to-action panel instead." }
-      - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
-      - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Upcoming Events' section on the homepage." }
-      - { label: "Show Services Section", name: "servicesSection", widget: "boolean", default: true, required: true, hint: "Show the services summary cards on the homepage." }
-      - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Working With' logos section on the homepage." }
-      - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
-      - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
-
   # Navigation Labels — manages data/nav.toml
   # Controls only the TEXT of each menu link. URLs, order, and structure remain fixed in config.toml (never CMS-editable).
   - name: "nav-settings"
@@ -414,8 +395,7 @@ singletons:
 collections:
 
   # ─── 2. HOMEPAGE ───────────────────────────────────────────────────────────
-  # Hero content and CTA references for the homepage.
-  # Section visibility toggles are in Site Settings → Homepage Display.
+  # Hero content, section visibility, and CTA references for the homepage.
   - name: "homepage"
     label: "Homepage"
     icon: home
@@ -425,7 +405,11 @@ collections:
       - name: "homepage_content"
         label: "Homepage"
         file: "content/_index.md"
+        media_folder: "static/images"
+        public_folder: "images"
         fields:
+          - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", required: true, hint: "'Overview' shows a grid of cards generated from your Services. 'CTA' shows a full-width call-to-action panel instead." }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
           - *field_hero_title
           - *field_hero_body
           - label: "Hero CTA"
@@ -473,6 +457,11 @@ collections:
             search_fields: ["title"]
             required: false
             hint: "The full-width call-to-action block above the page footer. Create options under 'CTA — Footer' first. Leave blank for no footer CTA block."
+          - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Upcoming Events' section on the homepage." }
+          - { label: "Show Services Section", name: "servicesSection", widget: "boolean", default: true, required: true, hint: "Show the services summary cards on the homepage." }
+          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Working With' logos section on the homepage." }
+          - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
+          - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
 
   # ─── 3. PAGES ──────────────────────────────────────────────────────────────
   - name: "pages"
