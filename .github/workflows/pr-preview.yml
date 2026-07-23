@@ -56,7 +56,7 @@ jobs:
 
       - name: Point CMS backend at the PR branch
         run: |
-          sed -i "s#branch: main#branch: ${GITHUB_HEAD_REF}#" static/admin/config.yml
+          sed -i "s#branch: main#branch: ${GITHUB_HEAD_REF}#" layouts/admin/single.cmsconfig.yml
 
       - name: Build with Hugo
         env:
