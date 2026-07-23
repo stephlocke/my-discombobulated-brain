@@ -367,6 +367,24 @@ singletons:
 
 collections:
 
+  # ─── HELP ───────────────────────────────────────────────────────────────
+  # Editor-facing guide to using this CMS. Not a real site page — CMS-GUIDE.md
+  # lives outside content/ so Hugo never builds it.
+  - name: "cms-guide"
+    label: "Help"
+    icon: help
+    editor:
+      preview: false
+    files:
+      - name: "guide"
+        label: "Help"
+        file: "CMS-GUIDE.md"
+        format: "raw"
+        fields:
+          - { label: "Guide", name: "body", widget: "markdown", required: true, hint: "Editable guide shown to anyone using this CMS." }
+
+  - divider: true
+
   # ─── HOMEPAGE ───────────────────────────────────────────────────────────
   # Hero content, section visibility, and CTA references for the homepage.
   - name: "homepage"
