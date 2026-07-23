@@ -4,6 +4,15 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.accounts-9c9.workers.dev/
 
+site_url: "{{ .Site.BaseURL }}"
+logout_redirect_url: "{{ .Site.BaseURL }}"
+app_title: "{{ .Site.Params.title }} CMS"
+{{- with .Site.Params.logo }}
+logo:
+  src: "{{ absURL . }}"
+  show_in_header: true
+{{- end }}
+
 # Uncomment for local development
 local_backend: true
 
@@ -588,8 +597,8 @@ collections:
     icon: edit_note
     folder: "content/blog"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     media_folder: ""
     public_folder: ""
     editor:
@@ -609,8 +618,8 @@ collections:
     icon: event
     folder: "content/events"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     media_folder: ""
     public_folder: ""
     editor:
@@ -630,8 +639,8 @@ collections:
     icon: volunteer_activism
     folder: "content/services"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     media_folder: ""
     public_folder: ""
     editor:
@@ -659,8 +668,8 @@ collections:
     icon: handshake
     folder: "content/working-with"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     media_folder: ""
     public_folder: ""
     editor:
@@ -679,8 +688,8 @@ collections:
     icon: emoji_events
     folder: "content/awards-and-recognition"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     media_folder: ""
     public_folder: ""
     editor:
@@ -702,8 +711,8 @@ collections:
     icon: gavel
     folder: "content/legals"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     editor:
       preview: false
     fields:
@@ -758,8 +767,8 @@ collections:
     icon: smart_button
     folder: "content/cta/header"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     editor:
       preview: false
     fields:
@@ -778,8 +787,8 @@ collections:
     icon: featured_play_list
     folder: "content/cta/hero"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     editor:
       preview: false
     fields:
@@ -800,8 +809,8 @@ collections:
     icon: call_to_action
     folder: "content/cta/footer"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     editor:
       preview: false
     fields:
@@ -822,8 +831,8 @@ collections:
     icon: format_quote
     folder: "content/cta/inline"
     create: true
-    path: "{{slug}}/index"
-    slug: "{{slug}}"
+    path: "{{ "{{slug}}" }}/index"
+    slug: "{{ "{{slug}}" }}"
     editor:
       preview: false
     fields:
@@ -836,4 +845,3 @@ collections:
       - *field_cta_body
       - *field_buttons
       - *field_build
-

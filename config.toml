@@ -93,3 +93,14 @@ enableRobotsTXT = true
   changefreq = 'weekly'
   filename = 'sitemap.xml'
   priority = 0.5
+
+# Custom output format for generating the Sveltia CMS admin/config.yml at build time,
+# so CMS-chrome fields (site_url, logout_redirect_url, logo, app_title) derive from this
+# file instead of being hand-duplicated per site clone.
+[mediaTypes."text/yaml"]
+  suffixes = ["yml"]
+
+[outputFormats.CMSConfig]
+  mediaType = "text/yaml"
+  isPlainText = true
+  notAlternative = true
