@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /search/
+Disallow: /admin/
+
+Sitemap: https://stephlocke.com/my-discombobulated-brain/sitemap.xml

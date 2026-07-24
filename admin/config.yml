@@ -4,41 +4,878 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.accounts-9c9.workers.dev/
 
+site_url: "https://stephlocke.com/my-discombobulated-brain/"
+logout_redirect_url: "https://stephlocke.com/my-discombobulated-brain/"
+app_title: "My Discombobulated Brain CMS"
+logo:
+  src: "https://stephlocke.com/my-discombobulated-brain/images/my-discombob-logo.svg"
+  show_in_header: true
+
 # Uncomment for local development
-# local_backend: true
+local_backend: true
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
-# Enable editorial workflow (draft, review, publish)
-publish_mode: editorial_workflow
+aliases:
+  field_title: &field_title
+    label: "Title"
+    name: "title"
+    widget: "string"
+    required: true
+    hint: "The title shown at the top of the page, in navigation, and in search results. This must not be left blank."
+  field_description: &field_description
+    label: "Description"
+    name: "description"
+    widget: "text"
+    required: true
+    hint: "A short summary shown in search results and social media previews. This must not be left blank."
+  field_date: &field_date
+    label: "Date"
+    name: "date"
+    widget: "datetime"
+    required: false
+    hint: "The date this content was published. Optional — leave blank if you don't need it displayed."
+  field_draft: &field_draft
+    label: "Draft"
+    name: "draft"
+    widget: "boolean"
+    default: false
+    required: true
+    hint: "Draft items are not published to the live site. Turn this off when you're ready to publish."
+  field_body: &field_body
+    label: "Body"
+    name: "body"
+    widget: "markdown"
+    required: false
+    hint: "The main content of the page. Supports headings, lists, links, and images. Can be left blank on pages that don't need extra text below their summary."
+  field_summary: &field_summary
+    label: "Summary"
+    name: "summary"
+    widget: "text"
+    required: false
+    hint: "A short preview shown on listing pages and in search results. If left blank, the description is used instead."
+  field_headline: &field_headline
+    label: "Headline"
+    name: "headline"
+    widget: "string"
+    required: true
+    hint: "Large display text shown prominently, separate from the page title. This must not be left blank."
+  field_weight: &field_weight
+    label: "Weight"
+    name: "weight"
+    widget: "number"
+    required: false
+    min: 0
+    hint: "Controls the order of items in lists. Lower numbers appear first. Leave blank to let the system decide the order."
+  field_icon: &field_icon
+    label: "Icon"
+    name: "icon"
+    widget: "select"
+    required: true
+    default: "heart"
+    hint: "The icon shown for this item on the homepage summary card."
+    options:
+      - { label: "Heart", value: "heart" }
+      - { label: "Star", value: "star" }
+      - { label: "Shield (check)", value: "shield-check" }
+      - { label: "Lightbulb", value: "lightbulb" }
+      - { label: "People / Community", value: "users" }
+      - { label: "Home", value: "home" }
+      - { label: "Open Book", value: "book-open" }
+      - { label: "Bar Chart", value: "chart-bar" }
+      - { label: "Calendar", value: "calendar" }
+      - { label: "Briefcase", value: "briefcase" }
+      - { label: "Gift", value: "gift" }
+      - { label: "Phone", value: "phone" }
+      - { label: "Map Pin / Location", value: "map-pin" }
+      - { label: "Clock", value: "clock" }
+      - { label: "Check Circle", value: "check-circle" }
+      - { label: "Target", value: "target" }
+      - { label: "Rocket", value: "rocket" }
+      - { label: "Camera", value: "camera" }
+      - { label: "Wrench / Tools", value: "wrench" }
+      - { label: "Sparkles", value: "sparkles" }
+      - { label: "Toolbox", value: "toolbox" }
+      - { label: "Music Note", value: "music" }
+      - { label: "Helping Hand", value: "hand-holding-hand" }
+  field_icon_color: &field_icon_color
+    label: "Icon Colour"
+    name: "icon_color"
+    widget: "color"
+    allowInput: true
+    required: true
+    default: "#3B82F6"
+    hint: "Background and icon colour for this item's summary card on the homepage."
+  field_hero_title: &field_hero_title
+    label: "Hero Title"
+    name: "hero_title"
+    widget: "string"
+    required: true
+    hint: "The large heading shown in the hero banner at the top of the homepage. This must not be left blank."
+  field_hero_body: &field_hero_body
+    label: "Hero Body"
+    name: "hero_body"
+    widget: "text"
+    required: true
+    hint: "Supporting text shown below the hero title on the homepage. This must not be left blank."
 
-collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "content/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+  field_resource: &field_resource
+    label: "Image"
+    name: "resource"
+    widget: "object"
+    required: true
+    hint: "The main image for this content. Required — pages without an image can fail to display correctly."
+    fields:
+      - { label: "Image", name: "src", widget: "image", required: true, hint: "Upload the image file." }
+      - { label: "Alt text", name: "alt", widget: "string", required: true, hint: "Describe the image for screen readers and search engines (e.g. 'Two volunteers handing out leaflets at a festival stall')." }
+
+  field_display: &field_display
+    label: "Display"
+    name: "display"
+    widget: "object"
+    required: true
+    hint: "Controls how items in this section are displayed."
+    fields:
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        required: true
+        default: "grid"
+        hint: "Carousel — items in a horizontally scrollable row. Grid — items arranged in a multi-column layout."
+        options:
+          - { label: "Carousel", value: "carousel" }
+          - { label: "Grid", value: "grid" }
+      - { label: "Clickable", name: "clickable", widget: "boolean", required: true, default: true, hint: "When on, each item links to its full content page." }
+      - { label: "Show title", name: "show_title", widget: "boolean", required: true, default: true, hint: "When on, the item's title is shown beneath its image." }
+
+  field_buttons: &field_buttons
+    label: "Buttons"
+    name: "buttons"
+    widget: "list"
+    required: true
+    min: 1
+    hint: "Call-to-action buttons shown in this section. At least one is required."
+    fields:
+      - label: "URL"
+        name: "href"
+        widget: "string"
+        required: true
+        pattern: ["^(/|https?://)", "Must be a relative path starting with / or a full URL starting with http:// or https://."]
+        hint: "The page or external URL this button links to (e.g. /donate or https://example.com)."
+      - { label: "Variant", name: "type", widget: "hidden", default: "solid" }
+      - { label: "Label", name: "label", widget: "string", required: true, hint: "The text shown on the button." }
+
+  # build.render is always "never" for CTAs and callouts — hidden so users cannot change it
+  field_build: &field_build
+    name: "build"
+    widget: "hidden"
+    default:
+      render: "never"
+
+  # Plain text body for CTAs (not markdown)
+  field_cta_body: &field_cta_body
+    label: "Body"
+    name: "body"
+    widget: "text"
+    required: true
+    hint: "Supporting text shown below the headline. Plain text only — no formatting. This must not be left blank."
+
+  # Optional external link used by Working With and Awards & Recognition logos
+  field_link: &field_link
+    label: "External Link"
+    name: "link"
+    widget: "string"
+    type: "url"
+    required: false
+    hint: "Optional external website URL (e.g. https://example.com). If provided, clicking this logo opens that URL in a new tab. Leave blank to link to this item's own page on your site instead."
+
+  # Shared curated font list for Heading Font / Body Font (site-settings)
+  # Alphabetical order — no entry is a "default" font, Exo is simply the one already in use.
+  font_options: &font_options
+    - { label: "Bitter (serif)", value: "'Bitter', Georgia, 'Times New Roman', serif" }
+    - { label: "DM Sans", value: "'DM Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Exo", value: "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" }
+    - { label: "Fira Sans", value: "'Fira Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Inter", value: "'Inter', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Josefin Sans", value: "'Josefin Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Karla", value: "'Karla', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Lato", value: "'Lato', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Merriweather (serif)", value: "'Merriweather', Georgia, 'Times New Roman', serif" }
+    - { label: "Montserrat", value: "'Montserrat', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Mulish", value: "'Mulish', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Noto Sans", value: "'Noto Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Nunito", value: "'Nunito', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Open Sans", value: "'Open Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Oswald", value: "'Oswald', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Playfair Display (serif)", value: "'Playfair Display', Georgia, 'Times New Roman', serif" }
+    - { label: "Poppins", value: "'Poppins', 'Segoe UI', Arial, sans-serif" }
+    - { label: "PT Sans", value: "'PT Sans', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Quicksand", value: "'Quicksand', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Raleway", value: "'Raleway', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Roboto", value: "'Roboto', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Rubik", value: "'Rubik', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Source Sans Pro", value: "'Source Sans Pro', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Ubuntu", value: "'Ubuntu', 'Segoe UI', Arial, sans-serif" }
+    - { label: "Work Sans", value: "'Work Sans', 'Segoe UI', Arial, sans-serif" }
+
+singletons:
+  # Site Settings — manages config/_default/params.toml
+  - name: "site-settings"
+    label: "Site Settings"
+    icon: settings
+    file: "config/_default/params.toml"
+    format: "toml"
+    media_folder: "static/images"
+    public_folder: "images"
     editor:
       preview: false
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - { label: "Categories", name: "categories", widget: "list", required: false }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Site Title", name: "title", widget: "string", required: true, hint: "The site name shown in the browser tab, header, footer, and search results. This must not be left blank." }
+      - { label: "Site Author", name: "author", widget: "string", required: true, hint: "The name or organisation that owns this website. Also used to build the copyright notice shown in the footer (e.g. © Your Business Name 2026. All rights reserved.) — the year is added automatically." }
+      - { label: "Site Description", name: "description", widget: "text", required: true, hint: "A short summary shown in search engine results and social shares." }
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        required: false
+        hint: "Words and phrases that describe the site, used by search engines. Optional."
+        field: { label: "Keyword", name: "keyword", widget: "string", required: true }
+      - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
+      - { label: "Favicon", name: "favicon", widget: "image", required: true, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
+      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
+      - label: "Style"
+        name: "style_rules"
+        widget: "object"
+        required: true
+        fields:
+          - { label: "Edge Style", name: "edges", widget: "select", options: ["sharp", "curved", "round"], default: "round", required: true, hint: "Controls the roundness of corners on cards, buttons, and containers." }
+          - { label: "Expanded Navigation", name: "expanded_nav", widget: "boolean", default: true, required: true, hint: "When on, the navigation bar expands at the top of the page and shrinks on scroll." }
+          - { label: "Primary Colour", name: "primary_color", widget: "color", allowInput: true, required: true, hint: "Main brand colour, used for the header, buttons, and links." }
+          - { label: "Secondary Colour", name: "secondary_color", widget: "color", allowInput: true, required: true, hint: "Accent colour used for highlights and hover states." }
+          - { label: "Heading Font", name: "title_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for headings across the site.", options: *font_options }
+          - { label: "Body Font", name: "body_font", widget: "select", required: true, default: "'Bitter', Georgia, 'Times New Roman', serif", hint: "Font used for paragraph text across the site.", options: *font_options }
+          - { label: "Button Alignment", name: "stacked_button_position", widget: "select", options: ["left", "center", "right"], default: "center", required: true, hint: "Horizontal alignment of buttons when stacked vertically (e.g. in the hero section)." }
+      - label: "Search"
+        name: "configs"
+        widget: "object"
+        required: false
+        hint: "Advanced search settings. Safe to leave at their defaults."
+        fields:
+          - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, min: 20, max: 2000, hint: "Maximum characters shown in a full search result summary." }
+          - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, min: 20, max: 2000, hint: "Characters shown in compact desktop search bar results." }
 
+  # Domain Settings — manages config/_default/hugo.toml
+  # baseURL can't live in params.toml (that file is scoped to .Site.Params only), so it gets its own file.
+  - name: "domain-settings"
+    label: "Domain"
+    icon: public
+    file: "config/_default/hugo.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - label: "DANGER: Site URL"
+        name: "baseURL"
+        widget: "string"
+        type: "url"
+        required: true
+        pattern: ["^https?://.+/$", "Must start with http:// or https:// and end with a trailing slash."]
+        hint: "The site's full public web address, including https:// and a trailing slash (e.g. https://example.org/). Changing this changes every link, canonical tag, RSS feed, and sitemap entry the whole site generates — only change this once the site's real hosting/domain has been updated to match, otherwise the site will describe itself with the wrong address."
+
+  # Navigation Labels — manages data/nav.toml
+  # Controls only the TEXT of each menu link. URLs, order, and structure remain fixed in config.toml (never CMS-editable).
+  - name: "nav-settings"
+    label: "Navigation Labels"
+    icon: menu_book
+    file: "data/nav.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - { label: "\"Home\" Link Label", name: "home_label", widget: "string", required: true, default: "Home", hint: "Text shown for the Home link in the header and footer navigation." }
+      - { label: "\"About\" Link Label", name: "about_label", widget: "string", required: true, default: "About", hint: "Text shown for the About link in the header and footer navigation." }
+      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link in the header and footer navigation." }
+      - { label: "\"Contact\" Link Label", name: "contact_label", widget: "string", required: true, default: "Contact", hint: "Text shown for the Contact link in the header and footer navigation." }
+
+  # Contact Settings — manages data/contact.toml
+  - name: "contact-settings"
+    label: "Contact"
+    icon: contact_mail
+    file: "data/contact.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - { label: "Contact Page Format", name: "contactFormat", widget: "select", options: ["list", "form"], default: "list", required: true, hint: "'List' shows contact details as a table. 'Form' shows a contact form." }
+      - label: "Netlify Form Details"
+        name: "contact_form"
+        widget: "object"
+        required: true
+        hint: "Settings for the contact form. Only used when Contact Page Format is 'Form'. The form is always submitted through Netlify."
+        fields:
+          - label: "Form Name"
+            name: "form_name"
+            widget: "string"
+            default: "contact"
+            required: true
+            pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. contact, general-enquiries) — no spaces or capital letters."]
+            hint: "Identifies this form in your Netlify dashboard. Use a short lowercase name with no spaces (e.g. contact, enquiries)."
+          - label: "Success Redirect URL"
+            name: "success_url"
+            widget: "string"
+            required: false
+            pattern: ["^(/|https?://)", "Must be a relative path starting with / or a full URL starting with http:// or https://."]
+            hint: "Page to show after a successful submission (e.g. /thank-you). Leave blank to use Netlify's default confirmation page."
+      - label: "Contact Details"
+        name: "contact"
+        widget: "list"
+        required: false
+        hint: "Contact details shown as a table. Only used when Contact Page Format is 'List'. Add one entry per contact type (e.g. General Enquiries, Donations)."
+        condition:
+          field: "contactFormat"
+          value: "list"
+        fields:
+          - { label: "Contact Type", name: "name", widget: "string", required: true, hint: "E.g. General Enquiries, Donations, Volunteering." }
+          - { label: "Email", name: "email", widget: "string", type: "email", required: false, hint: "Provide at least an email or a phone number for this contact type." }
+          - { label: "Phone", name: "phone", widget: "string", required: false }
+
+  # Social Media Settings — manages data/socials.toml
+  - name: "socials-settings"
+    label: "Social Media"
+    icon: share
+    file: "data/socials.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - label: "Social Media Links"
+        name: "socials"
+        widget: "list"
+        required: false
+        hint: "Social media profile links shown in the footer. Leave empty to hide social icons entirely."
+        fields:
+          - label: "Platform"
+            name: "icon"
+            widget: "select"
+            required: true
+            default: "facebook"
+            hint: "Choose the platform — the icon shown will match automatically."
+            options:
+              - { label: "Facebook", value: "facebook" }
+              - { label: "Instagram", value: "instagram" }
+              - { label: "X (formerly Twitter)", value: "x-twitter" }
+              - { label: "YouTube", value: "youtube" }
+              - { label: "Bluesky", value: "bluesky" }
+              - { label: "Pinterest", value: "pinterest" }
+              - { label: "Reddit", value: "reddit" }
+              - { label: "WhatsApp", value: "whatsapp" }
+              - { label: "Telegram", value: "telegram" }
+              - { label: "LinkedIn", value: "linkedin" }
+          - { label: "URL", name: "url", widget: "string", type: "url", required: true, hint: "The full web address of your profile, starting with https://" }
+          - { label: "Accessible Label", name: "label", widget: "string", required: true, hint: "Label for screen readers (e.g. 'Facebook', 'Instagram')." }
+
+  # Blog Settings — manages data/blog.toml
+  - name: "blog-settings"
+    label: "Blog"
+    icon: rss_feed
+    file: "data/blog.toml"
+    format: "toml"
+    editor:
+      preview: false
+    fields:
+      - { label: "Show Reading Time", name: "showReadingTime", widget: "boolean", default: true, required: true, hint: "Display estimated reading time on blog posts." }
+      - { label: "Show Share Buttons", name: "showShareButtons", widget: "boolean", default: true, required: true, hint: "Display share buttons on blog posts." }
+      - label: "Share Buttons"
+        name: "shareButtons"
+        widget: "select"
+        multiple: true
+        required: false
+        hint: "Select which share options to display on blog posts. Leave all unchecked to show none. Drag and drop to reorder."
+        options:
+          - { label: "Bluesky", value: "bluesky" }
+          - { label: "Facebook", value: "facebook" }
+          - { label: "LinkedIn", value: "linkedin" }
+          - { label: "X (Twitter)", value: "x-twitter" }
+          - { label: "Pinterest", value: "pinterest" }
+          - { label: "Reddit", value: "reddit" }
+          - { label: "WhatsApp", value: "whatsapp" }
+          - { label: "Telegram", value: "telegram" }
+          - { label: "Copy link", value: "copy" }
+          - { label: "Email", value: "email" }
+      - { label: "Show Date Last Updated", name: "showDateUpdated", widget: "boolean", default: false, required: true, hint: "Display the last-updated date on pages where it differs from the published date." }
+
+collections:
+
+  # ─── HELP ───────────────────────────────────────────────────────────────
+  # Editor-facing guide to using this CMS. Not a real site page — CMS-GUIDE.md
+  # lives outside content/ so Hugo never builds it.
+  - name: "cms-guide"
+    label: "Help"
+    icon: help
+    editor:
+      preview: false
+    files:
+      - name: "guide"
+        label: "Help"
+        file: "CMS-GUIDE.md"
+        format: "raw"
+        fields:
+          - { label: "Guide", name: "body", widget: "markdown", required: true, hint: "Editable guide shown to anyone using this CMS." }
+
+  - divider: true
+
+  # ─── HOMEPAGE ───────────────────────────────────────────────────────────
+  # Hero content, section visibility, and CTA references for the homepage.
+  - name: "homepage"
+    label: "Homepage"
+    icon: home
+    editor:
+      preview: false
+    files:
+      - name: "homepage_content"
+        label: "Homepage"
+        file: "content/_index.md"
+        media_folder: "static/images"
+        public_folder: "images"
+        fields:
+          - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", required: true, hint: "'Overview' shows a grid of cards generated from your Services. 'CTA' shows a full-width call-to-action panel instead." }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
+          - *field_hero_title
+          - *field_hero_body
+          - label: "Hero CTA"
+            name: "hero_cta"
+            widget: "relation"
+            collection: "cta-hero"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "The call-to-action shown in the hero section when Hero Style is 'CTA'. Create CTAs under 'CTA — Hero' first. Leave blank for no hero buttons."
+          - label: "Header CTA"
+            name: "header_cta"
+            widget: "relation"
+            collection: "cta-header"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "The button shown in the site header. Create options under 'CTA — Header' first. Leave blank for no header button."
+          - label: "First Inline CTA"
+            name: "inline_cta_1"
+            widget: "relation"
+            collection: "cta-inline"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "An inline CTA shown near the top of the homepage, just after the hero section. Create options under 'CTA — Inline' first. Leave blank for none."
+          - label: "Second Inline CTA"
+            name: "inline_cta_2"
+            widget: "relation"
+            collection: "cta-inline"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "An inline CTA shown further down the homepage, after the Awards & Recognition section. Create options under 'CTA — Inline' first. Leave blank for none."
+          - label: "Footer CTA"
+            name: "footer_cta"
+            widget: "relation"
+            collection: "cta-footer"
+            value_field: "title"
+            display_fields: ["title"]
+            search_fields: ["title"]
+            required: false
+            hint: "The full-width call-to-action block above the page footer. Create options under 'CTA — Footer' first. Leave blank for no footer CTA block."
+          - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Upcoming Events' section on the homepage." }
+          - { label: "Show Services Section", name: "servicesSection", widget: "boolean", default: true, required: true, hint: "Show the services summary cards on the homepage." }
+          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Working With' logos section on the homepage." }
+          - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
+          - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
+
+  # ─── PAGES ──────────────────────────────────────────────────────────────
   - name: "pages"
     label: "Pages"
+    icon: article
+    editor:
+      preview: false
     files:
-      - label: "About Page"
-        name: "about"
-        file: "content/about.md"
+      - name: "about"
+        label: "About"
+        file: "content/about/index.md"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text", required: false }
-          - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Body", name: "body", widget: "markdown" }
+          - *field_title
+          - *field_description
+          - *field_date
+          - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the About page. This must not be left blank." }
+      - name: "donate"
+        label: "Donate"
+        file: "content/donate/index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_date
+          - *field_draft
+          - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Donate page. This must not be left blank." }
+      - name: "contact"
+        label: "Contact"
+        file: "content/contact.md"
+        fields:
+          - *field_title
+          - { label: "Type", name: "type", widget: "hidden", default: "contact" }
+          - *field_draft
+          - *field_body
+      - name: "search"
+        label: "Search"
+        file: "content/search.md"
+        fields:
+          - *field_title
+          - *field_description
+          - { label: "Type", name: "type", widget: "hidden", default: "search" }
+      - name: "sitemap"
+        label: "Sitemap"
+        file: "content/sitemap.md"
+        fields:
+          - *field_title
+          - *field_description
+          - { label: "Type", name: "type", widget: "hidden", default: "sitemap" }
+
+  # ─── SECTIONS ───────────────────────────────────────────────
+  # The introductory pages for each content section listing (e.g. /blog, /events).
+  - name: "section-headers"
+    label: "Sections"
+    icon: toc
+    editor:
+      preview: false
+    files:
+      - name: "blog-section"
+        label: "Blog"
+        file: "content/blog/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - name: "events-section"
+        label: "Events"
+        file: "content/events/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - name: "services-section"
+        label: "Services"
+        file: "content/services/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
+      - name: "working-with-section"
+        label: "Working With"
+        file: "content/working-with/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_display
+          - *field_draft
+          - *field_body
+      - name: "awards-section"
+        label: "Awards & Recognition"
+        file: "content/awards-and-recognition/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_display
+          - *field_draft
+          - *field_body
+
+  # ─── FOOTER ────────────────────────────────────────────────────────────
+  - name: "footer-settings"
+    label: "Footer"
+    icon: horizontal_split
+    editor:
+      preview: false
+    files:
+      - name: "footer_content"
+        label: "Footer"
+        file: "content/footer/index.md"
+        fields:
+          - label: "About"
+            name: "about_section"
+            widget: "object"
+            required: true
+            hint: "Shown under your site title in the footer's About column. Leave any field blank to hide that line entirely."
+            fields:
+              - { label: "Address", name: "address", widget: "string", required: false, hint: "Your postal address. Leave blank to hide this line." }
+              - { label: "Company Registration Number", name: "company", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
+              - { label: "Charity Registration Number", name: "charity", widget: "string", required: false, hint: "Leave blank if this doesn't apply to your organisation." }
+          - label: "Support"
+            name: "support_section"
+            widget: "object"
+            required: true
+            hint: "Shown in the footer's 'Get Help' column. Leave a field blank to hide that line."
+            fields:
+              - { label: "Support Email", name: "email", widget: "string", type: "email", required: false, hint: "Leave blank to hide this line." }
+              - { label: "Support Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to hide this line." }
+          - *field_build
+
+  - divider: true
+
+  # ─── BLOG ───────────────────────────────────────────────────────────────
+  # media_folder: "" uploads images into the post's page bundle folder
+  - name: "blog"
+    label: "Blog"
+    icon: edit_note
+    folder: "content/blog"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_date
+      - *field_summary
+      - *field_description
+      - *field_draft
+      - *field_resource
+      - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the blog post. This must not be left blank." }
+
+  # ─── EVENTS ─────────────────────────────────────────────────────────────
+  - name: "events"
+    label: "Events"
+    icon: event
+    folder: "content/events"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - { label: "Event Date", name: "event_date", widget: "datetime", required: true, hint: "The date of the event. Required — used to decide whether the event is upcoming and to sort the events list." }
+      - { label: "Start Time", name: "start_time", widget: "datetime", required: true, hint: "When the event starts. Required — shown on event cards." }
+      - { label: "End Time", name: "end_time", widget: "datetime", required: true, hint: "When the event ends. Required — shown on event cards." }
+      - *field_resource
+      - *field_body
+
+  # ─── SERVICES ───────────────────────────────────────────────────────────
+  - name: "services"
+    label: "Services"
+    icon: volunteer_activism
+    folder: "content/services"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - { label: "Summary", name: "summary", widget: "text", required: true, hint: "A short paragraph introducing this service, shown on the homepage above the summary points. This must not be left blank." }
+      - label: "Summary Points"
+        name: "summary_bullets"
+        widget: "list"
+        required: true
+        min: 1
+        hint: "Short bullet points shown on the homepage below the summary. Add at least one."
+        field: { label: "Point", name: "point", widget: "string", required: true }
+      - *field_weight
+      - *field_icon
+      - *field_icon_color
+      - *field_resource
+      - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
+
+  # ─── WORKING WITH ───────────────────────────────────────────────────────
+  - name: "working-with"
+    label: "Working With"
+    icon: handshake
+    folder: "content/working-with"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - *field_weight
+      - *field_link
+      - *field_resource
+      - *field_body
+
+  # ─── AWARDS & RECOGNITION ───────────────────────────────────────────────
+  - name: "awards"
+    label: "Awards & Recognition"
+    icon: emoji_events
+    folder: "content/awards-and-recognition"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_description
+      - { label: "Year", name: "year", widget: "number", required: false, min: 1900, max: 2100, hint: "The year this award was received. Optional." }
+      - *field_weight
+      - *field_link
+      - *field_resource
+      - *field_body
+
+  - divider: true
+
+  # ─── LEGAL PAGES ───────────────────────────────────────────────────────
+  - name: "legals"
+    label: "Legal Pages"
+    icon: gavel
+    folder: "content/legals"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - *field_title
+      - *field_date
+      - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The full legal text of this page. This must not be left blank." }
+
+  - divider: true
+
+  # ─── CALLOUTS ──────────────────────────────────────────────────────────
+  # Fixed-purpose support messages. Kept as named files because the layouts
+  # look up these pages by hardcoded slug (footer, single, 404).
+  - name: "callouts"
+    label: "Callouts"
+    icon: campaign
+    editor:
+      preview: false
+    files:
+      - name: "callout-footer"
+        label: "Footer Callout"
+        file: "content/callouts/footer/index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "hidden", default: "footer" }
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: true, hint: "Supporting text shown below the headline. This must not be left blank." }
+          - *field_build
+      - name: "callout-single"
+        label: "Single Page Callout"
+        file: "content/callouts/single/index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "hidden", default: "single" }
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: true, hint: "Supporting text shown below the headline. This must not be left blank." }
+          - *field_buttons
+          - *field_build
+      - name: "callout-404"
+        label: "404 Page Callout"
+        file: "content/callouts/404/index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "hidden", default: "404" }
+          - *field_headline
+          - { label: "Body", name: "body", widget: "text", required: true, hint: "Supporting text shown below the headline. This must not be left blank." }
+          - *field_build
+
+  - divider: true
+
+  # ─── CTA — HEADER ──────────────────────────────────────────────────────
+  # Small buttons shown in the site header.
+  # The Name field is the lookup key used in Homepage → Header CTA.
+  - name: "cta-header"
+    label: "CTA — Header"
+    icon: smart_button
+    folder: "content/cta/header"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Name"
+        name: "title"
+        widget: "string"
+        required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
+        hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'donate'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected as the Homepage's Header CTA, do not rename it — renaming removes it from the header until you re-select it there."
+      - *field_buttons
+      - *field_build
+
+  # ─── CTA — HERO ────────────────────────────────────────────────────────
+  # Shown in the hero section when Hero Style is set to 'CTA'.
+  - name: "cta-hero"
+    label: "CTA — Hero"
+    icon: featured_play_list
+    folder: "content/cta/hero"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Name"
+        name: "title"
+        widget: "string"
+        required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
+        hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'version-1'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
+      - *field_headline
+      - *field_cta_body
+      - *field_buttons
+      - *field_build
+
+  # ─── CTA — FOOTER ──────────────────────────────────────────────────────
+  # Full-width call-to-action block shown above the page footer.
+  - name: "cta-footer"
+    label: "CTA — Footer"
+    icon: call_to_action
+    folder: "content/cta/footer"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Name"
+        name: "title"
+        widget: "string"
+        required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
+        hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'winter-appeal'). Used to select this CTA from the Homepage editor. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
+      - *field_headline
+      - *field_cta_body
+      - *field_buttons
+      - *field_build
+
+  # ─── CTA — INLINE ──────────────────────────────────────────────────────
+  # CTAs displayed inline within page content.
+  - name: "cta-inline"
+    label: "CTA — Inline"
+    icon: format_quote
+    folder: "content/cta/inline"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Name"
+        name: "title"
+        widget: "string"
+        required: true
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only (e.g. donate-appeal) — no spaces or capital letters."]
+        hint: "A short, simple, permanent identifier (lowercase, no spaces, e.g. 'donate-appeal'). Used to select this CTA from the Homepage editor's Inline CTAs list. Warning: once this CTA is selected on the Homepage, do not rename it — renaming removes it from the Homepage until you re-select it there."
+      - *field_headline
+      - *field_cta_body
+      - *field_buttons
+      - *field_build
