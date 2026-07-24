@@ -413,7 +413,7 @@ collections:
         file: "config/_default/hugo.toml"
         format: "toml"
         fields:
-          - label: "Site URL"
+          - label: "DANGER: Site URL"
             name: "baseURL"
             widget: "string"
             type: "url"
