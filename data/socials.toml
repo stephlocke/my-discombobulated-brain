@@ -9,11 +9,6 @@ url = "https://www.instagram.com/discombobbrain/"
 label = "Instagram"
 
 [[socials]]
-icon = "x-twitter"
-url = "https://x.com/DiscombobBrain"
-label = "X (formerly Twitter)"
-
-[[socials]]
 icon = "youtube"
 url = "https://www.youtube.com/channel/UCozMcQJbz5B1OB0xUfZvP-w"
 label = "YouTube"
