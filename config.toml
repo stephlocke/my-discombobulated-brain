@@ -1,5 +1,4 @@
-baseURL = 'https://stephlocke.com/my-discombobulated-brain/'
-locale = 'en-GB'
+languageCode = 'en-GB'
 title = 'My Discombobulated Brain'
 # Enable emoji support
 enableEmoji = true
@@ -7,8 +6,13 @@ enableEmoji = true
 enableGitInfo = false
 # Enable RSS
 enableRSS = true
-# Copyright notice
-copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
+# Enable robots.txt generation (see layouts/robots.txt)
+enableRobotsTXT = true
+
+[params.hugo]
+  version = "0.160.1"
+  extended = true
+
 # Pagination
 [pagination]
   pagerSize = 5
@@ -32,107 +36,10 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     disableWatch = true
     source = 'hugo_stats.json'
     target = 'assets/notwatching/hugo_stats.json'
+  [[module.mounts]]
+    source = 'static/images'
+    target = 'assets/images'
 
-[params]
-  author = 'My Discombobulated Brain'
-  description = 'Compassionate mental health support, resources, and community for people and carers across the UK.'
-  keywords = ['mental health', 'charity', 'support', 'wellness', 'resources']
-  logo = 'images/my-discombob-logo.svg'
-  favicon = 'images/my-discombob-logo.svg'
-  searchSummaryLength = 250
-  searchSummaryLengthMicro = 150
-
-  [params.hugo]
-    version = '0.160.1'
-    extended = true
-  [params.configs]
-    # Defines the maximum length of search result summaries in characters. Longer summaries will be truncated with an ellipsis.
-    searchSummaryLength = 250
-    # Used to set a shorter summary length for micro summaries, which are used in the cards that show in desktop search bar.
-    searchSummaryLengthMicro = 150
-    # Contact format: list or form
-    contactFormat = "list"
-
-  [params.homepage_config]
-    # Defines the hero type used: overview with is a number of cards linking to the services section, or CTA which shows a large call to action
-    hero_format = "overview"
-    # What image, if any, to use as the hero image on the homepage. The image is stored in static/images, if the image is static/images/hero-image.jpg, the value here should be "hero-image.jpg". If no hero image is desired, this can be left blank. Any image file can be used, but webp format is recommended for best performance.
-    hero_image = "hero-image.webp"
-    # Should Upcoming Events be shown on the homepage?
-    upcomingEventsSection = true
-    # Should Working With be shown on the homepage?
-    workingWithSection = true
-    # Should Services be shown on the homepage?
-    servicesSection = true
-    # Should Awards and Recognition be shown on the homepage?
-    awardsSection = true
-      # Should the blog section be shown on the homepage?
-    blogSection = false
-
-  [params.footer.about_section]
-    # Used to populate the About section of the footer. Every parameter added here will be displayed in the footer.
-    address = "123 Wellness Way, Mindful City, MC1 1CM"
-    company = "12345678"
-    charity = "87654321"
-
-  [params.footer.support_section]
-    # Used to populate the Support section of the footer. Every parameter added here will be displayed in the footer.
-    email = 'support@example.org'
-    phone = '0123 456 7890'
-
-  [params.contact]
-    email_users = 'contact@example.org'
-    email_donations = 'donations@example.org'
-    email_volunteer = 'volunteers@example.org'
-    email_media = 'media@example.org'
-    phone_users = '0123 456 7890'
-    phone_donations = '0123 456 7890'
-    phone_volunteer = '0123 456 7890'
-    phone_media = '0123 456 7890'
-
-
-  [params.style_rules]
-    # Edge rounding style: sharp, curved, or round
-    edges = "round"
-    # Whether the navigation bar expands vertically when the user is at the top of the page (true) or is always fixed (false)
-    expanded_nav = false
-    # Primary and secondary theme colors
-    primary_color = "oklch(50% 0.15 158)"
-    secondary_color = "var(--color-yellow-500)"
-    # Font stacks (primary plus fallbacks)
-    title_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    body_font = "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    # Stacked button position: "left", "right", or "center". This controls the alignment of buttons in stacked layouts (e.g. the hero CTA format). This setting only affects button alignment in layouts where buttons are stacked vertically; in horizontal layouts, buttons will always be center-aligned.
-    stacked_button_position = "center"
-  
-  # Social media profiles. Add one [[params.socials]] entry per platform.
-  # 'icon' must match a supported local icon name (e.g. "x-twitter", "facebook").
-  [[params.socials]]
-    icon = 'facebook'
-    url = 'https://www.facebook.com/mydiscombobulatedbrain/'
-    label = 'Facebook'
-  [[params.socials]]
-    icon = 'instagram'
-    url = 'https://www.instagram.com/discombobbrain/'
-    label = 'Instagram'
-  [[params.socials]]
-    icon = 'x-twitter'
-    url = 'https://x.com/DiscombobBrain'
-    label = 'X (formerly Twitter)'
-  [[params.socials]]
-    icon = 'youtube'
-    url = 'https://www.youtube.com/channel/UCozMcQJbz5B1OB0xUfZvP-w'
-    label = 'YouTube'
-  
-  # Contact
-  email = 'contact@example.org'
-  phone = ''
-  
-  # Features
-  showReadingTime = true
-  showShareButtons = true
-  showDateUpdated = false
-  
 [taxonomies]
   category = 'categories'
   tag = 'tags'
@@ -144,21 +51,18 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
     url = '/'
     pageRef = '/'
     weight = 1
-  
   [[menu.main]]
     identifier = 'about'
     name = 'About'
     url = '/about/'
     pageRef = '/about'
     weight = 2
-  
   [[menu.main]]
     identifier = 'blog'
     name = 'Blog'
     url = '/blog/'
     pageRef = '/blog'
     weight = 3
-  
   [[menu.main]]
     identifier = 'contact'
     name = 'Contact'
@@ -188,3 +92,14 @@ copyright = '© MyDiscombobulated Brain 2026. All rights reserved.'
   changefreq = 'weekly'
   filename = 'sitemap.xml'
   priority = 0.5
+
+# Custom output format for generating the Sveltia CMS admin/config.yml at build time,
+# so CMS-chrome fields (site_url, logout_redirect_url, logo, app_title) derive from this
+# file instead of being hand-duplicated per site clone.
+[mediaTypes."text/yaml"]
+  suffixes = ["yml"]
+
+[outputFormats.CMSConfig]
+  mediaType = "text/yaml"
+  isPlainText = true
+  notAlternative = true

@@ -1,0 +1,57 @@
+{{- /* Organization schema — every page */ -}}
+{{- $sameAs := slice -}}
+{{- range hugo.Data.socials.socials -}}
+  {{- with .url -}}
+    {{- $sameAs = $sameAs | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $organization := dict
+  "@context" "https://schema.org"
+  "@type" "Organization"
+  "name" site.Params.title
+  "url" site.BaseURL
+  "description" site.Params.description
+-}}
+{{- with site.Params.logo -}}
+  {{- $organization = merge $organization (dict "logo" (. | absURL)) -}}
+{{- end -}}
+{{- if $sameAs -}}
+  {{- $organization = merge $organization (dict "sameAs" $sameAs) -}}
+{{- end -}}
+<script type="application/ld+json">{{ $organization | jsonify | safeJS }}</script>
+
+{{- /* BreadcrumbList schema — every non-home page */ -}}
+{{- if not .IsHome -}}
+  {{- $items := slice (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.BaseURL) -}}
+  {{- $position := 2 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" .Title "item" .Permalink) -}}
+      {{- $position = add $position 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" .Title "item" .Permalink) -}}
+  {{- $breadcrumbs := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items -}}
+<script type="application/ld+json">{{ $breadcrumbs | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- /* Article schema — blog posts only */ -}}
+{{- if eq .Type "blog" -}}
+  {{- $article := dict
+    "@context" "https://schema.org"
+    "@type" "Article"
+    "headline" .Title
+    "description" .Description
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "author" (dict "@type" "Organization" "name" site.Params.author)
+  -}}
+  {{- with .Params.resource -}}
+    {{- with .src -}}
+      {{- with $.Resources.Get (strings.TrimPrefix "./" .) -}}
+        {{- $article = merge $article (dict "image" .Permalink) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+<script type="application/ld+json">{{ $article | jsonify | safeJS }}</script>
+{{- end -}}

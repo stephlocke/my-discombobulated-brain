@@ -1,0 +1,14 @@
+[[socials]]
+icon = "facebook"
+url = "https://www.facebook.com/mydiscombobulatedbrain/"
+label = "Facebook"
+
+[[socials]]
+icon = "instagram"
+url = "https://www.instagram.com/discombobbrain/"
+label = "Instagram"
+
+[[socials]]
+icon = "youtube"
+url = "https://www.youtube.com/channel/UCozMcQJbz5B1OB0xUfZvP-w"
+label = "YouTube"

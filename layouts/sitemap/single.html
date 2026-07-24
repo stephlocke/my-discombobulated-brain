@@ -1,0 +1,120 @@
+{{ define "main" }}
+{{- $linkClass := "text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded" -}}
+<section class="container py-12">
+    <div class="max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary mb-8">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="text-lg text-muted mb-10">{{ . }}</p>
+        {{ end }}
+
+        <div class="space-y-10">
+            <!-- Main Pages -->
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">Main Pages</h2>
+                <ul class="space-y-2">
+                    <li><a href="{{ "./" | relLangURL }}" class="{{ $linkClass }}">Home</a></li>
+                    {{ range (slice "/about" "/donate" "/contact" "/search") }}
+                    {{ with $.Site.GetPage . }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+
+            <!-- Services -->
+            {{ with .Site.GetPage "/services" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                </h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByWeight }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- Events -->
+            {{ with .Site.GetPage "/events" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                </h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByTitle }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- Working With -->
+            {{ with .Site.GetPage "/working-with" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                </h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByWeight }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- Awards & Recognition -->
+            {{ with .Site.GetPage "/awards-and-recognition" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                </h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByWeight }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- Blog -->
+            {{ with .Site.GetPage "/blog" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">{{ .Title }}</a>
+                </h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByDate.Reverse }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- Legal Pages -->
+            {{ with .Site.GetPage "/legals" }}
+            {{ if .Pages }}
+            <div>
+                <h2 class="text-xl font-semibold text-off-black mb-3">Legal Pages</h2>
+                <ul class="space-y-2">
+                    {{ range .Pages.ByTitle }}
+                    <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

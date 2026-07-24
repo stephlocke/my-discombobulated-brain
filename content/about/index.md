@@ -1,10 +1,10 @@
 ---
-title: "About Us"
+title: About Us
+description: Learn about our mission to support mental health and provide resources for those in need
 date: 2026-02-02
-description: "Learn about our mission to support mental health and provide resources for those in need"
 ---
 
-{{< general-img-load src="P8220092.webp" alt="Two people standing in a tent holding flyers" placement="Section">}}
+![Two people standing in a tent holding flyers](P8220092.webp)
 
 ## Our Story
 
@@ -17,15 +17,18 @@ We are a dedicated mental health charity committed to providing compassionate su
 Our mission is threefold:
 
 ### Support
+
 We provide accessible resources, information, and connections to professional services for those experiencing mental health challenges. We believe everyone deserves support, regardless of their circumstances.
 
 ### Education
+
 Through workshops, resources, and open conversations, we work to increase awareness and understanding of mental health issues. Knowledge is power, and we're committed to empowering our community.
 
 ### Community
+
 We foster safe, inclusive spaces where people can share their experiences, find connection, and receive support without judgment. No one should face mental health challenges alone.
 
-{{< general-img-load src="IMG_1968.webp" alt="Three people standing in front of a flag for Found Festival" placement="Section">}}
+![Three people standing in front of a flag for Found Festival](IMG_1968.webp)
 
 ## Our Values
 
@@ -51,11 +54,3 @@ We foster safe, inclusive spaces where people can share their experiences, find 
 ## Get Involved
 
 Whether you're seeking support, want to volunteer, or simply want to learn more about mental health, we're here for you. Together, we can build a more understanding and supportive community.
-
-
-
-### Need Support?
-
-If you or someone you know is struggling with mental health, please don't hesitate to reach out. Visit our [contact page](/contact/) or call your local crisis helpline.
-
-**Remember**: Seeking help is a sign of strength, not weakness. You matter, and your mental health matters.

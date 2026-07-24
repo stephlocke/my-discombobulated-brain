@@ -3,30 +3,68 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- SEO Meta Tags -->
-<title>{{ if .IsHome }}{{ .Site.Title }} - {{ .Site.Params.description }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ site.Params.title }} - {{ .Site.Params.description }}{{ else }}{{ .Title }} | {{ site.Params.title }}{{ end }}</title>
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary | truncate 160 }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta name="author" content="{{ .Site.Params.author }}">
 <meta name="keywords" content="{{ if .Keywords }}{{ delimit .Keywords ", " }}{{ else }}{{ delimit .Site.Params.keywords ", " }}{{ end }}">
 
+<!-- Search engine indexing: keep thin/utility pages (search, unused taxonomies) out of search results -->
+{{- $noindexKinds := slice "taxonomy" "term" -}}
+{{- if or (in $noindexKinds .Kind) (eq .Type "search") -}}
+<meta name="robots" content="noindex, follow">
+{{- end }}
+
+<!-- Shared social share image: prefer the page's own image, then the site's social image, then the logo -->
+{{- $shareImagePath := "" -}}
+{{- $shareImageIsBundleRelative := false -}}
+{{- with .Params.resource -}}
+  {{- with .src -}}
+    {{- $shareImagePath = . -}}
+    {{- $shareImageIsBundleRelative = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $shareImagePath -}}
+  {{- $shareImagePath = .Site.Params.social_image | default .Site.Params.logo -}}
+{{- end -}}
+{{- $shareImage := "" -}}
+{{- with $shareImagePath -}}
+  {{- $lookup := strings.TrimPrefix "./" . -}}
+  {{- if $shareImageIsBundleRelative -}}
+    {{- with $.Resources.Get $lookup -}}
+      {{- $shareImage = .Permalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with resources.Get (strings.TrimPrefix "/" $lookup) -}}
+      {{- $shareImage = .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <!-- Open Graph Meta Tags -->
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Params.title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ with .Site.Params.logo }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+<meta property="og:site_name" content="{{ site.Params.title }}">
+<meta property="og:locale" content="en_GB">
+{{ with $shareImage }}<meta property="og:image" content="{{ . }}">{{ end }}
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ site.Params.title }}{{ else }}{{ .Title }}{{ end }}">
 <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ with $shareImage }}<meta name="twitter:image" content="{{ . }}">{{ end }}
 {{ with .Site.Params.twitter }}<meta name="twitter:site" content="@{{ . }}">{{ end }}
+
+<!-- Structured Data -->
+{{ partial "essentials/structured-data.html" . }}
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
 
 <!-- RSS Feed -->
 {{ with .OutputFormats.Get "RSS" }}
-<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+<link rel="alternate" type="application/rss+xml" title="{{ site.Params.title }}" href="{{ .Permalink }}">
 {{ end }}
 
 <!-- Favicon -->
@@ -35,15 +73,6 @@
 {{- $faviconExt := lower (path.Ext $favicon) -}}
 {{- $faviconType := or (index $faviconMimeTypes $faviconExt) "image/x-icon" -}}
 <link rel="icon" type="{{ $faviconType }}" href="{{ $favicon | relURL }}">
-
-<!-- Dark Mode Script (runs before page load to prevent flash) -->
-{{- with resources.Get "js/theme-init.js" -}}
-{{- $themeInit := . -}}
-{{- if hugo.IsProduction -}}
-{{- $themeInit = $themeInit | minify | fingerprint -}}
-{{- end -}}
-<script src="{{ $themeInit.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $themeInit.Data.Integrity }}" crossorigin="anonymous"{{ end }}></script>
-{{- end -}}
 
 <!-- Preload critical resources for accessibility -->
 <link rel="preconnect" href="{{ .Site.BaseURL }}">
@@ -61,17 +90,21 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script>
-    (function () {
-        const googleFontsLink = document.getElementById('google-fonts-exo');
-        if (!googleFontsLink) {
-            return;
-        }
-        googleFontsLink.addEventListener('load', function () {
-            googleFontsLink.rel = 'stylesheet';
-        }, { once: true });
-    }());
-</script>
-<noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap">
-</noscript>
+{{- $defaultFontStack := "'Exo', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" -}}
+{{- $titleFontStack := site.Params.style_rules.title_font | default $defaultFontStack -}}
+{{- $bodyFontStack := site.Params.style_rules.body_font | default $defaultFontStack -}}
+{{- $titleFamily := replaceRE "^'([^']+)'.*$" "$1" $titleFontStack -}}
+{{- $bodyFamily := replaceRE "^'([^']+)'.*$" "$1" $bodyFontStack -}}
+{{- $titleFamilyParam := replace $titleFamily " " "+" -}}
+{{- $bodyFamilyParam := replace $bodyFamily " " "+" -}}
+{{- $fontFamilies := slice $titleFamilyParam -}}
+{{- if ne $bodyFamilyParam $titleFamilyParam -}}
+  {{- $fontFamilies = $fontFamilies | append $bodyFamilyParam -}}
+{{- end -}}
+{{- $fontQuery := "" -}}
+{{- range $i, $f := $fontFamilies -}}
+  {{- if $i -}}{{- $fontQuery = printf "%s&" $fontQuery -}}{{- end -}}
+  {{- $fontQuery = printf "%sfamily=%s:ital,wght@0,300..800;1,300..800" $fontQuery $f -}}
+{{- end -}}
+{{- $fontHref := printf "https://fonts.googleapis.com/css2?%s&display=swap" $fontQuery -}}
+<link rel="stylesheet" href="{{ $fontHref | safeURL }}">

@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $contactFormat := .Site.Params.configs.contactFormat | default "list" -}}
+{{- $contactFormat := hugo.Data.contact.contactFormat | default "list" -}}
 {{- $cardRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") -}}
 
 <article class="container py-12">
@@ -19,39 +19,41 @@
         <caption class="sr-only">Contact methods and details</caption>
         <thead class="bg-primary text-white font-semibold">
           <tr>
-            <th scope="col" class="px-4 py-3">Method</th>
-            <th scope="col" class="px-4 py-3">Details</th>
+            <th scope="col" class="px-4 py-3">Contact Type</th>
+            <th scope="col" class="px-4 py-3">Email</th>
+            <th scope="col" class="px-4 py-3">Phone</th>
           </tr>
         </thead>
         <tbody>
-          {{- range $key, $value := .Site.Params.contact -}}
-          {{- $valueString := printf "%v" $value -}}
-          {{- $trimmedValue := $valueString | strings.TrimSpace -}}
-          {{- $isEmail := findRE "^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" $trimmedValue -}}
-          {{- $isPhone := findRE "^\\+?[0-9()\\-\\s]{7,}$" $trimmedValue -}}
+          {{- range hugo.Data.contact.contact -}}
+          {{- if or .email .phone -}}
           <tr class="border-t border-white-darken">
-            <th scope="row" class="px-4 py-3 font-medium text-off-black">{{ $key | humanize }}</th>
+            <th scope="row" class="px-4 py-3 font-medium text-off-black">{{ .name }}</th>
             <td class="px-4 py-3 text-off-black">
-              {{- if gt (len $isEmail) 0 -}}
-              <a href="mailto:{{ $trimmedValue }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ $trimmedValue }}</a>
-              {{- else if gt (len $isPhone) 0 -}}
-              {{- $telValue := $trimmedValue | replaceRE "[^0-9+]" "" -}}
-              <a href="tel:{{ $telValue }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ $trimmedValue }}</a>
-              {{- else -}}
-              {{ $trimmedValue }}
+              {{- with .email -}}
+              <a href="mailto:{{ . }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ . }}</a>
+              {{- end -}}
+            </td>
+            <td class="px-4 py-3 text-off-black">
+              {{- with .phone -}}
+              {{- $telValue := . | replaceRE "[^0-9+]" "" -}}
+              <a href="tel:{{ $telValue }}" class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body">{{ . }}</a>
               {{- end -}}
             </td>
           </tr>
+          {{- end -}}
           {{- end -}}
         </tbody>
       </table>
     </section>
     {{- else if eq $contactFormat "form" -}}
+    {{- $formName := hugo.Data.contact.contact_form.form_name | default "contact" -}}
+    {{- $successUrl := hugo.Data.contact.contact_form.success_url | default "" -}}
     <section aria-labelledby="contact-form-heading">
       <h2 id="contact-form-heading" class="text-2xl font-bold text-off-black mb-0">Send Us a Message</h2>
 
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="p-6 md:p-8 space-y-6 {{ $cardRounding }}">
-        <input type="hidden" name="form-name" value="contact">
+      <form name="{{ $formName }}" method="POST" data-netlify="true" netlify-honeypot="bot-field"{{ with $successUrl }} action="{{ . }}"{{ end }} class="p-6 md:p-8 space-y-6 {{ $cardRounding }}">
+        <input type="hidden" name="form-name" value="{{ $formName }}">
 
         <p class="hidden" aria-hidden="true">
           <label for="contact-bot-field">Do not fill this out if you are human:</label>

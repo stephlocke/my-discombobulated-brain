@@ -2,7 +2,7 @@
 {{- $class := .class | default "h-5 w-5" -}}
 {{- if eq $name "facebook" -}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M13.5 21v-7.031h2.39L16.25 11H13.5V9.156c0-.844.281-1.406 1.547-1.406H16.5V5.062c-.258-.023-1.125-.094-2.156-.094-2.133 0-3.594 1.313-3.594 3.703V11H8.25v2.969h2.5V21h2.75Z" />
+    <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/>
   </svg>
 {{- else if eq $name "instagram" -}}
   <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -35,9 +35,154 @@
     <circle cx="10.5" cy="10.5" r="6.5" />
     <path d="M15.5 15.5 21 21" />
   </svg>
+{{- else if eq $name "mail" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="2" y="4" width="20" height="16" rx="2"/>
+    <path d="m2 7 10 7 10-7"/>
+  </svg>
+{{- else if eq $name "bluesky" -}}
+  <svg class="{{ $class }}" viewBox="0 0 600 530" fill="currentColor" aria-hidden="true">
+    <path d="M135.72 44.03C202.216 93.951 273.74 195.17 300 249.49c26.262-54.316 97.782-155.54 164.28-205.46C512.26 8.009 590-19.862 590 68.825c0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.38-3.69-10.832-3.708-7.896-.017-2.936-1.193.516-3.707 7.896-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.107 11.421-142.55-7.449-163.25-81.433C20.15 217.613 9.997 86.535 9.997 68.825c0-88.687 77.742-60.816 125.72-24.795z"/>
+  </svg>
+{{- else if eq $name "pinterest" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+  </svg>
+{{- else if eq $name "reddit" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+  </svg>
+{{- else if eq $name "whatsapp" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+{{- else if eq $name "telegram" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+  </svg>
+{{- else if eq $name "linkedin" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  </svg>
+{{- else if eq $name "link" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
 {{- else if eq $name "hand-holding-hand" -}}
   <svg class="{{ $class }}" viewBox="0 0 640 640" fill="currentColor" aria-hidden="true">
     <path d="M498.8 250.5L541.3 208L576 208C593.7 208 608 193.7 608 176L608 112C608 94.3 593.7 80 576 80L255.6 80C226.6 80 198.3 89.3 174.9 106.5L48.3 199.8C30.5 212.9 26.7 237.9 39.8 255.7C52.9 273.5 77.9 277.3 95.7 264.2L215.4 176L328 176C341.3 176 352 186.7 352 200C352 213.3 341.3 224 328 224L256 224C238.3 224 224 238.3 224 256C224 273.7 238.3 288 256 288L408.2 288C442.1 288 474.7 274.5 498.7 250.5zM141.3 389.5L98.7 432L64 432C46.3 432 32 446.3 32 464L32 528C32 545.7 46.3 560 64 560L384.5 560C413.5 560 441.8 550.7 465.2 533.5L591.8 440.2C609.6 427.1 613.4 402.1 600.3 384.3C587.2 366.5 562.2 362.7 544.4 375.8L424.6 464L312 464C298.7 464 288 453.3 288 440C288 426.7 298.7 416 312 416L384 416C401.7 416 416 401.7 416 384C416 366.3 401.7 352 384 352L231.8 352C197.9 352 165.3 365.5 141.3 389.5z" />
+  </svg>
+{{- else if eq $name "heart" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 20.5s-7-4.35-9.5-8.6C.9 8.9 2.3 5.5 5.6 5.5c1.9 0 3.4 1 4.9 2.9 1.5-1.9 3-2.9 4.9-2.9 3.3 0 4.7 3.4 3.1 6.4C19 16.15 12 20.5 12 20.5Z" />
+  </svg>
+{{- else if eq $name "star" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 3.5Z" />
+  </svg>
+{{- else if eq $name "shield-check" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-2.5Z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+{{- else if eq $name "lightbulb" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.45 1 .95 1.1 1.6h4.8c.1-.65.5-1.15 1.1-1.6A6 6 0 0 0 12 3Z" />
+    <path d="M9.7 18.5h4.6" />
+    <path d="M10.3 21h3.4" />
+  </svg>
+{{- else if eq $name "users" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="9" cy="8" r="3" />
+    <path d="M3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5" />
+    <circle cx="17" cy="9" r="2.3" />
+    <path d="M15.7 14.3c2.3.5 4 2.5 4.3 5.2" />
+  </svg>
+{{- else if eq $name "home" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 11.5 12 4l8 7.5" />
+    <path d="M6 10v9.5h5v-5.5h2v5.5h5V10" />
+  </svg>
+{{- else if eq $name "book-open" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 6c-1.7-1.2-4-2-6.5-2v13c2.5 0 4.8.8 6.5 2 1.7-1.2 4-2 6.5-2V4c-2.5 0-4.8.8-6.5 2Z" />
+    <path d="M12 6v13" />
+  </svg>
+{{- else if eq $name "chart-bar" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4.5 20V13" stroke-width="3.2" />
+    <path d="M12 20V8" stroke-width="3.2" />
+    <path d="M19.5 20v-6" stroke-width="3.2" />
+  </svg>
+{{- else if eq $name "calendar" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.75" y="5" width="16.5" height="15" rx="2" />
+    <path d="M3.75 9.5h16.5" />
+    <path d="M8 3.5v3" />
+    <path d="M16 3.5v3" />
+  </svg>
+{{- else if eq $name "briefcase" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.5" y="7.5" width="17" height="11" rx="1.8" />
+    <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5" />
+    <path d="M3.5 12.5h17" />
+  </svg>
+{{- else if eq $name "gift" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.5" y="9.5" width="17" height="4" rx="0.8" />
+    <rect x="4.5" y="13.5" width="15" height="7" rx="1" />
+    <path d="M12 9.5v11" />
+    <path d="M12 9.5c-1.2-2.5-5.5-2.7-5.5-.3 0 1.6 2.4 1.9 5.5.3Z" />
+    <path d="M12 9.5c1.2-2.5 5.5-2.7 5.5-.3 0 1.6-2.4 1.9-5.5.3Z" />
+  </svg>
+{{- else if eq $name "phone" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M6.5 3.5h3l1.2 4-2 1.5a12 12 0 0 0 5.3 5.3l1.5-2 4 1.2v3a1.7 1.7 0 0 1-1.9 1.7A16.5 16.5 0 0 1 4.8 5.4a1.7 1.7 0 0 1 1.7-1.9Z" />
+  </svg>
+{{- else if eq $name "map-pin" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 21s-6.5-5.7-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.3-6.5 11-6.5 11Z" />
+    <circle cx="12" cy="10" r="2.3" />
+  </svg>
+{{- else if eq $name "clock" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <path d="M12 7.5V12l3.2 2" />
+  </svg>
+{{- else if eq $name "check-circle" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <path d="M8 12.3l2.7 2.7 5.3-5.5" />
+  </svg>
+{{- else if eq $name "target" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.25" />
+    <circle cx="12" cy="12" r="4.5" />
+    <circle cx="12" cy="12" r=".75" fill="currentColor" stroke="none" />
+  </svg>
+{{- else if eq $name "rocket" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5c2.5 2 3.8 5 3.5 9-1 .3-2.3.5-3.5.5s-2.5-.2-3.5-.5c-.3-4 1-7 3.5-9Z" />
+    <path d="M9.2 13c-1.8.6-2.7 2.3-2.7 4.5 2.2 0 3.9-.9 4.5-2.7" />
+    <path d="M14.8 13c1.8.6 2.7 2.3 2.7 4.5-2.2 0-3.9-.9-4.5-2.7" />
+    <circle cx="12" cy="9" r="1.3" fill="currentColor" stroke="none" />
+    <path d="M10.3 17.5 9.5 20.5 12 19l2.5 1.5-.8-3" />
+  </svg>
+{{- else if eq $name "camera" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M8 7l1.5-2.5h5L16 7" />
+    <circle cx="12" cy="13.5" r="3.5" />
+  </svg>
+{{- else if eq $name "wrench" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L4 16.5 7.5 20l5.3-5.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2.1-2.1 2.6-2.6Z" />
+  </svg>
+{{- else if eq $name "sparkles" -}}
+  <svg class="{{ $class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5 13 8l4.5 1-4.5 1-1 4.5-1-4.5L6.5 9l4.5-1 1-4.5Z" />
+    <path d="M18.5 15.5 19 17.5l2 .5-2 .5-.5 2-.5-2-2-.5 2-.5.5-2Z" />
   </svg>
 {{- else -}}
   {{/* Fallback icon for unsupported icon names - displays an alert/info indicator */}}

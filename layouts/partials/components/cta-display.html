@@ -15,17 +15,9 @@
     {{- end -}}
   {{- end -}}
 {{- else if eq $location "inline" -}}
-  {{- if $cta -}}
-    {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location $cta) -}}
+  {{- with $cta -}}
+    {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location .) -}}
       {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
-    {{- end -}}
-  {{- else -}}
-    {{- with $ctxt.Params.inline_ctas -}}
-      {{- range . -}}
-        {{- with $ctxt.Site.GetPage (printf "/cta/%s/%s" $location .) -}}
-          {{- partial "components/cta.html" (dict "cta" . "location" $location) -}}
-        {{- end -}}
-      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

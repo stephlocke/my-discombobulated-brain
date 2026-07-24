@@ -1,6 +1,6 @@
 ---
 title: MMA
-description: ""
+description: "We collaborate with MMA to bring mental health support to their community and events."
 resource:
     src: mma-logo.png
     alt: MMA Logo

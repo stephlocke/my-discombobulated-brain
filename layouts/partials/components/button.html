@@ -10,6 +10,12 @@
 {{ $ariaLabel := .ariaLabel }}
 {{ $extraClass := .class | default "" }}
 {{ $isDisabled := .disabled | default false }}
+{{ $iconName := .iconName | default "" }}
+{{ $iconClass := .iconClass | default "h-4 w-4 shrink-0" }}
+{{ $labelClass := .labelClass | default "" }}
+{{ $target := .target | default "" }}
+{{ $rel := .rel | default "" }}
+{{ $title := .title | default "" }}
 {{ $bgClass := "" }}
 {{ $textClass := "" }}
 {{ $borderClass := "" }}
@@ -116,7 +122,9 @@
     {{ $positionClass = . }}
 {{ end }}
 
-{{ $classes := printf "inline-block min-h-11 %s text-center font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 %s %s %s %s %s %s %s" $paddingClass $bgClass $textClass $borderClass $hoverClass $focusRingClass $shapeClass $positionClass }}
+{{ $layoutClass := "inline-block text-center" }}
+{{ if $iconName }}{{ $layoutClass = "inline-flex items-center gap-2" }}{{ end }}
+{{ $classes := printf "%s min-h-11 %s font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 %s %s %s %s %s %s %s" $layoutClass $paddingClass $bgClass $textClass $borderClass $hoverClass $focusRingClass $shapeClass $positionClass }}
 {{ $classes = printf "%s %s" $classes $extraClass }}
 
 {{ if eq $element "button" }}
@@ -125,14 +133,20 @@
     {{ with $name }}name="{{ . }}"{{ end }}
     {{ with $value }}value="{{ . }}"{{ end }}
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+    {{ with $title }}title="{{ . }}"{{ end }}
     {{ if $isDisabled }}disabled{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
+    {{ if $iconName }}{{ partial "components/icon" (dict "name" $iconName "class" $iconClass) }}{{ end -}}
+    <span class="btn-label{{ with $labelClass }} {{ . }}{{ end }}">{{ $label }}</span>{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
 </button>
 {{ else }}
 <a href="{{ $href }}"
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+    {{ with $title }}title="{{ . }}"{{ end }}
+    {{ with $target }}target="{{ . }}"{{ end }}
+    {{ with $rel }}rel="{{ . }}"{{ end }}
     class="cursor-pointer {{ $classes }}">
-    {{ $label }}{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
+    {{ if $iconName }}{{ partial "components/icon" (dict "name" $iconName "class" $iconClass) }}{{ end -}}
+    <span class="btn-label{{ with $labelClass }} {{ . }}{{ end }}">{{ $label }}</span>{{- with ($srSuffix | strings.TrimSpace) }}<span class="sr-only"> {{ . }}</span>{{- end }}
 </a>
 {{ end }}

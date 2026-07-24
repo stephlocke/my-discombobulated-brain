@@ -1,0 +1,25 @@
+contactFormat = "list"
+
+[contact_form]
+form_name = "contact"
+success_url = ""
+
+[[contact]]
+name = "General Enquiries"
+email = "contact@example.org"
+phone = "0123 456 7890"
+
+[[contact]]
+name = "Donations"
+email = "donations@example.org"
+phone = "0123 456 7890"
+
+[[contact]]
+name = "Volunteering"
+email = "volunteers@example.org"
+phone = "0123 456 7890"
+
+[[contact]]
+name = "Media Enquiries"
+email = "media@example.org"
+phone = "0123 456 7890"

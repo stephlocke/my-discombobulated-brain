@@ -1,0 +1,4 @@
+showReadingTime = true
+showShareButtons = true
+shareButtons = ["bluesky", "facebook", "linkedin", "pinterest", "reddit", "whatsapp", "email", "copy"]
+showDateUpdated = false
