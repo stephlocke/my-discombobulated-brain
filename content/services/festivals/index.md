@@ -10,8 +10,8 @@ weight: 1
 icon: music
 icon_color: '#c71a1a'
 resource:
-  src: festival.webp
-  alt: People sitting on logs in front of a festival tent
+  src: P8220092.jpeg
+  alt: Team members stood in front of the festival set up
 ---
 
 ## Festivals Support
