@@ -1,5 +1,5 @@
 ---
-title: Projects
+title: Events
 description: We work closely with a wide range of organisations to help improve mental health support.
 summary: We work closely with organisations to be able to provide you with support, and them with advice. Whether it's education, entertainment, or employment we want to ensure you can feel safe and supported in all parts of your day-to-day life.
 summary_bullets:
