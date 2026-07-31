@@ -10,8 +10,8 @@ weight: 3
 icon: toolbox
 icon_color: '#c318a4'
 resource:
-  src: festival.webp
-  alt: People sitting on logs in front of a festival tent
+  src: Image 2.png
+  alt: Image of the multiple layers of the app
 ---
 
 ## Resources to Support Your Journey
