@@ -1,5 +1,5 @@
 ---
-title: Resources
+title: GeoLocation App
 description: We provide a range of resources for helping handle mental health issues.
 summary: We provide a range of useful resources that you can access right now to help you on your mental health journey, and help organisations provide you with the support you need.
 summary_bullets:
