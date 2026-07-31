@@ -14,7 +14,7 @@ resource:
   alt: People sitting on logs in front of a festival tent
 ---
 
-## Festivals and Events Support
+## Festivals Support
 
 Festivals are euphoric, electric... and sometimes overwhelming. That’s why we bring real, human mental health support to events across the UK. Whether you're a solo raver or a backstage manager, we’re here to help your brain feel safe. We work with event organisers to build mental health support into the heart of their planning, not as an afterthought.
 
@@ -28,4 +28,4 @@ Festivals are euphoric, electric... and sometimes overwhelming. That’s why we 
 
 > Everyone deserves to enjoy a festival without feeling overwhelmed. A little planning goes a long way.
 
-Whether you're organising a singular or a series of events, a small local gathering or a multi-day festival, we can help you put the right support in place before the gates open.
+Whether you're organising a small local gathering or a multi-day festival, we can help you put the right support in place before the gates open.
