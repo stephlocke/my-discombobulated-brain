@@ -14,17 +14,18 @@ resource:
   alt: People sitting on logs in front of a festival tent
 ---
 
-## Supporting Festivals and Events
+## Festivals and Events Support
 
-Festivals and large events bring people together, but the atmosphere, crowds, and long hours can also take a toll on mental wellbeing. We work with event organisers to build mental health support into the heart of their planning, not as an afterthought.
+Festivals are euphoric, electric... and sometimes overwhelming. That’s why we bring real, human mental health support to events across the UK. Whether you're a solo raver or a backstage manager, we’re here to help your brain feel safe. We work with event organisers to build mental health support into the heart of their planning, not as an afterthought.
 
 ### What We Offer
 
-- On-site welfare support and calm spaces for attendees who need a break
-- Training for event staff and volunteers on spotting the signs of distress
-- Pre-event guidance on safeguarding and crisis planning
-- A directory of mental-health-conscious events that prioritise attendee wellbeing
+- The Brain Pod – a calm, interactive space for chats, games & support
+- 24/7 Safe Zones – open day and night for anyone feeling wobbly
+- Backstage & Crew Support – looking after those who keep the show running
+- Volunteer & Vendor Training – so everyone knows how to help
+- Collaborative Planning – we work with your site, first aid & safeguarding teams
 
 > Everyone deserves to enjoy a festival without feeling overwhelmed. A little planning goes a long way.
 
-Whether you're organising a small local gathering or a multi-day festival, we can help you put the right support in place before the gates open.
+Whether you're organising a singular or a series of events, a small local gathering or a multi-day festival, we can help you put the right support in place before the gates open.
