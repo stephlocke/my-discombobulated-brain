@@ -1,9 +1,9 @@
 ---
 title: Found Festival
 description: My Discombobulated Brain is incredibly proud to be the official Wellbeing Partner for Found Festival
-event_date: 2026-08-28T01:00
-start_time: 2026-08-28T17:00
-end_time: 2026-08-30T22:00
+event_date: 2026-08-28T01:00:00
+start_time: 2026-08-28T17:00:00
+end_time: 2026-08-30T22:00:00
 resource:
   src: Found Festival .jpg
   alt: Found Festival 2026 poster
