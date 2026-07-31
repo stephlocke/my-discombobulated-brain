@@ -1,9 +1,9 @@
 ---
 title: Wellnergy 2027
 description: My Discombobulated Brain is proud to support Wellnergy Festival, providing a dedicated wellbeing space where visitors can pause, reset, and access mental health support throughout the event.
-event_date: 2027-06-11T10:00
-start_time: 2027-06-11T10:00
-end_time: 2026-06-13T22:00
+event_date: 2027-06-11T10:00:00
+start_time: 2027-06-11T10:00:00
+end_time: 2027-06-13T22:00:00
 resource:
   src: wellnergy 2027.jpeg
   alt: Wellnergy 2027 poster

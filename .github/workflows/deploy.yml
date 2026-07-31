@@ -31,6 +31,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Validate event dates
+        run: python3 .github/scripts/validate_event_dates.py
+
       - name: Read Hugo config
         id: hugo-config
         run: python3 .github/scripts/read_hugo_config.py
@@ -48,6 +51,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Convert AVIF images to WebP
+        run: python3 .github/scripts/convert_avif.py
 
       - name: Build with Hugo
         env:

@@ -1,7 +1,7 @@
 {{- $upcomingEvents := slice -}}
 {{ with .Site.GetPage "/events" }}
     {{ range .Pages }}
-    {{ $eventDate := time.AsTime .Params.event_date }}
+    {{ $eventDate := partial "components/safe-time" .Params.event_date }}
         {{- if ge $eventDate (now) -}}
             {{- $upcomingEvents = $upcomingEvents | append . -}}
         {{- end -}}
