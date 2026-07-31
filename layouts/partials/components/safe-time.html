@@ -1,0 +1,20 @@
+{{- /*
+Parses a date string into a time.Time, tolerating the one shape that keeps
+recurring from the CMS: a datetime with no seconds (e.g. "2026-08-28T01:00"),
+which time.AsTime otherwise rejects outright and fails the whole build.
+Usage: {{ partial "components/safe-time" $rawDateString }}
+*/ -}}
+{{- $raw := . -}}
+{{- $result := "" -}}
+{{- $attempt := try (time.AsTime $raw) -}}
+{{- if $attempt.Err -}}
+    {{- $retry := try (time.AsTime (printf "%s:00" $raw)) -}}
+    {{- if $retry.Err -}}
+        {{- errorf "safe-time partial: could not parse date value %q (%s)" $raw $attempt.Err -}}
+    {{- else -}}
+        {{- $result = $retry.Value -}}
+    {{- end -}}
+{{- else -}}
+    {{- $result = $attempt.Value -}}
+{{- end -}}
+{{- return $result -}}

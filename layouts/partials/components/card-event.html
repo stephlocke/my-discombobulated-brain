@@ -11,9 +11,9 @@
         <p class="text-text mb-4 text-sm line-clamp-3">
             {{ .Description }}
         </p>
-        {{ $eventDate := time.AsTime .Params.event_date }}
-        {{ $startTime := time.AsTime .Params.start_time }}
-        {{ $endTime := time.AsTime .Params.end_time }}
+        {{ $eventDate := partial "components/safe-time" .Params.event_date }}
+        {{ $startTime := partial "components/safe-time" .Params.start_time }}
+        {{ $endTime := partial "components/safe-time" .Params.end_time }}
         <div class="space-y-1 text-xs text-tertiary">
                 <p><strong>Date:</strong> {{ $eventDate.Format "January 2, 2006" }}</p>
                 <p><strong>Time:</strong> {{ $startTime.Format "3:04 PM" }} – {{ $endTime.Format "3:04 PM" }}</p>

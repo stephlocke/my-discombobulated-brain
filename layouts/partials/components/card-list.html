@@ -63,13 +63,13 @@
             {{ if or $eventDate (or $startTime $endTime) }}
             <div class="space-y-1 text-sm text-muted sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-1 sm:space-y-0">
                 {{ with $eventDate }}
-                <p><span class="font-semibold text-off-black">Date:</span> {{ (time.AsTime .).Format "January 2, 2006" }}</p>
+                <p><span class="font-semibold text-off-black">Date:</span> {{ (partial "components/safe-time" .).Format "January 2, 2006" }}</p>
                 {{ end }}
                 {{ with $startTime }}
-                <p><span class="font-semibold text-off-black">Start:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                <p><span class="font-semibold text-off-black">Start:</span> {{ (partial "components/safe-time" .).Format "3:04 PM" }}</p>
                 {{ end }}
                 {{ with $endTime }}
-                <p><span class="font-semibold text-off-black">End:</span> {{ (time.AsTime .).Format "3:04 PM" }}</p>
+                <p><span class="font-semibold text-off-black">End:</span> {{ (partial "components/safe-time" .).Format "3:04 PM" }}</p>
                 {{ end }}
             </div>
             {{ end }}

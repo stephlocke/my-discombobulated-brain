@@ -1,12 +1,12 @@
 ---
 title: About Us
-description: Learn about our mission to support mental health and provide resources for those in need
+description: Learn about how we break stigma through education, support, real stories and community wellbeing.
 date: 2026-02-02
 ---
 
 ![Two people standing in a tent holding flyers](P8220092.webp)
 
-## About Us
+## Our Story
 
 My Discombobulated Brain is a mental health charity dedicated to breaking the stigma surrounding mental health through support, education, and honest conversation. Born from personal experience of living with mental health challenges and supporting loved ones, we understand the impact stigma can have and why it needs to change.
 
@@ -26,28 +26,19 @@ Everything we do is guided by a clear mission: to break the stigma surrounding m
 4. To provide insight and guidance to both public and private organisations on their approach to mental health and how to support each other.
 5. To collaborate with like-minded people, charities and businesses to achieve our goals
 
-![Three people standing in front of a flag for Found Festival](IMG_1968.webp)
+![A black and white image of a poster saying It's an illness not an emotion](/images/uploads/Screen%20Shot%202017-10-23%20at%2011.56.31.png)
 
 ## Our Values
 
-**Compassion**: We approach every individual with empathy, understanding, and without judgment.
-
-**Accessibility**: Mental health support should be available to everyone, regardless of background or circumstance.
-
-**Evidence-Based**: We rely on scientific research and best practices to guide our programs and resources.
-
-**Inclusivity**: We welcome and support people of all backgrounds, identities, and experiences.
-
-**Hope**: We believe in recovery, resilience, and the inherent strength within each person.
+We believe in authenticity, honesty, and the power of lived experience. That's why we only share real stories from real people, told in their own words. We proudly use #SickNotSad because mental illness is exactly that, an illness, not a choice. While we all have mental health that we can look after, not everyone lives with a mental illness. By sharing genuine experiences, we help people better understand the realities of mental illness, challenge harmful stereotypes, and remind those who are struggling that they are never alone.
 
 ## What We Do
 
 - Provide free educational resources and information
 - Connect individuals with professional mental health services
-- Offer support groups and peer connection opportunities
+- Provide event and festival support to make them accessible for all
 - Advocate for mental health awareness and policy change
-- Share stories of hope and recovery
-- Create accessible, stigma-free spaces for conversation
+- Share real people's stories
 
 ## Get Involved
 
