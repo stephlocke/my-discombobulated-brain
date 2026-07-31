@@ -1,11 +1,11 @@
 ---
-title: Projects
-description: We work closely with a wide range of organisations to help improve mental health support.
-summary: We work closely with organisations to be able to provide you with support, and them with advice. Whether it's education, entertainment, or employment we want to ensure you can feel safe and supported in all parts of your day-to-day life.
+title: Events
+description: Live events are exciting, unforgettable... and sometimes emotionally intense. That’s why we provide visible, approachable mental health support at events like New Wave Wrestling. Whether you're an audience member feeling overwhelmed, a performer managing the pressures behind the scenes, or part of the event team, we’re there with a calm, friendly presence. From on-the-day wellbeing support to training and ongoing guidance for performers and event organisers, we help create safer, more supportive environments where everyone can enjoy the experience with confidence.
+summary: Creating safer, more inclusive events through wellbeing support, training, and education.
 summary_bullets:
-  - Education and guidance for organisations
-  - Help and support for users
-  - A flexible approach to working with all involved
+  - Visible Wellbeing Support
+  - Performer Wellbeing
+  - Training & Event Support
 weight: 2
 icon: hand-holding-hand
 icon_color: '#12107f'
@@ -16,13 +16,12 @@ resource:
 
 ## Working Together on Mental Health Projects
 
-We partner with a wide range of organisations — from schools and workplaces to sports clubs and community groups — to embed mental health support into their everyday work.
+Live events are exciting, unforgettable... and sometimes emotionally intense. That’s why we provide visible, approachable mental health support at events like New Wave Wrestling. Whether you're an audience member feeling overwhelmed, a performer managing the pressures behind the scenes, or part of the event team, we’re there with a calm, friendly presence. From on-the-day wellbeing support to training and ongoing guidance for performers and event organisers, we help create safer, more supportive environments where everyone can enjoy the experience with confidence.
 
 ### How We Help
 
-- Co-designing projects that fit your organisation's specific needs
-- Training and workshops for staff, volunteers, and members
-- Ongoing advice as your project develops
-- Connecting you with other organisations doing similar work
+- **Visible Wellbeing Support** – A friendly, approachable team on-site for attendees who may be feeling overwhelmed, anxious, or simply need a quiet moment.
+- **Performer Wellbeing** – Providing mental health support, guidance, and a safe space for wrestlers and performers before, during, and after events.
+- **Training & Event Support** – Working with organisers to deliver wellbeing training and practical advice, helping create safer, more inclusive events for everyone.
 
-Every partnership starts with a conversation about what your community needs. From there, we build a flexible plan that works for everyone involved — whether that means one-off training or an ongoing collaboration.
+Every partnership starts with a conversation about what you need for your events and teams. From there, we build a flexible plan that works for everyone involved, whether that means one-off training or an ongoing collaboration.

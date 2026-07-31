@@ -26,7 +26,7 @@ Everything we do is guided by a clear mission: to break the stigma surrounding m
 4. To provide insight and guidance to both public and private organisations on their approach to mental health and how to support each other.
 5. To collaborate with like-minded people, charities and businesses to achieve our goals
 
-O![A black and white image of a poster saying It's an illness not an emotion](/images/uploads/Screen%20Shot%202017-10-23%20at%2011.56.31.png)
+![A black and white image of a poster saying It's an illness not an emotion](/images/uploads/Screen%20Shot%202017-10-23%20at%2011.56.31.png)
 
 ## Our Values
 

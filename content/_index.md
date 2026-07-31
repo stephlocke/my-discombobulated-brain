@@ -1,8 +1,8 @@
 ---
 hero_format: overview
 hero_image: hero-image.webp
-hero_title: Your Mental Health Matters
-hero_body: We're here to support you on your journey to better mental health. You're not alone.
+hero_title: Making Space for Every Brain
+hero_body: We are a charity breaking down stigma around mental health, one honest conversation at a time.
 hero_cta: version-1
 header_cta: donate
 inline_cta_1: version-2

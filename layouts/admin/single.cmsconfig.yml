@@ -659,9 +659,9 @@ collections:
     fields:
       - *field_title
       - *field_description
-      - { label: "Event Date", name: "event_date", widget: "datetime", required: true, hint: "The date of the event. Required — used to decide whether the event is upcoming and to sort the events list." }
-      - { label: "Start Time", name: "start_time", widget: "datetime", required: true, hint: "When the event starts. Required — shown on event cards." }
-      - { label: "End Time", name: "end_time", widget: "datetime", required: true, hint: "When the event ends. Required — shown on event cards." }
+      - { label: "Event Date", name: "event_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", required: true, hint: "The date of the event. Required — used to decide whether the event is upcoming and to sort the events list." }
+      - { label: "Start Time", name: "start_time", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", required: true, hint: "When the event starts. Required — shown on event cards." }
+      - { label: "End Time", name: "end_time", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", required: true, hint: "When the event ends. Required — shown on event cards." }
       - *field_resource
       - *field_body
 

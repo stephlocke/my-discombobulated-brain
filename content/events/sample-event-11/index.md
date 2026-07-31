@@ -1,9 +1,9 @@
 ---
 title: New Wave Pride In Roath
 description: We are incredibly proud to partner with New Wave Wrestling
-event_date: 2026-08-28T18:30
-start_time: 2026-08-28T18:30
-end_time: 2026-08-28T22:30
+event_date: 2026-08-28T18:30:00
+start_time: 2026-08-28T18:30:00
+end_time: 2026-08-28T22:30:00
 resource:
   src: New wave Pride.jpeg
   alt: New Wave Pride In Roath Poster

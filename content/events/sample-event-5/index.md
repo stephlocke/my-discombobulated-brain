@@ -1,11 +1,11 @@
 ---
 title: Wellnergy 2026
 description: Visit My Discombobulated Brain at Wellnergy Festival for a safe, welcoming wellbeing space offering mental health support, conversation, and a place to recharge.
-event_date: 2026-06-12T10:00
-start_time: 2026-06-12T10:00
-end_time: 2026-06-13T22:00
+event_date: 2026-06-12T10:00:00
+start_time: 2026-06-12T10:00:00
+end_time: 2026-06-13T22:00:00
 resource:
-  src: wellnergy 2026.avif
+  src: wellnergy 2026.webp
   alt: Wellnergy 2026 poster
 ---
 

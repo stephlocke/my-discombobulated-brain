@@ -1,9 +1,9 @@
 ---
 title: The New Wave Open 3
 description: We are incredibly proud to partner with New Wave Wrestling, and the next show is the New Wave Open at the KIDZ R US theatre in Tredegar.
-event_date: 2026-08-02T15:00
-start_time: 2026-08-02T15:30
-end_time: 2026-08-02T18:30
+event_date: 2026-08-02T15:00:00
+start_time: 2026-08-02T15:30:00
+end_time: 2026-08-02T18:30:00
 resource:
   src: the open.jpeg
   alt: New Wave Wrestling New Wave Open poster
