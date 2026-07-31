@@ -18,6 +18,10 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 aliases:
+  # Hugo's image processing pipeline can't read AVIF source files, so it's deliberately excluded
+  # here even though the CMS would otherwise accept it by default.
+  image_accept: &image_accept "image/jpeg,.jpg,.jpeg,image/png,.png,image/gif,.gif,image/webp,.webp,image/svg+xml,.svg"
+
   field_title: &field_title
     label: "Title"
     name: "title"
@@ -127,7 +131,7 @@ aliases:
     required: true
     hint: "The main image for this content. Required — pages without an image can fail to display correctly."
     fields:
-      - { label: "Image", name: "src", widget: "image", required: true, hint: "Upload the image file." }
+      - { label: "Image", name: "src", widget: "image", required: true, accept: *image_accept, hint: "Upload the image file." }
       - { label: "Alt text", name: "alt", widget: "string", required: true, hint: "Describe the image for screen readers and search engines (e.g. 'Two volunteers handing out leaflets at a festival stall')." }
 
   field_display: &field_display
@@ -240,9 +244,9 @@ singletons:
         required: false
         hint: "Words and phrases that describe the site, used by search engines. Optional."
         field: { label: "Keyword", name: "keyword", widget: "string", required: true }
-      - { label: "Logo", name: "logo", widget: "image", required: false, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
-      - { label: "Favicon", name: "favicon", widget: "image", required: true, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
-      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
+      - { label: "Logo", name: "logo", widget: "image", required: false, accept: *image_accept, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
+      - { label: "Favicon", name: "favicon", widget: "image", required: true, accept: *image_accept, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
+      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, accept: *image_accept, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
       - label: "Style"
         name: "style_rules"
         widget: "object"
@@ -439,7 +443,7 @@ collections:
         public_folder: "images"
         fields:
           - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", required: true, hint: "'Overview' shows a grid of cards generated from your Services. 'CTA' shows a full-width call-to-action panel instead." }
-          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, accept: *image_accept, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
           - *field_hero_title
           - *field_hero_body
           - label: "Hero CTA"
