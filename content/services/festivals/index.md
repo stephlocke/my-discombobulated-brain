@@ -11,7 +11,7 @@ icon: music
 icon_color: '#c71a1a'
 resource:
   src: P8220092.jpeg
-  alt: Team members stood in front of the festival set up
+  alt: Team members stood in front of the festival set up.
 ---
 
 ## Festivals Support
