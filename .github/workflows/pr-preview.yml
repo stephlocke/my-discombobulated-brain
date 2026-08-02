@@ -28,7 +28,8 @@ jobs:
   deploy-preview:
     name: Deploy PR preview
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
+    # TEMPORARILY DISABLED: remove the "false &&" below to re-enable.
+    if: false && github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -84,7 +85,8 @@ jobs:
   remove-preview:
     name: Remove PR preview
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed'
+    # TEMPORARILY DISABLED: remove the "false &&" below to re-enable.
+    if: false && github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed'
     steps:
       - name: Remove PR preview
         uses: rossjrw/pr-preview-action@v1
