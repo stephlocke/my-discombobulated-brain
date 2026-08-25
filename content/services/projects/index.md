@@ -10,8 +10,8 @@ weight: 2
 icon: hand-holding-hand
 icon_color: '#12107f'
 resource:
-  src: festival.webp
-  alt: People sitting on logs in front of a festival tent
+  src: IMG_5462.jpeg
+  alt: Brendan White sitting on a wrestling ring
 ---
 
 ## Working Together on Mental Health Projects
