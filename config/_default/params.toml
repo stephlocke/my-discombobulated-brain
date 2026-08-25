@@ -1,9 +1,10 @@
 title = "My Discombobulated Brain"
 author = "My Discombobulated Brain"
-description = "Compassionate mental health support, resources, and community for people and carers across the UK."
-keywords = [ "mental health", "charity", "support", "wellness", "resources" ]
+description = "A charity breaking down stigma around mental health, one honest conversation at a time."
+keywords = [ "mental health", "charity", "support", "wellness", "resources", "festival" ]
 logo = "images/my-discombob-logo.svg"
 favicon = "images/my-discombob-logo.svg"
+social_image = ""
 
 [style_rules]
 edges = "round"
