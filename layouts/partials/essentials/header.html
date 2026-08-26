@@ -28,7 +28,6 @@
                 <div class="relative" data-nav-dropdown>
                     <button type="button"
                             class="inline-flex min-h-11 items-center gap-1 cursor-pointer {{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $isChildCurrent }}bg-primary-darken/90 text-white{{ end }}"
-                            aria-haspopup="true"
                             aria-expanded="false"
                             aria-controls="{{ $panelID }}"
                             data-nav-dropdown-toggle>
@@ -39,13 +38,11 @@
                     </button>
                     <div id="{{ $panelID }}"
                          class="absolute top-full left-1/2 z-20 mt-2 hidden w-48 -translate-x-1/2 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} bg-white p-2 space-y-1 shadow-lg ring-1 ring-primary/10"
-                         role="menu"
                          data-nav-dropdown-panel>
                         {{ range .Children }}
                         {{ $childLabel := .Name }}
                         {{ with index $navLabels .Identifier }}{{ $childLabel = . }}{{ end }}
                         <a href="{{ .URL | relLangURL }}"
-                           role="menuitem"
                            class="flex items-center justify-center min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-1 text-center font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
                            {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                             {{ $childLabel }}
