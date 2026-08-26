@@ -575,9 +575,9 @@ collections:
           - *field_title
           - *field_description
           - *field_body
-      - name: "working-with-section"
+      - name: "worked-with-section"
         label: "Worked With"
-        file: "content/working-with/_index.md"
+        file: "content/worked-with/_index.md"
         fields:
           - *field_title
           - *field_description
@@ -699,10 +699,10 @@ collections:
       - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
 
   # ─── WORKED WITH ────────────────────────────────────────────────────────
-  - name: "working-with"
+  - name: "worked-with"
     label: "Worked With"
     icon: handshake
-    folder: "content/working-with"
+    folder: "content/worked-with"
     create: true
     path: "{{ "{{slug}}" }}/index"
     slug: "{{ "{{slug}}" }}"
