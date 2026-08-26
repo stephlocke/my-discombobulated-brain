@@ -27,7 +27,7 @@
                 {{ range .Children }}{{ if $.IsMenuCurrent "main" . }}{{ $isChildCurrent = true }}{{ end }}{{ end }}
                 <div class="relative" data-nav-dropdown>
                     <button type="button"
-                            class="inline-flex items-center gap-1 cursor-pointer {{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $isChildCurrent }}bg-primary-darken/90 text-white{{ end }}"
+                            class="inline-flex min-h-11 items-center gap-1 cursor-pointer {{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $isChildCurrent }}bg-primary-darken/90 text-white{{ end }}"
                             aria-haspopup="true"
                             aria-expanded="false"
                             aria-controls="{{ $panelID }}"
