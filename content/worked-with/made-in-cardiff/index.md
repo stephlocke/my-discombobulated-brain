@@ -4,6 +4,6 @@ description: Made in Cardiff
 weight: null
 link: ''
 resource:
-  src: _86110070_cardifflogo.jpg
+  src: 86110070_cardifflogo.jpg
   alt: Made in Cardiff Logo
 ---
