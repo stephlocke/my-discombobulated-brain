@@ -25,11 +25,17 @@
             </p>
             {{ end }}
         </header>
-        <!-- List of Pages, by date if blog posts, or by weight if not -->
-        {{ $paginator := .Paginate (.RegularPages.ByWeight) }}
+        <!-- List of Pages, by date if blog posts, or by weight if not.
+             .Paginate can only be called once per page, so the page size and
+             sort order are resolved first and passed to a single call.
+             $pageSize's default must match [pagination] pagerSize in config.toml. -->
+        {{ $pages := .RegularPages.ByWeight }}
+        {{ $pageSize := 6 }}
         {{ if eq .Section "blog" }}
-            {{ $paginator = .Paginate (.RegularPages.ByDate.Reverse) 10 }}
+            {{ $pages = .RegularPages.ByDate.Reverse }}
+            {{ $pageSize = 12 }}
         {{ end }}
+        {{ $paginator := .Paginate $pages $pageSize }}
         
         {{ if $paginator.Pages }}
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" role="list">

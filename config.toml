@@ -15,7 +15,7 @@ enableRobotsTXT = true
 
 # Pagination
 [pagination]
-  pagerSize = 5
+  pagerSize = 6
 
 # Build configuration for Tailwind CSS
 [build]
