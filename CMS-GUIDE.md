@@ -78,6 +78,6 @@ If saving is blocked, check the field's hint text — it explains what format is
 - **CTA — Header / Hero / Footer / Inline** — reusable call-to-action buttons, referenced by
   name from the Homepage and elsewhere.
 - **Site Settings** (Files) — site title, author, logo, favicon, theme colours and fonts,
-  search settings.
+  search settings, logo carousel scroll speed.
 - **Domain** (Files) — the site's real public web address. See the warning above before
   touching this.

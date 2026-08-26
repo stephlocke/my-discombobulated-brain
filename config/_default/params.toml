@@ -18,3 +18,6 @@ stacked_button_position = "center"
 [configs]
 searchSummaryLength = 250
 searchSummaryLengthMicro = 150
+
+[carousels]
+speed = "normal"
