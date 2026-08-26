@@ -22,6 +22,13 @@ aliases:
   # here even though the CMS would otherwise accept it by default.
   image_accept: &image_accept "image/jpeg,.jpg,.jpeg,image/png,.png,image/gif,.gif,image/webp,.webp,image/svg+xml,.svg"
 
+  # GitHub Pages runs published content through Jekyll, which silently excludes any file whose
+  # name starts with an underscore or a dot (its convention for internal directories like
+  # _layouts and hidden files) — the file builds fine locally but never appears once deployed.
+  image_filename_pattern: &image_filename_pattern
+    - "^(.*/)?[^._][^/]*$"
+    - "The filename can't start with an underscore ( _ ) or a dot ( . ). GitHub Pages silently excludes files named like that, so the image would disappear once the site is published, even though it looks fine locally. Rename the file (e.g. remove the leading character, or add a short prefix) before uploading."
+
   field_title: &field_title
     label: "Title"
     name: "title"
@@ -131,7 +138,7 @@ aliases:
     required: true
     hint: "The main image for this content. Required — pages without an image can fail to display correctly."
     fields:
-      - { label: "Image", name: "src", widget: "image", required: true, accept: *image_accept, hint: "Upload the image file." }
+      - { label: "Image", name: "src", widget: "image", required: true, accept: *image_accept, pattern: *image_filename_pattern, hint: "Upload the image file." }
       - { label: "Alt text", name: "alt", widget: "string", required: true, hint: "Describe the image for screen readers and search engines (e.g. 'Two volunteers handing out leaflets at a festival stall')." }
 
   field_display: &field_display
@@ -185,7 +192,7 @@ aliases:
     required: true
     hint: "Supporting text shown below the headline. Plain text only — no formatting. This must not be left blank."
 
-  # Optional external link used by Working With and Awards & Recognition logos
+  # Optional external link used by Worked With and Awards & Recognition logos
   field_link: &field_link
     label: "External Link"
     name: "link"
@@ -244,9 +251,9 @@ singletons:
         required: false
         hint: "Words and phrases that describe the site, used by search engines. Optional."
         field: { label: "Keyword", name: "keyword", widget: "string", required: true }
-      - { label: "Logo", name: "logo", widget: "image", required: false, accept: *image_accept, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
-      - { label: "Favicon", name: "favicon", widget: "image", required: true, accept: *image_accept, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
-      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, accept: *image_accept, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
+      - { label: "Logo", name: "logo", widget: "image", required: false, accept: *image_accept, pattern: *image_filename_pattern, hint: "The site logo, shown in the header. Recommended: SVG or PNG with a transparent background. Leave blank to show the site title as plain text instead." }
+      - { label: "Favicon", name: "favicon", widget: "image", required: true, accept: *image_accept, pattern: *image_filename_pattern, hint: "The small icon shown in browser tabs. Usually the same image as the logo, saved as a square PNG, SVG, or ICO." }
+      - { label: "Social Share Image", name: "social_image", widget: "image", required: false, accept: *image_accept, pattern: *image_filename_pattern, hint: "The preview image shown when your site is shared on social media (e.g. Facebook, X). Recommended size: 1200x630px. Individual pages with their own image (blog posts, services, etc.) use that instead. Leave blank to use the logo." }
       - label: "Style"
         name: "style_rules"
         widget: "object"
@@ -267,6 +274,13 @@ singletons:
         fields:
           - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, min: 20, max: 2000, hint: "Maximum characters shown in a full search result summary." }
           - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, min: 20, max: 2000, hint: "Characters shown in compact desktop search bar results." }
+      - label: "Logo Carousels"
+        name: "carousels"
+        widget: "object"
+        required: false
+        hint: "Controls the logo carousels shown on the homepage (e.g. Worked With, Awards & Recognition)."
+        fields:
+          - { label: "Scroll Speed", name: "speed", widget: "select", options: ["slow", "normal", "fast"], default: "normal", required: true, hint: "How fast logos scroll across the carousel. Applies to every logo carousel on the site." }
 
   # Domain Settings — manages config/_default/hugo.toml
   # baseURL can't live in params.toml (that file is scoped to .Site.Params only), so it gets its own file.
@@ -298,8 +312,13 @@ singletons:
     fields:
       - { label: "\"Home\" Link Label", name: "home_label", widget: "string", required: true, default: "Home", hint: "Text shown for the Home link in the header and footer navigation." }
       - { label: "\"About\" Link Label", name: "about_label", widget: "string", required: true, default: "About", hint: "Text shown for the About link in the header and footer navigation." }
-      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link in the header and footer navigation." }
+      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header and footer navigation." }
       - { label: "\"Contact\" Link Label", name: "contact_label", widget: "string", required: true, default: "Contact", hint: "Text shown for the Contact link in the header and footer navigation." }
+      - { label: "\"Awards and Recognition\" Link Label", name: "awards_label", widget: "string", required: true, default: "Awards and Recognition", hint: "Text shown for the Awards and Recognition link inside the 'More' dropdown." }
+      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link inside the 'More' dropdown." }
+      - { label: "\"Events\" Link Label", name: "events_label", widget: "string", required: true, default: "Events", hint: "Text shown for the Events link inside the 'More' dropdown." }
+      - { label: "\"Services\" Link Label", name: "services_label", widget: "string", required: true, default: "Services", hint: "Text shown for the Services link inside the 'More' dropdown." }
+      - { label: "\"Worked With\" Link Label", name: "worked_with_label", widget: "string", required: true, default: "Worked With", hint: "Text shown for the Worked With link inside the 'More' dropdown." }
 
   # Contact Settings — manages data/contact.toml
   - name: "contact-settings"
@@ -443,7 +462,7 @@ collections:
         public_folder: "images"
         fields:
           - { label: "Hero Style", name: "hero_format", widget: "select", options: ["overview", "cta"], default: "overview", required: true, hint: "'Overview' shows a grid of cards generated from your Services. 'CTA' shows a full-width call-to-action panel instead." }
-          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, accept: *image_accept, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, accept: *image_accept, pattern: *image_filename_pattern, hint: "Background image for the hero section. Upload a landscape image for best results. Leave blank for no hero background image." }
           - *field_hero_title
           - *field_hero_body
           - label: "Hero CTA"
@@ -493,7 +512,7 @@ collections:
             hint: "The full-width call-to-action block above the page footer. Create options under 'CTA — Footer' first. Leave blank for no footer CTA block."
           - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Upcoming Events' section on the homepage." }
           - { label: "Show Services Section", name: "servicesSection", widget: "boolean", default: true, required: true, hint: "Show the services summary cards on the homepage." }
-          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Working With' logos section on the homepage." }
+          - { label: "Show Worked With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Worked With' logos section on the homepage." }
           - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
           - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
 
@@ -573,9 +592,9 @@ collections:
           - *field_title
           - *field_description
           - *field_body
-      - name: "working-with-section"
-        label: "Working With"
-        file: "content/working-with/_index.md"
+      - name: "worked-with-section"
+        label: "Worked With"
+        file: "content/worked-with/_index.md"
         fields:
           - *field_title
           - *field_description
@@ -696,11 +715,11 @@ collections:
       - *field_resource
       - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
 
-  # ─── WORKING WITH ───────────────────────────────────────────────────────
-  - name: "working-with"
-    label: "Working With"
+  # ─── WORKED WITH ────────────────────────────────────────────────────────
+  - name: "worked-with"
+    label: "Worked With"
     icon: handshake
-    folder: "content/working-with"
+    folder: "content/worked-with"
     create: true
     path: "{{slug}}/index"
     slug: "{{slug}}"
