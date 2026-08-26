@@ -307,8 +307,13 @@ singletons:
     fields:
       - { label: "\"Home\" Link Label", name: "home_label", widget: "string", required: true, default: "Home", hint: "Text shown for the Home link in the header and footer navigation." }
       - { label: "\"About\" Link Label", name: "about_label", widget: "string", required: true, default: "About", hint: "Text shown for the About link in the header and footer navigation." }
-      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link in the header and footer navigation." }
+      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header and footer navigation." }
       - { label: "\"Contact\" Link Label", name: "contact_label", widget: "string", required: true, default: "Contact", hint: "Text shown for the Contact link in the header and footer navigation." }
+      - { label: "\"Awards and Recognition\" Link Label", name: "awards_label", widget: "string", required: true, default: "Awards and Recognition", hint: "Text shown for the Awards and Recognition link inside the 'More' dropdown." }
+      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link inside the 'More' dropdown." }
+      - { label: "\"Events\" Link Label", name: "events_label", widget: "string", required: true, default: "Events", hint: "Text shown for the Events link inside the 'More' dropdown." }
+      - { label: "\"Services\" Link Label", name: "services_label", widget: "string", required: true, default: "Services", hint: "Text shown for the Services link inside the 'More' dropdown." }
+      - { label: "\"Worked With\" Link Label", name: "worked_with_label", widget: "string", required: true, default: "Worked With", hint: "Text shown for the Worked With link inside the 'More' dropdown." }
 
   # Contact Settings — manages data/contact.toml
   - name: "contact-settings"

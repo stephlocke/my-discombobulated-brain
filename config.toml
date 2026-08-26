@@ -57,17 +57,54 @@ enableRobotsTXT = true
     url = '/about/'
     pageRef = '/about'
     weight = 2
+  # 'more' has no page of its own — it is a dropdown container, rendered as a
+  # toggle button rather than a link. Its children (below) supply the URLs.
   [[menu.main]]
-    identifier = 'blog'
-    name = 'Blog'
-    url = '/blog/'
-    pageRef = '/blog'
+    identifier = 'more'
+    name = 'More'
+    url = '#'
     weight = 3
   [[menu.main]]
     identifier = 'contact'
     name = 'Contact'
     url = '/contact/'
     weight = 4
+  # Children of 'more', alphabetical by name.
+  [[menu.main]]
+    identifier = 'awards'
+    name = 'Awards and Recognition'
+    url = '/awards-and-recognition/'
+    pageRef = '/awards-and-recognition'
+    parent = 'more'
+    weight = 1
+  [[menu.main]]
+    identifier = 'blog'
+    name = 'Blog'
+    url = '/blog/'
+    pageRef = '/blog'
+    parent = 'more'
+    weight = 2
+  [[menu.main]]
+    identifier = 'events'
+    name = 'Events'
+    url = '/events/'
+    pageRef = '/events'
+    parent = 'more'
+    weight = 3
+  [[menu.main]]
+    identifier = 'services'
+    name = 'Services'
+    url = '/services/'
+    pageRef = '/services'
+    parent = 'more'
+    weight = 4
+  [[menu.main]]
+    identifier = 'worked-with'
+    name = 'Worked With'
+    url = '/worked-with/'
+    pageRef = '/worked-with'
+    parent = 'more'
+    weight = 5
 
 [markup]
   [markup.goldmark]
