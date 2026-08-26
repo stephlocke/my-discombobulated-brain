@@ -1,11 +1,13 @@
 {{- $speedPreset := .speed | default "normal" -}}
 {{- $clickable := .clickable | default true -}}
 {{- $showTitle := .show_title | default true -}}
-{{- $duration := 25000 -}}
+{{- /* Pixels per second, not a total duration, so tracks with different
+       numbers of logos still scroll at the same visual speed. */ -}}
+{{- $speed := 50 -}}
 {{- if eq $speedPreset "slow" -}}
-  {{- $duration = 30000 -}}
+  {{- $speed = 35 -}}
 {{- else if eq $speedPreset "fast" -}}
-  {{- $duration = 20000 -}}
+  {{- $speed = 70 -}}
 {{- end -}}
 {{- with .ctxt -}}
 <section class="container">
@@ -22,23 +24,34 @@
       <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-linear-to-r from-surface to-transparent"></div>
       <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-linear-to-l from-surface to-transparent"></div>
 
+      {{- /* Only the logos that fit in the initial visible window need to be
+             eager. Everything past that - and the whole duplicated half of
+             the track, none of which is visible at rest - starts lazy;
+             logo-carousel.js warms those up shortly after the page settles
+             rather than relying on native lazy-loading's viewport heuristic,
+             which doesn't track a transform-animated track reliably. 6 is a
+             generous estimate of how many logos fit across a wide desktop
+             viewport. */ -}}
+      {{- $eagerCount := 6 -}}
       <div class="relative overflow-hidden">
-        <div data-logo-carousel-track data-logo-carousel-duration="{{ $duration }}" class="flex w-max items-center gap-12 px-6 will-change-transform">
-          {{- range .Pages.ByWeight -}}
+        <div data-logo-carousel-track data-logo-carousel-speed="{{ $speed }}" class="flex w-max items-center gap-12 px-6 will-change-transform">
+          {{- range $i, $p := .Pages.ByWeight -}}
+            {{- $loading := "lazy" -}}
+            {{- if lt $i $eagerCount -}}{{- $loading = "eager" -}}{{- end -}}
             <div class="shrink-0">
               {{- if $clickable -}}
-                {{- if .Params.link -}}
-                <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                {{- if $p.Params.link -}}
+                <a href="{{ $p.Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ $p.Title }}" class="block rounded">
+                  {{ partial "components/general-img-load.html" (dict "ctxt" $p "placement" "Grid" "isPhoto" false "loading" $loading) }}
                 </a>
                 {{- else -}}
-                <a href="{{ .RelPermalink }}" title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                <a href="{{ $p.RelPermalink }}" title="{{ $p.Title }}" class="block rounded">
+                  {{ partial "components/general-img-load.html" (dict "ctxt" $p "placement" "Grid" "isPhoto" false "loading" $loading) }}
                 </a>
                 {{- end -}}
               {{- else -}}
-                <div title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                <div title="{{ $p.Title }}" class="block rounded">
+                  {{ partial "components/general-img-load.html" (dict "ctxt" $p "placement" "Grid" "isPhoto" false "loading" $loading) }}
                 </div>
               {{- end -}}
             </div>
@@ -49,16 +62,16 @@
               {{- if $clickable -}}
                 {{- if .Params.link -}}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "lazy") }}
                 </a>
                 {{- else -}}
                 <a href="{{ .RelPermalink }}" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "lazy") }}
                 </a>
                 {{- end -}}
               {{- else -}}
                 <div title="{{ .Title }}" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "lazy") }}
                 </div>
               {{- end -}}
             </div>

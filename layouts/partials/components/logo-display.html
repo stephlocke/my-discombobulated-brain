@@ -11,7 +11,8 @@
   {{- end -}}
 
   {{- if eq $displayType "carousel" -}}
-    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" "normal" "clickable" $clickable "show_title" $showTitle) -}}
+    {{- $speedSetting := $ctxt.Site.Params.carousels.speed | default "normal" -}}
+    {{- partial "components/logo-carousel.html" (dict "ctxt" . "speed" $speedSetting "clickable" $clickable "show_title" $showTitle) -}}
   {{- else -}}
     {{- partial "components/logo-grid.html" (dict "ctxt" . "clickable" $clickable "show_title" $showTitle) -}}
   {{- end -}}

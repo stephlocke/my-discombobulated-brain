@@ -91,4 +91,123 @@
     // Run once and then on future scroll events.
     updateHeaderOnScroll();
     window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
+
+    // Resolve the "More" desktop dropdown(s) in the main navigation.
+    const navDropdowns = document.querySelectorAll('[data-nav-dropdown]');
+
+    // Closes a single desktop dropdown and resets its toggle/chevron state.
+    function closeNavDropdown(dropdown) {
+        const toggle = dropdown.querySelector('[data-nav-dropdown-toggle]');
+        const panel = dropdown.querySelector('[data-nav-dropdown-panel]');
+        const chevron = dropdown.querySelector('[data-nav-dropdown-chevron]');
+        if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+        if (panel) {
+            panel.classList.add('hidden');
+        }
+        if (chevron) {
+            chevron.classList.remove('rotate-180');
+        }
+    }
+
+    navDropdowns.forEach(function (dropdown) {
+        const toggle = dropdown.querySelector('[data-nav-dropdown-toggle]');
+        const panel = dropdown.querySelector('[data-nav-dropdown-panel]');
+        const chevron = dropdown.querySelector('[data-nav-dropdown-chevron]');
+        if (!toggle || !panel) {
+            return;
+        }
+
+        toggle.addEventListener('click', function () {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+            // Close every other open dropdown before opening this one.
+            navDropdowns.forEach(function (other) {
+                if (other !== dropdown) {
+                    closeNavDropdown(other);
+                }
+            });
+
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            panel.classList.toggle('hidden', isExpanded);
+            if (chevron) {
+                chevron.classList.toggle('rotate-180', !isExpanded);
+            }
+        });
+    });
+
+    if (navDropdowns.length) {
+        // Close any open dropdown when clicking outside every dropdown.
+        document.addEventListener('click', function (event) {
+            navDropdowns.forEach(function (dropdown) {
+                if (!dropdown.contains(event.target)) {
+                    closeNavDropdown(dropdown);
+                }
+            });
+        });
+
+        // Close on Escape and return focus to the dropdown's own toggle button.
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') {
+                return;
+            }
+            navDropdowns.forEach(function (dropdown) {
+                const toggle = dropdown.querySelector('[data-nav-dropdown-toggle]');
+                const wasExpanded = toggle && toggle.getAttribute('aria-expanded') === 'true';
+                closeNavDropdown(dropdown);
+                if (wasExpanded && toggle) {
+                    toggle.focus();
+                }
+            });
+        });
+    }
+
+    // Resolve the "More" mobile submenu(s) nested inside the mobile menu.
+    const mobileNavDropdowns = document.querySelectorAll('[data-mobile-nav-dropdown]');
+
+    // Closes a single mobile submenu and resets its toggle/chevron state.
+    function closeMobileNavDropdown(dropdown) {
+        const toggle = dropdown.querySelector('[data-mobile-nav-dropdown-toggle]');
+        const panel = dropdown.querySelector('[data-mobile-nav-dropdown-panel]');
+        const chevron = dropdown.querySelector('[data-mobile-nav-dropdown-chevron]');
+        if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+        if (panel) {
+            panel.classList.add('hidden');
+        }
+        if (chevron) {
+            chevron.classList.remove('rotate-180');
+        }
+    }
+
+    mobileNavDropdowns.forEach(function (dropdown) {
+        const toggle = dropdown.querySelector('[data-mobile-nav-dropdown-toggle]');
+        const panel = dropdown.querySelector('[data-mobile-nav-dropdown-panel]');
+        const chevron = dropdown.querySelector('[data-mobile-nav-dropdown-chevron]');
+        if (!toggle || !panel) {
+            return;
+        }
+
+        toggle.addEventListener('click', function () {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            panel.classList.toggle('hidden', isExpanded);
+            if (chevron) {
+                chevron.classList.toggle('rotate-180', !isExpanded);
+            }
+        });
+    });
+
+    // Collapse mobile submenus whenever the mobile menu itself closes, so
+    // they don't reopen already-expanded the next time the menu is shown.
+    if (mobileMenuButton && mobileNavDropdowns.length) {
+        mobileMenuButton.addEventListener('click', function () {
+            const isMenuNowOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            if (!isMenuNowOpen) {
+                mobileNavDropdowns.forEach(closeMobileNavDropdown);
+            }
+        });
+    }
 })();

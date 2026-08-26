@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+/* order-1 and md:order-2 are applied conditionally in general-img-load.html
+   (odd-indexed gallery images) and are only emitted into hugo_stats.json when
+   a page currently renders that branch. Force-generate them so they are not
+   purged from the compiled CSS on builds where no content exercises it.
+   rotate-180 is applied only at runtime by header.js (dropdown chevrons) and
+   never appears as a literal string in any template, so hugo_stats.json never
+   sees it either — same fix, different cause. */
+@source inline("order-1 md:order-2 rotate-180");
 @import "modules/layout.css";
 
 @theme {

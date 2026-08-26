@@ -69,7 +69,7 @@ If saving is blocked, check the field's hint text — it explains what format is
   place.
 - **Pages** — About, Donate, Contact, Search, Sitemap.
 - **Sections** — the intro text shown at the top of `/blog`, `/events`, `/services`, etc.
-- **Blog / Events / Services / Working With / Awards & Recognition** — the repeatable content
+- **Blog / Events / Services / Worked With / Awards & Recognition** — the repeatable content
   types, each its own collection.
 - **Footer** — the About and Get Help columns shown in the site footer.
 - **Legal Pages** — privacy policy, terms, and similar.
@@ -78,6 +78,6 @@ If saving is blocked, check the field's hint text — it explains what format is
 - **CTA — Header / Hero / Footer / Inline** — reusable call-to-action buttons, referenced by
   name from the Homepage and elsewhere.
 - **Site Settings** (Files) — site title, author, logo, favicon, theme colours and fonts,
-  search settings.
+  search settings, logo carousel scroll speed.
 - **Domain** (Files) — the site's real public web address. See the warning above before
   touching this.

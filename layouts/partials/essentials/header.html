@@ -1,5 +1,5 @@
 {{ $shouldExpandNav := .Site.Params.style_rules.expanded_nav | default true }}
-{{ $navLabels := dict "home" hugo.Data.nav.home_label "about" hugo.Data.nav.about_label "blog" hugo.Data.nav.blog_label "contact" hugo.Data.nav.contact_label }}
+{{ $navLabels := dict "home" hugo.Data.nav.home_label "about" hugo.Data.nav.about_label "more" hugo.Data.nav.more_label "contact" hugo.Data.nav.contact_label "awards" hugo.Data.nav.awards_label "blog" hugo.Data.nav.blog_label "events" hugo.Data.nav.events_label "services" hugo.Data.nav.services_label "worked-with" hugo.Data.nav.worked_with_label }}
 <header id="site-header" class="sticky top-0 z-40 border-b border-none bg-primary shadow-md backdrop-blur transition-[background-color,border-color] duration-300 ease-out [&.is-compact]:bg-primary/95{{ if not $shouldExpandNav }} is-compact{{ end }}" data-expand-nav="{{ if $shouldExpandNav }}true{{ else }}false{{ end }}" role="banner">
     <nav id="site-nav" class="container {{ if $shouldExpandNav }}py-4{{ else }}py-2{{ end }} transition-[padding] duration-300 ease-out" aria-label="Main navigation">
         <div class="relative flex items-center justify-between gap-4">
@@ -21,10 +21,41 @@
                 {{ range .Site.Menus.main }}
                 {{ $navLabel := .Name }}
                 {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
+                {{ if .HasChildren }}
+                {{ $panelID := printf "desktop-nav-%s-panel" .Identifier }}
+                {{ $isChildCurrent := false }}
+                {{ range .Children }}{{ if $.IsMenuCurrent "main" . }}{{ $isChildCurrent = true }}{{ end }}{{ end }}
+                <div class="relative" data-nav-dropdown>
+                    <button type="button"
+                            class="inline-flex min-h-11 items-center gap-1 cursor-pointer {{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $isChildCurrent }}bg-primary-darken/90 text-white{{ end }}"
+                            aria-expanded="false"
+                            aria-controls="{{ $panelID }}"
+                            data-nav-dropdown-toggle>
+                        {{ $navLabel }}
+                        <svg class="h-4 w-4 transition-transform duration-200" data-nav-dropdown-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div id="{{ $panelID }}"
+                         class="absolute top-full left-1/2 z-20 mt-2 hidden w-48 -translate-x-1/2 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} bg-white p-2 space-y-1 shadow-lg ring-1 ring-primary/10"
+                         data-nav-dropdown-panel>
+                        {{ range .Children }}
+                        {{ $childLabel := .Name }}
+                        {{ with index $navLabels .Identifier }}{{ $childLabel = . }}{{ end }}
+                        <a href="{{ .URL | relLangURL }}"
+                           class="flex items-center justify-center min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-1 text-center font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
+                           {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
+                            {{ $childLabel }}
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ else }}
                 <a href="{{ .URL | relLangURL }}"
                          class="{{ partial "components/edge-rounding" (dict "shape" "button") }} px-2 py-1 font-bold text-white hover:text-secondary focus:bg-primary-darken focus:text-secondary focus:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:underline focus-visible:underline-offset-8 {{ if $.IsMenuCurrent "main" . }}bg-primary-darken/90 text-white{{ end }}">
                     {{ $navLabel }}
                 </a>
+                {{ end }}
                 {{ end }}
             </div>
             <div class="hidden md:flex md:items-center md:shrink-0 md:gap-2">
@@ -58,11 +89,40 @@
             {{ range .Site.Menus.main }}
             {{ $navLabel := .Name }}
             {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
+            {{ if .HasChildren }}
+            {{ $panelID := printf "mobile-nav-%s-panel" .Identifier }}
+            {{ $isChildCurrent := false }}
+            {{ range .Children }}{{ if $.IsMenuCurrent "main" . }}{{ $isChildCurrent = true }}{{ end }}{{ end }}
+            <div data-mobile-nav-dropdown>
+                <button type="button"
+                        class="flex w-full min-h-11 items-center justify-between {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 font-bold {{ if $isChildCurrent }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
+                        aria-expanded="false"
+                        aria-controls="{{ $panelID }}"
+                        data-mobile-nav-dropdown-toggle>
+                    <span>{{ $navLabel }}</span>
+                    <svg class="h-4 w-4 transition-transform duration-200" data-mobile-nav-dropdown-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </button>
+                <div id="{{ $panelID }}" class="hidden space-y-1 py-1 pl-4" data-mobile-nav-dropdown-panel>
+                    {{ range .Children }}
+                    {{ $childLabel := .Name }}
+                    {{ with index $navLabels .Identifier }}{{ $childLabel = . }}{{ end }}
+                    <a href="{{ .URL | relLangURL }}"
+                            class="flex items-center justify-center min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 text-center font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
+                       {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
+                        {{ $childLabel }}
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            {{ else }}
             <a href="{{ .URL | relLangURL }}"
-                    class="block min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
+                    class="flex items-center min-h-11 {{ partial "components/edge-rounding" (dict "shape" "button") }} px-4 py-2 font-bold {{ if $.IsMenuCurrent "main" . }}bg-primary text-white hover:text-secondary hover:bg-primary-darken{{ else }}text-off-black hover:bg-primary/10 hover:text-off-black-darken focus:text-secondary focus:bg-primary-darken{{ end }} focus:no-underline focus:outline-none focus-visible:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:underline focus-visible:underline-offset-4"
                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                 {{ $navLabel }}
             </a>
+            {{ end }}
             {{ end }}
 
             <!-- Mobile Search -->
