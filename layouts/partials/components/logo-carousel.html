@@ -31,16 +31,16 @@
               {{- if $clickable -}}
                 {{- if .Params.link -}}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </a>
                 {{- else -}}
                 <a href="{{ .RelPermalink }}" title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </a>
                 {{- end -}}
               {{- else -}}
                 <div title="{{ .Title }}" class="block rounded">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </div>
               {{- end -}}
             </div>
@@ -51,16 +51,16 @@
               {{- if $clickable -}}
                 {{- if .Params.link -}}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </a>
                 {{- else -}}
                 <a href="{{ .RelPermalink }}" title="{{ .Title }}" tabindex="-1" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </a>
                 {{- end -}}
               {{- else -}}
                 <div title="{{ .Title }}" class="block rounded pointer-events-none" aria-hidden="true">
-                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false) }}
+                  {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "Grid" "isPhoto" false "loading" "eager") }}
                 </div>
               {{- end -}}
             </div>

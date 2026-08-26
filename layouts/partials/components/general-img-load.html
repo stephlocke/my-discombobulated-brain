@@ -299,7 +299,7 @@
                 {{ $gridImage = . }}
               {{ end }}
             {{ end }}
-            {{ partial "components/image" (dict "Src" $gridImage.RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 w-auto transition-transform duration-300 hover:scale-105" "Width" $gridImage.Width "Height" $gridImage.Height) }}
+            {{ partial "components/image" (dict "Src" $gridImage.RelPermalink "Context" $.Page "Alt" $alt "Class" "mx-auto mb-6 h-24 md:h-30 w-auto transition-transform duration-300 hover:scale-105" "Loading" $directLoading "Width" $gridImage.Width "Height" $gridImage.Height) }}
         </div>
       {{ end }}
     {{ end }}
