@@ -1,6 +1,6 @@
 ---
 title: Gov UK
-description: "We work alongside Gov UK on initiatives that promote mental health awareness and support."
+description: "We worked alongside Gov UK on initiatives that promoted mental health awareness and support."
 resource:
     src: gov-uk-logo.png
     alt: Gov UK Logo

@@ -1,6 +1,6 @@
 ---
 title: PHA Group
-description: "We work with PHA Group to raise awareness of mental health through media and communications."
+description: "We worked with PHA Group to raise awareness of mental health through media and communications."
 resource:
     src: pha-group-logo.png
     alt: PHA Group Logo

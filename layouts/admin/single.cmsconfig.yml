@@ -187,7 +187,7 @@ aliases:
     required: true
     hint: "Supporting text shown below the headline. Plain text only — no formatting. This must not be left blank."
 
-  # Optional external link used by Working With and Awards & Recognition logos
+  # Optional external link used by Worked With and Awards & Recognition logos
   field_link: &field_link
     label: "External Link"
     name: "link"
@@ -495,7 +495,7 @@ collections:
             hint: "The full-width call-to-action block above the page footer. Create options under 'CTA — Footer' first. Leave blank for no footer CTA block."
           - { label: "Show Events Section", name: "upcomingEventsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Upcoming Events' section on the homepage." }
           - { label: "Show Services Section", name: "servicesSection", widget: "boolean", default: true, required: true, hint: "Show the services summary cards on the homepage." }
-          - { label: "Show Working With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Working With' logos section on the homepage." }
+          - { label: "Show Worked With Section", name: "workingWithSection", widget: "boolean", default: true, required: true, hint: "Show the 'Worked With' logos section on the homepage." }
           - { label: "Show Awards Section", name: "awardsSection", widget: "boolean", default: true, required: true, hint: "Show the 'Awards & Recognition' logos section on the homepage." }
           - { label: "Show Blog Section", name: "blogSection", widget: "boolean", default: true, required: true, hint: "Show the latest blog posts section on the homepage." }
 
@@ -576,7 +576,7 @@ collections:
           - *field_description
           - *field_body
       - name: "working-with-section"
-        label: "Working With"
+        label: "Worked With"
         file: "content/working-with/_index.md"
         fields:
           - *field_title
@@ -698,9 +698,9 @@ collections:
       - *field_resource
       - { label: "Body", name: "body", widget: "markdown", required: true, hint: "A more detailed write-up of this service, shown on its own dedicated page. This must not be left blank." }
 
-  # ─── WORKING WITH ───────────────────────────────────────────────────────
+  # ─── WORKED WITH ────────────────────────────────────────────────────────
   - name: "working-with"
-    label: "Working With"
+    label: "Worked With"
     icon: handshake
     folder: "content/working-with"
     create: true
