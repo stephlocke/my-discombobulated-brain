@@ -5,5 +5,5 @@ weight: 4
 link: ''
 resource:
   src: ncmh-logo.png
-  alt: NCHM Logo
+  alt: NCMH Logo
 ---
