@@ -223,11 +223,15 @@
         </div>
       {{ end }}
       {{ if  and (eq $placement "VerCard") (not $is_svg) }}
-        <div class="cursor-pointer">
+        {{/* Smart-cropped to a fixed aspect ratio (matches HorCard's approach)
+             so cards stay a consistent height regardless of how a
+             contributor's source image is framed. */}}
+        <div class="relative aspect-video w-full overflow-hidden cursor-pointer">
           {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ partial "components/image" (dict "Src" (.Fit " 600x600 webp ").RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "mx-auto mb-6 w-full h-auto object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
+            {{ $verCardImage := .Fill "720x405 webp q62" }}
+            {{ partial "components/image" (dict "Src" $verCardImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $imageRounding) "Width" $verCardImage.Width "Height" $verCardImage.Height) }}
           {{ end }}
         </div>
       {{ end }}
