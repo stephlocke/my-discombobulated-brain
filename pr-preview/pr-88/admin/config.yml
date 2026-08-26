@@ -267,6 +267,13 @@ singletons:
         fields:
           - { label: "Search Result Length", name: "searchSummaryLength", widget: "number", required: false, default: 250, min: 20, max: 2000, hint: "Maximum characters shown in a full search result summary." }
           - { label: "Compact Result Length", name: "searchSummaryLengthMicro", widget: "number", required: false, default: 150, min: 20, max: 2000, hint: "Characters shown in compact desktop search bar results." }
+      - label: "Logo Carousels"
+        name: "carousels"
+        widget: "object"
+        required: false
+        hint: "Controls the logo carousels shown on the homepage (e.g. Worked With, Awards & Recognition)."
+        fields:
+          - { label: "Scroll Speed", name: "speed", widget: "select", options: ["slow", "normal", "fast"], default: "normal", required: true, hint: "How fast logos scroll across the carousel. Applies to every logo carousel on the site." }
 
   # Domain Settings — manages config/_default/hugo.toml
   # baseURL can't live in params.toml (that file is scoped to .Site.Params only), so it gets its own file.
