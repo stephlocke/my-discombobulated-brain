@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/made-in-cardiff/"]
 title: Made in Cardiff
 description: Made in Cardiff
 weight: null

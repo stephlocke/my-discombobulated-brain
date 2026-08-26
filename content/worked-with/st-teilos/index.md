@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/st-teilos/"]
 title: St Teilos
 description: St Teilos
 weight: null

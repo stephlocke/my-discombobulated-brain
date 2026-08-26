@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/senedd-cymru-welsh-parliament/"]
 title: Senedd Cymru, Welsh Parliament
 description: Senedd Cymru, Welsh Parliament
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/newport-county-afc/"]
 title: Newport County AFC
 description: "We partnered with Newport County AFC to promote mental wellbeing among fans and players."
 resource:

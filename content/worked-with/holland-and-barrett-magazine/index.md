@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/holland-and-barrett-magazine/"]
 title: Holland and Barrett Magazine
 description: Holland and Barrett Magazine
 weight: null

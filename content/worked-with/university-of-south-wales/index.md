@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/university-of-south-wales/"]
 title: University of South Wales
 description: University of South Wales
 weight: null

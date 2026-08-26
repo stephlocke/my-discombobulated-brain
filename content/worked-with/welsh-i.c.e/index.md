@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/welsh-i.c.e/"]
 title: Welsh I.C.E
 description: Welsh ICE
 weight: null

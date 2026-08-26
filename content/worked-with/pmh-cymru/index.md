@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/pmh-cymru/"]
 title: PMH Cymru
 description: PMH Cymru
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/wellnergy/"]
 title: Wellnergy
 description: Wellnergy
 weight: null

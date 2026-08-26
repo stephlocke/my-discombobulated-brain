@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/mindful-families/"]
 title: Mindful Families
 description: Mindful Families
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/found-festival/"]
 title: Found Festival
 description: Found Festival
 weight: null

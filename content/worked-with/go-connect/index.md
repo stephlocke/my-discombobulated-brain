@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/go-connect/"]
 title: Go Connect
 description: Go Connect
 weight: null

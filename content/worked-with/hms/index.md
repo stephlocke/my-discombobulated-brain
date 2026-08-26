@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/hms/"]
 title: HMS
 description: HMS
 weight: null

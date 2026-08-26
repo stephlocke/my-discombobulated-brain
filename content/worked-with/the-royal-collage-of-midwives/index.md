@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/the-royal-collage-of-midwives/"]
 title: The Royal Collage of Midwives
 description: The Royal Collage of Midwives
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/panda/"]
 title: Panda
 description: Panda
 weight: null

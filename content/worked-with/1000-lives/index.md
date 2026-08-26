@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/1000-lives/"]
 title: 1000 Lives
 description: 1000 Lives
 weight: null

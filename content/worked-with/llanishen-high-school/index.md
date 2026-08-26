@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/llanishen-high-school/"]
 title: Llanishen High School
 description: Llanishen High School
 weight: null

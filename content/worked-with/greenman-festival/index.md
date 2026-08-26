@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/greenman-festival/"]
 title: GreenMan Festival
 description: GreenMan Festival
 weight: null

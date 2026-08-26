@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/international-alliance-of-hollistic-therapies/"]
 title: International Alliance of Hollistic Therapies
 description: International Alliance of Hollistic Therapies
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/inner-strength/"]
 title: Inner Strength
 description: Inner Strength
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/new-wave-wrestling/"]
 title: New Wave Wrestling
 description: New Wave Wrestling
 weight: null

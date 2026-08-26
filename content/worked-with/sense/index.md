@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/sense/"]
 title: Sense
 description: Sense
 weight: null

@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/gov-uk/"]
 title: Gov UK
 description: "We worked alongside Gov UK on initiatives that promoted mental health awareness and support."
 resource:

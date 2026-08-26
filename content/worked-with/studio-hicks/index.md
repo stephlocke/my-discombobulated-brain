@@ -1,4 +1,5 @@
 ---
+aliases: ["/working-with/studio-hicks/"]
 title: Studio Hicks
 description: Studio Hicks
 weight: null
