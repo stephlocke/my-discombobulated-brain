@@ -57,6 +57,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Cache Hugo image processing
+        uses: actions/cache@v4
+        with:
+          path: resources/_gen
+          key: hugo-resources-${{ runner.os }}-${{ hashFiles('content/**/*.jpg', 'content/**/*.jpeg', 'content/**/*.png', 'content/**/*.gif', 'content/**/*.webp', 'static/images/**', 'layouts/**/*.html', 'config.toml', 'config/**/*.toml') }}
+          restore-keys: |
+            hugo-resources-${{ runner.os }}-
+
       - name: Point CMS backend at the PR branch
         run: |
           sed -i "s#branch: main#branch: ${GITHUB_HEAD_REF}#" layouts/admin/single.cmsconfig.yml
