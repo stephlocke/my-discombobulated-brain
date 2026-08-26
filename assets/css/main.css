@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+/* order-1 and md:order-2 are applied conditionally in general-img-load.html
+   (odd-indexed gallery images) and are only emitted into hugo_stats.json when
+   a page currently renders that branch. Force-generate them so they are not
+   purged from the compiled CSS on builds where no content exercises it. */
+@source inline("order-1 md:order-2");
 @import "modules/layout.css";
 
 @theme {
