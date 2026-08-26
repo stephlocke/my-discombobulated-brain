@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /search/
+Disallow: /admin/
+
+Sitemap: https://stephlocke.github.io/my-discombobulated-brain/pr-preview/pr-88/sitemap.xml
