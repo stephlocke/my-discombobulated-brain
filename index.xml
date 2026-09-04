@@ -80,35 +80,6 @@
  
  
  
- 
- 
- 
- 
- 
- 
- &lt;div class="mb-6 content-center md:col-10 md:mb-0 lg:col-6 "&gt;
- 
- &lt;picture&gt;
- &lt;img
- loading="lazy"
- decoding="async"
- src="https://stephlocke.com/my-discombobulated-brain/about/P8220092.webp"
- alt="Two people standing in a tent holding flyers"
- class="w-full h-auto shadow-[0_4px_16px_rgba(20,20,30,0.4)] rounded-[2rem]" width="5184" height="3888" /&gt;
-&lt;/picture&gt;
- 
- &lt;/div&gt;
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 
 &lt;/p&gt;
 &lt;h2 id="our-story"&gt;Our Story&lt;/h2&gt;
