@@ -4,7 +4,7 @@ description: Learn about how we break stigma through education, support, real st
 date: 2026-02-02
 ---
 
-![Two people standing in a tent holding flyers](P8220092.webp)
+![A black and white image of a poster saying It's an illness not an emotion](/images/uploads/Screen%20Shot%202017-10-23%20at%2011.56.31.png)
 
 ## Our Story
 
