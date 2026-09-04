@@ -1,10 +1,10 @@
 ---
-title: "Donate"
-description: "Support our non-profit so we can keep providing mental health support, education, and community."
+title: Donate
+description: We run purely on donations, and no one takes a wage. 99.7p of every pound donated goes straight back into our work.
 date: 2026-05-08
 draft: false
 ---
 
-We are a non-profit organisation, and donations help us continue the work we do every day.
+We run purely on donations, and no one takes a wage. 99.7p of every pound donated goes straight back into our work. 
 
-Your support helps fund our resources, outreach, and community support for people who need compassionate mental health help.
+These donations mean that we can keep making events, Festivals and more accessable for all.
