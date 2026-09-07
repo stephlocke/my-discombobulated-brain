@@ -294,7 +294,7 @@
             {{ else if $is_gif }}
               {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $mediaFrame) "Width" $safeWidth "Height" $safeHeight) }}
             {{ else }}
-              {{ $sectionSmallImage := .Fill "720x540 webp q72" }}
+              {{ $sectionSmallImage := .Fill "720x540 Center webp q72" }}
               {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallImage.Width "Height" $sectionSmallImage.Height) }}
             {{ end }}
           </div>
