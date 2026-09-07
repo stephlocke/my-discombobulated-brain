@@ -43,10 +43,12 @@ with the wrong address. This should be a rare, deliberate change, not a routine 
 Files → Navigation Labels controls what shows in the header and footer navigation, in
 addition to the text of each link:
 
-- **"Show a 'More' Dropdown Section"** — a single on/off switch. Off means every page is
-  shown as a plain link in the main navigation bar. On means a "More" button appears, which
-  opens a dropdown containing whichever pages are chosen in "Pages Shown In The 'More'
-  Dropdown" below.
+- **"Show a 'More' Dropdown Section"** — a single on/off switch. On means a "More" button
+  appears, which opens a dropdown containing whichever pages are chosen in "Pages Shown In
+  The 'More' Dropdown" below. Off means that button disappears — only pages ticked in "Pages
+  Always Shown In The Main Navigation" below are shown; pages chosen only for the dropdown are
+  not promoted into the main list, they simply aren't shown in navigation until the dropdown
+  is switched back on.
 - **"Pages Always Shown In The Main Navigation"** — tick every page that should always be a
   plain link in the main bar. This applies whether the "More" dropdown is switched on or off.
 - **"Pages Shown In The 'More' Dropdown"** — only matters while the switch above is on. Tick

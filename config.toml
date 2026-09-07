@@ -68,6 +68,7 @@ enableRobotsTXT = true
     identifier = 'contact'
     name = 'Contact'
     url = '/contact/'
+    pageRef = '/contact'
     weight = 3
   [[menu.main]]
     identifier = 'blog'
