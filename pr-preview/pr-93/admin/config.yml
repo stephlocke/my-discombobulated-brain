@@ -315,7 +315,7 @@ singletons:
     fields:
       - { label: "\"Home\" Link Label", name: "home_label", widget: "string", required: true, default: "Home", hint: "Text shown for the Home link in the header and footer navigation." }
       - { label: "\"About\" Link Label", name: "about_label", widget: "string", required: true, default: "About", hint: "Text shown for the About link in the header and footer navigation." }
-      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header and footer navigation. Only shown if 'Show a \"More\" Dropdown Section' below is switched on." }
+      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header navigation (desktop and mobile). The footer never shows this button — it lists 'More' dropdown pages as plain links instead. Only shown if 'Show a \"More\" Dropdown Section' below is switched on." }
       - { label: "\"Contact\" Link Label", name: "contact_label", widget: "string", required: true, default: "Contact", hint: "Text shown for the Contact link in the header and footer navigation." }
       - { label: "\"Awards and Recognition\" Link Label", name: "awards_label", widget: "string", required: true, default: "Awards and Recognition", hint: "Text shown for the Awards and Recognition link, wherever it appears in navigation." }
       - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link, wherever it appears in navigation." }
