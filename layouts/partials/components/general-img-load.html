@@ -223,14 +223,16 @@
         </div>
       {{ end }}
       {{ if  and (eq $placement "VerCard") (not $is_svg) }}
-        {{/* Smart-cropped to a fixed aspect ratio (matches HorCard's approach)
+        {{/* Center-cropped to a fixed aspect ratio (matches HorCard's approach)
              so cards stay a consistent height regardless of how a
-             contributor's source image is framed. */}}
+             contributor's source image is framed. Center anchor, rather than
+             Hugo's default "Smart" content-aware crop, keeps the framing
+             predictable. */}}
         <div class="relative aspect-video w-full overflow-hidden cursor-pointer">
           {{ if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ $verCardImage := .Fill "720x405 webp q62" }}
+            {{ $verCardImage := .Fill "720x405 Center webp q62" }}
             {{ partial "components/image" (dict "Src" $verCardImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $imageRounding) "Width" $verCardImage.Width "Height" $verCardImage.Height) }}
           {{ end }}
         </div>
@@ -252,7 +254,11 @@
           {{ else if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
-            {{ $horCardImage := .Fill "720x540 webp q62" }}
+            {{/* Center anchor - by default Hugo's "Smart" content-aware crop
+                 doesn't always agree with what looks right for a photo, and
+                 tended to crop toward the left. Center is more predictable
+                 and consistent for a list of straight-on photos. */}}
+            {{ $horCardImage := .Fill "720x540 Center webp q62" }}
             {{ partial "components/image" (dict "Src" $horCardImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" $horCardImage.Width "Height" $horCardImage.Height) }}
           {{ end }}
         </div>
@@ -267,32 +273,31 @@
         </div>
       {{ end }}
       {{ if eq $placement "SectionSmall" }}
+        {{/* Smart-cropped to a fixed aspect ratio (matches VerCard/HorCard's
+             approach) so all Services rows show the same image footprint
+             regardless of whether the source photo is landscape, portrait or
+             square. */}}
         <div class="mb-6 content-center {{ if not (modBool $index 2) }}order-1 md:order-2{{ end }}">
-          {{ if $is_video }}
-            <video
-              class="mx-auto max-h-96 w-auto {{ $mediaFrame }}"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              {{ if $poster }}poster="{{ $poster }}"{{ end }}>
-              <source src="{{ .RelPermalink }}" type="video/{{ $image_ext }}" />
-              {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
-            </video>
-          {{ else }}
-            {{ $sectionSmallImage := . }}
-            {{ $sectionSmallWidth := $safeWidth }}
-            {{ $sectionSmallHeight := $safeHeight }}
-            {{ if and (not $is_svg) (not $is_gif) }}
-              {{ with .Fit "720x720 webp q72" }}
-                {{ $sectionSmallImage = . }}
-                {{ $sectionSmallWidth = .Width }}
-                {{ $sectionSmallHeight = .Height }}
-              {{ end }}
+          <div class="relative aspect-[4/3] w-full overflow-hidden {{ $imageRounding }}">
+            {{ if $is_video }}
+              <video
+                class="absolute inset-0 h-full w-full object-cover {{ $mediaFrame }}"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                {{ if $poster }}poster="{{ $poster }}"{{ end }}>
+                <source src="{{ .RelPermalink }}" type="video/{{ $image_ext }}" />
+                {{ i18n "video_not_supported" | default "Your browser does not support the video tag." }}
+              </video>
+            {{ else if $is_gif }}
+              {{ partial "components/image" (dict "Src" .RelPermalink "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $mediaFrame) "Width" $safeWidth "Height" $safeHeight) }}
+            {{ else }}
+              {{ $sectionSmallImage := .Fill "720x540 webp q72" }}
+              {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s" $mediaFrame) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallImage.Width "Height" $sectionSmallImage.Height) }}
             {{ end }}
-            {{ partial "components/image" (dict "Src" $sectionSmallImage.RelPermalink "Alt" $alt "Class" (printf "mx-auto max-h-96 w-auto %s %s" $mediaFrame $imageRounding) "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x" "Width" $sectionSmallWidth "Height" $sectionSmallHeight) }}
-          {{ end }}
+          </div>
         </div>
       {{ end }}
       {{ if and (eq $placement "Grid") (not $is_svg) }}
