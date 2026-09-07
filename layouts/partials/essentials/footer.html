@@ -1,5 +1,6 @@
 {{- $footerLinkRounding := printf "[&_a]:%s" (partial "components/edge-rounding" (dict "shape" "button")) -}}
-{{- $navLabels := dict "home" hugo.Data.nav.home_label "about" hugo.Data.nav.about_label "more" hugo.Data.nav.more_label "contact" hugo.Data.nav.contact_label "awards" hugo.Data.nav.awards_label "blog" hugo.Data.nav.blog_label "events" hugo.Data.nav.events_label "services" hugo.Data.nav.services_label "worked-with" hugo.Data.nav.worked_with_label -}}
+{{- $nav := partial "essentials/nav-menu" . -}}
+{{- $navLabels := $nav.navLabels -}}
 {{- $footerContent := site.GetPage "/footer" -}}
 <footer class="bg-surface-muted border-t border-border-subtle {{ $footerLinkRounding }}" role="contentinfo">
     <div class="container py-8">
@@ -31,27 +32,29 @@
                 <h3 class="text-lg font-semibold mb-4 text-strong">Quick Links</h3>
                 <nav aria-label="Footer navigation">
                     <ul class="space-y-2">
-                        {{ range .Site.Menus.main }}
-                        {{ if .HasChildren }}
-                        {{/* The footer has no dropdown interaction, so its children are
-                             listed inline as regular links rather than nested under a
-                             non-navigable "More" entry. */}}
-                        {{ range .Children }}
+                        {{/* The footer has no dropdown interaction, so "More" dropdown
+                             pages (when the dropdown is switched on) are listed inline
+                             as regular links here, alongside the main list, rather than
+                             nested under a non-navigable "More" entry. */}}
+                        {{ range $nav.mainItems }}
                         {{ $navLabel := .Name }}
                         {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
                         <li>
                                      <a href="{{ .URL | relLangURL }}"
-                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                                         {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                                 {{ $navLabel }}
                             </a>
                         </li>
                         {{ end }}
-                        {{ else }}
+                        {{ if $nav.moreEnabled }}
+                        {{ range $nav.dropdownItems }}
                         {{ $navLabel := .Name }}
                         {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
                         <li>
                                      <a href="{{ .URL | relLangURL }}"
-                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                                         {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
                                 {{ $navLabel }}
                             </a>
                         </li>

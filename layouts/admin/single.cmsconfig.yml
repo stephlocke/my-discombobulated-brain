@@ -303,7 +303,10 @@ singletons:
         hint: "The site's full public web address, including https:// and a trailing slash (e.g. https://example.org/). Changing this changes every link, canonical tag, RSS feed, and sitemap entry the whole site generates — only change this once the site's real hosting/domain has been updated to match, otherwise the site will describe itself with the wrong address."
 
   # Navigation Labels — manages data/nav.toml
-  # Controls only the TEXT of each menu link. URLs, order, and structure remain fixed in config.toml (never CMS-editable).
+  # Controls the TEXT of each menu link, plus which pages appear in navigation and
+  # whether they sit in the main list or a "More" dropdown (see more_enabled/main_pages/
+  # dropdown_pages below). URLs and display order remain fixed in config.toml (never
+  # CMS-editable) — see layouts/partials/essentials/nav-menu.html for how the two combine.
   - name: "nav-settings"
     label: "Navigation Labels"
     icon: menu_book
@@ -314,13 +317,51 @@ singletons:
     fields:
       - { label: "\"Home\" Link Label", name: "home_label", widget: "string", required: true, default: "Home", hint: "Text shown for the Home link in the header and footer navigation." }
       - { label: "\"About\" Link Label", name: "about_label", widget: "string", required: true, default: "About", hint: "Text shown for the About link in the header and footer navigation." }
-      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header and footer navigation." }
+      - { label: "\"More\" Link Label", name: "more_label", widget: "string", required: true, default: "More", hint: "Text shown for the 'More' dropdown button in the header and footer navigation. Only shown if 'Show a \"More\" Dropdown Section' below is switched on." }
       - { label: "\"Contact\" Link Label", name: "contact_label", widget: "string", required: true, default: "Contact", hint: "Text shown for the Contact link in the header and footer navigation." }
-      - { label: "\"Awards and Recognition\" Link Label", name: "awards_label", widget: "string", required: true, default: "Awards and Recognition", hint: "Text shown for the Awards and Recognition link inside the 'More' dropdown." }
-      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link inside the 'More' dropdown." }
-      - { label: "\"Events\" Link Label", name: "events_label", widget: "string", required: true, default: "Events", hint: "Text shown for the Events link inside the 'More' dropdown." }
-      - { label: "\"Services\" Link Label", name: "services_label", widget: "string", required: true, default: "Services", hint: "Text shown for the Services link inside the 'More' dropdown." }
-      - { label: "\"Worked With\" Link Label", name: "worked_with_label", widget: "string", required: true, default: "Worked With", hint: "Text shown for the Worked With link inside the 'More' dropdown." }
+      - { label: "\"Awards and Recognition\" Link Label", name: "awards_label", widget: "string", required: true, default: "Awards and Recognition", hint: "Text shown for the Awards and Recognition link, wherever it appears in navigation." }
+      - { label: "\"Blog\" Link Label", name: "blog_label", widget: "string", required: true, default: "Blog", hint: "Text shown for the Blog link, wherever it appears in navigation." }
+      - { label: "\"Events\" Link Label", name: "events_label", widget: "string", required: true, default: "Events", hint: "Text shown for the Events link, wherever it appears in navigation." }
+      - { label: "\"Services\" Link Label", name: "services_label", widget: "string", required: true, default: "Services", hint: "Text shown for the Services link, wherever it appears in navigation." }
+      - { label: "\"Worked With\" Link Label", name: "worked_with_label", widget: "string", required: true, default: "Worked With", hint: "Text shown for the Worked With link, wherever it appears in navigation." }
+      - label: "Show a \"More\" Dropdown Section"
+        name: "more_enabled"
+        widget: "boolean"
+        required: true
+        default: false
+        hint: "Switch this on to show a 'More' button in the main navigation that opens a dropdown of extra pages. The pages inside it are chosen below, in \"Pages Shown In The 'More' Dropdown\". Switch it off to remove the 'More' button entirely — pages that were only assigned to the dropdown then disappear from navigation completely, rather than moving into the main list."
+      - label: "Pages Always Shown In The Main Navigation"
+        name: "main_pages"
+        widget: "select"
+        multiple: true
+        required: false
+        default: ["home", "about", "contact", "blog", "events", "services"]
+        options:
+          - { label: "Home", value: "home" }
+          - { label: "About", value: "about" }
+          - { label: "Contact", value: "contact" }
+          - { label: "Blog", value: "blog" }
+          - { label: "Events", value: "events" }
+          - { label: "Services", value: "services" }
+          - { label: "Awards and Recognition", value: "awards" }
+          - { label: "Worked With", value: "worked-with" }
+        hint: "Tick every page that should always appear as an ordinary link in the main navigation bar — this applies whether or not the 'More' dropdown above is switched on. A page left unticked here (and not ticked below either) will not appear in navigation at all. The web address and position of each page are fixed in the site's code; this only controls whether it's shown."
+      - label: "Pages Shown In The \"More\" Dropdown"
+        name: "dropdown_pages"
+        widget: "select"
+        multiple: true
+        required: false
+        default: ["awards", "worked-with"]
+        options:
+          - { label: "Home", value: "home" }
+          - { label: "About", value: "about" }
+          - { label: "Contact", value: "contact" }
+          - { label: "Blog", value: "blog" }
+          - { label: "Events", value: "events" }
+          - { label: "Services", value: "services" }
+          - { label: "Awards and Recognition", value: "awards" }
+          - { label: "Worked With", value: "worked-with" }
+        hint: "Only takes effect while 'Show a \"More\" Dropdown Section' above is switched on. Pages ticked here appear inside that dropdown instead of the main list. If the dropdown is switched off, pages ticked only here are hidden from navigation completely — they do not fall back into the main list. Don't tick a page here that's also ticked above in \"Pages Always Shown In The Main Navigation\"; the main list takes priority and the dropdown entry will be ignored."
 
   # Contact Settings — manages data/contact.toml
   - name: "contact-settings"

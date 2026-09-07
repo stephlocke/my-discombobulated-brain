@@ -1,0 +1,51 @@
+{{/*
+Computes the site's main navigation structure by combining:
+  - config.toml's [menu.main] entries — identifiers, URLs, and display order
+    (weight). These are fixed in code and are never CMS-editable.
+  - data/nav.toml — CMS-editable via the "Navigation Labels" file in the CMS.
+    This controls link text, whether the "More" dropdown exists at all, which
+    pages always show in the main list, and which pages show in the dropdown
+    when it's switched on.
+
+data/nav.toml fields read here:
+  - more_enabled: whether the "More" dropdown section exists at all.
+  - main_pages: identifiers always shown as ordinary links in the main list,
+    regardless of more_enabled.
+  - dropdown_pages: identifiers shown inside the "More" dropdown, but only
+    while more_enabled is true. If more_enabled is false, these pages are not
+    shown in navigation at all — they are not promoted into the main list.
+  - more_label: the text on the dropdown's toggle button.
+
+If a page identifier is listed in both main_pages and dropdown_pages, it is
+treated as a main_pages entry (shown once, in the main list) so a CMS editor
+mistake can't render the same link twice.
+
+Returns a dict: { moreEnabled, moreLabel, navLabels, mainItems, dropdownItems }
+mainItems/dropdownItems are already ordered by weight, since .Site.Menus.main
+is weight-sorted before this filters it.
+*/}}
+{{ $navLabels := dict
+    "home" hugo.Data.nav.home_label
+    "about" hugo.Data.nav.about_label
+    "contact" hugo.Data.nav.contact_label
+    "awards" hugo.Data.nav.awards_label
+    "blog" hugo.Data.nav.blog_label
+    "events" hugo.Data.nav.events_label
+    "services" hugo.Data.nav.services_label
+    "worked-with" hugo.Data.nav.worked_with_label
+}}
+
+{{ $moreEnabledSetting := hugo.Data.nav.more_enabled | default false }}
+{{ $mainIdentifiers := hugo.Data.nav.main_pages | default slice }}
+{{ $dropdownIdentifiers := hugo.Data.nav.dropdown_pages | default slice }}
+
+{{ $mainItems := where .Site.Menus.main "Identifier" "in" $mainIdentifiers }}
+
+{{ $dropdownItems := slice }}
+{{ if $moreEnabledSetting }}
+{{ $dropdownItems = where (where .Site.Menus.main "Identifier" "in" $dropdownIdentifiers) "Identifier" "not in" $mainIdentifiers }}
+{{ end }}
+
+{{ $moreEnabled := and $moreEnabledSetting (gt (len $dropdownItems) 0) }}
+
+{{ return (dict "moreEnabled" $moreEnabled "moreLabel" hugo.Data.nav.more_label "navLabels" $navLabels "mainItems" $mainItems "dropdownItems" $dropdownItems) }}
