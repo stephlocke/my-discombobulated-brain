@@ -7,6 +7,6 @@ blog_label = "Blog"
 events_label = "Events"
 services_label = "Services"
 worked_with_label = "Worked With"
-more_enabled = false
+more_enabled = true
 main_pages = [ "home", "about", "contact", "blog", "events", "services" ]
 dropdown_pages = [ "awards", "worked-with" ]
