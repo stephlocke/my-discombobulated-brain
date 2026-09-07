@@ -44,6 +44,13 @@ enableRobotsTXT = true
   category = 'categories'
   tag = 'tags'
 
+# Every page that can appear in navigation is listed here, flat, with its
+# identifier, URL, and display weight (display order). This structure is
+# fixed in code and never CMS-editable. Whether each page actually appears —
+# and whether it appears in the main list or inside the "More" dropdown — is
+# controlled separately, by content editors, via data/nav.toml (see the
+# "Navigation Labels" file in the CMS, and layouts/partials/essentials/nav-menu.html
+# which combines the two).
 [menu]
   [[menu.main]]
     identifier = 'home'
@@ -57,54 +64,42 @@ enableRobotsTXT = true
     url = '/about/'
     pageRef = '/about'
     weight = 2
-  # 'more' has no page of its own — it is a dropdown container, rendered as a
-  # toggle button rather than a link. Its children (below) supply the URLs.
-  [[menu.main]]
-    identifier = 'more'
-    name = 'More'
-    url = '#'
-    weight = 3
   [[menu.main]]
     identifier = 'contact'
     name = 'Contact'
     url = '/contact/'
-    weight = 4
-  # Children of 'more', alphabetical by name.
-  [[menu.main]]
-    identifier = 'awards'
-    name = 'Awards and Recognition'
-    url = '/awards-and-recognition/'
-    pageRef = '/awards-and-recognition'
-    parent = 'more'
-    weight = 1
+    pageRef = '/contact'
+    weight = 3
   [[menu.main]]
     identifier = 'blog'
     name = 'Blog'
     url = '/blog/'
     pageRef = '/blog'
-    parent = 'more'
-    weight = 2
+    weight = 4
   [[menu.main]]
     identifier = 'events'
     name = 'Events'
     url = '/events/'
     pageRef = '/events'
-    parent = 'more'
-    weight = 3
+    weight = 5
   [[menu.main]]
     identifier = 'services'
     name = 'Services'
     url = '/services/'
     pageRef = '/services'
-    parent = 'more'
-    weight = 4
+    weight = 6
+  [[menu.main]]
+    identifier = 'awards'
+    name = 'Awards and Recognition'
+    url = '/awards-and-recognition/'
+    pageRef = '/awards-and-recognition'
+    weight = 7
   [[menu.main]]
     identifier = 'worked-with'
     name = 'Worked With'
     url = '/worked-with/'
     pageRef = '/worked-with'
-    parent = 'more'
-    weight = 5
+    weight = 8
 
 [markup]
   [markup.goldmark]

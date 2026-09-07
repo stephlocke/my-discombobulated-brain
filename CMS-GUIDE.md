@@ -38,6 +38,32 @@ canonical tag, RSS feed, and sitemap entry the site generates. Only change it on
 real hosting/domain has actually moved to match; otherwise the live site will describe itself
 with the wrong address. This should be a rare, deliberate change, not a routine edit.
 
+## Controlling the navigation menu
+
+Files → Navigation Labels controls what shows in the header and footer navigation, in
+addition to the text of each link:
+
+- **"Show a 'More' Dropdown Section"** — a single on/off switch. On means a "More" button
+  appears, which opens a dropdown containing whichever pages are chosen in "Pages Shown In
+  The 'More' Dropdown" below. Off means that button disappears — only pages ticked in "Pages
+  Always Shown In The Main Navigation" below are shown; pages chosen only for the dropdown are
+  not promoted into the main list, they simply aren't shown in navigation until the dropdown
+  is switched back on.
+- **"Pages Always Shown In The Main Navigation"** — tick every page that should always be a
+  plain link in the main bar. This applies whether the "More" dropdown is switched on or off.
+- **"Pages Shown In The 'More' Dropdown"** — only matters while the switch above is on. Tick
+  pages here to have them appear inside the "More" dropdown instead of the main list. If the
+  dropdown switch is off, pages ticked only here don't appear in navigation at all — they
+  don't move into the main list, they simply aren't shown.
+
+A page not ticked in either list is left out of navigation entirely (its actual page still
+exists and can be reached by a direct link — it just isn't offered in the menu). Don't tick
+the same page in both lists — the main list takes priority and the dropdown entry is ignored.
+
+The web address and left-to-right order of each page are fixed in the site's code, not the
+CMS — these settings only control whether a page is shown, and if shown, whether it's in the
+main list or the dropdown.
+
 ## Field validation
 
 Some fields now check the format of what you type and will show an error and refuse to save
@@ -77,6 +103,9 @@ If saving is blocked, check the field's hint text — it explains what format is
   the 404 page.
 - **CTA — Header / Hero / Footer / Inline** — reusable call-to-action buttons, referenced by
   name from the Homepage and elsewhere.
+- **Navigation Labels** (Files) — link text for the header/footer navigation, plus which
+  pages appear in navigation and whether they sit in the main list or the "More" dropdown.
+  See "Controlling the navigation menu" above.
 - **Site Settings** (Files) — site title, author, logo, favicon, theme colours and fonts,
   search settings, logo carousel scroll speed.
 - **Domain** (Files) — the site's real public web address. See the warning above before
