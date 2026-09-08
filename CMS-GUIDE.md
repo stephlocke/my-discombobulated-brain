@@ -73,7 +73,7 @@ page can appear in the header, the footer, both, or neither, in any combination.
 are always shown alphabetised and split evenly across two columns, so there's no ordering or
 column choice to make.
 
-## Controlling how card images are cropped (Fill vs Fit)
+## Controlling card image framing (Fill vs Fit)
 
 Some Sections (currently Worked With and Awards & Recognition) have an "Image Fit" setting,
 alongside Display, that controls how each item's image is shown when that section is listed
