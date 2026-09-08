@@ -168,7 +168,7 @@ aliases:
     widget: "select"
     required: true
     default: "fill"
-    hint: "Fill — each item's image is cropped to fill its space, with no gaps but the edges may be cut off. Fit — each item's image is scaled down to fit within its space without cropping, so the whole image stays visible but may leave gaps on two sides. Use Fit for logos or other images where cutting off the edges would look wrong."
+    hint: "Fill: each item's image is cropped to fill its space. This leaves no gaps, but the edges may be cut off. Fit: each item's image is scaled down to fit within its space without cropping. The whole image stays visible, but this may leave gaps on two sides. Use Fit for logos or other images where cutting off the edges would look wrong."
     options:
       - { label: "Fill", value: "fill" }
       - { label: "Fit", value: "fit" }
