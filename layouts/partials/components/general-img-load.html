@@ -263,14 +263,17 @@
           {{ end }}
         </div>
       {{ end }}
-      {{ if and (eq $placement "HorCardLogo") (not $is_svg) }}
+      {{ if eq $placement "HorCardLogo" }}
         {{/* Same fixed image area as HorCard, but for a logo rather than a
              photo: a center-crop fill would clip the logo's edges, so this
              fits the whole logo within the box (letterboxed/pillarboxed as
-             needed) instead of cropping it to fill the box. */}}
+             needed) instead of cropping it to fill the box. Unlike HorCard,
+             this doesn't exclude SVGs - the CMS accepts SVG logo uploads,
+             and Hugo's .Fit can't process them, so they're rendered
+             directly instead of being silently skipped. */}}
         <div class="relative h-full w-full overflow-hidden bg-surface p-4">
-          {{ if $is_gif }}
-            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ if or $is_svg $is_gif }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" $safeWidth "Height" $safeHeight) }}
           {{ else }}
             {{ $horCardLogoImage := .Fit "720x540 webp q72" }}
             {{ partial "components/image" (dict "Src" $horCardLogoImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" $horCardLogoImage.Width "Height" $horCardLogoImage.Height) }}
