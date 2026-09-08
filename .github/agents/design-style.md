@@ -46,7 +46,6 @@ Apply this agent whenever reviewing:
   - `outline` — secondary action
   - `solid-alt` — CTA on coloured/teal backgrounds
   - `outline-alt` — secondary action on coloured backgrounds
-  - `ghost` — tertiary/subtle actions
   - `danger` — destructive actions only
 - [ ] `href` is a valid relative or absolute URL
 - [ ] `label` is descriptive and follows brand voice conventions (see brand-voice-icp agent)

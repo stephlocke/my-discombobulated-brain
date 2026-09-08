@@ -14,12 +14,13 @@ Usage: {{ partial "components/events-list" (dict "page" . "which" "upcoming") }}
 {{- $which := .which -}}
 {{- $isUpcoming := eq $which "upcoming" -}}
 {{- $eventsSection := $page.Site.GetPage "/events" -}}
+{{- $now := now -}}
 
 {{- $matches := slice -}}
 {{- with $eventsSection -}}
 {{- range .RegularPages -}}
     {{- $eventDate := partial "components/safe-time" .Params.event_date -}}
-    {{- $eventIsUpcoming := ge $eventDate (now) -}}
+    {{- $eventIsUpcoming := ge $eventDate $now -}}
     {{- if eq $eventIsUpcoming $isUpcoming -}}
         {{- $matches = $matches | append (dict "page" . "eventDate" $eventDate) -}}
     {{- end -}}

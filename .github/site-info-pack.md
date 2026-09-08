@@ -316,7 +316,7 @@ All colours are defined as CSS custom properties in `assets/css/main.css` under 
 | Overview Card | `layouts/partials/components/overview-card.html` | Feature/pillar cards on home and section pages |
 | Footer CTA | `layouts/partials/components/footer-cta.html` | End-of-page call-to-action blocks |
 
-**Button variants**: `solid`, `outline`, `solid-alt`, `outline-alt`, `ghost`, `danger`, `success`, `warning`
+**Button variants**: `solid`, `outline`, `solid-alt`, `outline-alt`, `danger`, `success`, `warning`
 
 **Button accessible label pattern**:
 - Keep repeated card CTA text visually short (`Read more`, `Learn more`).

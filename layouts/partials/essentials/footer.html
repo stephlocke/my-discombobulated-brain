@@ -62,7 +62,8 @@
                         {{ end }}
                         <li>
                             <a href="{{ "past-events/" | relLangURL }}"
-                                class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                                {{ if eq $.Section "past-events" }}aria-current="page"{{ end }}>
                                 Past Events
                             </a>
                         </li>
