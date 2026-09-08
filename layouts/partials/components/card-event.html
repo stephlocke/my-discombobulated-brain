@@ -8,9 +8,6 @@
                 {{ .Title }}
             </a>
         </h3>
-        <p class="text-text mb-4 text-sm line-clamp-3">
-            {{ .Description }}
-        </p>
         {{ $eventDate := partial "components/safe-time" .Params.event_date }}
         {{ $startTime := partial "components/safe-time" .Params.start_time }}
         {{ $endTime := partial "components/safe-time" .Params.end_time }}
