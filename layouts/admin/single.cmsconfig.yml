@@ -583,6 +583,15 @@ collections:
           - *field_date
           - *field_draft
           - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Donate page. This must not be left blank." }
+      - name: "help"
+        label: "Get Help"
+        file: "content/help/index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_date
+          - *field_draft
+          - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Get Help page. This must not be left blank." }
       - name: "contact"
         label: "Contact"
         file: "content/contact.md"

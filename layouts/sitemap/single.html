@@ -13,7 +13,7 @@
                 <h2 class="text-xl font-semibold text-off-black mb-3">Main Pages</h2>
                 <ul class="space-y-2">
                     <li><a href="{{ "./" | relLangURL }}" class="{{ $linkClass }}">Home</a></li>
-                    {{ range (slice "/about" "/donate" "/contact" "/search") }}
+                    {{ range (slice "/about" "/donate" "/help" "/contact" "/search") }}
                     {{ with $.Site.GetPage . }}
                     <li><a href="{{ .RelPermalink }}" class="{{ $linkClass }}">{{ .Title }}</a></li>
                     {{ end }}

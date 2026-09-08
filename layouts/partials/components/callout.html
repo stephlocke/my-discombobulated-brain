@@ -4,28 +4,38 @@
 {{- if eq ($ctxt.Site.Params.style_rules.edges | default "round") "round" -}}
   {{- $singleCalloutBorderWidth = "border-l-8" -}}
 {{- end -}}
+{{- $helpHref := partial "components/resolve-content-href.html" "/help/" -}}
+{{- with $ctxt.Site.GetPage "/help" -}}
+  {{- $helpHref = .RelPermalink -}}
+{{- end -}}
 {{- with $ctxt.Site.GetPage (printf "/callouts/%s" $location) -}}
   {{- if eq $location "footer" -}}
     <p class="mt-4 p-3 bg-primary/5 border border-primary/20 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}">
         <strong class="text-strong">{{ .Params.headline }}:</strong><br>
         {{ .Params.body }}
+        <a href="{{ $helpHref }}" class="mt-1 block font-semibold text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary">Find mental health support</a>
     </p>
   {{- else if eq $location "single" -}}
+    {{/* Skip this on the Get Help page itself — it would just point back at the
+         page the visitor is already reading. */}}
+    {{- if ne $ctxt.RelPermalink $helpHref -}}
     <aside class="mt-12 p-6 bg-primary/10 {{ $singleCalloutBorderWidth }} border-primary {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}" role="complementary">
         <h2 class="text-lg font-semibold text-off-black mb-2">{{ .Params.headline }}</h2>
         <p class="text-off-black mb-4">{{ .Params.body }}</p>
         {{- with .Params.buttons -}}
           {{- range . -}}
-            {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+            {{ partial "components/button" (dict "type" .type "href" (partial "components/resolve-content-href.html" .href) "label" .label) }}
           {{- end -}}
         {{- end -}}
     </aside>
+    {{- end -}}
   {{- else if eq $location "404" -}}
     <section class="pb-16" aria-labelledby="callout-heading">
         <div class="container">
             <div class="mx-auto max-w-3xl {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} border border-primary/20 bg-primary/5 p-8 text-center">
                 <h2 id="callout-heading" class="mb-4 text-2xl font-bold text-primary">{{ .Params.headline }}</h2>
-                <p class="text-muted">{{ .Params.body }}</p>
+                <p class="mb-4 text-muted">{{ .Params.body }}</p>
+                {{ partial "components/button" (dict "type" "outline" "href" $helpHref "label" "Find support") }}
             </div>
         </div>
     </section>

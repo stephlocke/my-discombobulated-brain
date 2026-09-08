@@ -48,7 +48,7 @@
                         {{ $ctaPage := site.GetPage (printf "/cta/hero/%s" $heroCta) }}
                         {{ with $ctaPage }}
                             {{ range .Params.buttons }}
-                                {{ partial "components/button" (dict "type" .type "href" .href "label" .label) }}
+                                {{ partial "components/button" (dict "type" .type "href" (partial "components/resolve-content-href.html" .href) "label" .label) }}
                             {{ end }}
                         {{ end }}
                     {{ end }}

@@ -1,0 +1,24 @@
+{{/*
+Resolves a URL typed directly into CMS content (CTA and callout "Buttons" fields,
+e.g. "/donate" or "/help") so it carries the site's baseURL subpath in production
+(config/_default/hugo.toml sets baseURL to "https://stephlocke.com/my-discombobulated-brain/").
+
+Only use this on raw strings taken straight from content front matter. Don't use it
+on a href already built from a Page (e.g. .RelPermalink, or something already piped
+through relURL/relLangURL) — those already carry the subpath, and passing them
+through again would double it up.
+
+Root-relative paths ("/donate") are resolved via relLangURL, which — for a
+generic string rather than a Page's own permalink — only adds the baseURL's
+subpath when the leading slash is stripped first (compare the existing
+`"sitemap/" | relLangURL` and `"./" | relLangURL` usages elsewhere in this
+codebase, both without a leading slash). Anything else — "#", "https://…",
+"//…", "mailto:…", "tel:…" — is left untouched.
+
+Usage: {{ partial "components/resolve-content-href.html" .href }}
+*/}}
+{{- $href := . -}}
+{{- if and (strings.HasPrefix $href "/") (not (strings.HasPrefix $href "//")) -}}
+  {{- $href = ($href | strings.TrimPrefix "/") | relLangURL -}}
+{{- end -}}
+{{- return $href -}}
