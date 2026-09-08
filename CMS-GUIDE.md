@@ -66,11 +66,11 @@ main list or the dropdown.
 
 ## Controlling the footer's "Quick Links" list
 
-The same Files → Navigation Labels screen also has "Pages Shown In Footer 'Quick Links'" —
-this controls the separate "Quick Links" list in the site footer, and has no connection at
+The same Files → Navigation Labels screen also has "Pages Shown In Footer 'Quick Links'".
+This controls the separate "Quick Links" list in the site footer, and has no connection at
 all to the header navigation settings above. Tick any page there to add it to Quick Links; a
 page can appear in the header, the footer, both, or neither, in any combination. Quick Links
-are always shown alphabetised and split evenly across two columns — there's no ordering or
+are always shown alphabetised and split evenly across two columns, so there's no ordering or
 column choice to make.
 
 ## Field validation
