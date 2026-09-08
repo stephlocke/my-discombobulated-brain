@@ -79,7 +79,7 @@ Some Sections (currently Worked With and Awards & Recognition) have an "Image Fi
 alongside Display, that controls how each item's image is shown when that section is listed
 as a page of cards (e.g. `/worked-with`, `/awards-and-recognition`):
 
-- **Fill** — the image is cropped to completely fill its space, with no gaps. Best for photos,
+- **Fill**: the image is cropped to completely fill its space, with no gaps. Best for photos,
   where losing a bit of the edges doesn't matter.
 - **Fit** — the image is scaled down to fit within its space without cropping, so the whole
   image stays visible. This can leave a small gap on two sides if the image's proportions
