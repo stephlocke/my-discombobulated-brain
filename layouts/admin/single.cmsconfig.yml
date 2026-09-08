@@ -338,6 +338,7 @@ singletons:
       - { label: "\"Events\" Link Label", name: "events_label", widget: "string", required: true, default: "Events", hint: "Text shown for the Events link, wherever it appears in navigation." }
       - { label: "\"Services\" Link Label", name: "services_label", widget: "string", required: true, default: "Services", hint: "Text shown for the Services link, wherever it appears in navigation." }
       - { label: "\"Worked With\" Link Label", name: "worked_with_label", widget: "string", required: true, default: "Worked With", hint: "Text shown for the Worked With link, wherever it appears in navigation." }
+      - { label: "\"Get Support\" Link Label", name: "support_label", widget: "string", required: true, default: "Support", hint: "Text shown for the Get Support link, wherever it appears in navigation." }
       - label: "Show a \"More\" Dropdown Section"
         name: "more_enabled"
         widget: "boolean"
@@ -349,7 +350,7 @@ singletons:
         widget: "select"
         multiple: true
         required: false
-        default: ["home", "about", "contact", "blog", "events", "services"]
+        default: ["home", "about", "contact", "blog", "events", "services", "support"]
         options:
           - { label: "Home", value: "home" }
           - { label: "About", value: "about" }
@@ -359,6 +360,7 @@ singletons:
           - { label: "Services", value: "services" }
           - { label: "Awards and Recognition", value: "awards" }
           - { label: "Worked With", value: "worked-with" }
+          - { label: "Get Support", value: "support" }
         hint: "Tick every page that should always appear as an ordinary link in the main navigation bar — this applies whether or not the 'More' dropdown above is switched on. A page left unticked here (and not ticked below either) will not appear in navigation at all. The web address and position of each page are fixed in the site's code; this only controls whether it's shown."
       - label: "Pages Shown In The \"More\" Dropdown"
         name: "dropdown_pages"
@@ -375,6 +377,7 @@ singletons:
           - { label: "Services", value: "services" }
           - { label: "Awards and Recognition", value: "awards" }
           - { label: "Worked With", value: "worked-with" }
+          - { label: "Get Support", value: "support" }
         hint: "Only takes effect while 'Show a \"More\" Dropdown Section' above is switched on. Pages ticked here appear inside that dropdown instead of the main list. If the dropdown is switched off, pages ticked only here are hidden from navigation completely — they do not fall back into the main list. Don't tick a page here that's also ticked above in \"Pages Always Shown In The Main Navigation\"; the main list takes priority and the dropdown entry will be ignored."
       - label: "Pages Shown In Footer \"Quick Links\""
         name: "quick_link_pages"
@@ -615,15 +618,15 @@ collections:
           - *field_date
           - *field_draft
           - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Donate page. This must not be left blank." }
-      - name: "help"
-        label: "Get Help"
-        file: "content/help/index.md"
+      - name: "support"
+        label: "Get Support"
+        file: "content/support/index.md"
         fields:
           - *field_title
           - *field_description
           - *field_date
           - *field_draft
-          - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Get Help page. This must not be left blank." }
+          - { label: "Body", name: "body", widget: "markdown", required: true, hint: "The main content of the Get Support page. This must not be left blank." }
       - name: "contact"
         label: "Contact"
         file: "content/contact.md"
@@ -728,7 +731,7 @@ collections:
             name: "support_section"
             widget: "object"
             required: true
-            hint: "Shown in the footer's 'Get Help' column. Leave a field blank to hide that line."
+            hint: "Shown in the footer's 'Get Support' column. Leave a field blank to hide that line."
             fields:
               - { label: "Support Email", name: "email", widget: "string", type: "email", required: false, hint: "Leave blank to hide this line." }
               - { label: "Support Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to hide this line." }

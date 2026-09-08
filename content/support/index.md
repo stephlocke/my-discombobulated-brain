@@ -1,5 +1,5 @@
 ---
-title: Get Help
+title: Get Support
 description: Key contacts for mental health support and crisis help across the UK, including Samaritans, Shout, NHS services, and helplines for young people.
 date: 2026-09-08
 draft: false

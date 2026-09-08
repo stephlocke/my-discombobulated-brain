@@ -100,6 +100,12 @@ enableRobotsTXT = true
     url = '/worked-with/'
     pageRef = '/worked-with'
     weight = 8
+  [[menu.main]]
+    identifier = 'support'
+    name = 'Get Support'
+    url = '/support/'
+    pageRef = '/support'
+    weight = 9
 
 [markup]
   [markup.goldmark]
