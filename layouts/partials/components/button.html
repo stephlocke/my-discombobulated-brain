@@ -8,6 +8,7 @@
 {{ $name := .name }}
 {{ $value := .value }}
 {{ $ariaLabel := .ariaLabel }}
+{{ $ariaCurrent := .ariaCurrent }}
 {{ $extraClass := .class | default "" }}
 {{ $isDisabled := .disabled | default false }}
 {{ $iconName := .iconName | default "" }}
@@ -60,12 +61,6 @@
     {{ $borderClass = "border-2 border-off-black" }}
     {{ $hoverClass = "hover:bg-surface/10" }}
     {{ $focusRingClass = "focus:ring-off-black focus:ring-offset-primary" }}
-{{ else if eq $type "ghost" }}
-    {{ $bgClass = "bg-transparent" }}
-    {{ $textClass = "text-primary" }}
-    {{ $borderClass = "" }}
-    {{ $hoverClass = "hover:bg-surface-hover hover:text-primary-darken" }}
-    {{ $focusRingClass = "focus:ring-primary" }}
 {{ else if eq $type "danger" }}
     {{ $bgClass = "bg-danger" }}
     {{ $textClass = "text-inverse" }}
@@ -133,6 +128,7 @@
     {{ with $name }}name="{{ . }}"{{ end }}
     {{ with $value }}value="{{ . }}"{{ end }}
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+    {{ with $ariaCurrent }}aria-current="{{ . }}"{{ end }}
     {{ with $title }}title="{{ . }}"{{ end }}
     {{ if $isDisabled }}disabled{{ end }}
     class="cursor-pointer {{ $classes }}">
@@ -142,6 +138,7 @@
 {{ else }}
 <a href="{{ $href }}"
     {{ with $ariaLabel }}aria-label="{{ . }}"{{ end }}
+    {{ with $ariaCurrent }}aria-current="{{ . }}"{{ end }}
     {{ with $title }}title="{{ . }}"{{ end }}
     {{ with $target }}target="{{ . }}"{{ end }}
     {{ with $rel }}rel="{{ . }}"{{ end }}

@@ -7,10 +7,15 @@
 {{- if and (not $listTitle) .Section -}}
     {{- $listTitle = .Section | humanize -}}
 {{- end -}}
+{{- $isEventsPage := or (eq .Section "events") (eq .Section "past-events") -}}
+{{- $headerSpacingClass := "mb-10" -}}
+{{- if $isEventsPage -}}
+    {{- $headerSpacingClass = "mb-4" -}}
+{{- end -}}
 
 <section class="container py-12">
     <div class="max-w-5xl mx-auto">
-        <header class="mb-10 text-center">
+        <header class="{{ $headerSpacingClass }} text-center">
             {{ with $listTitle }}
             <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">{{ . }}</h1>
             {{ end }}
@@ -25,6 +30,17 @@
             </p>
             {{ end }}
         </header>
+        {{ if $isEventsPage }}
+        <!-- Events and Past Events are separate pages (only Events is in the
+             main nav) so each gets its own real, URL-based pagination rather
+             than a client-side filter. Both delegate to the same partial. -->
+        {{ $which := "upcoming" }}
+        {{ if eq .Section "past-events" }}
+            {{ $which = "past" }}
+        {{ end }}
+        {{ partial "components/events-list" (dict "page" . "which" $which) }}
+
+        {{ else }}
         <!-- List of Pages, by date if blog posts, or by weight if not.
              .Paginate can only be called once per page, so the page size and
              sort order are resolved first and passed to a single call.
@@ -36,7 +52,7 @@
             {{ $pageSize = 12 }}
         {{ end }}
         {{ $paginator := .Paginate $pages $pageSize }}
-        
+
         {{ if $paginator.Pages }}
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" role="list">
             {{ range $paginator.Pages }}
@@ -45,6 +61,7 @@
         </div>
 
         {{ partial "components/paginator.html" (dict "paginator" $paginator) }}
+        {{ end }}
         {{ end }}
 
     </div>

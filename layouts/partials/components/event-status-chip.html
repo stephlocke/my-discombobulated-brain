@@ -1,0 +1,15 @@
+{{- /*
+Renders a small status chip for an event: "Upcoming" while its event_date is
+still in the future (or happening now), "Past Event" once it has passed.
+Renders nothing when the given context has no event_date param, so it is
+safe to call unconditionally from templates shared with non-event content
+types (e.g. the generic single/card templates).
+Usage: {{ partial "components/event-status-chip" . }}
+*/ -}}
+{{- with .Params.event_date -}}
+{{- $eventDate := partial "components/safe-time" . -}}
+{{- $isUpcoming := ge $eventDate (now) -}}
+<span class="inline-block px-3 py-1 mb-3 text-xs font-semibold {{ if $isUpcoming }}bg-primary/10 text-primary{{ else }}bg-white-darken text-off-black{{ end }} {{ partial "components/edge-rounding" (dict "context" . "shape" "button") }}">
+    {{ if $isUpcoming }}Upcoming{{ else }}Past Event{{ end }}
+</span>
+{{- end -}}

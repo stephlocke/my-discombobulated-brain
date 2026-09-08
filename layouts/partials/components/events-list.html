@@ -1,0 +1,80 @@
+{{- /*
+Renders one properly-paginated events list: either Upcoming (soonest first)
+or Past (most recently passed first), plus Upcoming/Past nav buttons (the one
+matching the current page rendered filled, the other outlined). Real event
+page bundles live only under the /events section, so this always reads from
+there regardless of which page calls it — letting /events and /past-events
+each be their own page with their own URL-based pagination (.Paginate can
+only be called once per page, so each of those two pages calls this once,
+with a different "which").
+Usage: {{ partial "components/events-list" (dict "page" . "which" "upcoming") }}
+"which" is "upcoming" or "past".
+*/ -}}
+{{- $page := .page -}}
+{{- $which := .which -}}
+{{- $isUpcoming := eq $which "upcoming" -}}
+{{- $eventsSection := $page.Site.GetPage "/events" -}}
+{{- $now := now -}}
+
+{{- $matches := slice -}}
+{{- with $eventsSection -}}
+{{- range .RegularPages -}}
+    {{- $eventDate := partial "components/safe-time" .Params.event_date -}}
+    {{- $eventIsUpcoming := ge $eventDate $now -}}
+    {{- if eq $eventIsUpcoming $isUpcoming -}}
+        {{- $matches = $matches | append (dict "page" . "eventDate" $eventDate) -}}
+    {{- end -}}
+{{- end -}}
+{{- end -}}
+{{- $sortOrder := "desc" -}}
+{{- if $isUpcoming -}}
+    {{- $sortOrder = "asc" -}}
+{{- end -}}
+{{- $matches = sort $matches "eventDate" $sortOrder -}}
+
+{{- $matchingPages := slice -}}
+{{- range $matches -}}
+    {{- $matchingPages = $matchingPages | append .page -}}
+{{- end -}}
+
+<!-- $pageSize's default must match [pagination] pagerSize in config.toml. -->
+{{- $pageSize := 6 -}}
+{{- $paginator := $page.Paginate $matchingPages $pageSize -}}
+
+{{- /* The current page's button is marked aria-current="page", matching
+     the convention used for nav links elsewhere on the site (see
+     $.IsMenuCurrent in header.html/footer.html); the button partial passes
+     this through to the rendered element like it does aria-label. */ -}}
+{{- $upcomingButtonType := "outline" -}}
+{{- $pastButtonType := "outline" -}}
+{{- $upcomingAriaCurrent := "" -}}
+{{- $pastAriaCurrent := "" -}}
+{{- if $isUpcoming -}}
+    {{- $upcomingButtonType = "solid" -}}
+    {{- $upcomingAriaCurrent = "page" -}}
+{{- else -}}
+    {{- $pastButtonType = "solid" -}}
+    {{- $pastAriaCurrent = "page" -}}
+{{- end -}}
+<div class="mb-8 flex justify-center gap-2">
+    {{ partial "components/button" (dict "element" "a" "type" $upcomingButtonType "href" ("events/" | relLangURL) "label" "Upcoming Events" "ariaCurrent" $upcomingAriaCurrent) }}
+    {{ partial "components/button" (dict "element" "a" "type" $pastButtonType "href" ("past-events/" | relLangURL) "label" "Past Events" "ariaCurrent" $pastAriaCurrent) }}
+</div>
+
+{{ if $paginator.Pages }}
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-2" role="list">
+    {{ range $paginator.Pages }}
+        {{ partial "components/card-list.html" . }}
+    {{ end }}
+</div>
+
+{{ partial "components/paginator.html" (dict "paginator" $paginator) }}
+{{ else }}
+<p class="text-off-black text-lg text-center py-8">
+    {{- if $isUpcoming -}}
+    No upcoming events at this time.
+    {{- else -}}
+    No past events yet.
+    {{- end -}}
+</p>
+{{ end }}
