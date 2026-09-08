@@ -5,5 +5,6 @@ display:
   type: carousel
   clickable: false
   show_title: true
+image_type: logo
 draft: false
 ---

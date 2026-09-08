@@ -38,7 +38,7 @@
     {{ $mediaFrame = $photoFrame }}
   {{ end }}
   {{ $imageRounding := partial "components/edge-rounding" (dict "context" . "shape" "card-compact") }}
-  {{ if or (eq $placement "VerCard") (eq $placement "HorCard") (eq $placement "BlogCard") }}
+  {{ if or (eq $placement "VerCard") (eq $placement "HorCard") (eq $placement "HorCardLogo") (eq $placement "BlogCard") }}
     {{ $imageRounding = "rounded-none" }}
   {{ end }}
   <!-- Support old multi-resource format for backwards compatibility -->
@@ -260,6 +260,20 @@
                  and consistent for a list of straight-on photos. */}}
             {{ $horCardImage := .Fill "720x540 Center webp q62" }}
             {{ partial "components/image" (dict "Src" $horCardImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-cover %s %s" $mediaFrame $imageRounding) "Width" $horCardImage.Width "Height" $horCardImage.Height) }}
+          {{ end }}
+        </div>
+      {{ end }}
+      {{ if and (eq $placement "HorCardLogo") (not $is_svg) }}
+        {{/* Same fixed image area as HorCard, but for a logo rather than a
+             photo: a center-crop fill would clip the logo's edges, so this
+             fits the whole logo within the box (letterboxed/pillarboxed as
+             needed) instead of cropping it to fill the box. */}}
+        <div class="relative h-full w-full overflow-hidden bg-white p-4">
+          {{ if $is_gif }}
+            {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
+          {{ else }}
+            {{ $horCardLogoImage := .Fit "720x540 webp q72" }}
+            {{ partial "components/image" (dict "Src" $horCardLogoImage.RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" $horCardLogoImage.Width "Height" $horCardLogoImage.Height) }}
           {{ end }}
         </div>
       {{ end }}

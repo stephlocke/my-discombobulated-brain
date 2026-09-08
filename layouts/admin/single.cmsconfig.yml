@@ -162,6 +162,17 @@ aliases:
       - { label: "Clickable", name: "clickable", widget: "boolean", required: true, default: true, hint: "When on, each item links to its full content page." }
       - { label: "Show title", name: "show_title", widget: "boolean", required: true, default: true, hint: "When on, the item's title is shown beneath its image." }
 
+  field_image_type: &field_image_type
+    label: "Image Type"
+    name: "image_type"
+    widget: "select"
+    required: true
+    default: "image"
+    hint: "Photo — each item's image is cropped to fill its space, as with a normal photo. Logo — each item's image is fit within its space without cropping, so the whole logo stays visible."
+    options:
+      - { label: "Photo", value: "image" }
+      - { label: "Logo", value: "logo" }
+
   field_buttons: &field_buttons
     label: "Buttons"
     name: "buttons"
@@ -649,6 +660,7 @@ collections:
           - *field_title
           - *field_description
           - *field_display
+          - *field_image_type
           - *field_draft
           - *field_body
       - name: "awards-section"
@@ -658,6 +670,7 @@ collections:
           - *field_title
           - *field_description
           - *field_display
+          - *field_image_type
           - *field_draft
           - *field_body
 
