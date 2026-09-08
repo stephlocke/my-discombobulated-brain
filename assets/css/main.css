@@ -9,6 +9,13 @@
    never appears as a literal string in any template, so hugo_stats.json never
    sees it either — same fix, different cause. */
 @source inline("order-1 md:order-2 rotate-180");
+/* gap-1, top-full, z-20, w-48, and pl-4 are used by the "More" nav dropdown
+   markup in layouts/partials/essentials/header.html, which only renders while
+   data/nav.toml's more_enabled is switched on. While it's off (the current
+   default), none of these classes appear in hugo_stats.json, so without this
+   safelist they'd be purged from the compiled CSS and the dropdown would ship
+   unstyled the moment a CMS editor switches more_enabled on. */
+@source inline("gap-1 top-full z-20 w-48 pl-4");
 @import "modules/layout.css";
 
 @theme {
