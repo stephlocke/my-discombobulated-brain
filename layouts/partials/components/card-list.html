@@ -20,20 +20,20 @@
     {{ end }}
     <div class="grid h-full grid-cols-1 {{ if $hasResource }}md:grid-cols-[220px_1fr] md:items-stretch{{ end }}">
         {{ if $hasResource }}
-        {{/* A section declares whether its items hold logos rather than
-             photos via "image_type" on its _index.md (set in the CMS under
-             that section's Display settings). Logos are fit within the
-             image area instead of being cropped to fill it, the way a photo
-             is. Defaults to "image" so sections that don't set this (blog,
-             events, services) keep the original cropped-photo behaviour. */}}
-        {{ $imageType := "image" }}
+        {{/* A section declares how its items' images should be framed via
+             "image_type" on its _index.md (set in the CMS under that
+             section's Image Fit setting): "fill" crops the image to fill
+             the image area, "fit" scales it down to fit within the area
+             without cropping. Defaults to "fill" so sections that don't set
+             this (blog, events, services) keep the original behaviour. */}}
+        {{ $imageType := "fill" }}
         {{ with .CurrentSection.Params.image_type }}
             {{ $imageType = . }}
         {{ end }}
         {{ $imagePlacement := "HorCard" }}
         {{ $imageIsPhoto := true }}
-        {{ if eq $imageType "logo" }}
-            {{ $imagePlacement = "HorCardLogo" }}
+        {{ if eq $imageType "fit" }}
+            {{ $imagePlacement = "HorCardFit" }}
             {{ $imageIsPhoto = false }}
         {{ end }}
         <a href="{{ .RelPermalink }}" class="block h-full w-full self-stretch overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body" aria-label="Read {{ .Title }}">
