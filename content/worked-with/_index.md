@@ -4,8 +4,8 @@ description: Organisations and group we have worked with to improve mental healt
 display:
   type: carousel
   clickable: false
-  show_title: false
-image_type: fill
+  show_title: true
+image_type: fit
 draft: false
 aliases:
   - /working-with/
