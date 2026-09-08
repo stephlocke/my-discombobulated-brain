@@ -20,8 +20,24 @@
     {{ end }}
     <div class="grid h-full grid-cols-1 {{ if $hasResource }}md:grid-cols-[220px_1fr] md:items-stretch{{ end }}">
         {{ if $hasResource }}
+        {{/* A section declares whether its items hold logos rather than
+             photos via "image_type" on its _index.md (set in the CMS under
+             that section's Display settings). Logos are fit within the
+             image area instead of being cropped to fill it, the way a photo
+             is. Defaults to "image" so sections that don't set this (blog,
+             events, services) keep the original cropped-photo behaviour. */}}
+        {{ $imageType := "image" }}
+        {{ with .CurrentSection.Params.image_type }}
+            {{ $imageType = . }}
+        {{ end }}
+        {{ $imagePlacement := "HorCard" }}
+        {{ $imageIsPhoto := true }}
+        {{ if eq $imageType "logo" }}
+            {{ $imagePlacement = "HorCardLogo" }}
+            {{ $imageIsPhoto = false }}
+        {{ end }}
         <a href="{{ .RelPermalink }}" class="block h-full w-full self-stretch overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-body" aria-label="Read {{ .Title }}">
-            {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" "HorCard" "zoomable" false "isPhoto" true) }}
+            {{ partial "components/general-img-load.html" (dict "ctxt" . "placement" $imagePlacement "zoomable" false "isPhoto" $imageIsPhoto) }}
         </a>
         {{ end }}
         <div class="space-y-3 p-5 md:p-6">
