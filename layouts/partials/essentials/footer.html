@@ -67,7 +67,7 @@
                 {{ $rightColumn := after $splitPoint $quickLinks }}
 
                 <nav aria-label="Footer navigation">
-                    <div class="grid grid-cols-2 gap-x-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {{ range $column := slice $leftColumn $rightColumn }}
                         <ul class="space-y-2">
                             {{ range $column }}
