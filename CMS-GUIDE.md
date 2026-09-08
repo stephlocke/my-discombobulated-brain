@@ -40,8 +40,8 @@ with the wrong address. This should be a rare, deliberate change, not a routine 
 
 ## Controlling the navigation menu
 
-Files → Navigation Labels controls what shows in the header and footer navigation, in
-addition to the text of each link:
+Files → Navigation Labels controls what shows in the header navigation, in addition to the
+text of each link:
 
 - **"Show a 'More' Dropdown Section"** — a single on/off switch. On means a "More" button
   appears, which opens a dropdown containing whichever pages are chosen in "Pages Shown In
@@ -63,6 +63,15 @@ the same page in both lists — the main list takes priority and the dropdown en
 The web address and left-to-right order of each page are fixed in the site's code, not the
 CMS — these settings only control whether a page is shown, and if shown, whether it's in the
 main list or the dropdown.
+
+## Controlling the footer's "Quick Links" list
+
+The same Files → Navigation Labels screen also has "Pages Shown In Footer 'Quick Links'" —
+this controls the separate "Quick Links" list in the site footer, and has no connection at
+all to the header navigation settings above. Tick any page there to add it to Quick Links; a
+page can appear in the header, the footer, both, or neither, in any combination. Quick Links
+are always shown alphabetised and split evenly across two columns — there's no ordering or
+column choice to make.
 
 ## Field validation
 
@@ -103,9 +112,10 @@ If saving is blocked, check the field's hint text — it explains what format is
   the 404 page.
 - **CTA — Header / Hero / Footer / Inline** — reusable call-to-action buttons, referenced by
   name from the Homepage and elsewhere.
-- **Navigation Labels** (Files) — link text for the header/footer navigation, plus which
-  pages appear in navigation and whether they sit in the main list or the "More" dropdown.
-  See "Controlling the navigation menu" above.
+- **Navigation Labels** (Files) — link text for the header navigation, plus which pages
+  appear there and whether they sit in the main list or the "More" dropdown, and separately,
+  which pages appear in the footer's "Quick Links" list. See "Controlling the navigation
+  menu" and "Controlling the footer's 'Quick Links' list" above.
 - **Site Settings** (Files) — site title, author, logo, favicon, theme colours and fonts,
   search settings, logo carousel scroll speed.
 - **Domain** (Files) — the site's real public web address. See the warning above before

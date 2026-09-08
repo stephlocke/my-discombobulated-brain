@@ -30,50 +30,58 @@
             <!-- Quick Links -->
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-strong">Quick Links</h3>
+                {{/* Which pages appear here is controlled independently of the header
+                     navigation, via "Pages Shown In Footer Quick Links" in the CMS's
+                     Navigation Labels settings (data/nav.toml's quick_link_pages) —
+                     it has no connection to main_pages/dropdown_pages/more_enabled
+                     above, so a page can appear in one, both, or neither list.
+
+                     All selected quick links are gathered into one list, alphabetised
+                     by label, then split into two columns programmatically — the left
+                     column takes the first half (rounded up), the right column takes
+                     the rest — so no page has to be assigned to a column by hand. */}}
+                {{ $quickLinkIdentifiers := hugo.Data.nav.quick_link_pages | default slice }}
+                {{ $quickLinks := slice }}
+
+                {{/* Home/About/Contact/Blog/Events/Services/Awards/Worked With: URL
+                     and weight come from .Site.Menus.main; label text comes from
+                     $navLabels (data/nav.toml, editable in the CMS). */}}
+                {{ range where site.Menus.main "Identifier" "in" $quickLinkIdentifiers }}
+                {{ $navLabel := .Name }}
+                {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
+                {{ $quickLinks = $quickLinks | append (dict "label" $navLabel "url" (.URL | relLangURL) "current" ($.IsMenuCurrent "main" .)) }}
+                {{ end }}
+
+                {{/* Past Events and Sitemap aren't part of the main menu, so they're
+                     handled separately here. */}}
+                {{ if in $quickLinkIdentifiers "past-events" }}
+                {{ $quickLinks = $quickLinks | append (dict "label" "Past Events" "url" ("past-events/" | relLangURL) "current" (eq $.Section "past-events")) }}
+                {{ end }}
+                {{ if in $quickLinkIdentifiers "sitemap" }}
+                {{ $quickLinks = $quickLinks | append (dict "label" "Sitemap" "url" ("sitemap/" | relLangURL) "current" false) }}
+                {{ end }}
+
+                {{ $quickLinks = sort $quickLinks "label" }}
+                {{ $splitPoint := div (add (len $quickLinks) 1) 2 }}
+                {{ $leftColumn := first $splitPoint $quickLinks }}
+                {{ $rightColumn := after $splitPoint $quickLinks }}
+
                 <nav aria-label="Footer navigation">
-                    <ul class="space-y-2">
-                        {{/* The footer has no dropdown interaction, so "More" dropdown
-                             pages (when the dropdown is switched on) are listed inline
-                             as regular links here, alongside the main list, rather than
-                             nested under a non-navigable "More" entry. */}}
-                        {{ range $nav.mainItems }}
-                        {{ $navLabel := .Name }}
-                        {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
-                        <li>
-                                     <a href="{{ .URL | relLangURL }}"
-                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                                         {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
-                                {{ $navLabel }}
-                            </a>
-                        </li>
+                    <div class="grid grid-cols-2 gap-x-4">
+                        {{ range $column := slice $leftColumn $rightColumn }}
+                        <ul class="space-y-2">
+                            {{ range $column }}
+                            <li>
+                                <a href="{{ .url }}"
+                                    class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                                    {{ if .current }}aria-current="page"{{ end }}>
+                                    {{ .label }}
+                                </a>
+                            </li>
+                            {{ end }}
+                        </ul>
                         {{ end }}
-                        {{ if $nav.moreEnabled }}
-                        {{ range $nav.dropdownItems }}
-                        {{ $navLabel := .Name }}
-                        {{ with index $navLabels .Identifier }}{{ $navLabel = . }}{{ end }}
-                        <li>
-                                     <a href="{{ .URL | relLangURL }}"
-                                         class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                                         {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>
-                                {{ $navLabel }}
-                            </a>
-                        </li>
-                        {{ end }}
-                        {{ end }}
-                        <li>
-                            <a href="{{ "past-events/" | relLangURL }}"
-                                class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                                {{ if eq $.Section "past-events" }}aria-current="page"{{ end }}>
-                                Past Events
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ "sitemap/" | relLangURL }}"
-                                class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                                Sitemap
-                            </a>
-                        </li>
-                    </ul>
+                    </div>
                 </nav>
             </div>
 
