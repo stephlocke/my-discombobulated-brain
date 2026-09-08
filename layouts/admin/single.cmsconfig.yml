@@ -307,6 +307,9 @@ singletons:
   # whether they sit in the main list or a "More" dropdown (see more_enabled/main_pages/
   # dropdown_pages below). URLs and display order remain fixed in config.toml (never
   # CMS-editable) — see layouts/partials/essentials/nav-menu.html for how the two combine.
+  # quick_link_pages (below) is separate again — it controls only the footer's "Quick
+  # Links" list and has no effect on the header navigation, or vice versa — see
+  # layouts/partials/essentials/footer.html.
   - name: "nav-settings"
     label: "Navigation Labels"
     icon: menu_book
@@ -362,6 +365,24 @@ singletons:
           - { label: "Awards and Recognition", value: "awards" }
           - { label: "Worked With", value: "worked-with" }
         hint: "Only takes effect while 'Show a \"More\" Dropdown Section' above is switched on. Pages ticked here appear inside that dropdown instead of the main list. If the dropdown is switched off, pages ticked only here are hidden from navigation completely — they do not fall back into the main list. Don't tick a page here that's also ticked above in \"Pages Always Shown In The Main Navigation\"; the main list takes priority and the dropdown entry will be ignored."
+      - label: "Pages Shown In Footer \"Quick Links\""
+        name: "quick_link_pages"
+        widget: "select"
+        multiple: true
+        required: false
+        default: ["home", "about", "contact", "blog", "events", "services", "past-events", "sitemap", "awards", "worked-with"]
+        options:
+          - { label: "Home", value: "home" }
+          - { label: "About", value: "about" }
+          - { label: "Contact", value: "contact" }
+          - { label: "Blog", value: "blog" }
+          - { label: "Events", value: "events" }
+          - { label: "Services", value: "services" }
+          - { label: "Awards and Recognition", value: "awards" }
+          - { label: "Worked With", value: "worked-with" }
+          - { label: "Past Events", value: "past-events" }
+          - { label: "Sitemap", value: "sitemap" }
+        hint: "Tick every page that should appear in the footer's 'Quick Links' list. This is entirely independent of the main navigation controls above — a page can appear in Quick Links whether or not it's shown in the header, and in any combination. Links are alphabetised and split evenly across two columns automatically."
 
   # Contact Settings — manages data/contact.toml
   - name: "contact-settings"
