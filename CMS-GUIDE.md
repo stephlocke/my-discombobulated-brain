@@ -73,6 +73,22 @@ page can appear in the header, the footer, both, or neither, in any combination.
 are always shown alphabetised and split evenly across two columns, so there's no ordering or
 column choice to make.
 
+## Controlling card image framing (Fill vs Fit)
+
+Some Sections (currently Worked With and Awards & Recognition) have an "Image Fit" setting,
+alongside Display, that controls how each item's image is shown when that section is listed
+as a page of cards (e.g. `/worked-with`, `/awards-and-recognition`):
+
+- **Fill**: the image is cropped to completely fill its space, with no gaps. Best for photos,
+  where losing a bit of the edges doesn't matter.
+- **Fit**: the image is scaled down to fit within its space without cropping, so the whole
+  image stays visible. This can leave a small gap on two sides if the image's proportions
+  don't match the space exactly. Best for logos or anything else where cutting off the edges
+  would look wrong.
+
+Fill is the default. Only switch a section to Fit if its items' images need to be shown in
+full rather than cropped.
+
 ## Field validation
 
 Some fields now check the format of what you type and will show an error and refuse to save
