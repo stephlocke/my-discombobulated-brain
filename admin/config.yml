@@ -161,15 +161,15 @@ aliases:
       - { label: "Show title", name: "show_title", widget: "boolean", required: true, default: true, hint: "When on, the item's title is shown beneath its image." }
 
   field_image_type: &field_image_type
-    label: "Image Type"
+    label: "Image Fit"
     name: "image_type"
     widget: "select"
     required: true
-    default: "image"
-    hint: "Photo — each item's image is cropped to fill its space, as with a normal photo. Logo — each item's image is fit within its space without cropping, so the whole logo stays visible."
+    default: "fill"
+    hint: "Fill: each item's image is cropped to fill its space. This leaves no gaps, but the edges may be cut off. Fit: each item's image is scaled down to fit within its space without cropping. The whole image stays visible, but this may leave gaps on two sides. Use Fit for logos or other images where cutting off the edges would look wrong."
     options:
-      - { label: "Photo", value: "image" }
-      - { label: "Logo", value: "logo" }
+      - { label: "Fill", value: "fill" }
+      - { label: "Fit", value: "fit" }
 
   field_buttons: &field_buttons
     label: "Buttons"
