@@ -118,14 +118,14 @@ If saving is blocked, check the field's hint text — it explains what format is
 
 - **Homepage** — hero text/image, section on/off toggles, and all the homepage CTAs, in one
   place.
-- **Pages** — About, Donate, Get Help, Contact, Search, Sitemap.
+- **Pages** — About, Donate, Get Support, Contact, Search, Sitemap.
 - **Sections** — the intro text shown at the top of `/blog`, `/events`, `/services`, etc.
 - **Blog / Events / Services / Worked With / Awards & Recognition** — the repeatable content
   types, each its own collection.
-- **Footer** — the About and Get Help columns shown in the site footer.
+- **Footer** — the About and Get Support columns shown in the site footer.
 - **Legal Pages** — privacy policy, terms, and similar.
 - **Callouts** — the small fixed support messages shown in the footer, on single pages, and on
-  the 404 page. Each links through to the Get Help page.
+  the 404 page. Each links through to the Get Support page.
 - **CTA — Header / Hero / Footer / Inline** — reusable call-to-action buttons, referenced by
   name from the Homepage and elsewhere.
 - **Navigation Labels** (Files) — link text for the header navigation, plus which pages

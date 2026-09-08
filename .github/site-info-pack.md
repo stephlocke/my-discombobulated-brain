@@ -551,7 +551,7 @@ Crisis and safety information must:
 - Appear in the footer on **every page** (currently implemented in `layouts/partials/footer.html`)
 - Appear inline at the end of **every blog post** (implemented in `layouts/_default/single.html`)
 - Never be hidden behind a toggle or collapsed UI element
-- Include at minimum: a crisis helpline reference and the "Get Help" CTA button
+- Include at minimum: a crisis helpline reference and the "Get Support" CTA button
 
 ---
 
