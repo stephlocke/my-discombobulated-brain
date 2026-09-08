@@ -81,7 +81,7 @@ as a page of cards (e.g. `/worked-with`, `/awards-and-recognition`):
 
 - **Fill**: the image is cropped to completely fill its space, with no gaps. Best for photos,
   where losing a bit of the edges doesn't matter.
-- **Fit** — the image is scaled down to fit within its space without cropping, so the whole
+- **Fit**: the image is scaled down to fit within its space without cropping, so the whole
   image stays visible. This can leave a small gap on two sides if the image's proportions
   don't match the space exactly. Best for logos or anything else where cutting off the edges
   would look wrong.
