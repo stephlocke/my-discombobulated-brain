@@ -5,7 +5,7 @@ display:
   type: carousel
   clickable: false
   show_title: false
-image_type: fit
+image_type: fill
 draft: false
 aliases:
   - /working-with/
