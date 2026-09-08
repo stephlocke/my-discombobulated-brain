@@ -3,7 +3,7 @@ title: version-1
 headline: Need Support?
 body: Remember, seeking help is a sign of strength, not weakness. We're here for you.
 buttons: 
- - href: ./contact
+ - href: /help/
    type: solid
    label: Let Us Help
 build:
