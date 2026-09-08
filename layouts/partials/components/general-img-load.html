@@ -268,7 +268,7 @@
              photo: a center-crop fill would clip the logo's edges, so this
              fits the whole logo within the box (letterboxed/pillarboxed as
              needed) instead of cropping it to fill the box. */}}
-        <div class="relative h-full w-full overflow-hidden bg-white p-4">
+        <div class="relative h-full w-full overflow-hidden bg-surface p-4">
           {{ if $is_gif }}
             {{ partial "components/image" (dict "Src" .RelPermalink "Context" $.Page "Alt" $alt "Class" (printf "absolute inset-0 h-full w-full object-contain %s" $imageRounding) "Width" .Width "Height" .Height) }}
           {{ else }}
