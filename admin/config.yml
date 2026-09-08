@@ -626,6 +626,13 @@ collections:
           - *field_title
           - *field_description
           - *field_body
+      - name: "past-events-section"
+        label: "Past Events"
+        file: "content/past-events/_index.md"
+        fields:
+          - *field_title
+          - *field_description
+          - *field_body
       - name: "services-section"
         label: "Services"
         file: "content/services/_index.md"
