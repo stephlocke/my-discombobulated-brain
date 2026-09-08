@@ -15,9 +15,21 @@ subpath when the leading slash is stripped first (compare the existing
 codebase, both without a leading slash). Anything else — "#", "https://…",
 "//…", "mailto:…", "tel:…" — is left untouched.
 
+Some of the site's existing CTA content (e.g. content/cta/header/donate)
+was authored as "./donate" rather than "/donate". That form is genuinely
+page-relative, so it resolves differently depending on how deep the
+current page sits — the same CTA appearing on both "/" and "/blog/some-post/"
+would point at two different URLs. Treated as a synonym for the intended
+root-relative "/donate" here, since that matches every one of its current
+uses in this codebase and is what CMS-GUIDE.md's own button hint documents
+("e.g. /donate or https://example.com").
+
 Usage: {{ partial "components/resolve-content-href.html" .href }}
 */}}
 {{- $href := . -}}
+{{- if strings.HasPrefix $href "./" -}}
+  {{- $href = printf "/%s" (strings.TrimPrefix "./" $href) -}}
+{{- end -}}
 {{- if and (strings.HasPrefix $href "/") (not (strings.HasPrefix $href "//")) -}}
   {{- $href = ($href | strings.TrimPrefix "/") | relLangURL -}}
 {{- end -}}

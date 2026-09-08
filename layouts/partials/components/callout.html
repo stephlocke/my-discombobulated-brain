@@ -13,8 +13,10 @@
     <p class="mt-4 p-3 bg-primary/5 border border-primary/20 {{ partial "components/edge-rounding" (dict "shape" "card-compact") }}">
         <strong class="text-strong">{{ .Params.headline }}:</strong><br>
         {{ .Params.body }}
-        <a href="{{ $helpHref }}" class="mt-1 block font-semibold text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary">Find mental health support</a>
     </p>
+    <div class="mt-2">
+        {{ partial "components/button" (dict "type" "solid" "href" $helpHref "label" "Get Help") }}
+    </div>
   {{- else if eq $location "single" -}}
     {{/* Skip this on the Get Help page itself — it would just point back at the
          page the visitor is already reading. */}}
@@ -35,7 +37,7 @@
             <div class="mx-auto max-w-3xl {{ partial "components/edge-rounding" (dict "shape" "card-compact") }} border border-primary/20 bg-primary/5 p-8 text-center">
                 <h2 id="callout-heading" class="mb-4 text-2xl font-bold text-primary">{{ .Params.headline }}</h2>
                 <p class="mb-4 text-muted">{{ .Params.body }}</p>
-                {{ partial "components/button" (dict "type" "outline" "href" $helpHref "label" "Find support") }}
+                {{ partial "components/button" (dict "type" "solid" "href" $helpHref "label" "Find support") }}
             </div>
         </div>
     </section>
