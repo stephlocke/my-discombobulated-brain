@@ -5,7 +5,11 @@ date: 2026-09-08
 draft: false
 ---
 
-If you're in immediate danger, call **999** or go to your nearest A&E.
+Do you need help right now? It will be ok; this is temporary, however if you need or want to talk to someone, read on.
+
+We’re not a 24-hour helpline, and we are NOT a substitute for medical or professional intervention.
+
+If it is an emergency or you’re worried that you or someone you may know may be at risk of suicide, call 999 immediately
 
 ## Crisis support, right now
 
@@ -16,9 +20,8 @@ If you're in immediate danger, call **999** or go to your nearest A&E.
 ## Talking to someone
 
 - **Mind Infoline**: 0300 123 3393. Information and signposting to mental health services near you.
-- **SANEline**: 0300 304 7000 (4:30pm–10:30pm, every day). Support for anyone affected by mental illness.
+- **SANEline**: 0300 304 7000 (4:30 pm–10:30 pm, every day). Support for anyone affected by mental illness.
 - **CALM (Campaign Against Living Miserably)**: 0800 58 58 58 (5pm–midnight, every day). Support for anyone struggling, with a focus on preventing male suicide.
-- **Papyrus HOPELINEUK**: 0800 068 41 41. For people under 35 having thoughts of suicide, and anyone worried about a young person.
 
 ## Support for young people
 
