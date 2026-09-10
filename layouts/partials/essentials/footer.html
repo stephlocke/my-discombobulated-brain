@@ -93,7 +93,12 @@
                         {{ $legals := where (where .Site.Pages "Section" "legals") ".Kind" "==" "page" }}
                         {{ range $legals }}
                         <li>
-                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary">{{ .Title }}</a>
+                            {{/* These pages come from .Site.Pages, not a menu entry, so
+                                 $.IsMenuCurrent (used for Quick Links above) doesn't apply
+                                 here — comparing the looped page against $ (the page this
+                                 partial was called with) identifies the current page instead. */}}
+                            <a href="{{ .RelPermalink }}" class="text-muted hover:text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                                {{ if eq $ . }}aria-current="page"{{ end }}>{{ .Title }}</a>
                         </li>
                         {{ end }}
                     </ul>
