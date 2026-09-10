@@ -1,6 +1,9 @@
 ---
 title: Get Support
-description: Key contacts for mental health support and crisis help across the UK, including Samaritans, Shout, NHS services, and helplines for young people.
+description: |-
+  Do you need help right now? It will be ok; this is temporary, however if you need or want to talk to someone, read on.
+
+  We’re not a 24-hour helpline, and we are NOT a substitute for medical or professional intervention.
 date: 2026-09-08
 draft: false
 ---
