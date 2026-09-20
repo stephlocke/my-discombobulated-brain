@@ -1,6 +1,6 @@
 ---
 title: The Senedd and Leanne Wood
-date: ''
+date: 2026-09-20T19:00:00
 summary: A visit to the Senedd in Cardiff and a meeting with Leanne Wood, former Plaid Cymru leader, to discuss mental health in Wales, mental health services, access to support, suicide prevention, mental health stigma, and improving care for people experiencing mental health difficulties.
 description: A meeting at the Senedd in Cardiff with Leanne Wood, former Plaid Cymru leader, to discuss mental health in Wales, mental health services, suicide prevention, access to mental health support, and tackling the stigma surrounding mental health.
 draft: false
