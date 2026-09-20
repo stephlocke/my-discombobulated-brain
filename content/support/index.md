@@ -19,6 +19,7 @@ If it is an emergency or you’re worried that you or someone you may know may b
 - **Samaritans**: call **116 123** (free, 24/7, every day). For anyone struggling to cope.
 - **Shout**: text **SHOUT** to **85258** (free, 24/7). A confidential text service for anyone in crisis.
 - **NHS 111**: in England, call **111** and select the mental health option for urgent advice, day or night. In Scotland, call NHS 24 on 111. In Wales, contact NHS 111 Wales where it's available in your area. In Northern Ireland, contact your GP out-of-hours service, or call Lifeline on 0808 808 8000.
+- **No Panic:** 
 
 ## Talking to someone
 
