@@ -1,0 +1,24 @@
+---
+title: '#RealPeople - Katie'
+date: 2026-09-20T21:12:00
+summary: An honest personal story about eating disorder recovery, mental illness, and the stigma surrounding eating disorders. Exploring anorexia, bulimia, distorted body image, secrecy, isolation, anxiety, and the impact of mental illness on relationships, work, and everyday life. A powerful reflection on seeking help, challenging mental health stigma, finding support and taking the first steps towards eating disorder recovery.
+description: An honest personal story about eating disorder recovery, mental illness, and mental health stigma. Exploring anorexia, bulimia, distorted body image, anxiety, secrecy, and isolation, and the journey towards seeking help, support, and recovery.
+draft: false
+resource:
+  src: Katie Barnes.jpg
+  alt: 'Katie Barnes with #sicknotsad'
+---
+
+When you think of an eating disorder, what do you imagine? Do you imagine stick-thin models, young girls, vanity, or attention-seeking? All of these views and judgments are certainly what I have experienced on my journey. Eating disorders often come from a place of unknown; like many mental illnesses, their source is not always easily identifiable, and they lie hidden until a trigger is pulled. A trigger that is both destructive and not always easy to see.As we are absorbed and lose ourselves in our eating disorders, the perception of ourselves and the outside world changes. We see things through tinted glasses; a distorted view of ourselves and the intentions of others leaves us confused and vulnerable. Mental Illnesses are still a taboo subject for many; it’s hard to openly admit to something that others cannot see or understand. I have lost friends through having a mental illness, and family found it hard to accept; their own lack of understanding made things harder. I found I was managing their feelings and disappointment as well as dealing with my mental illness. 
+
+Prior to this disease taking hold, I had an awesome job selling British cheese in America and ran my own gluten-free food business, but both suffered because of the effect my mental illness had on me. Eating disorders are selfish diseases; they do not care how you or anyone else is feeling! They want your whole attention; they command your everyday thoughts, and they make you feel alone, unloved, and depressed. They are notoriously secretive and lonely diseases. They can be easily hidden from friends, family, and colleagues, and by their true nature can make the sufferer feel the disease should be kept a secret – their secret.
+
+Many sufferers find it hard to admit to their disorder, and it took me 7 years to admit to myself and then others. Admitting to your disorder means letting go, handing over control, dealing with the painful thoughts and feelings, and ultimately recovering. Recovery feels scary and unknown. Admitting to an eating disorder is the first step to getting help. An eating disorder is a form of addiction, an addiction that needs to be broken and an addiction that can be broken. Figuring it out. There are over 200 classified types of mental illness, and it is believed at least 1 in 4 people will be affected by mental illness in their lifetime. The 200 types typically fit into five main categories: anxiety disorders, Mood disorders, psychotic disorders, dementias, and eating disorders. There are many types of eating disorders; Anorexia, bulimia, and binge eating are amongst some of the more recognized disorders BUT there are more. In the UK, 1 in 5 will be affected by mental health issues throughout their lifetime. Eating disorders will be accountable for 1.6 out of 100 of those diagnosed with a mental illness. The figures keep growing, and as more and more people seek treatment and are encouraged, the more the figures will continue to grow. 
+
+As I start to dilute the poison living inside me, I still find that each day brings a new challenge that I need to overcome. Albeit a small setback or a criticism, both can have an effect on me that leads down the path of negative thoughts and anxiety.
+
+I want to speak about my mental illness and eating disorder as I want to encourage others to do the same. Educating friends and family is such a huge part of the support mechanism we often need. Sometimes I just want a hug and to be told it will all be OK, and other times I want to be left alone to figure out my thoughts. On these days, you need the people around you to understand and be there to support you.
+
+I am proud to be shouting about my disease; I will not be judged, and I will not be sorry for having a mental illness. We are all on a path, and I believe I needed to go through this for some reason; I am still figuring out what that might be!
+
+Stand up to stigma and be brave; seek help and talk to someone. I know you can do it!
