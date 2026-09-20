@@ -1,5 +1,5 @@
 ---
-title: 'Meet the amazing Coral! - When life seems too much #SICKNOTSAD'
+title: '#RealPeople - Coral'
 date: 2026-09-20T18:56:00
 summary: 'Coral got on board with our #SickNotSad campaign, and we started talking. It turns out that this lovely lady not only loves her coffee; she is an amazing blogger. She has written a fantastic blog for us and has said that not only can I send you to her site to read the blog, but I can also write it out below. Hopefully this is the first of many linkups with bloggers, and especially Coral!'
 description: 'When Life Seems Too Much #SickNotSad. Coral shares her honest story of living with mental health challenges, depression, and the daily reality of struggling with difficult thoughts and emotions. Through her personal experience, she explores mental health stigma, depression, medication, emotional wellbeing, and the importance of talking openly about mental health. Her powerful #SickNotSad story is a reminder that we never truly know what someone is experiencing beneath the surface, and that listening, understanding, and offering support can make a real difference.'
