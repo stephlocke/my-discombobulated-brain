@@ -1,5 +1,5 @@
 ---
-title: Steve Gray
+title: '#RealPeople - Steve'
 date: 2026-09-20T18:58:00
 summary: A deeply personal story about depression, grief, family mental health, and the stigma that can make asking for help feel impossible. Reflecting on loss, denial, isolation, and recovery, this powerful account explores the importance of family, friendship, therapy, and breaking the silence around mental health.
 description: A personal story about depression, mental illness, grief, anxiety, and mental health recovery, exploring family mental health, stigma, CBT therapy, emotional isolation, and the importance of asking for help.
