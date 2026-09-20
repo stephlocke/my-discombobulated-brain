@@ -1,9 +1,13 @@
 ---
-aliases: ["/working-with/mma/"]
+aliases:
+  - /working-with/mma/
 title: MMA
-description: "We collaborated with MMA to bring mental health support to their community and events."
-resource:
-    src: mma-logo.png
-    alt: MMA Logo
+description: We work with Phil Raeburn who is an MMA fighter training out of SBG in Ireland. Phil trains alongside John Phillips and Connor McGregor. Phil publicly speaks about his mental health.
 weight: 3
+link: ''
+resource:
+  src: mma-logo.png
+  alt: MMA Logo
 ---
+
+We work with Phil Raeburn who is an MMA fighter training out of SBG in Ireland. Phil trains alongside John Phillips and Connor McGregor. Phil publicly speaks about his mental health.
