@@ -1,6 +1,6 @@
 ---
 title: Whitchurch Hospital Exhibition
-date: ''
+date: 2026-09-20T18:57:00
 summary: A visit to the Whitchurch Hospital exhibition before its closure became a deeply emotional experience. Walking the hospital corridors brought back memories of living with mental illness, while the exhibition revealed the history of mental health care in Cardiff, from its former patients and staff to changing attitudes and language around mental health. Discover why Dr Edwin Goodall became one of my mental health heroes.
 description: Discover the history of Whitchurch Hospital in Cardiff and its exhibition exploring mental health, psychiatric care, and the history of mental health services in Wales. This personal reflection looks at Whitchurch Hospital, mental illness, mental health stigma, and changing attitudes towards mental health care.
 draft: false
