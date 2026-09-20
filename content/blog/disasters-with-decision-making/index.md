@@ -1,6 +1,6 @@
 ---
 title: Disasters with decision making?
-date: ''
+date: 2026-09-20T18:59:00
 summary: Guest post by Ann from Rainbows Are Too Beautiful about raising a child with autism and ASD. Read her personal journey, her experiences of parenting a son with autism, and how she raises awareness and supports parents of children with autism and associated disorders.
 description: A personal story about raising a child with autism (ASD), anxiety, and ADHD. Ann from Rainbows Are Too Beautiful shares her experiences of parenting a son with autism, decision-making difficulties, anxiety, and associated mental health conditions, raising awareness of autism, and supporting families.
 draft: false
@@ -10,7 +10,6 @@ resource:
 ---
 
 A report released over six months ago by the King's Fund reported that mental health patients are at risk due to budget cuts. I remember listening to it on Radio 5 Live. It occurred to me that it may be relatively unknown that quite a few mental health conditions are comorbid with autism – that is, that they are commonly occurring conditions. Depression, phobias, and bipolar disorder are often described with autism.  In fact, a mental health issue is recorded in 70% of people with autism / ASD.  Studies have shown that in individuals with autism, about 30% have Obsessive-compulsive disorder (OCD), and anxiety disorders in children with autism have been reported to be anywhere between 11% and 84%. 
-
 
 Our son Anthony is eight years old and was diagnosed with ASD a little while after his fourth birthday. As he has developed and grown, we have noted that some of his issues are not simply ASD, and he has a few comorbid conditions.  We were referred to the Children’s and Adolescents Mental Health Services (CAMHS) for Attention Deficit Hyperactivity Disorder, and because we noticed he seemed to find it extremely difficult to make decisions or became upset about ones he had made in the past.  It wasn’t really until we were referred to CAMHS that we considered he could actually be suffering from a form of anxiety.
 
