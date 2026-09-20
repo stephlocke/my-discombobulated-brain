@@ -9,7 +9,7 @@ resource:
   alt: Whitchurch Hospital corridor
 ---
 
-![Exhibition poster ](Exhibition%20form.jpg "Exhibition poster ")
+![Exhibition poster](Exhibition%20form.jpg "Exhibition poster")
 
 I went to see the exhibition in Whitchurch Hospital prior to it closing. It was a very moving experience. As I walked in the corridor, I wasn’t expecting the wave of emotion that flowed over me.
 
