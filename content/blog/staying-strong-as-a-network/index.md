@@ -1,6 +1,6 @@
 ---
 title: Staying strong as a network
-date: ''
+date: 2026-09-20T19:01:00
 summary: Staying Strong as a Network explores how social media and online communities can provide mental health support, challenge mental health stigma, and help people connect with others. John Sennet shares how the web can create safe spaces to talk openly about mental health, share experiences, and realise you are not alone.
 description: Staying Strong as a Network explores the importance of support, friendship, and family in mental health. Discover why listening, understanding, and giving people space to lead their own mental health journey can create a stronger, more supportive network.
 draft: false
